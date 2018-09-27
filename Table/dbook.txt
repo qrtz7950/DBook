@@ -1,0 +1,92 @@
+drop table db_user CASCADE CONSTRAINTS;
+drop table book CASCADE CONSTRAINTS;
+drop table user_rating CASCADE CONSTRAINTS;
+drop table best_seller CASCADE CONSTRAINTS;
+drop table interest CASCADE CONSTRAINTS;
+drop table recent_view CASCADE CONSTRAINTS;
+drop table review CASCADE CONSTRAINTS;
+
+drop sequence seq_db_user_no;
+drop sequence seq_book_no;
+
+create sequence seq_db_user_no;
+create table db_user (
+        no              number(10)      not null 
+    ,   id              number(10)      primary key
+    ,   profile_image   varchar2(120)
+    ,   thumbnail_image varchar2(120)
+    ,   nickname        varchar2(30)
+    ,   age_range       varchar2(8)
+    ,   gender          varchar2(12)
+    ,   reg_date        date            default sysdate
+);
+
+create sequence seq_book_no;
+create table book (
+        book_no             number(10)      primary key
+    ,   book_name           varchar2(200)   not null
+    ,   cover               varchar2(20)
+    ,   genre               varchar2(50)    not null
+    ,   genre2              varchar2(50)
+    ,   genre3              varchar2(50)
+    ,   author              varchar2(50)
+    ,   translator          varchar2(50)
+    ,   publisher           varchar2(50)
+    ,   published_date      date
+    ,   is_ebook            number(1)
+    ,   form_detail         varchar2(30)
+    ,   ISBN_10             varchar2(10)   
+    ,   ISBN_13             varchar2(13)
+    ,   book_introduction   varchar2(2000)
+    ,   author_introduction varchar2(2000)
+    ,   contents            varchar2(2000)
+    ,   view_cnt            number(8)
+);
+
+create table user_rating (
+        book_no             number(10)
+    ,   id                  number(10)
+    ,   rating              number(2)
+    ,   constraint user_rating_id_fk foreign key(id)
+        references db_user(id) on delete cascade
+    ,   constraint user_rating_book_no_fk foreign key(book_no)
+        references book(book_no) on delete cascade
+);
+
+create table best_seller (
+        sell_period         date
+    ,   book_no             number(10)
+    ,   constraint best_seller_no_fk foreign key(book_no)
+        references book(book_no) on delete cascade
+);
+
+create table interest (
+        id              number(10)
+    ,   book_no         number(10)
+    ,   constraint interest_id_fk foreign key(id)
+        references db_user(id) on delete cascade
+    ,   constraint interest_book_no_fk foreign key(book_no)
+        references book(book_no) on delete cascade
+);
+
+create table recent_view (
+        id              number(10)
+    ,   book_no         number(10)
+    ,   constraint recent_view_id_fk foreign key(id)
+        references db_user(id) on delete cascade
+    ,   constraint recent_view_book_no_fk foreign key(book_no)
+        references book(book_no) on delete cascade
+);
+
+create table review (
+        id              number(10)
+    ,   book_no         number(10)
+    ,   rating          number(2)
+    ,   content         varchar2(4000)  not null
+    ,   good            number(5)
+    ,   bad             number(5)
+    ,   constraint review_id_fk foreign key(id)
+        references db_user(id) on delete cascade
+    ,   constraint review_book_no_fk foreign key(book_no)
+        references book(book_no) on delete cascade
+);
