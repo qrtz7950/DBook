@@ -5,12 +5,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="./resources/assets/css/slide.css" />
-	<link rel="stylesheet" href="./resources/assets/css/slide2.css" />
-	<link rel="stylesheet" href="./resources/assets/css/main.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/slide2.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/main.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/css/swiper.min.css">
-	<link rel="stylesheet" href="./resources/assets/css/sideMenu.css" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/sideMenu.css" />
 	
 	<title>DBook</title>
 </head>
@@ -48,68 +46,8 @@
 										</ul>
 									</div>
 									<span class="image object">
-										<img src="./resources/images/pic10.jpg" alt="" />
+										<img src="${pageContext.request.contextPath}/resources/images/pic10.jpg" alt="" />
 									</span>
-								</section>
-
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2 style="margin-bottom: 0px;">추천도서</h2>
-									</header>
-									<div class="contain">
-
-  <div class="row">
-    <div class="row__inner">
-
-      <div class="tile">
-        <div class="tile__media">
-          <img class="tile__img" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/70390/show-1.jpg" alt=""  />
-        </div>
-        <div class="tile__details">
-          <div class="tile__title">
-            Top Gear
-          </div>
-        </div>
-      </div>
-
-      <div class="tile">
-        <div class="tile__media">
-          <img class="tile__img" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/70390/show-2.jpg" alt=""  />
-        </div>
-        <div class="tile__details">
-          <div class="tile__title">
-            Top Gear
-          </div>
-        </div>
-      </div>
-
-      <div class="tile">
-        <div class="tile__media">
-          <img class="tile__img" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/70390/show-3.jpg" alt=""  />
-        </div>
-        <div class="tile__details">
-          <div class="tile__title">
-            Top Gear
-          </div>
-        </div>
-      </div>
-
-      <div class="tile">
-        <div class="tile__media">
-          <img class="tile__img" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/70390/show-4.jpg" alt=""  />
-        </div>
-        <div class="tile__details">
-          <div class="tile__title">
-            Top Gear
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-</div>
 								</section>
 
 							<!-- Section -->
@@ -156,7 +94,7 @@
 									</header>
 									<div class="posts">
 										<article>
-											<a href="#" class="image"><img src="./resources/images/pic01.jpg" alt="" /></a>
+											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic01.jpg" alt="" /></a>
 											<h3>Interdum aenean</h3>
 											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
 											<ul class="actions">
@@ -164,7 +102,7 @@
 											</ul>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="./resources/images/pic02.jpg" alt="" /></a>
+											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic02.jpg" alt="" /></a>
 											<h3>Nulla amet dolore</h3>
 											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
 											<ul class="actions">
@@ -172,7 +110,7 @@
 											</ul>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="./resources/images/pic03.jpg" alt="" /></a>
+											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic03.jpg" alt="" /></a>
 											<h3>Tempus ullamcorper</h3>
 											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
 											<ul class="actions">
@@ -180,7 +118,7 @@
 											</ul>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="./resources/images/pic04.jpg" alt="" /></a>
+											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic04.jpg" alt="" /></a>
 											<h3>Sed etiam facilis</h3>
 											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
 											<ul class="actions">
@@ -188,7 +126,7 @@
 											</ul>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="./resources/images/pic05.jpg" alt="" /></a>
+											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic05.jpg" alt="" /></a>
 											<h3>Feugiat lorem aenean</h3>
 											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
 											<ul class="actions">
@@ -196,7 +134,7 @@
 											</ul>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="./resources/images/pic06.jpg" alt="" /></a>
+											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic06.jpg" alt="" /></a>
 											<h3>Amet varius aliquam</h3>
 											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
 											<ul class="actions">
@@ -302,12 +240,13 @@
 					</div>
 
 		<!-- Scripts -->
-			<script src="./resources/assets/js/jquery.min.js"></script>
-			<script src="./resources/assets/js/skel.min.js"></script>
-			<script src="./resources/assets/js/util.js"></script>
-			<script src="./resources/assets/js/main.js"></script>
-			<script src="./resources/assets/js/slide2.js"></script>
-			<script src="./resources/assets/js/sideMenu.js"></script>
-			<script src="./resources/assets/js/classie.js"></script>
+			<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.min.js"></script>
+			<script src="${pageContext.request.contextPath}/resources/assets/js/skel.min.js"></script>
+			<script src="${pageContext.request.contextPath}/resources/assets/js/util.js"></script>
+			<script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
+			<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
+			<script src="${pageContext.request.contextPath}/resources/assets/js/sideMenu.js"></script>
+			<script src="${pageContext.request.contextPath}/resources/assets/js/classie.js"></script>
 </body>
 </html>
