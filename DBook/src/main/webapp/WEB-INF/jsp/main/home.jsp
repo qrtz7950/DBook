@@ -5,10 +5,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<jsp:include page="../include/CSS.jsp"></jsp:include>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/slide2.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/main.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/css/swiper.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/sideMenu.css" />
 	
 	<title>DBook</title>
 </head>
@@ -21,16 +20,8 @@
 						<div class="inner">
 
 							<!-- Header -->
-								<header id="header">
-									<a href="${pageContext.request.contextPath}/main/home.do" class="logo" style="font-size: 2em;"><strong>DB</strong>ook</a>
-									<ul class="icons">
-										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon fa-medium"><span class="label">Medium</span></a></li>
-									</ul>
-								</header>
+							<jsp:include page="../include/HeaderMenu.jsp"/>
+								
 
 							<!-- Banner -->
 								<section id="banner">
@@ -56,35 +47,35 @@
 										<h2>slide</h2>
 									</header>
 									<div class="swiper-container">
-<div class="swiper-container">
-	<div class="swiper-wrapper">
-		<div class="swiper-slide"><div><img src="http://oldmidi.cdn3.cafe24.com/p/578.jpg"><div>1</div></div></div>
-		<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/099.jpg"><div>2</div></div></div>
-		<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/334.jpg"><div>3</div></div></div>
-		<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/526.jpg"><div>4</div></div></div>
-		<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/563.jpg"><div>5</div></div></div>
-		<div class="swiper-slide"><div><img src="http://oldmidi.cdn3.cafe24.com/p/019.jpg"><div>6</div></div></div>
-		<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/187.jpg"><div>7</div></div></div>
-		<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/176.jpg"><div>8</div></div></div>
-		<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/461.jpg"><div>9</div></div></div>
-		<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/321.jpg"><div>10</div></div></div>
-		<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/521.jpg"><div>11</div></div></div>
-		<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/400.jpg"><div>12</div></div></div>
-		<div class="swiper-slide"><div><img src="http://biketago.com/img/p/407.jpg"><div>13</div></div></div>
-		<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/288.jpg"><div>14</div></div></div>
-		<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/557.jpg"><div>15</div></div></div>
-		<div class="swiper-slide" style="font-size:50pt;">- 끝 -</div>
-	</div>
-
-	<!-- 네비게이션 -->
-	<div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-	<div class="swiper-button-prev"></div><!-- 이전 버튼 -->
-
-	<!-- 페이징 -->
-	<div class="swiper-pagination"></div>
-</div>
-<div style="text-align:center; margin-top:5px;">랜덤사진 갤러리</div>
-
+										<div class="swiper-container">
+											<div class="swiper-wrapper">
+												<div class="swiper-slide"><div><img src="http://oldmidi.cdn3.cafe24.com/p/578.jpg"><div>1</div></div></div>
+												<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/099.jpg"><div>2</div></div></div>
+												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/334.jpg"><div>3</div></div></div>
+												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/526.jpg"><div>4</div></div></div>
+												<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/563.jpg"><div>5</div></div></div>
+												<div class="swiper-slide"><div><img src="http://oldmidi.cdn3.cafe24.com/p/019.jpg"><div>6</div></div></div>
+												<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/187.jpg"><div>7</div></div></div>
+												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/176.jpg"><div>8</div></div></div>
+												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/461.jpg"><div>9</div></div></div>
+												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/321.jpg"><div>10</div></div></div>
+												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/521.jpg"><div>11</div></div></div>
+												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/400.jpg"><div>12</div></div></div>
+												<div class="swiper-slide"><div><img src="http://biketago.com/img/p/407.jpg"><div>13</div></div></div>
+												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/288.jpg"><div>14</div></div></div>
+												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/557.jpg"><div>15</div></div></div>
+												<div class="swiper-slide" style="font-size:50pt;">- 끝 -</div>
+											</div>
+										
+											<!-- 네비게이션 -->
+											<div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+											<div class="swiper-button-prev"></div><!-- 이전 버튼 -->
+										
+											<!-- 페이징 -->
+											<div class="swiper-pagination"></div>
+										</div>
+										<div style="text-align:center; margin-top:5px;">랜덤사진 갤러리</div>
+									</div>
 								</section>
 
 							<!-- Section -->
@@ -161,19 +152,55 @@
 								<!-- Menu -->
 									<nav id="menu">
 										<header class="major">
-											<h2>국내도서</h2>
+											<h2>책 카테고리</h2>
 										</header>
 										<ul>
-											<li><a href="index.html">시/에세이</a></li>
-											<li><a href="generic.html">인문가정</a></li>
-											<li><a href="elements.html">생활요리</a></li>
+											<li><a href="index.html">?</a></li>
 											<li>
-												<span class="opener">건강취미</span>
+												<span class="opener">국내도서</span>
 												<ul>
-													<li><a href="#">Lorem Dolor</a></li>
-													<li><a href="#">Ipsum Adipiscing</a></li>
-													<li><a href="#">Tempus Magna</a></li>
-													<li><a href="#">Feugiat Veroeros</a></li>
+													<li><a href="#">소설</a></li>
+													<li><a href="#">시/에세이</a></li>
+													<li><a href="#">인문</a></li>
+													<li><a href="#">가정/생활</a></li>
+													<li><a href="#">요리</a></li>
+													<li><a href="#">건강</a></li>
+													<li><a href="#">취미/스포츠</a></li>
+													<li><a href="#">경제/경영</a></li>
+													<li><a href="#">자기계발</a></li>
+													<li><a href="#">정치/사회</a></li>
+													<li><a href="#">정부간행물</a></li>
+													<li><a href="#">역사/문화</a></li>
+													<li><a href="#">종교</a></li>
+													<li><a href="#">예술/대중문화</a></li>
+													<li><a href="#">중/고학습</a></li>
+													<li><a href="#">기술/공학</a></li>
+													<li><a href="#">외국어</a></li>
+													<li><a href="#">과학</a></li>
+													<li><a href="#">취업/수험서</a></li>
+													<li><a href="#">여행</a></li>
+													<li><a href="#">컴퓨터/IT</a></li>
+													<li><a href="#">잡지</a></li>
+													<li><a href="#">사전</a></li>
+													<li><a href="#">청소년</a></li>
+													<li><a href="#">초등학습</a></li>
+													<li><a href="#">유아</a></li>
+													<li><a href="#">아동</a></li>
+													<li><a href="#">어린이영어</a></li>
+													<li><a href="#">만화</a></li>
+													<li><a href="#">아동/유아전집</a></li>
+													<li><a href="#">한국소개도서</a></li>
+													<li><a href="#">PB상품</a></li>
+												</ul>
+											</li>
+											<li>
+												<span class="opener">국외도서</span>
+												<ul>
+													<li><a href="#">영어 도서</a></li>
+													<li><a href="#">일어 도서</a></li>
+													<li><a href="#">프랑스 도서</a></li>
+													<li><a href="#">독어 도서</a></li>
+													<li><a href="#">스페인 도서</a></li>
 												</ul>
 											</li>
 											<li><a href="#">스포츠/경제</a></li>
@@ -240,13 +267,8 @@
 					</div>
 
 		<!-- Scripts -->
-			<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.min.js"></script>
-			<script src="${pageContext.request.contextPath}/resources/assets/js/skel.min.js"></script>
-			<script src="${pageContext.request.contextPath}/resources/assets/js/util.js"></script>
-			<script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
+			<jsp:include page="../include/JS.jsp"></jsp:include>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
 			<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
-			<script src="${pageContext.request.contextPath}/resources/assets/js/sideMenu.js"></script>
-			<script src="${pageContext.request.contextPath}/resources/assets/js/classie.js"></script>
 </body>
 </html>
