@@ -4,9 +4,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.project.login.service.LoginService;
@@ -36,6 +38,40 @@ public class LoginController {
 		System.out.println("현재 로그인 정보" + user);
 
 		user = loginService.Login(user);
+
+		session.setAttribute("user", user);
+		
+		System.out.print("세션에 올라간 정보");
+		System.out.println((LoginVO)session.getAttribute("user"));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/main/home.do");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/user/update.do", method=RequestMethod.POST)
+	public ModelAndView userInfoUpdate( @RequestParam("id") int id,
+										@RequestParam("profile_image") String profile_image,
+										@RequestParam("thumbnail_image") String thumbnail_image,
+										@RequestParam("nickname") String nickname,
+										@RequestParam("gender") String gender,
+										@RequestParam("age_range") String age_range,
+										Model model, HttpSession session) {
+		
+		System.out.println("userInfoUpdate() 메소드호출");
+		
+		LoginVO user = new LoginVO();
+		user.setAge_range(age_range);
+		user.setGender(gender);
+		user.setId(id);
+		user.setNickname(nickname);
+		user.setProfile_image(profile_image);
+		user.setThumbnail_image(thumbnail_image);
+
+		System.out.println(user);
+		
+		user = loginService.addUserInfo(user);
 
 		session.setAttribute("user", user);
 		

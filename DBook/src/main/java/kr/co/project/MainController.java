@@ -26,4 +26,17 @@ public class MainController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/test.do")
+	public ModelAndView test(HttpSession session) {
+
+		System.out.println("test()진입");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("test/layerPopUpTest");
+		
+		return mav;
+	}
+
+	
 }

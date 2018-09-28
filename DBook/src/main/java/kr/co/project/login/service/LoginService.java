@@ -11,4 +11,6 @@ public interface LoginService {
 	
 	public LoginVO Login(LoginVO user);
 
+	public LoginVO addUserInfo(LoginVO user);
+
 }
