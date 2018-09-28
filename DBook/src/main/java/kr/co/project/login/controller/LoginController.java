@@ -1,5 +1,7 @@
 package kr.co.project.login.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,7 +19,7 @@ public class LoginController {
 	private LoginService loginService;
 	
 	@RequestMapping(value="/login/login.do", method=RequestMethod.GET)
-	public ModelAndView login() {
+	public ModelAndView login(@ModelAttribute LoginVO user) {
 		
 		System.out.println("login() 메소드호출");
 		
@@ -28,15 +30,20 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login/login.do", method=RequestMethod.POST)
-	public ModelAndView loginProcess(@ModelAttribute LoginVO user) {
+	public ModelAndView loginProcess(@ModelAttribute LoginVO user, HttpSession session) {
 		
 		System.out.println("loginProcess() 메소드호출");
-		System.out.println(user);
+		System.out.println("현재 로그인 정보" + user);
+
+		user = loginService.Login(user);
+
+		session.setAttribute("user", user);
 		
-		loginService.Login(user);
+		System.out.print("세션에 올라간 정보");
+		System.out.println((LoginVO)session.getAttribute("user"));
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/");
+		mav.setViewName("redirect:/main/home.do");
 		
 		return mav;
 	}

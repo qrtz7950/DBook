@@ -9,11 +9,13 @@
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
 <title>Login Demo - Kakao JavaScript SDK</title>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 </head>
 <body>
 <a id="kakao-login-btn"></a>
-<a href="http://developers.kakao.com/logout">아저씨는 미리 만들어 봤어요</a>
+<a href="http://developers.kakao.com/logout">로그아웃</a>
+
 <script type='text/javascript'>
 
 	function post_to_url(path, params, method) {
@@ -35,7 +37,7 @@
 	    document.body.appendChild(form);
 	    form.submit();
 	}
-
+	
 	// 사용할 앱의 JavaScript 키
     Kakao.init('70b6dca9bb4272bcec25e71ea7ab0125');
     // 카카오 로그인 버튼을 생성
@@ -53,8 +55,10 @@
 				var thumbnail_image = response.properties['thumbnail_image'];
 				var nickname = response.properties['nickname'];
 				var age_range = response.kakao_account['age_range'];
-				var gender = response.kakao_account['gender']
-            	
+				var gender = response.kakao_account['gender'];
+            	var has_gender = response.kakao_account['has_gender'];
+            	var has_age_range = response.kakao_account['has_age_range'];
+				
             	console.log(JSON.stringify(response));
 				console.log(id);
 				console.log(profile_image);
@@ -62,16 +66,29 @@
 				console.log(nickname);
 				console.log(age_range);
 				console.log(gender);
+				console.log(has_gender);
+				console.log(has_age_range);
 				
+				
+				if(has_gender == false || has_age_range == false){
+
+					if(has_gender == false){
+						gender = 'null';
+					}
+					
+					if(has_age_range == false){
+						age_range = 'null';
+					}
+				} 
 				post_to_url("${pageContext.request.contextPath}/login/login.do",
-							{ "id": id
-							, "profile_image":profile_image
-							, "thumbnail_image":thumbnail_image
-							, "nickname":nickname
-							, "age_range":age_range
-							, "gender":gender
-							   });
-            }
+						{ "id": id
+						, "profile_image":profile_image
+						, "thumbnail_image":thumbnail_image
+						, "nickname":nickname
+						, "age_range":age_range
+						, "gender":gender
+						});
+            	}
         });
       },
       fail: function(err) {

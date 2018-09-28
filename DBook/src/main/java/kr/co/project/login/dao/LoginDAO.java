@@ -15,12 +15,14 @@ public interface LoginDAO {
 	 * @param user
 	 * @return
 	 */
-	boolean overlapCheck(LoginVO user);
+	public boolean overlapCheck(LoginVO user);
 	
 	/**
 	 * 파라미터의 정보대로 회원의 정보를 수정
 	 * @param user
 	 */
-	void updateUserInfo(LoginVO user);
+	public void updateUserInfo(LoginVO user);
+	
+	public LoginVO login(LoginVO user);
 	
 }

@@ -11,7 +11,7 @@ public class LoginDAOImpl implements LoginDAO{
 
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-	
+
 	@Override
 	public void signIn(LoginVO user) {
 		sqlSessionTemplate.insert("kr.co.project.login.dao.LoginDAO.signIn", user);
@@ -30,6 +30,11 @@ public class LoginDAOImpl implements LoginDAO{
 	@Override
 	public void updateUserInfo(LoginVO user) {
 		sqlSessionTemplate.selectOne("kr.co.project.login.dao.LoginDAO.update", user);
+	}
+
+	public LoginVO login(LoginVO user) {
+		user = sqlSessionTemplate.selectOne("kr.co.project.login.dao.LoginDAO.login", user);
+		return user;
 	}
 
 }

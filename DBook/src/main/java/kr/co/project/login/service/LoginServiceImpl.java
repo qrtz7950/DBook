@@ -15,10 +15,9 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public LoginVO Login(LoginVO user) {
 		
-		System.out.println("Loginservice 진입");
-		
 		if(dao.overlapCheck(user)) {
 			dao.updateUserInfo(user);
+			user = dao.login(user);
 		} else {
 			dao.signIn(user);
 		}
