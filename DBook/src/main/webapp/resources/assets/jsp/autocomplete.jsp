@@ -25,11 +25,11 @@
 
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		con = DriverManager.getConnection(url,"hr","hr");
-		String sql = "select first_name from employees where first_name LIKE ? ";
 		/* String sql = "select keyword from keyword where keyword LIKE ?"; */
+		String sql = "select first_name from employees where first_name LIKE ? ";
 		
 		ps = con.prepareStatement(sql);
-		ps.setString(1, first_name+"%");
+		ps.setString(1, first_name+"%" );
 		rs = ps.executeQuery();
 		while(rs.next()){
 			list.add(rs.getString("first_name"));
