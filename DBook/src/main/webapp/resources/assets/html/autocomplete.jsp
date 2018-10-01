@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>jQuery 자동 완성3</title>
+<title>jQuery 자동 완성</title>
 <link rel = "stylesheet" href="../css/jquery.autocomplete.css"/>
 <script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="../js/jquery.autocomplete.js"></script>
@@ -18,6 +18,5 @@
 </head>
 <body>
 	<input type="text" id="keyword" size="20" name="keyword" />
-<button href="">검색</button>
 </body>
 </html>
