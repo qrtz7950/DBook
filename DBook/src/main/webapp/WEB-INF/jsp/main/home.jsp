@@ -10,10 +10,47 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/css/swiper.min.css">
 	
 	<title>DBook</title>
+	
+	<style>
+		#topMenu {
+			position: fixed;
+			width: 100%;
+		    list-style-type: none;
+		    margin: 0;
+		    padding: 0;
+		    overflow: hidden;
+		    background-color: #333;
+		    z-index: 900;
+		}
+		
+		#topMenu > li {
+		    float: left;
+		}
+		
+		#topMenu > li a {
+		    display: block;
+		    color: white;
+		    text-align: center;
+		    padding: 14px 16px;
+		    text-decoration: none;
+		}
+		
+		#topMenu > li a:hover {
+		    background-color: #111;
+		}
+	</style>
+
 </head>
 <body>
 	<!-- Wrapper -->
-			<button id="showLeft" style="position: fixed; right: 0px; z-index: 100;">Menu</button>
+			<ul id="topMenu">
+			  <li><a class="active" href="#home">Home</a></li>
+			  <li><a href="#news">News</a></li>
+			  <li><a href="#contact">Contact</a></li>
+			  <li><a href="#about">About</a></li>
+			  <li style="float: right;"><a id="showLeft">Menu</a></li>
+			</ul>
+			<!-- <button id="showLeft" style="position: fixed; right: 0px; z-index: 902;">Menu</button> -->
 			<div id="wrapper">
 				<!-- Main -->
 					<div id="main">
@@ -147,5 +184,34 @@
 			<jsp:include page="../include/JS.jsp"></jsp:include>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
 			<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
+			<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+			<script>
+				$(document).ready(function(){
+					menuButton();
+					
+				});
+				
+				
+				function menuButton(){
+					$.ajax({
+						type : 'get',
+						url : '',
+						dataType : '',
+						data : '' ,
+						success : function(){
+							if($(window).width()<1000){
+						        $("#showLeft").hide();
+						        $("#cbp-spmenu-s1").hide();
+								$("#navbar1").show();
+						    }else{
+						        $("#navbar1").hide();
+								$("#showLeft").show();
+								$("#cbp-spmenu-s1").show();
+						    }
+						}
+					});
+					setTimeout("menuButton()", 100);
+				}
+			</script>
 </body>
 </html>
