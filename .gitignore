@@ -2,5 +2,6 @@
 Servers/
 RemoteSystemsTempFiles/
 DBook/bin/
-DBook/target/
 DBook/.classpath
+DBook/.project
+DBook/.settings/
