@@ -27,14 +27,19 @@
     
            rs = pstmt.executeQuery(); 
     
+           rs.next();
+           
            while(rs.next()) { 
                list.add(rs.getString(1));
            } 
           
            JSONArray arrayObj = new JSONArray();
            
-           for(String str :  list) {
+           for(String str : list) {
                arrayObj.add(str);
+               if(arrayObj.size() > 9){
+            	   break;
+               }
            }
           
            out.println(arrayObj.toString());

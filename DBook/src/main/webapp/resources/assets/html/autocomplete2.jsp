@@ -17,8 +17,8 @@
 .ui-autocomplete {  
     position: absolute; 
     cursor: default; 
-    height: 200px; 
-    overflow-y: scroll; 
+    height: 230px; 
+    overflow-y: hidden; 
     overflow-x: hidden;}
 .ui-widget{
      font-size: 12px;
