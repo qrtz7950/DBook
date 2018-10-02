@@ -72,14 +72,14 @@ public class LoginController {
 		System.out.println(user);
 		
 		user = loginService.addUserInfo(user);
-
+		
 		session.setAttribute("user", user);
 		
 		System.out.print("세션에 올라간 정보");
 		System.out.println((LoginVO)session.getAttribute("user"));
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/main/home.do");
+//		mav.setViewName("redirect:/main/home.do");
 		
 		return mav;
 	}

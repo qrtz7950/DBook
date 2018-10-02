@@ -37,9 +37,8 @@ public class LoginDAOImpl implements LoginDAO{
 		return user;
 	}
 
-	public LoginVO addUserInfo(LoginVO user) {
-		user = sqlSessionTemplate.selectOne("kr.co.project.login.dao.LoginDAO.update", user);
-		return user;
+	public void addUserInfo(LoginVO user) {
+		user = sqlSessionTemplate.selectOne("kr.co.project.login.dao.LoginDAO.updateAll", user);
 	}
 
 }

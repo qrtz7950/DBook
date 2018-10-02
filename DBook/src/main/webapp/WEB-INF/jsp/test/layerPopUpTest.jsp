@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,31 +30,32 @@
     display: none;
 }
 </style>
-
+	<c:if test="${not empty user.id and empty user.gender or empty user.age_range}">
+		$( document ).ready(function() {
+			alert('!');
+			$('.layerPopUp').removeClass('hidden');
+			$('#userInfo').click(function() {
+			    $.ajax({
+			        type: "POST",
+			        url: "${pageContext.request.contextPath}/user/update.do",
+			        data: {    
+			        	"id" : '${user.id}',
+			        	"nickname" : '${user.nickname}',
+			            "profile_image" : '${user.profile_image}',
+			            "thumbnail_image" : '${user.thumbnail_image}',
+			            "age_range" : $('#age_range').val(),
+			            "gender" : $('#gender').val()
+			        },
+			        success: function() {
+			            alert('정보 등록 성공');
+			        }, error: function() {
+			            alert('정보 등록 실패');
+			        }
+			    });
+			});
+		});
+	</c:if>
 <script>
-$( document ).ready(function() {
-	alert('!');
-	$('.layerPopUp').removeClass('hidden');
-	$('#userInfo').click(function() {
-	    $.ajax({
-	        type: "POST",
-	        url: "${pageContext.request.contextPath}/user/update.do",
-	        data: {    
-	        	"id" : '${user.id}',
-	        	"nickname" : '${user.nickname}',
-	            "profile_image" : '${user.profile_image}',
-	            "thumbnail_image" : '${user.thumbnail_image}',
-	            "age_range" : $('#age_range').val(),
-	            "gender" : $('#gender').val()
-	        },
-	        success: function() {
-	            alert('정보 등록 성공');
-	        }, error: function() {
-	            alert('정보 등록 실패');
-	        }
-	    });
-	});
-});
 
 </script>
 </head>
@@ -82,7 +84,8 @@ $( document ).ready(function() {
 			</form>
 		</div>
 	</div>
-<script>
-</script>
+<h1></h1>
+<h1></h1>
+<h1></h1>
 </body>
 </html>
