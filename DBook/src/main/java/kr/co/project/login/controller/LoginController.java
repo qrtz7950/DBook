@@ -84,4 +84,14 @@ public class LoginController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/login/logout.do")
+   public ModelAndView logOut(HttpSession session) {
+      
+      session.invalidate();
+      
+      ModelAndView mav = new ModelAndView();
+      mav.setViewName("redirect:/main/home.do");
+      
+      return mav;
+   }
 }

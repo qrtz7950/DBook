@@ -60,30 +60,7 @@
 </script>
 </head>
 <body>
-	<div class="layerPopUp hidden">
-		<div class="infoForm">
-			서비스를 이용하기 위하여 성별과 나이 정보가 필요합니다<br><br>
-			<form action="" method="post">
-				<select id="age_range" name="age_range">
-					<option selected value="0~9">0~9</option>
-					<option value="10~19">10~19</option>
-					<option value="20~29">20~29</option>
-					<option value="30~39">30~39</option>
-					<option value="40~49">40~49</option>
-					<option value="50~59">50~59</option>
-					<option value="60~69">60~69</option>
-					<option value="70~79">70~79</option>
-					<option value="80~89">80~89</option>
-					<option value="90~99">90~99</option>
-				</select>
-				<select id="gender" name="gender">
-					<option selected value="male">남자</option>
-					<option value="female">여자</option>
-				</select>
-				<button id="userInfo">확인</button>
-			</form>
-		</div>
-	</div>
+
 <h1></h1>
 <h1></h1>
 <h1></h1>

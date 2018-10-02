@@ -1,0 +1,22 @@
+@charset "UTF-8";
+.layerPopUp {
+    position: fixed;
+    width: 80%;
+    left: 50%;
+    margin-left: -40%; /* half of width */
+    height: 60%;
+    top: 50%;
+    margin-top: -20%; /* half of height */
+    overflow: auto;
+   text-align:center;
+   z-index:999;
+   
+    /* decoration */
+    border: 3px solid #F56A6A;
+    background-color: #FAA9A9;
+    padding: 1em;
+    box-sizing: border-box;
+}
+.hidden {
+    display: none;
+}

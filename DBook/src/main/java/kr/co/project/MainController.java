@@ -15,12 +15,6 @@ public class MainController {
 	@RequestMapping("/home.do")
 	public ModelAndView home(HttpSession session) {
 
-		System.out.println("home()진입");
-		
-		LoginVO user = (LoginVO) session.getAttribute("user");
-		
-		System.out.println(user);
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main/home");
 		
@@ -33,7 +27,6 @@ public class MainController {
 		System.out.println("test()진입");
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("test/layerPopUpTest");
 		
 		return mav;
 	}

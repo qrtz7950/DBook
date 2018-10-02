@@ -14,7 +14,8 @@
 </head>
 <body>
 <a id="kakao-login-btn"></a>
-<a href="http://developers.kakao.com/logout">로그아웃</a>
+<a href="${pageContext.request.contextPath}/login/logout.do">DBook 로그아웃</a>
+<a href="http://developers.kakao.com/logout">카카오 로그아웃</a>
 
 <script type='text/javascript'>
 
@@ -73,11 +74,11 @@
 				if(has_gender == false || has_age_range == false){
 
 					if(has_gender == false){
-						gender = 'null';
+						gender = 'none';
 					}
 					
 					if(has_age_range == false){
-						age_range = 'null';
+						age_range = 'none';
 					}
 				} 
 				post_to_url("${pageContext.request.contextPath}/login/login.do",

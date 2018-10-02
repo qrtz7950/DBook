@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<jsp:include page="../include/CSS.jsp"></jsp:include>
+	<jsp:include page="../include/CSS.jsp" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/slide2.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/css/swiper.min.css">
-	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/css/swiper.min.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/layoutPopUp.css" />
+		
 	<title>DBook</title>
 	
 	<style>
@@ -48,7 +50,7 @@
 
 </head>
 <body>
-	<!-- Wrapper -->
+		<!-- topMenu -->
 			<ul id="topMenu">
 				<li><a class="active" href="#home">Home</a></li>
 				<li><a href="#news">News</a></li>
@@ -63,6 +65,8 @@
 				</li>
 			</ul>
 			<!-- <button id="showLeft" style="position: fixed; right: 0px; z-index: 902;">Menu</button> -->
+			
+		<!-- Wrapper -->
 			<div id="wrapper">
 				<!-- Main -->
 					<div id="main">
@@ -188,21 +192,109 @@
 					</div>
 			</div>
 					
-				<!-- Sidebar -->
-					<jsp:include page="../include/SideMenu.jsp"></jsp:include>
+		<!-- layerPopUp -->
+				<div class="layerPopUp hidden">
+					<div class="infoForm">
+						서비스를 이용하기 위하여 성별과 나이 정보가 필요합니다<br><br>
+						<form action="" method="post">
+							<select id="age_range" name="age_range">
+								<option selected value="0~9">0~9</option>
+								<option value="10~19">10~19</option>
+								<option value="20~29">20~29</option>
+								<option value="30~39">30~39</option>
+								<option value="40~49">40~49</option>
+								<option value="50~59">50~59</option>
+								<option value="60~69">60~69</option>
+								<option value="70~79">70~79</option>
+								<option value="80~89">80~89</option>
+								<option value="90~99">90~99</option>
+							</select>
+							<select id="gender" name="gender">
+								<option selected value="male">남자</option>
+								<option value="female">여자</option>
+							</select>
+							<button id="userInfo">확인</button>
+						</form>
+					</div>
+				</div>
+					
+		<!-- Sidebar -->
+			<jsp:include page="../include/SideMenu.jsp"></jsp:include>
 					
 
 		<!-- Scripts -->
 			<jsp:include page="../include/JS.jsp"></jsp:include>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
 			<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
-			<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+			
+			
+		<!-- 로그인 유저정보 추가입력 -->
+			<c:if test="${not empty user.id and user.gender == 'none' or user.age_range == 'none'}">
+            <script>
+               $( document ).ready(function() {
+                  $('.layerPopUp').removeClass('hidden');
+                  $('#userInfo').click(function() {
+                      $.ajax({
+                          type: "POST",
+                          url: "${pageContext.request.contextPath}/user/update.do",
+                          data: {    
+                             "id" : '${user.id}',
+                             "nickname" : '${user.nickname}',
+                              "profile_image" : '${user.profile_image}',
+                              "thumbnail_image" : '${user.thumbnail_image}',
+                              "age_range" : $('#age_range').val(),
+                              "gender" : $('#gender').val()
+                          },
+                          success: function() {
+                             alert('!');
+                             $('.layerPopUp').addClass('hidden');
+                          }, error: function() {
+                             alert('!');
+                             $('.layerPopUp').addClass('hidden');
+                          }
+                      });
+                  });
+               });
+            </script>
+         </c:if>        
+			
+			
+		<!-- Menu  -->
 			<script>
-				$(document).ready(function(){
+				$(window).resize(function(){
 					menuButton();
 					
 				});
 				
+				
+				$(document).ready(function() {
+	                $('#ui-active-menuitem').css('font-size', '10px');
+	                $("input#autoText").autocomplete({
+	                    width: 300,
+	                    max: 10,
+	                    delay: 100,
+	                    minLength: 1,
+	                    autoFocus: true,
+	                    cacheLength: 1,
+	                    scroll: true,
+	                    highlight: false,
+	                    source: function(request, response) {
+	                        $.ajax({
+	                            url: "${pageContext.request.contextPath}/resources/assets/jsp/autocompleteDB2.jsp",
+	                            dataType: "json",
+	                            type: "post",
+	                            data: request,
+	                            success: function( data) {
+	                                response(data);
+	                            },
+	                            error: function(status, error){
+	                                 console.log( status +' / ' + error);
+	                            }
+	                        });
+	                    }
+	             
+	                });
+	            });
 				
 				function menuButton(){
 					$.ajax({
@@ -224,8 +316,10 @@
 						    }
 						}
 					});
-					setTimeout("menuButton()", 100);
+					/* setTimeout("menuButton()", 100); */
 				}
 			</script>
+			
+			
 </body>
 </html>
