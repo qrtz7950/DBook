@@ -4,7 +4,7 @@
 <%@ page import="java.sql.*" %>
 <%
 
-	//DB에서 키워드를 가져와서 suggest.html에서 자동 완성..
+	//DB에서 키워드를 가져와서 autocomplete.jsp에서 자동 완성..
 	request.setCharacterEncoding("UTF-8");
 
 	//jquery autocomplete플러그인 설정된 이름 'q'로 넘어온다. 그래서 값을 가지고 있는 파라미터 이름은 'q'

@@ -1,13 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Autocomplete Scripts -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/jquery.autocomplete.css"/>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/jquery-1.8.3.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/jquery.autocomplete.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#keyword").autocomplete("${pageContext.request.contextPath}/resources/assets/jsp/autocompleteDB.jsp"); //한줄. 서버에서 키워드 리스 가져오기
+		
+		});
+	</script>
+</head>
+<body>
+			
 <div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1" style="overflow: auto;">
 		<div style="width:80%; margin: 10%;">
 
 			<!-- Search -->
 				<section id="search" class="alt">
 					<form method="post" action="#">
-						<input type="text" name="query" id="query" placeholder="Search" />
+						<input type="text" id="keyword" size="20" name="keyword" />
 					</form>
 				</section>
 
@@ -127,3 +143,5 @@
 
 		</div>
 </div>
+</body>
+</html>
