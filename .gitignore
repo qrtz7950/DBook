@@ -1,3 +1,6 @@
 /.metadata/
 Servers/
 RemoteSystemsTempFiles/
+DBook/bin/
+DBook/target/
+DBook/.classpath
