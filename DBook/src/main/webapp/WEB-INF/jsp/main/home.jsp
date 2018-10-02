@@ -33,22 +33,34 @@
 		    text-align: center;
 		    padding: 14px 16px;
 		    text-decoration: none;
+		    border: none;
 		}
 		
 		#topMenu > li a:hover {
 		    background-color: #111;
 		}
+		
+		#topMenu > li.topMenu-right {
+			float: right;
+		}
+		
 	</style>
 
 </head>
 <body>
 	<!-- Wrapper -->
 			<ul id="topMenu">
-			  <li><a class="active" href="#home">Home</a></li>
-			  <li><a href="#news">News</a></li>
-			  <li><a href="#contact">Contact</a></li>
-			  <li><a href="#about">About</a></li>
-			  <li style="float: right;"><a id="showLeft">Menu</a></li>
+				<li><a class="active" href="#home">Home</a></li>
+				<li><a href="#news">News</a></li>
+				<li><a href="#contact">Contact</a></li>
+				<li><a href="#about">About</a></li>
+				<li class="topMenu-right"><a id="showLeft">Menu</a></li>
+				<li class="topMenu-right"><a id="showTop">Menu</a></li>
+				<li class="topMenu-right" id="topMenu-search">
+					<form method="post" action="#" style="margin: 0; padding-top: 5px;">
+						<input type="text" name="query" id="query" placeholder="Search" /> 
+					</form>
+				</li>
 			</ul>
 			<!-- <button id="showLeft" style="position: fixed; right: 0px; z-index: 902;">Menu</button> -->
 			<div id="wrapper">
@@ -199,14 +211,16 @@
 						dataType : '',
 						data : '' ,
 						success : function(){
-							if($(window).width()<1000){
+							if($(window).width()<660){
 						        $("#showLeft").hide();
 						        $("#cbp-spmenu-s1").hide();
-								$("#navbar1").show();
+						        $("#topMenu-search").hide();
+								$("#showTop").show();
 						    }else{
-						        $("#navbar1").hide();
+						        $("#showTop").hide();
 								$("#showLeft").show();
 								$("#cbp-spmenu-s1").show();
+								$("#topMenu-search").show();								
 						    }
 						}
 					});
