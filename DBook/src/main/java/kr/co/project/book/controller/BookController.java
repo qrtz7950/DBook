@@ -1,15 +1,17 @@
-package kr.co.project.booklist.controller;
+package kr.co.project.book.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
-@RequestMapping("/booklist")
-public class BooklistController {
+import kr.co.project.book.vo.BookVO;
 
-	@RequestMapping("/category/{category}.do")
+@Controller
+@RequestMapping("/book")
+public class BookController {
+
+	@RequestMapping("/booklist/category/{category}.do")
 	public ModelAndView booklistByCategory(@PathVariable("category") String category) {
 
 		System.out.println("booklistByCategory()진입");
@@ -23,6 +25,21 @@ public class BooklistController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("categories", categories);
 		mav.setViewName("booklist/category");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/bookDetail/{book_no}.do")
+	public ModelAndView bookDetail(@PathVariable("book_no") int book_no) {
+		
+		System.out.println("bookDetail()진입");
+		
+		BookVO book = new BookVO();
+		
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("bookDetail/detail");
 		
 		return mav;
 	}

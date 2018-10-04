@@ -27,7 +27,7 @@
 						<li>
 							<span class="opener">국내도서</span>
 							<ul>
-								<li><a href="${pageContext.request.contextPath}/booklist/category/국내도서>소설.do">소설</a></li>
+								<li><a href="${pageContext.request.contextPath}/book/booklist/category/국내도서>소설.do">소설</a></li>
 								<li><a href="#">시/에세이</a></li>
 								<li><a href="#">인문</a></li>
 								<li><a href="#">가정/생활</a></li>
