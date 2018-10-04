@@ -57,7 +57,7 @@
 </head>
 <body>
 		<!-- topMenu -->
-			<ul id="topMenu">
+			<!-- <ul id="topMenu">
 				<li><a class="active" href="#home">Home</a></li>
 				<li><a href="#news">News</a></li>
 				<li><a href="#contact">Contact</a></li>
@@ -69,7 +69,8 @@
 						<input type="text" name="query" id="query" placeholder="Search" /> 
 					</form>
 				</li>
-			</ul>
+			</ul> -->
+			<jsp:include page="../include/TopMenu.jsp"></jsp:include>
 			<!-- <button id="showLeft" style="position: fixed; right: 0px; z-index: 902;">Menu</button> -->
 			
 		<!-- Wrapper -->
