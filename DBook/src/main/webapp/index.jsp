@@ -189,7 +189,7 @@
          </div>
                
             <!-- Sidebar -->
-               <jsp:include page="WEB-INF/jsp/include/SideMenu.jsp"></jsp:include>
+               <jsp:include page="WEB-INF/jsp/include/SlideSideMenu.jsp"></jsp:include>
                
 
       <!-- Scripts -->
