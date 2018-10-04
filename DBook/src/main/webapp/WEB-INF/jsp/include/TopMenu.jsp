@@ -9,8 +9,10 @@
 			<li class="topMenu-right" style="cursor: pointer;"><a id="showLeft">Menu</a></li>
 			<li class="topMenu-right" style="cursor: pointer;"><a id="showTop">Menu</a></li>
 			<li class="topMenu-right" id="topMenu-search">
-				<form method="post" action="#" style="margin: 0; padding-top: 5px;">
-					<input type="text" name="query" id="query" placeholder="Search" /> 
+			<section id="search" class="alt">
+				<form method="get" style="margin: 0; padding-top: 5px;" action="${pageContext.request.contextPath}/main/searchresult.do">
+						<input type="text" id="noAutoText" name="keyword" maxlength="20" />
 				</form>
+			</section>
 			</li>
 		</ul>
