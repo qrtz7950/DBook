@@ -209,53 +209,6 @@
                    });
             	});
             </script>
-<<<<<<< HEAD
          </c:if>        
-			
-		<!-- 달지마 -->
-			<script>
-				/* MenuButton */
-					$(document).ready(function() {
-						menuButton();
-					});
-				
-					$(window).resize(function(){
-						menuButton();
-						
-					});
-				
-				 
-			</script>
-			
-		<!-- script function -->
-			<script>
-				function menuButton(){
-					$.ajax({
-						type : 'get',
-						url : '',
-						dataType : '',
-						data : '' ,
-						success : function(){
-							if($(window).width()<660){
-						        $("#showLeft").hide();
-						        $("#cbp-spmenu-s1").hide();
-						        $("#topMenu-search").hide();
-								$("#showTop").show();
-						    }else{
-						        $("#showTop").hide();
-								$("#showLeft").show();
-								$("#cbp-spmenu-s1").show();
-								$("#topMenu-search").show();								
-						    }
-						}
-					});
-					/* setTimeout("menuButton()", 100); */
-				}
-			</script>
-			
-=======
-         </c:if>
->>>>>>> origin/Ddock2
-			
 </body>
 </html>

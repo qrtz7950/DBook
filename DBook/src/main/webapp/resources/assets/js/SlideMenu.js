@@ -24,34 +24,3 @@ function disableOther( button ) {
 		classie.toggle( showTop, 'disabled' );
 	}
 }
-
-
-/* 검색어 자동완성 */
-$(document).ready(function() {
-    $('#ui-active-menuitem').css('font-size', '10px');
-    $("input#autoText").autocomplete({
-        width: 300,
-        max: 10,
-        delay: 100,
-        minLength: 1,
-        autoFocus: true,
-        cacheLength: 1,
-        scroll: true,
-        highlight: false,
-        source: function(request, response) {
-            $.ajax({
-                url: "http://127.0.0.1:8000/DBook/resources/assets/jsp/autocompleteDB2.jsp",
-                dataType: "json",
-                type: "post",
-                data: request,
-                success: function(data) {
-                    response(data);
-                },
-                error: function(status, error){
-                     console.log( status +' / ' + error);
-                }
-            });
-        }
- 
-    });
-});
