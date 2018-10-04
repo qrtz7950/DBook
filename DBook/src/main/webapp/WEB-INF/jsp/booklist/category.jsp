@@ -41,10 +41,10 @@
 	
 	#category_select{
 		display: -webkit-box;
-		height: 45px;
+		height: 50px;
 		vertical-align:middle;
 		border-bottom: 1px solid #7f888f;
-		margin-bottom: 15px;
+		margin-bottom: 20px;
 	}
 	
 	#category_select select{
