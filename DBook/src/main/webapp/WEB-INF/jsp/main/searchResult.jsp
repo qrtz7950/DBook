@@ -10,8 +10,14 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/slide2.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/css/swiper.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/layerPopUp.css" />
-		
-	<title>SearchResult</title>
+	
+	<%
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		String keyword = request.getParameter("keyword");
+	%>
+	
+	<title><%=keyword %>:: 검색결과 - DBooK</title>
 	
 	<style>
 		#topMenu {

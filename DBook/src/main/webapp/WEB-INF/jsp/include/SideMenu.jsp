@@ -6,7 +6,7 @@
 <!-- Autocomplete Scripts -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/jquery.autocomplete.css"/>
 </head>
-			
+
 <div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1" style="overflow: auto;">
 		<div style="width:80%; margin: 10%;">
 
