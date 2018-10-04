@@ -148,7 +148,7 @@
 			</div>
 					
 				<!-- Sidebar -->
-					<jsp:include page="../include/SideMenu.jsp"></jsp:include>
+					<jsp:include page="../include/SlideSideMenu.jsp"></jsp:include>
 					
 
 		<!-- Scripts -->

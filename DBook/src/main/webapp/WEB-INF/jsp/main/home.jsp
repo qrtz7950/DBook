@@ -12,59 +12,11 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/layerPopUp.css" />
 		
 	<title>DBook</title>
-	
-	<style>
-		#topMenu {
-			position: fixed;
-			width: 100%;
-		    list-style-type: none;
-		    margin: 0;
-		    padding: 0;
-		    overflow: hidden;
-		    background-color: #333;
-		    z-index: 900;
-		}
-		
-		#topMenu > li {
-		    float: left;
-		}
-		
-		#topMenu > li a {
-		    display: block;
-		    color: white;
-		    text-align: center;
-		    padding: 14px 16px;
-		    text-decoration: none;
-		    border: none;
-		}
-		
-		#topMenu > li a:hover {
-		    background-color: #111;
-		}
-		
-		#topMenu > li.topMenu-right {
-			float: right;
-		}
-		
-	</style>
 
 </head>
 <body>
 		<!-- topMenu -->
-			<ul id="topMenu">
-				<li><a class="active" href="#home">Home</a></li>
-				<li><a href="#news">News</a></li>
-				<li><a href="#contact">Contact</a></li>
-				<li><a href="#about">About</a></li>
-				<li class="topMenu-right"><a id="showLeft">Menu</a></li>
-				<li class="topMenu-right"><a id="showTop">Menu</a></li>
-				<li class="topMenu-right" id="topMenu-search">
-					<form method="post" action="#" style="margin: 0; padding-top: 5px;">
-						<input type="text" name="query" id="query" placeholder="Search" /> 
-					</form>
-				</li>
-			</ul>
-			<!-- <button id="showLeft" style="position: fixed; right: 0px; z-index: 902;">Menu</button> -->
+			<jsp:include page="../include/TopMenu.jsp"/>
 			
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -219,7 +171,8 @@
 				</div>
 					
 		<!-- Sidebar -->
-			<jsp:include page="../include/SideMenu.jsp"></jsp:include>
+			<jsp:include page="../include/SlideSideMenu.jsp"></jsp:include>
+			<jsp:include page="../include/SlideTopMenu.jsp"></jsp:include>
 					
 
 		<!-- Scripts -->
@@ -253,9 +206,10 @@
                              $('.layerPopUp').addClass('hidden');
                           }
                       });
-                  });
-               });
+                   });
+            	});
             </script>
+<<<<<<< HEAD
          </c:if>        
 			
 		<!-- 달지마 -->
@@ -299,6 +253,9 @@
 				}
 			</script>
 			
+=======
+         </c:if>
+>>>>>>> origin/Ddock2
 			
 </body>
 </html>
