@@ -1,8 +1,8 @@
 @charset "UTF-8";
 .ui-autocomplete {  
-    position: absolute; 
+    position: fixed; 
     cursor: default; 
-    height: 230px; 
+    height: 285px; 
     overflow-y: hidden; 
     overflow-x: hidden;}
 .ui-widget{

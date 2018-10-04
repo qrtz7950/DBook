@@ -6,14 +6,14 @@
 <!-- Autocomplete Scripts -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/jquery.autocomplete.css"/>
 </head>
-			
+
 <div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1" style="overflow: auto;">
 		<div style="width:80%; margin: 10%;">
 
 			<!-- Search -->
 				<section id="search" class="alt">
-					<form method="post" action="#">
-						<input type="text" id="autoText" maxlength="20" />
+					<form method="get" action="${pageContext.request.contextPath}/main/searchresult.do">
+						<input type="text" id="autoText" name="keyword" maxlength="20" />
 					</form>
 				</section>
 
@@ -136,3 +136,34 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/js/jquery.autocomplete.js"></script>
+<script>
+/* 검색어 자동완성 */
+$(document).ready(function() {
+    $('#ui-active-menuitem').css('font-size', '10px');
+    $("input#autoText").autocomplete({
+        width: 300,
+        max: 10,
+        delay: 100,
+        minLength: 1,
+        autoFocus: true,
+        cacheLength: 1,
+        scroll: true,
+        highlight: false,
+        source: function(request, response) {
+            $.ajax({
+                url: "${pageContext.request.contextPath}/resources/assets/jsp/autocompleteDB2.jsp",
+                dataType: "json",
+                type: "post",
+                data: request,
+                success: function( data) {
+                    response(data);
+                },
+                error: function(status, error){
+                     console.log( status +' / ' + error);
+                }
+            });
+        }
+ 
+    });
+});
+</script>
