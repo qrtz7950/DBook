@@ -23,7 +23,16 @@
 						<h2>책 카테고리</h2>
 					</header>
 					<ul>
-						<li><a href="index.html">?</a></li>
+						<li>
+							<span class="opener">하던거</span>
+							<ul>
+								<li><a href="${pageContext.request.contextPath}/book/booklist/category/국내도서>소설.do">카테고리별 검색</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/login.do">로그인</a></li>
+								<li><a href="${pageContext.request.contextPath}/book/bookDetail/KOR9791196394509.do">상세</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/logout.do">로그아웃</a></li>
+								<li><a href="http://developers.kakao.com/logout">카톡 로그아웃</a></li>
+							</ul>
+						</li>
 						<li>
 							<span class="opener">국내도서</span>
 							<ul>

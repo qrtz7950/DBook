@@ -58,8 +58,7 @@ public class BookController {
 			mav.setViewName("bookDetail/detail");
 		}
 		else {
-			mav.addObject("book", "noBook");
-			mav.setViewName("bookDetail/detail");
+			mav.setViewName("error/error");
 		}
 		
 		return mav;

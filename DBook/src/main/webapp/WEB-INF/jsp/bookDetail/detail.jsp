@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,31 +15,6 @@
 	<title>DBook</title>
 	<style type="text/css">
 	
-	#sideCategoryMenu{
-		width : 15%;
-		display: block;
-		margin-left:30px;
-		float: left;
-	}
-	
-	#sideCategoryMenu_title{
-		background-color: rgb(245, 106, 106);
-		text-align: center;
-		vertical-align: middle;
-		font-weight: bold;
-		color: white;
-	}
-	#sideCategoryMenu_title_category{
-		padding: 5px;
-		padding-left: 10px;
-	}
-	
-	#Category_content{
-		width: 80%;
-		display: inline-flex;
-		float:left;"
-	}
-	
 	#category_select{
 		display: -webkit-box;
 		height: 50px;
@@ -51,6 +27,11 @@
 		height: 1.75em;
 		margin-left: 5px;
 		margin-right: 5px;
+	}
+	
+	.test{
+		display: block;
+		height: auto;
 	}
 	</style>
 </head>
@@ -70,11 +51,10 @@
 							<jsp:include page="../include/HeaderMenu.jsp"/>
 							
 							<!-- Section -->
-								<section style="padding-top: 15px; height: auto;">
-									${book}
+								<section style="padding-top: 15px; padding-bottom: 15px; margin: 0; height: auto; border: none;">
 									<div id="category_select">
 										
-										<a href="${pageContext.request.contextPath}">홈 ></a>
+										<a href="${pageContext.request.contextPath}" style="border: hidden;">홈 ></a>
 									
 										<select style="width:auto;" >
 										
@@ -100,177 +80,79 @@
 										</select>
 									</div>
 									
-									<%-- ${requestScope.categories["0"]} > ${requestScope.categories["1"]} --%>
-									
-									<div id="sideCategoryMenu">
-										<div id="sideCategoryMenu_title">
-											카테고리
-										</div>
-										<div id="sideCategoryMenu_title_category">
-											<ul>
-												<li><a href="${pageContext.request.contextPath}/booklist/category/국내도서>소설.do">소설</a></li>
-												<li><a href="#">시/에세이</a></li>
-												<li><a href="#">인문</a></li>
-												<li><a href="#">가정/생활</a></li>
-												<li><a href="#">요리</a></li>
-												<li><a href="#">건강</a></li>
-												<li><a href="#">취미/스포츠</a></li>
-												<li><a href="#">경제/경영</a></li>
-												<li><a href="#">자기계발</a></li>
-												<li><a href="#">정치/사회</a></li>
-												<li><a href="#">정부간행물</a></li>
-												<li><a href="#">역사/문화</a></li>
-												<li><a href="#">종교</a></li>
-												<li><a href="#">예술/대중문화</a></li>
-												<li><a href="#">중/고학습</a></li>
-												<li><a href="#">기술/공학</a></li>
-												<li><a href="#">외국어</a></li>
-												<li><a href="#">과학</a></li>
-												<li><a href="#">취업/수험서</a></li>
-												<li><a href="#">여행</a></li>
-												<li><a href="#">컴퓨터/IT</a></li>
-												<li><a href="#">잡지</a></li>
-												<li><a href="#">사전</a></li>
-												<li><a href="#">청소년</a></li>
-												<li><a href="#">초등학습</a></li>
-												<li><a href="#">유아</a></li>
-												<li><a href="#">아동</a></li>
-												<li><a href="#">어린이영어</a></li>
-												<li><a href="#">만화</a></li>
-												<li><a href="#">아동/유아전집</a></li>
-												<li><a href="#">한국소개도서</a></li>
-												<li><a href="#">PB상품</a></li>
-											</ul>
-										</div>
+									<div style="padding-bottom: 5px;">
+										<h3 style="margin-bottom: 0;">${book.book_name}</h3>
+										<h5 style="float: right;">조회수 ${requestScope.book.view_cnt}</h5>
 									</div>
 									
-									<div id="Category_content" class="posts">
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                           </div>
-		                           
-							</section>
+								</section>
 								
-
-							<%-- <a href="${pageContext.request.contextPath}/login/login.do">카톡로그인</a> --%>
+								<section style="width: 100%; height: auto; padding-top: 30px; float: left; border-top: 0px;">
+									<div style="width:100%; float: left;">
+										<div style="width: 30%; height: auto; margin: 0; padding-left: 3%; padding-right: 3%; display: inline-block; float:left;">
+											<img src="${pageContext.request.contextPath}/resources/images/book01.jpg" style="width:100%; height:auto;"/>
+										</div>
+										<div style="width: 70%; height: auto; margin: 0; display: inline-block; float:left;">
+											<table style="width: 100%;">
+												<tr>
+													<th style="width: 20%;">저자</th>
+													<td style="width: 80%;">${pageScope.book.author}
+												</tr>
+												<c:if test="${empty book.translator}">
+													<tr>
+														<th>번역</th>
+														<td>${requestScope.book.translator}
+													</tr>
+												</c:if>
+												<tr>
+													<th>출판사</th>
+													<td>${requestScope.book.publisher}
+												</tr>
+												<tr>
+													<th>출판일</th>
+													<td>${requestScope.book.published_date}
+												</tr>
+												<tr>
+													<th>형태</th>
+													<td>${requestScope.book.form_detail}
+												</tr>
+												<tr>
+													<th>평점</th>
+													<td>해야됨</td>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</section>
+								
+								<section>
+									<h3>책 소개</h3>
+									<c:forEach var="item" items="${requestScope.book_introduction}">
+										${item}
+										<br>
+									</c:forEach>
+								</section>
+								
+								<section>
+									<h3>저자 소개</h3>
+									<c:forEach var="item" items="${requestScope.author_introduction}">
+										${item}
+										<br>
+									</c:forEach>
+								</section>
+								
+								<section>
+									<h3>목차</h3>
+									<c:forEach var="item" items="${requestScope.contents}">
+										${item}
+										<br>
+									</c:forEach>
+								</section>
+								
+								<section>
+									${book}
+								</section>
+								
 						</div>
 					</div>
 			</div>
@@ -284,31 +166,6 @@
 			<jsp:include page="../include/JS.jsp"></jsp:include>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
 			<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
-			<script type="text/javascript">
-			
-			$(document).ready(function() {
-				category_toggle();
-			});
-
-			$(window).resize(function(){
-				category_toggle();
-				
-			});
-			
-			function category_toggle(){
-			
-				if($(window).width()<720){
-					$("#sideCategoryMenu").hide();
-					$("#Category_content").css("width","100%");
-				}
-				
-				if($(window).width()>720){
-					$("#sideCategoryMenu").show();
-					$("#Category_content").css("width","80%");
-				}
-			}
-			
-			</script>
 			
 			<script>
 	
