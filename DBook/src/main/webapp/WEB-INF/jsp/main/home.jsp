@@ -145,28 +145,46 @@
 			</div>
 					
 		<!-- layerPopUp -->
+		
+		<div id="layerPopUp_mask" class="hidden"></div>
+		
 				<div class="layerPopUp hidden">
-					<div class="infoForm">
-						서비스를 이용하기 위하여 성별과 나이 정보가 필요합니다<br><br>
-						<form action="" method="post">
-							<select id="age_range" name="age_range">
-								<option selected value="0~9">0~9</option>
-								<option value="10~19">10~19</option>
-								<option value="20~29">20~29</option>
-								<option value="30~39">30~39</option>
-								<option value="40~49">40~49</option>
-								<option value="50~59">50~59</option>
-								<option value="60~69">60~69</option>
-								<option value="70~79">70~79</option>
-								<option value="80~89">80~89</option>
-								<option value="90~99">90~99</option>
-							</select>
-							<select id="gender" name="gender">
-								<option selected value="male">남자</option>
-								<option value="female">여자</option>
-							</select>
-							<button id="userInfo">확인</button>
-						</form>
+					<div id="layer" class="layer-wrap">
+						<div class="pop-layer">
+							<div class="pop-container">
+								<div class="pop-conts">
+									서비스를 이용하기 위하여 성별과 나이 정보가 필요합니다<br><br>
+									
+									<div id="infoForm">
+										<div class="infoText">나이</div>
+										<div>
+											<select id="age_range" name="age_range">
+												<option selected value="0~9">0~9</option>
+												<option value="10~19">10~19</option>
+												<option value="20~29">20~29</option>
+												<option value="30~39">30~39</option>
+												<option value="40~49">40~49</option>
+												<option value="50~59">50~59</option>
+												<option value="60~69">60~69</option>
+												<option value="70~79">70~79</option>
+												<option value="80~89">80~89</option>
+												<option value="90~99">90~99</option>
+											</select>
+										</div>
+										<div class="infoText">성별</div>
+										<div>
+											<select id="gender" name="gender">
+												<option selected value="male">남자</option>
+												<option value="female">여자</option>
+											</select>
+										</div>
+									</div>
+									<div class="btn-r">
+										<a id="userInfo" href="#" class="btn-layerClose"><strong>확인</strong></a>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 					
@@ -184,8 +202,20 @@
 		<!-- 로그인 유저정보 추가입력 -->
 			<c:if test="${not empty user.id and user.gender == 'none' or user.age_range == 'none'}">
             <script>
+	            function wrapWindowByMask(){
+	                var maskHeight = $(document).height();  
+	                var maskWidth = $(window).width();  
+	
+	                $('#mask').css({'width':maskWidth,'height':maskHeight});  
+	
+	                $('#mask').fadeIn(1000);      
+	                $('#mask').fadeTo("slow",0.8);    
+	        	}
+            
                $( document ).ready(function() {
                   $('.layerPopUp').removeClass('hidden');
+                  wrapWindowByMask();
+                  $('#layerPopUp_mask').removeClass('hidden');
                   $('#userInfo').click(function() {
                       $.ajax({
                           type: "POST",
@@ -199,15 +229,16 @@
                               "gender" : $('#gender').val()
                           },
                           success: function() {
-                             alert('!');
                              $('.layerPopUp').addClass('hidden');
+                             $('#mask').hide();
                           }, error: function() {
-                             alert('!');
                              $('.layerPopUp').addClass('hidden');
+                             $('#mask').hide();
                           }
                       });
                    });
             	});
+               
             </script>
          </c:if>        
 </body>

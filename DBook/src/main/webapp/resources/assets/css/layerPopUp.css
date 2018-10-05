@@ -1,22 +1,90 @@
 @charset "UTF-8";
-.layerPopUp {
-    position: fixed;
-    width: 80%;
-    left: 50%;
-    margin-left: -40%; /* half of width */
-    height: 60%;
-    top: 50%;
-    margin-top: -20%; /* half of height */
-    overflow: auto;
-   text-align:center;
-   z-index:999;
-   
-    /* decoration */
-    border: 3px solid #F56A6A;
-    background-color: #FAA9A9;
-    padding: 1em;
-    box-sizing: border-box;
+.layer-wrap {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.5);
 }
-.hidden {
-    display: none;
+
+.layer-wrap:before {
+	content: "";
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	margin-right: -.25em;
 }
+
+.pop-layer {
+	display: inline-block;
+	vertical-align: middle;
+	width: 500px;
+	height: auto;
+	background-color: #fff;
+	border: 5px solid #F56A6A;
+	z-index: 10;
+	font-family: Tahoma;
+}
+
+.pop-layer .pop-container {
+	padding: 20px 25px;
+}
+
+.pop-layer .btn-r {
+	width: 100%;
+	margin: 10px 0 20px;
+	padding-top: 10px;
+	border-top: 1px solid #DDD;
+	text-align: center;
+}
+
+a.btn-layerClose {
+	display: inline-block;
+	height: 25px;
+	padding: 0 14px 0;
+	border: 1px solid rgba(210, 215, 217, 0.75);
+	background-color: #F56A6A;
+	font-size: 13px;
+	color: #fff;
+	line-height: 25px;
+}
+
+#infoForm{
+	text-align: center;
+	display: inline-flex;
+}
+
+#infoForm div{
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+#infoForm select{
+	text-align: center;
+	display: block;
+}
+
+.infoText{
+	padding: 8px;
+}
+
+.hidden{
+	display: none;
+}
+
+#layerPopUp_mask {  
+  position:absolute;  
+  left:0;
+  top:0;
+  z-index:999;  
+  background-color:#000;  
+}
+
+#layer{
+	z-index: 999;
+}
+
+
+
