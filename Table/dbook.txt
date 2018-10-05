@@ -5,9 +5,10 @@ drop table best_seller CASCADE CONSTRAINTS;
 drop table interest CASCADE CONSTRAINTS;
 drop table recent_view CASCADE CONSTRAINTS;
 drop table review CASCADE CONSTRAINTS;
+drop table db_category CASCADE CONSTRAINTS;
+drop table db_category_management CASCADE CONSTRAINTS;
 
 drop sequence seq_db_user_no;
-drop sequence seq_book_no;
 
 create sequence seq_db_user_no;
 create table db_user (
@@ -21,14 +22,10 @@ create table db_user (
     ,   reg_date        date            default sysdate
 );
 
-create sequence seq_book_no;
 create table book (
-        book_no             number(10)      primary key
+        book_id             varchar2(20)      primary key
     ,   book_name           varchar2(200)   not null
-    ,   cover               varchar2(20)
-    ,   genre               varchar2(50)    not null
-    ,   genre2              varchar2(50)
-    ,   genre3              varchar2(50)
+    ,   cover               varchar2(200)
     ,   author              varchar2(50)
     ,   translator          varchar2(50)
     ,   publisher           varchar2(50)
@@ -44,49 +41,83 @@ create table book (
 );
 
 create table user_rating (
-        book_no             number(10)
+        book_id             varchar2(20)
     ,   id                  number(10)
     ,   rating              number(2)
     ,   constraint user_rating_id_fk foreign key(id)
         references db_user(id) on delete cascade
-    ,   constraint user_rating_book_no_fk foreign key(book_no)
-        references book(book_no) on delete cascade
+    ,   constraint user_rating_book_id_fk foreign key(book_id)
+        references book(book_id) on delete cascade
 );
 
 create table best_seller (
         sell_period         date
-    ,   book_no             number(10)
-    ,   constraint best_seller_no_fk foreign key(book_no)
-        references book(book_no) on delete cascade
+    ,   book_id             varchar2(20)
+    ,   constraint best_seller_no_fk foreign key(book_id)
+        references book(book_id) on delete cascade
 );
 
 create table interest (
         id              number(10)
-    ,   book_no         number(10)
+    ,   book_id         varchar2(20)
     ,   constraint interest_id_fk foreign key(id)
         references db_user(id) on delete cascade
-    ,   constraint interest_book_no_fk foreign key(book_no)
-        references book(book_no) on delete cascade
+    ,   constraint interest_book_id_fk foreign key(book_id)
+        references book(book_id) on delete cascade
 );
 
 create table recent_view (
         id              number(10)
-    ,   book_no         number(10)
+    ,   book_id         varchar2(20)
     ,   constraint recent_view_id_fk foreign key(id)
         references db_user(id) on delete cascade
-    ,   constraint recent_view_book_no_fk foreign key(book_no)
-        references book(book_no) on delete cascade
+    ,   constraint recent_view_book_id_fk foreign key(book_id)
+        references book(book_id) on delete cascade
 );
 
 create table review (
         id              number(10)
-    ,   book_no         number(10)
+    ,   book_id         varchar2(20)
     ,   rating          number(2)
     ,   content         varchar2(4000)  not null
     ,   good            number(5)
     ,   bad             number(5)
     ,   constraint review_id_fk foreign key(id)
         references db_user(id) on delete cascade
-    ,   constraint review_book_no_fk foreign key(book_no)
-        references book(book_no) on delete cascade
+    ,   constraint review_book_id_fk foreign key(book_id)
+        references book(book_id) on delete cascade
 );
+
+create table db_category_management (
+        category_no     number(10)      primary key
+    ,   category        varchar(20)     not null
+    ,   parent_no       number(10)
+);
+
+create table db_category (
+        book_id         varchar2(20)
+    ,   category_no     number(10)
+    ,   constraint db_category_book_id_fk foreign key(book_id)
+        references book(book_id) on delete cascade
+    ,   constraint db_category_category_no_fk foreign key(category_no)
+        references db_category_management(category_no)
+);
+
+---------------------------------- test ----------------------------------------
+insert into book values('KOR9791196394509', '죽고 싶지만 떡볶이는 먹고 싶어', 'http://t1.daumcdn.net/thumb/R155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fbook%2Fimage%2FKOR9791196394509%3Fmoddttm=20181005064557'
+                        , '백세희', '없음', '흔', '2018/06/17', 1, '페이지 수 208', '1196394504', '9791196394509'
+                        , '의심 없이 편안하게 사랑하고 사랑받고 싶은 한 사람의 이야기;;10년 넘게 기분부전장애(가벼운 우울 증상이 지속되는 상태)와 불안장애를 겪으며 정신과를 전전했던 저자와 정신과 전문의와의 12주간의 대화를 엮은 『죽고 싶지만 떡볶이는 먹고 싶어』. 지독히 우울하지도 행복하지도 않은 애매한 기분에 시달렸고, 이러한 감정들이 한 번에 일어날 수 있다는 사실을 알지 못해서 괴로웠던 저자는 2017년 잘 맞는 병원을 찾아 약물치료와 상담치료를 병행하고 있다.;;이 책은 저자의 치료 기록을 담고 있다. 사적인 이야기가 가득하지만 어두운 감정만 풀어내기보다는 구체적인 상황을 통해 근본적인 원인을 찾고, 건강한 방향으로 나아가는 것에 중점을 두고 있다. 겉보기에는 멀쩡하지만 속은 곪아 있는 사람들, 불안 속에 하루하루를 버티고 있는 사람들에게 이제까지 간과하고 있었지만 본인으로부터 나오고 있을지 모를 또 다른 소리에 귀 기울여보게 한다.'
+                        , '1990년 서울에서 태어났다. 문예창작학과를 졸업한 뒤 출 판사에서 5년간 일했다. 10년 넘게 기분부전장애(경도의 우울증)와 불안장애를 앓으며 정신과를 전전했고, 2017년 잘 맞는 병원을 찾아 약물치료와 상담치료를 병행하고 있다. 책을 읽고 글을 쓰며, 가장 좋아하는 음식은 떡볶이다.'
+                        , '시작하며 별일 없이 사는데 왜 마음은 허전할까;;1주 그냥 좀 우울해서요;2주 저 혹시 허언증인가요?', 0);
+
+select book_id, book_name, cover, author, translator, publisher, to_char(published_date, 'yyyy-mm-dd') as published_date,
+	   is_ebook, form_detail, isbn_10, isbn_13, book_introduction, author_introduction, contents, view_cnt 
+  from book
+  where book_id = 'KOR9791196394509';
+  
+insert into db_category_management(category_no, category) values(1, '국내도서');
+insert into db_category_management(category_no, category) values(2, '국외도서');
+insert into db_category_management values(3, '시/에세이', 1);
+insert into db_category_management values(10, '나라별 에세이', 3);
+
+insert into db_category values('KOR9791196394509', 10);
