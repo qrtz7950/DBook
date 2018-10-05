@@ -220,9 +220,9 @@
                       $.ajax({
                           type: "POST",
                           url: "${pageContext.request.contextPath}/user/update.do",
-                          data: {    
-                             "id" : '${user.id}',
-                             "nickname" : '${user.nickname}',
+                          data: {
+                        	  "id" : '${user.id}',
+                              "nickname" : '${user.nickname}',
                               "profile_image" : '${user.profile_image}',
                               "thumbnail_image" : '${user.thumbnail_image}',
                               "age_range" : $('#age_range').val(),

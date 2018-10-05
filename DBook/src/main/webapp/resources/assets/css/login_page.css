@@ -22,8 +22,9 @@
 	padding: 45px;
 }
 
-.form input {
+.form input,select {
 	font-family: "Roboto", sans-serif;
+	font-weight:bold;
 	outline: 0;
 	background: #f2f2f2;
 	width: 100%;
@@ -34,6 +35,21 @@
 	font-size: 14px;
 	border-radius: 3px;
 }
+
+#sign_gender {
+	
+}
+
+#sign_gender option {
+    height:300px;
+    font-weight:bold;
+    display: block;
+    white-space: pre;
+    min-height: 2em;
+    padding: 15px;
+    margin: 10px;
+}
+
 
 .form button {
 	font-family: "Roboto", sans-serif;

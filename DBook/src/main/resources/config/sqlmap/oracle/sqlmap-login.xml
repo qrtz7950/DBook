@@ -6,6 +6,12 @@
 	
 	<!-- 회원가입 -->	
 	<insert id="signIn" parameterType="loginVO">
+		insert into db_user(no, id, password, age_range, gender)
+		 			values(seq_db_user_no.nextval, #{id}, #{password}, #{age_range}, #{gender})
+	</insert>
+	
+	<!-- 카카오 회원가입 -->
+	<insert id="kakaoSignIn" parameterType="loginVO">
 		insert into db_user(no, id, profile_image, thumbnail_image, nickname, age_range, gender)
 		 			values(seq_db_user_no.nextval, #{id}, #{profile_image}, #{thumbnail_image}, #{nickname}, #{age_range}, #{gender})
 	</insert>
@@ -36,9 +42,12 @@
 	</update>
 	
 	<!-- 로그인 -->
-	<select id="login" resultType="loginVO" parameterType="loginVO">
+	<select id="kakaoLogin" resultType="loginVO" parameterType="loginVO">
 		select * from db_user where id = #{id}
 	</select>
 	
+	<select id="login" resultType="loginVO" parameterType="loginVO">
+		select * from db_user where id = #{id} and password = #{password}
+	</select>
 	
 </mapper>
