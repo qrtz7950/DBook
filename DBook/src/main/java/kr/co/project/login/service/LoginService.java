@@ -13,4 +13,8 @@ public interface LoginService {
 
 	public LoginVO addUserInfo(LoginVO user);
 
+	public LoginVO signIn(LoginVO user);
+
+	public LoginVO kakaoLogin(LoginVO user);
+
 }

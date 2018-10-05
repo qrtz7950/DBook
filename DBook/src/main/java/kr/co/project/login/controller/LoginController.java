@@ -21,10 +21,10 @@ public class LoginController {
 	private LoginService loginService;
 	
 	@RequestMapping(value="/user/login.do", method=RequestMethod.GET)
-	public ModelAndView login(@ModelAttribute LoginVO user) {
+	public ModelAndView login() {
 		
 		System.out.println("login() 메소드호출");
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("login/login");
 		
@@ -32,12 +32,38 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/user/login.do", method=RequestMethod.POST)
-	public ModelAndView loginProcess(@ModelAttribute LoginVO user, HttpSession session) {
+	public ModelAndView LoginProcess(@ModelAttribute LoginVO user, HttpSession session) {
 		
-		System.out.println("loginProcess() 메소드호출");
+		System.out.println("LoginProcess() 메소드호출");
+		System.out.println(user);
+		
+		user = loginService.Login(user);
+
+		ModelAndView mav = new ModelAndView();
+		String msg = "";
+		
+		if(user == null) {
+			System.out.println("틀림");
+			msg = "아이디 또는 비밀번호를 확인하세요";
+			mav.setViewName("redirect:/user/login.do");
+			mav.addObject("msg", msg);
+			
+			return mav;
+		} else {
+			System.out.println("맞음");
+			session.setAttribute("user", user);
+			mav.setViewName("redirect:/main/home.do");
+			return mav;
+		}
+	}
+	
+	@RequestMapping(value="/user/kakaoLogin.do", method=RequestMethod.POST)
+	public ModelAndView kakaoLoginProcess(@ModelAttribute LoginVO user, HttpSession session) {
+		
+		System.out.println("kakaoLoginProcess() 메소드호출");
 		System.out.println("현재 로그인 정보" + user);
 
-		user = loginService.Login(user);
+		user = loginService.kakaoLogin(user);
 
 		session.setAttribute("user", user);
 		
@@ -94,15 +120,40 @@ public class LoginController {
 		
 		return mav;
    }
-
+	
 	@RequestMapping(value="/user/signIn.do", method=RequestMethod.POST)
 	public ModelAndView signIn(@ModelAttribute LoginVO user) {
 		
+		System.out.println("signIn()진입...");
+		System.out.println(user);
+		
+		user = loginService.signIn(user);
+		
+		String msg = "";
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("login/login");
-	
+		
+		if(user == null) {
+			msg = "이미 존재하는 ID입니다";
+			mav.setViewName("login/login");
+		} else {
+			msg = "가입완료!";
+			mav.setViewName("redirect:/user/login.do");
+		}
+		
 		return mav;
-   }
+	}
 	
-	
+	@RequestMapping(value="/user/signIn.do", method=RequestMethod.GET)
+	public ModelAndView signInDuplicated(@ModelAttribute LoginVO user) {
+		
+		System.out.println("signInDuplicated()진입...");
+		
+		String msg = "이미 존재하 아이디입니다????";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/user/login.do");
+		mav.addObject("msg", msg);
+		
+		return mav;
+	}
 }

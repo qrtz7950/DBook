@@ -16,6 +16,17 @@ public class LoginDAOImpl implements LoginDAO{
 	public void signIn(LoginVO user) {
 		sqlSessionTemplate.insert("kr.co.project.login.dao.LoginDAO.signIn", user);
 	}
+	
+	@Override
+	public void kakaoSignIn(LoginVO user) {
+		sqlSessionTemplate.insert("kr.co.project.login.dao.LoginDAO.kakaoSignIn", user);
+	}
+
+	@Override
+	public LoginVO login(LoginVO user) {
+		user = sqlSessionTemplate.selectOne("kr.co.project.login.dao.LoginDAO.login", user);
+		return user;
+	}
 
 	@Override
 	public boolean overlapCheck(LoginVO user) {
@@ -32,11 +43,13 @@ public class LoginDAOImpl implements LoginDAO{
 		sqlSessionTemplate.selectOne("kr.co.project.login.dao.LoginDAO.update", user);
 	}
 
-	public LoginVO login(LoginVO user) {
-		user = sqlSessionTemplate.selectOne("kr.co.project.login.dao.LoginDAO.login", user);
+	@Override
+	public LoginVO kakaoLogin(LoginVO user) {
+		user = sqlSessionTemplate.selectOne("kr.co.project.login.dao.LoginDAO.kakaoLogin", user);
 		return user;
 	}
 
+	@Override
 	public void addUserInfo(LoginVO user) {
 		user = sqlSessionTemplate.selectOne("kr.co.project.login.dao.LoginDAO.updateAll", user);
 	}

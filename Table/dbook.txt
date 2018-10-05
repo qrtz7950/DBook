@@ -1,4 +1,4 @@
-drop table db_user CASCADE CONSTRAINTS;
+﻿drop table db_user CASCADE CONSTRAINTS;
 drop table book CASCADE CONSTRAINTS;
 drop table user_rating CASCADE CONSTRAINTS;
 drop table best_seller CASCADE CONSTRAINTS;
@@ -10,10 +10,13 @@ drop table db_category_management CASCADE CONSTRAINTS;
 
 drop sequence seq_db_user_no;
 
+select * from db_user;
+
 create sequence seq_db_user_no;
 create table db_user (
         no              number(10)      not null 
-    ,   id              number(10)      primary key
+    ,   id              varchar2(30)    primary key
+    ,   password        varchar2(30)
     ,   profile_image   varchar2(120)
     ,   thumbnail_image varchar2(120)
     ,   nickname        varchar2(30)

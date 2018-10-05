@@ -23,6 +23,32 @@ public interface LoginDAO {
 	 */
 	public void updateUserInfo(LoginVO user);
 	
+	/**
+	 * 일반 사용자용 로그인
+	 * @param user
+	 * @return
+	 */
 	public LoginVO login(LoginVO user);
+
+	/**
+	 * 카카오 채널링 유저 로그인
+	 * @param user
+	 * @return
+	 */
+	public LoginVO kakaoLogin(LoginVO user);
+
+	/**
+	 * 추가로 정보를 입력한 채널링 유저의 정보추가를 위한 메소드
+	 * @param user
+	 */
+	public void addUserInfo(LoginVO user);
+
+	/**
+	 * 카카오 채널링 유저 회원가입
+	 * @param user
+	 */
+	void kakaoSignIn(LoginVO user);
+	
+	
 	
 }

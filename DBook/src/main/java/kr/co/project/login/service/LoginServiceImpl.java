@@ -14,12 +14,18 @@ public class LoginServiceImpl implements LoginService{
 	
 	@Override
 	public LoginVO Login(LoginVO user) {
+		user = dao.login(user);
+		return user;
+	}
+	
+	@Override
+	public LoginVO kakaoLogin(LoginVO user) {
 		
 		if(dao.overlapCheck(user)) {
 			dao.updateUserInfo(user);
-			user = dao.login(user);
+			user = dao.kakaoLogin(user);
 		} else {
-			dao.signIn(user);
+			dao.kakaoSignIn(user);
 		}
 		
 		return user;
@@ -29,6 +35,17 @@ public class LoginServiceImpl implements LoginService{
 		
 		dao.addUserInfo(user);
 		user = dao.login(user);
+		return user;
+	}
+	
+	@Override
+	public LoginVO signIn(LoginVO user) {
+		
+		if(dao.overlapCheck(user)) {
+			user = null;
+		} else {
+			dao.signIn(user);
+		}
 		return user;
 	}
 	
