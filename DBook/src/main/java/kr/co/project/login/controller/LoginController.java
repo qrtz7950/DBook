@@ -20,7 +20,7 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
-	@RequestMapping(value="/login/login.do", method=RequestMethod.GET)
+	@RequestMapping(value="/user/login.do", method=RequestMethod.GET)
 	public ModelAndView login(@ModelAttribute LoginVO user) {
 		
 		System.out.println("login() 메소드호출");
@@ -31,7 +31,7 @@ public class LoginController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/login/login.do", method=RequestMethod.POST)
+	@RequestMapping(value="/user/login.do", method=RequestMethod.POST)
 	public ModelAndView loginProcess(@ModelAttribute LoginVO user, HttpSession session) {
 		
 		System.out.println("loginProcess() 메소드호출");
@@ -84,7 +84,7 @@ public class LoginController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/login/logout.do")
+	@RequestMapping(value="/user/logout.do")
    public ModelAndView logOut(HttpSession session) {
       
       session.invalidate();
@@ -94,4 +94,15 @@ public class LoginController {
       
       return mav;
    }
+
+	@RequestMapping(value="/user/signIn.do", method=RequestMethod.POST)
+	public ModelAndView signIn(@ModelAttribute LoginVO user) {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("login/login");
+      
+		return mav;
+   }
+	
+	
 }
