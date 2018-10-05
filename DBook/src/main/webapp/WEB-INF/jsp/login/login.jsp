@@ -17,16 +17,20 @@
 	  <hr>
 	  <div class="form">
 	    <form class="register-form">
-	      <input type="text" placeholder="name"/>
-	      <input type="password" placeholder="password"/>
-	      <input type="text" placeholder="email address"/>
-	      <button>create</button>
+	      <input id="sign_id" type="text" placeholder="ID"/>
+	      <input id="sign_password" type="password" placeholder="PASSWORD"/>
+	      <input id="sign_age_range" type="text" placeholder="AGE   ex)29"/>
+	      <select id="sign_gender">
+	      	<option selected="selected">Male</option>
+	      	<option>Female</option>
+	      </select>
+	      <button id="signIn">create</button>
 	      <p class="message">Already registered? <a href="#">Sign In</a></p>
 	    </form>
 	    <form class="login-form">
-	      <input type="text" placeholder="username"/>
-	      <input type="password" placeholder="password"/>
-	      <button id="asd">login</button>
+	      <input id="id" type="text" placeholder="ID"/>
+	      <input id="password" type="password" placeholder="PASSWORD"/>
+	      <button id="logIn">login</button>
 	      <a id="kakao-login-btn"></a>
 	      <p class="message">Not registered? <a href="#">Create an account</a></p>
 	    </form>

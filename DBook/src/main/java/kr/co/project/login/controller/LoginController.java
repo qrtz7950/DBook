@@ -51,7 +51,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/user/update.do", method=RequestMethod.POST)
-	public ModelAndView userInfoUpdate( @RequestParam("id") int id,
+	public ModelAndView userInfoUpdate( @RequestParam("id") String id,
 										@RequestParam("profile_image") String profile_image,
 										@RequestParam("thumbnail_image") String thumbnail_image,
 										@RequestParam("nickname") String nickname,
@@ -87,12 +87,12 @@ public class LoginController {
 	@RequestMapping(value="/user/logout.do")
    public ModelAndView logOut(HttpSession session) {
       
-      session.invalidate();
-      
-      ModelAndView mav = new ModelAndView();
-      mav.setViewName("redirect:/main/home.do");
-      
-      return mav;
+		session.invalidate();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/main/home.do");
+		
+		return mav;
    }
 
 	@RequestMapping(value="/user/signIn.do", method=RequestMethod.POST)
@@ -100,7 +100,7 @@ public class LoginController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("login/login");
-      
+	
 		return mav;
    }
 	

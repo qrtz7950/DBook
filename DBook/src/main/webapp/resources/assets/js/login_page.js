@@ -22,6 +22,26 @@ $('.message a').click(function(){
 	    form.submit();
 	}
 	
+	$(document).ready(function() {
+		
+		$('#signIn').click(function() {
+			post_to_url("../user/signIn.do",
+					{ "id": $('#sign_id').val()
+					, "password":$('#sign_password').val()
+					, "age_range":$('#sign_age_range').val()
+					, "gender":$('#sign_gender').val()
+					});
+		});
+		$('#logIn').click(function() {
+			post_to_url("../user/login.do",
+					{ "id": $('#id').val()
+					, "passowrd":$('#password').val()
+					});
+		});
+	});
+	
+	
+	
 	// 사용할 앱의 JavaScript 키
     Kakao.init('70b6dca9bb4272bcec25e71ea7ab0125');
     // 카카오 로그인 버튼을 생성
