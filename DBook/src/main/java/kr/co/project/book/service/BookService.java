@@ -12,9 +12,13 @@ public class BookService {
 	@Autowired
 	private BookDAO dao;
 	
-	public BookVO bookDetail(int book_no) {
+	// 책 번호로 책 조회
+	public BookVO bookDetail(String book_id) {
 		
 		BookVO book = new BookVO();
+		book.setBook_id(book_id);
+		
+		book = dao.bookDetail(book);
 		
 		return book;
 	}

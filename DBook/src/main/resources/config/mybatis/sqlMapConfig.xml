@@ -6,6 +6,7 @@
 	
 	<typeAliases>
 		<typeAlias type="kr.co.project.login.vo.LoginVO" alias="loginVO"/>
+		<typeAlias type="kr.co.project.book.vo.BookVO" alias="bookVO"/>
 	</typeAliases>
 	
 </configuration>
