@@ -1,16 +1,22 @@
 package kr.co.project.book.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.project.book.service.BookService;
 import kr.co.project.book.vo.BookVO;
 
 @Controller
 @RequestMapping("/book")
 public class BookController {
-
+	
+	@Autowired
+	private BookService bookService; 
+	
+	// 카테고리 검색 페이지
 	@RequestMapping("/booklist/category/{category}.do")
 	public ModelAndView booklistByCategory(@PathVariable("category") String category) {
 
@@ -29,17 +35,32 @@ public class BookController {
 		return mav;
 	}
 	
-	@RequestMapping("/bookDetail/{book_no}.do")
-	public ModelAndView bookDetail(@PathVariable("book_no") int book_no) {
+	// 책 세부 페이지
+	@RequestMapping("/bookDetail/{book_id}.do")
+	public ModelAndView bookDetail(@PathVariable("book_id") String book_id) {
 		
 		System.out.println("bookDetail()진입");
 		
-		BookVO book = new BookVO();
-		
-		
+		BookVO book = bookService.bookDetail(book_id);
+		System.out.println(book);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("bookDetail/detail");
+		
+		if(book!=null) {
+			String[] book_introduction = book.getBook_introduction().split(";");
+			String[] author_introduction = book.getAuthor_introduction().split(";");
+			String[] contents = book.getContents().split(";");
+			
+			mav.addObject("book", book);
+			mav.addObject("book_introduction", book_introduction);
+			mav.addObject("author_introduction", author_introduction);
+			mav.addObject("contents", contents);
+			mav.setViewName("bookDetail/detail");
+		}
+		else {
+			mav.addObject("book", "noBook");
+			mav.setViewName("bookDetail/detail");
+		}
 		
 		return mav;
 	}
