@@ -96,7 +96,7 @@
 											<table style="width: 100%;">
 												<tr>
 													<th style="width: 20%;">저자</th>
-													<td style="width: 80%;">${pageScope.book.author}
+													<td style="width: 80%;">${requestScope.book.author}
 												</tr>
 												<c:if test="${empty book.translator}">
 													<tr>
