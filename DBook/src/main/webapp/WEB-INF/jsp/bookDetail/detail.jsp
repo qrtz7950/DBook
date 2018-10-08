@@ -29,14 +29,74 @@
 		margin-right: 5px;
 	}
 	
-	.test{
-		display: block;
+	/* 책 이미지, 설명 */
+	#cover_image {
+		width: 25%;
 		height: auto;
+		margin: 0;
+		padding-left: 3%;
+		padding-right: 3%;
+		display: inline-block;
+		float:left;
 	}
+	
+	.book_info_table {
+		width: 75%;
+		height: auto;
+		margin: 0;
+		display: table;
+		float:left;
+		padding-left: 3%;
+		padding-right: 3%;
+	}
+	
+	.book_info_row {
+		display: table-row;
+	}
+	
+	.book_info_cell {
+		display: table-cell;
+		padding: 10px;
+	}
+	
+	.book_info_col1 {
+		width: 15%;
+		font-weight: bold;
+		color: black;
+	}
+	
+	.book_info_col2 {
+		width: 32%;
+	}
+	
+	
+	/* 별점 */
+	.starR1 {
+	    background: url('${pageContext.request.contextPath}/resources/images/star.jpg') no-repeat -52px 0;
+	    background-size: auto 100%;
+	    width: 15px;
+	    height: 30px;
+	    float:left;
+	    text-indent: -9999px;
+	}
+	.starR2 {
+	    background: url('${pageContext.request.contextPath}/resources/images/star.jpg') no-repeat right 0;
+	    background-size: auto 100%;
+	    width: 15px;
+	    height: 30px;
+	    float:left;
+	    text-indent: -9999px;
+	}
+	#rating > span {cursor: pointer;}
+	#avg_rating {display: inline-block; height: 30px;}
+	
+	.starR1.on {background-position:0 0;}
+	.starR2.on {background-position:-15px 0;}
+	
 	</style>
 </head>
 <body>
-
+	
 	<!-- topMenu -->
 			<jsp:include page="../include/TopMenu.jsp"/>
 			
@@ -88,39 +148,57 @@
 								</section>
 								
 								<section style="width: 100%; height: auto; padding-top: 30px; float: left; border-top: 0px;">
-									<div style="width:100%; float: left;">
-										<div style="width: 30%; height: auto; margin: 0; padding-left: 3%; padding-right: 3%; display: inline-block; float:left;">
+									<div style="width:100%; float: left; text-align: center;">
+										<div id="cover_image">
 											<img src="${pageContext.request.contextPath}/resources/images/book01.jpg" style="width:100%; height:auto;"/>
 										</div>
-										<div style="width: 70%; height: auto; margin: 0; display: inline-block; float:left;">
-											<table style="width: 100%;">
-												<tr>
-													<th style="width: 20%;">저자</th>
-													<td style="width: 80%;">${requestScope.book.author}
-												</tr>
-												<c:if test="${empty book.translator}">
-													<tr>
-														<th>번역</th>
-														<td>${requestScope.book.translator}
-													</tr>
-												</c:if>
-												<tr>
-													<th>출판사</th>
-													<td>${requestScope.book.publisher}
-												</tr>
-												<tr>
-													<th>출판일</th>
-													<td>${requestScope.book.published_date}
-												</tr>
-												<tr>
-													<th>형태</th>
-													<td>${requestScope.book.form_detail}
-												</tr>
-												<tr>
-													<th>평점</th>
-													<td>해야됨</td>
-												</tr>
-											</table>
+										<div class="book_info_table">
+											<div class="book_info_row">
+												<div class="book_info_cell book_info_col1">저자</div>
+												<div class="book_info_cell book_info_col2">${requestScope.book.author}</div>
+												<div class="book_info_cell book_info_col1">번역</div>
+												<div class="book_info_cell book_info_col2">${requestScope.book.translator}</div>
+											</div>
+											<div class="book_info_row">
+												<div class="book_info_cell book_info_col1">출판사</div>
+												<div class="book_info_cell book_info_col2">${requestScope.book.publisher}</div>
+												<div class="book_info_cell book_info_col1">출판일</div>
+												<div class="book_info_cell book_info_col2">${requestScope.book.published_date}</div>
+											</div>
+											<div class="book_info_row">
+												<div class="book_info_cell book_info_col1">형태</div>
+												<div class="book_info_cell book_info_col2">${requestScope.book.form_detail}</div>
+												<div class="book_info_cell book_info_col1">eBOOK</div>
+												<div class="book_info_cell book_info_col2">
+													<c:if test="${requestScope.book.is_ebook==0}">없음</c:if>
+													<c:if test="${requestScope.book.is_ebook==1}">있음</c:if>
+												</div>
+											</div>
+											<div class="book_info_row">
+												<div class="book_info_cell book_info_col1">ISBN 10</div>
+												<div class="book_info_cell book_info_col2">${requestScope.book.isbn_10}</div>
+												<div class="book_info_cell book_info_col1">ISBN 13</div>
+												<div class="book_info_cell book_info_col2">${requestScope.book.isbn_13}</div>
+											</div>
+										</div>
+										<div class="book_info_table" style="float: right;">
+											<div class="book_info_row">
+												<div class="book_info_cell book_info_col1" style="vertical-align: middle;">평점</div>
+												<div class="book_info_cell" style="width: 85%; text-align: center;">
+													<div id="avg_rating">
+														<span class="starR1"></span>
+														<span class="starR2"></span>
+														<span class="starR1"></span>
+														<span class="starR2"></span>
+														<span class="starR1"></span>
+														<span class="starR2"></span>
+														<span class="starR1"></span>
+														<span class="starR2"></span>
+														<span class="starR1"></span>
+														<span class="starR2"></span>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</section>
@@ -150,6 +228,38 @@
 								</section>
 								
 								<section>
+									<h3 style="display: inline;">의견 남기기</h3>
+									<div id="rating" style="display: inline-block; height: 30px; margin-left: 20px;">
+										<span class="starR1"></span>
+										<span class="starR2"></span>
+										<span class="starR1"></span>
+										<span class="starR2"></span>
+										<span class="starR1"></span>
+										<span class="starR2"></span>
+										<span class="starR1"></span>
+										<span class="starR2"></span>
+										<span class="starR1"></span>
+										<span class="starR2"></span>
+										<!-- $("#rating span.on").length -->
+									</div>
+									
+									<div id="replyInput0" style="margin-top: 20px;">
+										<form action="${pageContext.request.contextPath}/reply/write.do" onsubmit="return checkReply(0)" method="post">
+											<div class="input-group" style="width:95%;  margin: 0 auto;">
+												  <input type="hidden" name="board_no" value="${detailBlogBoard.board_no}">
+												  <input type="hidden" name="id" value="${sessionScope.userVO.id}">
+												  <input type="hidden" name="depth" value="0">
+												  <input type="hidden" name="seq" value="${pageScope.replySeqMax+1}">							  
+												  <textarea type="text" class="form-control" placeholder="남기고 싶은 댓글을 남기세요" name="content" id="replyContent0"></textarea>
+												  <div class="input-group-append" style="margin-top: 10px;">
+												    <button type="submit" id="button-addon">제출</button>
+												  </div>
+											</div>
+										</form>
+									</div>
+								</section>
+								
+								<section style="width: 100%; word-wrap: break-word;">
 									${book}
 								</section>
 								
@@ -168,17 +278,38 @@
 			<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
 			
 			<script>
-	
-			$(document).ready(function(){
-				
-				$("#category1").each(function(){
+					$(document).ready(function() {
+						detailForm();
+						avg_rating();
+					});
+		
+					$(window).resize(function(){
+						detailForm();
+					});
 					
-					if($(this).val()=="${requestScope.categories[0]}"){
-						$(this).attr()
+				/* 별 누를때 */
+					$("#rating span").click(function(){
+						  $(this).parent().children('span').removeClass('on');
+						  $(this).addClass('on').prevAll('span').addClass('on');
+						});
+		
+		
+					function detailForm(){
+						
+						if($(window).width()>660){
+							$("#cover_image").css("width","25%");
+							$(".book_info_table").css("width","75%");
+					    }
+						else{
+							$("#cover_image").css("width","100%");
+							$(".book_info_table").css("width","100%");							
+					    }
 					}
 					
-				});	
-			}); 
+				/* 책 정보 평점 구하고 출력 */
+					function avg_rating(){
+						
+					}
 			</script>
 			
 			
