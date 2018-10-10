@@ -10,4 +10,11 @@
 			   values(#{id}, #{book_id}, #{rating}, #{content}, #{good}, #{bad})
 	</insert>
 	
+	<!-- 리뷰 book_id로 불러오기 -->	
+	<select id="reviewListByBook_id" resultType="reviewVO" parameterType="String">
+		select id, book_id, rating, content, good, bad
+		  from review
+		  where book_id = ${book_id}
+	</select>
+	
 </mapper>
