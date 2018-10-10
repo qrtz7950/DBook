@@ -13,12 +13,13 @@
 </head>
 <body>
 	<div class="login-page">
-	  <h1><strong>DB</strong>ook</h1>
+	  <a style="text-decoration: none;" href="${pageContext.request.contextPath}/main/home.do"><h1><strong>DB</strong>ook</h1></a>
 	  <hr>
 	  <div class="form">
 	    <form class="register-form">
 	      <input id="sign_id" type="text" placeholder="ID"/>
 	      <input id="sign_password" type="password" placeholder="PASSWORD"/>
+	      <input id="sign_password_check" type="password" placeholder="CONFIRM PASSWORD"/>
 	      <input id="sign_age_range" type="text" placeholder="AGE   ex)29"/>
 	      <select id="sign_gender" size="1">
 	      	<option value="male" selected="selected">Male</option>

@@ -23,41 +23,104 @@ function post_to_url(path, params, method) {
     form.submit();
 }
 
+function signCheckForm() {
+	
+	console.log('checkForm()진입');
+		
+	if(isNull($('#sign_id'), '아이디를 입력해주세요')) {
+		return false;
+	}
+	
+	if($('#sign_id').val().length > 15) {
+		alert('아이디는 15자 이내만 가능합니다');
+		$('#sign_id').focus();
+		return false;
+	}
+	
+	if(isNull($('#sign_password'), '패스워드를 입력해주세요')) {
+		return false;
+	}
+	
+	if($('#sign_password').val().length > 15) {
+		alert('패스워드는 15자 이내만 가능합니다');
+		$('#sign_password').focus();
+		return false;
+	}
+	
+	if(isNull($('#sign_age_range'), '나이를 입력해주세요')) {
+		return false;
+	}
+	
+	var age = $('#sign_age_range');
+	
+	if(isNaN(age.val())){
+		alert('나이 입력란에는 숫자만 입력 가능합니다');
+		age.focus();
+		return false;
+	}
+	
+	if(age.val() <= 0 || age.val() > 100){
+		alert('1~100 사이의 숫자를 입력해주세요');
+		age.focus();
+		return false;
+	}
+	
+	if($('#sign_password').val() != $('#sign_password_check').val()){
+		alert('입력한 패스워드와 패스워드 확인 일치한지 확인하세요');
+		$('#sign_password_check').focus();
+		return false;
+	}
+	
+	return true;
+}
+
+function isNull(obj, msg) {
+	if(obj.val() == '') {
+		alert(msg);
+		obj.focus();
+		return true;
+	}
+	return false;
+}
+
 $(document).ready(function() {
 	
 	$('#signIn').click(function() {
 		
-		var age = $('#sign_age_range').val();
-		
-		age = age - (age % 10);
-		age = age + "~" + (age + 9);
-		
-		console.log($('#sign_id').val());
-		console.log($('#sign_password').val());
-		console.log(age);
-		console.log($('#sign_gender').val());
-		
-		var id = $('#sign_id').val();
-		var password = $('#sign_password').val();
-		var gender = $('#sign_gender').val();
-		var profile_image = "none";
-		var thumbnail_image = "none";
-		var nickname = "none";
-		
-		$.ajax({
-			success : function(){
-				post_to_url("../user/signIn.do",
-						{ "id":id
+		if(signCheckForm()){
+			
+			var age = $('#sign_age_range').val();
+			
+			age = age - (age % 10);
+			age = age + "~" + (age + 9);
+			
+			console.log($('#sign_id').val());
+			console.log($('#sign_password').val());
+			console.log(age);
+			console.log($('#sign_gender').val());
+			
+			var id = $('#sign_id').val();
+			var password = $('#sign_password').val();
+			var gender = $('#sign_gender').val();
+			var profile_image = "none";
+			var thumbnail_image = "none";
+			var nickname = "none";
+			
+			$.ajax({
+				success : function(){
+					post_to_url("../user/signIn.do",
+							{ "id":id
 						, "profile_image":profile_image
 						, "thumbnail_image":thumbnail_image
 						, "password":password
 						, "nickname":nickname
 						, "age_range":age
 						, "gender":gender
-						});
-			    }
-			});
-		});
+							});
+						  }
+				  });
+		}
+	});
 	
 	$('#logIn').click(function() {
 		

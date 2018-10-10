@@ -18,7 +18,7 @@
 	text-align: center;
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
 		rgba(0, 0, 0, 0.24);
-	border-radius: 3px;
+	border-radius: 5px;
 	padding: 45px;
 }
 
@@ -33,7 +33,7 @@
 	padding: 15px;
 	box-sizing: border-box;
 	font-size: 14px;
-	border-radius: 3px;
+	border-radius: 5px;
 }
 
 #sign_gender {
@@ -65,7 +65,7 @@
 	transition: all 0.3 ease;
 	cursor: pointer;
 	margin-bottom: 15px;
-	border-radius: 3px;
+	border-radius: 5px;
 }
 
 #kakao-login-btn {

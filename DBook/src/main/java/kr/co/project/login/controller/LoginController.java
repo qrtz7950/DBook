@@ -45,8 +45,8 @@ public class LoginController {
 		if(user == null) {
 			System.out.println("틀림");
 			msg = "아이디 또는 비밀번호를 확인하세요";
-			mav.setViewName("redirect:/user/login.do");
 			mav.addObject("msg", msg);
+			mav.setViewName("login/login");
 			
 			return mav;
 		} else {
@@ -111,8 +111,8 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/user/logout.do")
-   public ModelAndView logOut(HttpSession session) {
-      
+	public ModelAndView logOut(HttpSession session) {
+		
 		session.invalidate();
 		
 		ModelAndView mav = new ModelAndView();
@@ -134,10 +134,12 @@ public class LoginController {
 		
 		if(user == null) {
 			msg = "이미 존재하는 ID입니다";
+			mav.addObject("msg", msg);
 			mav.setViewName("login/login");
 		} else {
 			msg = "가입완료!";
-			mav.setViewName("redirect:/user/login.do");
+			mav.addObject("msg", msg);
+			mav.setViewName("login/login");
 		}
 		
 		return mav;
