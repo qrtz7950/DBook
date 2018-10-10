@@ -37,6 +37,17 @@ public class BookController {
 		return mav;
 	}
 	
+	// 키워드 검색 페이지
+	@RequestMapping("/bookSearch/searchResult.do")
+	public ModelAndView booksearchByKeyword() {
+		
+		System.out.println("booksearchByKeyword()진입");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("bookSearch/searchResult");
+		
+		return mav;
+	}
 	// 책 세부 페이지
 	@RequestMapping("/bookDetail/{book_id}.do")
 	public ModelAndView bookDetail(@PathVariable("book_id") String book_id) {

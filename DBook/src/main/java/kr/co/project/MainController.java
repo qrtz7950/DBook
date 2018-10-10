@@ -20,14 +20,6 @@ public class MainController {
 		
 		return mav;
 	}
-	@RequestMapping("/searchresult.do")
-	public ModelAndView searchresult(HttpSession session) {
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("main/searchResult");
-		
-		return mav;
-	}
 	
 	@RequestMapping("/test.do")
 	public ModelAndView test(HttpSession session) {

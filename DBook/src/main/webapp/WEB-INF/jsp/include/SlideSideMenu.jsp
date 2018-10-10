@@ -12,7 +12,7 @@
 
 			<!-- Search -->
 				<section id="search" class="alt">
-					<form method="get" action="${pageContext.request.contextPath}/main/searchresult.do">
+					<form method="get" action="${pageContext.request.contextPath}/book/bookSearch/searchResult.do">
 						<input type="text" id="autoText" name="keyword" maxlength="20" />
 					</form>
 				</section>

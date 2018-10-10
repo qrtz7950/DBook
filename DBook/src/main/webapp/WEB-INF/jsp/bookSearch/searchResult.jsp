@@ -260,7 +260,29 @@
 					/* setTimeout("menuButton()", 100); */
 				}
 			</script>
-			
+		
+		
+		<!-- 검색결과  -->
+			<script>
+			$(document).ready(function() {
+				search();
+			});
+				function search(){
+					$.ajax({
+						url: "${pageContext.request.contextPath}/resources/assets/jsp/searchDB.jsp",
+						type : "post",
+						dataType: "json",
+						data: request,
+						success: function( data) {
+		                    response(data);
+		                },
+		                error: function(status, error){
+		                     console.log( status +' / ' + error);
+		                }
+						
+					});
+				}
+			</script>
 			
 			
 </body>
