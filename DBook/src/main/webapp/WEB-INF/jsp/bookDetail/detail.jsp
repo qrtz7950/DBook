@@ -141,7 +141,7 @@
 									</div>
 									
 									<div style="padding-bottom: 5px;">
-										<h3 style="margin-bottom: 0;">${book.book_name}</h3>
+										<h3 style="margin-bottom: 0;">${requestScope.book.book_name}</h3>
 										<h5 style="float: right;">조회수 ${requestScope.book.view_cnt}</h5>
 									</div>
 									
@@ -243,19 +243,29 @@
 										<!-- $("#rating span.on").length -->
 									</div>
 									
-									<div id="replyInput0" style="margin-top: 20px;">
-										<form action="${pageContext.request.contextPath}/reply/write.do" onsubmit="return checkReply(0)" method="post">
+									<div id="reviewInput" style="margin-top: 20px; margin-bottom: 20px;">
+										<form action="${pageContext.request.contextPath}/review/write.do" onsubmit="return check_before_input()" method="post">
 											<div class="input-group" style="width:95%;  margin: 0 auto;">
-												  <input type="hidden" name="board_no" value="${detailBlogBoard.board_no}">
-												  <input type="hidden" name="id" value="${sessionScope.userVO.id}">
-												  <input type="hidden" name="depth" value="0">
-												  <input type="hidden" name="seq" value="${pageScope.replySeqMax+1}">							  
-												  <textarea type="text" class="form-control" placeholder="남기고 싶은 댓글을 남기세요" name="content" id="replyContent0"></textarea>
+												  <input type="hidden" name="id" value="${sessionScope.user.id}">
+												  <input type="hidden" name="book_id" value="${requestScope.book.book_id}">
+												  <input type="hidden" name="rating" value="0">							  
+												  <textarea type="text" class="form-control" placeholder="남기고 싶은 글을 남기세요" name="content"></textarea>
 												  <div class="input-group-append" style="margin-top: 10px;">
 												    <button type="submit" id="button-addon">제출</button>
 												  </div>
 											</div>
 										</form>
+									</div>
+									
+									<div id="reviews">
+										<c:forEach var="review" items="${requestScope.reviews}" varStatus="status">
+											<div id="review${status.count}" class="review">
+												<div class="reviewForm1">${requestScope.review.id}</div>
+												<div class="reviewForm2">${requestScope.review.rating}</div>
+												<div class="reviewForm3">${requestScope.review.content}</div>
+												<div class="reviewForm4">${requestScope.review.good}/${requestScope.review.bad}</div>
+											</div>
+										</c:forEach>
 									</div>
 								</section>
 								
@@ -291,9 +301,35 @@
 					$("#rating span").click(function(){
 						  $(this).parent().children('span').removeClass('on');
 						  $(this).addClass('on').prevAll('span').addClass('on');
+						  $('input[name=rating]').attr("value", getInputRating());
 						});
 		
 		
+					
+				/* 책 리뷰 평점 평균 출력 */
+					function avg_rating(){
+						
+					};
+				
+				/* 리뷰 보내기전 확인 */
+					function check_before_input(){
+						if(${empty user}){
+							alert("로그인이 필요한 서비스 입니다");
+							alert($('input[name=book_id]').val() + "\n" + $('input[name=rating]').val());
+							return false;
+						}else if($('textarea.form-control').eq(0).val()==""){
+							alert("글을 입력해 주세요");
+							return false;
+						}
+						return true;
+					};
+				
+				/* 별점 입력값 구하기 */
+					function getInputRating(){
+						return $("#rating span.on").length;
+					};
+					
+					
 					function detailForm(){
 						
 						if($(window).width()>660){
@@ -304,12 +340,7 @@
 							$("#cover_image").css("width","100%");
 							$(".book_info_table").css("width","100%");							
 					    }
-					}
-					
-				/* 책 정보 평점 구하고 출력 */
-					function avg_rating(){
-						
-					}
+					};
 			</script>
 			
 			

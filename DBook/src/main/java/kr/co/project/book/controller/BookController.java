@@ -8,6 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.project.book.service.BookService;
 import kr.co.project.book.vo.BookVO;
+import kr.co.project.review.service.ReviewService;
+import kr.co.project.review.vo.ReviewVO;
 
 @Controller
 @RequestMapping("/book")
@@ -40,9 +42,10 @@ public class BookController {
 	public ModelAndView bookDetail(@PathVariable("book_id") String book_id) {
 		
 		System.out.println("bookDetail()진입");
+		//ReviewService reviewService = new ReviewService();
 		
 		BookVO book = bookService.bookDetail(book_id);
-		System.out.println(book);
+		//ReviewVO[] reviews = reviewService.reviewListByBook_id(book_id);
 		
 		ModelAndView mav = new ModelAndView();
 		
