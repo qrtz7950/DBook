@@ -1,5 +1,7 @@
 package kr.co.project.book.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,10 +55,10 @@ public class BookController {
 	public ModelAndView bookDetail(@PathVariable("book_id") String book_id) {
 		
 		System.out.println("bookDetail()진입");
-		//ReviewService reviewService = new ReviewService();
+		ReviewService reviewService = new ReviewService();
 		
 		BookVO book = bookService.bookDetail(book_id);
-		//ReviewVO[] reviews = reviewService.reviewListByBook_id(book_id);
+		List<ReviewVO> reviews = reviewService.reviewListByBook_id(book_id);
 		
 		ModelAndView mav = new ModelAndView();
 		

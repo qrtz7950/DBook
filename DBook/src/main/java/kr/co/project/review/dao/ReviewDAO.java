@@ -18,12 +18,12 @@ public class ReviewDAO {
 		sqlSessionTemplate.insert("kr.co.project.review.dao.ReviewDAO.writeReview", review);
 	}
 	
-	public ReviewVO[] reviewListByBook_id(String book_id) {
-		List<ReviewVO> list = sqlSessionTemplate.selectList(book_id);
-		ReviewVO[] reviews = list.toArray(new ReviewVO[list.size()]);
+	public List<ReviewVO> reviewListByBook_id(String book_id) {
+		List<ReviewVO> reviews = sqlSessionTemplate.selectList(book_id);
 		
-		System.out.println(reviews);
-		
+		for(ReviewVO review : reviews) {
+			System.out.println(review);
+		}
 		return reviews;
 	}
 	
