@@ -31,6 +31,7 @@
 								<li><a href="${pageContext.request.contextPath}/book/bookDetail/KOR9791196394509.do">상세</a></li>
 								<li><a href="${pageContext.request.contextPath}/user/logout.do">로그아웃</a></li>
 								<li><a href="http://developers.kakao.com/logout">카톡 로그아웃</a></li>
+								<li><a href="${pageContext.request.contextPath}/book/mypage/mypage.do">마이 페이지</a></li>
 							</ul>
 						</li>
 						<li>

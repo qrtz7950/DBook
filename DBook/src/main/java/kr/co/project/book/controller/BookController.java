@@ -50,6 +50,7 @@ public class BookController {
 		
 		return mav;
 	}
+	
 	// 책 세부 페이지
 	@RequestMapping("/bookDetail/{book_id}.do")
 	public ModelAndView bookDetail(@PathVariable("book_id") String book_id) {
