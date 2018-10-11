@@ -109,18 +109,7 @@ public class LoginController {
 		
 		return mav;
 	}
-	
-	@RequestMapping(value="/user/logout.do")
-	public ModelAndView logOut(HttpSession session) {
-		
-		session.invalidate();
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/main/home.do");
-		
-		return mav;
-   }
-	
+
 	@RequestMapping(value="/user/signIn.do", method=RequestMethod.POST)
 	public ModelAndView signIn(@ModelAttribute LoginVO user) {
 		
@@ -145,17 +134,15 @@ public class LoginController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/user/signIn.do", method=RequestMethod.GET)
-	public ModelAndView signInDuplicated(@ModelAttribute LoginVO user) {
+	@RequestMapping(value="/user/logout.do")
+	public ModelAndView logOut(HttpSession session) {
 		
-		System.out.println("signInDuplicated()진입...");
-		
-		String msg = "이미 존재하 아이디입니다????";
+		session.invalidate();
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/user/login.do");
-		mav.addObject("msg", msg);
+		mav.setViewName("redirect:/main/home.do");
 		
 		return mav;
-	}
+   }
+	
 }

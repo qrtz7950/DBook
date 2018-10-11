@@ -98,9 +98,7 @@
 											<option>국외도서</option>
 										</select>
 									</div>
-									
-									<%-- ${requestScope.categories["0"]} > ${requestScope.categories["1"]} --%>
-									
+
 									<div id="sideCategoryMenu">
 										<div id="sideCategoryMenu_title">
 											카테고리
