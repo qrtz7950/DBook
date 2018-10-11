@@ -1,5 +1,6 @@
 package kr.co.project.book.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,6 @@ public class BookController {
 		ReviewService reviewService = new ReviewService();
 		
 		BookVO book = bookService.bookDetail(book_id);
-		List<ReviewVO> reviews = reviewService.reviewListByBook_id(book_id);
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -71,7 +71,7 @@ public class BookController {
 			mav.addObject("book_introduction", book_introduction);
 			mav.addObject("author_introduction", author_introduction);
 			mav.addObject("contents", contents);
-			mav.setViewName("bookDetail/detail");
+			mav.setViewName("forward:/review/bookDetail_review.do");
 		}
 		else {
 			mav.setViewName("error/error");
