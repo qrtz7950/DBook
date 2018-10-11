@@ -19,6 +19,33 @@ public class MypageController {
 			
 			return mav;
 		}
+		@RequestMapping(("/bookmark.do"))
+		public ModelAndView bookmark() {
+			System.out.println("bookmark()진입");
+			
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("mypage/bookmark");
+			
+			return mav;
+		}
+		@RequestMapping(("/rated.do"))
+		public ModelAndView rated() {
+			System.out.println("rated()진입");
+			
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("mypage/rated");
+			
+			return mav;
+		}
+		@RequestMapping(("/allreview.do"))
+		public ModelAndView allreview() {
+			System.out.println("allreview()진입");
+			
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("mypage/allreview");
+			
+			return mav;
+		}
 		
 		@RequestMapping(("/userRating.do"))
 		public ModelAndView userRating() {
