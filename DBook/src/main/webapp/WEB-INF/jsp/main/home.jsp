@@ -26,7 +26,6 @@
 
 							<!-- Header -->
 							<jsp:include page="../include/HeaderMenu.jsp"/>
-								
 
 							<!-- Banner -->
 								<section id="banner">
