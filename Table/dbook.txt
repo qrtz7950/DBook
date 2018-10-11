@@ -10,13 +10,10 @@ drop table db_category_management CASCADE CONSTRAINTS;
 
 drop sequence seq_db_user_no;
 
-select * from db_user;
-
 create sequence seq_db_user_no;
 create table db_user (
         no              number(10)      not null 
-    ,   id              varchar2(30)    primary key
-    ,   password        varchar2(30)
+    ,   id              number(10)      primary key
     ,   profile_image   varchar2(120)
     ,   thumbnail_image varchar2(120)
     ,   nickname        varchar2(30)
@@ -85,6 +82,7 @@ create table review (
     ,   content         varchar2(4000)  not null
     ,   good            number(5)
     ,   bad             number(5)
+    ,   review_reg_date date            default sysdate
     ,   constraint review_id_fk foreign key(id)
         references db_user(id) on delete cascade
     ,   constraint review_book_id_fk foreign key(book_id)
@@ -114,7 +112,7 @@ insert into book values('KOR9791196394509', '죽고 싶지만 떡볶이는 먹�
                         , '시작하며 별일 없이 사는데 왜 마음은 허전할까;;1주 그냥 좀 우울해서요;2주 저 혹시 허언증인가요?', 0);
 
 select book_id, book_name, cover, author, translator, publisher, to_char(published_date, 'yyyy-mm-dd') as published_date,
-	   is_ebook, form_detail, isbn_10, isbn_13, book_introduction, author_introduction, contents, view_cnt 
+      is_ebook, form_detail, isbn_10, isbn_13, book_introduction, author_introduction, contents, view_cnt 
   from book
   where book_id = 'KOR9791196394509';
   
@@ -124,3 +122,5 @@ insert into db_category_management values(3, '시/에세이', 1);
 insert into db_category_management values(10, '나라별 에세이', 3);
 
 insert into db_category values('KOR9791196394509', 10);
+
+commit;
