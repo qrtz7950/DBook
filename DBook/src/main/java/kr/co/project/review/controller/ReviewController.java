@@ -1,5 +1,9 @@
 package kr.co.project.review.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,6 +31,20 @@ public class ReviewController {
 		
 		
 		ModelAndView mav = new ModelAndView();
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/bookDetail_review.do")
+	public ModelAndView bookDetail_review(HttpServletRequest request) {
+		System.out.println("forward 성공");
+		
+		String book_id = request.getAttribute("book_id").toString();
+		List<ReviewVO> reviews = reviewService.reviewListByBook_id(book_id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("reviews", reviews);
+		mav.setViewName("/bookDetail/detail");
 		
 		return mav;
 	}

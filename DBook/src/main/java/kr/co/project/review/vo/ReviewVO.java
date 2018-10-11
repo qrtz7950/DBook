@@ -8,18 +8,20 @@ public class ReviewVO {
 	private String content;
 	private int good;
 	private int bad;
+	private String review_reg_date;
 	
 	public ReviewVO() {
 		
 	}
 
-	public ReviewVO(String id, String book_id, int rating, String content, int good, int bad) {
+	public ReviewVO(String id, String book_id, int rating, String content, int good, int bad, String review_reg_date) {
 		this.id = id;
 		this.book_id = book_id;
 		this.rating = rating;
 		this.content = content;
 		this.good = good;
 		this.bad = bad;
+		this.review_reg_date = review_reg_date;
 	}
 
 	public String getId() {
@@ -70,10 +72,18 @@ public class ReviewVO {
 		this.bad = bad;
 	}
 
+	public String getReview_reg_date() {
+		return review_reg_date;
+	}
+
+	public void setReview_reg_date(String review_reg_date) {
+		this.review_reg_date = review_reg_date;
+	}
+
 	@Override
 	public String toString() {
 		return "ReviewVO [id=" + id + ", book_id=" + book_id + ", rating=" + rating + ", content=" + content + ", good="
-				+ good + ", bad=" + bad + "]";
+				+ good + ", bad=" + bad + ", review_reg_date=" + review_reg_date + "]";
 	}
 	
 	

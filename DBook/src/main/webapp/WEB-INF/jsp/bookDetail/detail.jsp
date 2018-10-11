@@ -15,6 +15,10 @@
 	<title>DBook</title>
 	<style type="text/css">
 	
+	section {
+		padding-top:
+	}
+	
 	#category_select{
 		display: -webkit-box;
 		height: 50px;
@@ -89,9 +93,43 @@
 	}
 	#rating > span {cursor: pointer;}
 	#avg_rating {display: inline-block; height: 30px;}
+	#rating {
+		display: inline-block;
+		height: 20px;
+		margin-left: 20px;
+	}
+	.reviewForm2 > span{width: 8px; height: 16px;}
 	
 	.starR1.on {background-position:0 0;}
 	.starR2.on {background-position:-15px 0;}
+	
+	
+	/* 리뷰 */
+	.reviewForm1 {
+	    font-size: 15px;
+	    color: #2a2a2a;
+	    line-height: 25px;
+	    font-weight: 800;
+	    display: inline;
+	}
+	.reviewForm2 {
+	    display: inline-block;
+	    margin-left: 15px;
+	}
+	.reviewForm3 {
+	    font-size: 13px;
+	    color: black;
+	    line-height: 18px;
+	    word-break: break-all;
+	    padding: 5px;
+	}
+	.reviewForm4 {
+		display: inline;
+	}
+	.reviewForm5 {
+		float: right;
+		display: inline-block;
+	}
 	
 	</style>
 </head>
@@ -229,7 +267,7 @@
 								
 								<section>
 									<h3 style="display: inline;">의견 남기기</h3>
-									<div id="rating" style="display: inline-block; height: 30px; margin-left: 20px;">
+									<div id="rating">
 										<span class="starR1"></span>
 										<span class="starR2"></span>
 										<span class="starR1"></span>
@@ -240,7 +278,6 @@
 										<span class="starR2"></span>
 										<span class="starR1"></span>
 										<span class="starR2"></span>
-										<!-- $("#rating span.on").length -->
 									</div>
 									
 									<div id="reviewInput" style="margin-top: 20px; margin-bottom: 20px;">
@@ -258,19 +295,32 @@
 									</div>
 									
 									<div id="reviews">
-										<c:forEach var="review" items="${requestScope.reviews}" varStatus="status">
-											<div id="review${status.count}" class="review">
-												<div class="reviewForm1">${requestScope.review.id}</div>
-												<div class="reviewForm2">${requestScope.review.rating}</div>
-												<div class="reviewForm3">${requestScope.review.content}</div>
-												<div class="reviewForm4">${requestScope.review.good}/${requestScope.review.bad}</div>
+										<c:forEach var="review" items="${requestScope.reviews}">
+											<div class="review">
+												<div class="reviewForm1">${review.id}</div>
+												<div class="reviewForm2">평점 : ${review.rating}
+													<span class="starR1"></span>
+													<span class="starR2"></span>
+													<span class="starR1"></span>
+													<span class="starR2"></span>
+													<span class="starR1"></span>
+													<span class="starR2"></span>
+													<span class="starR1"></span>
+													<span class="starR2"></span>
+													<span class="starR1"></span>
+													<span class="starR2"></span>
+												</div>
+												<div class="reviewForm3">${review.content}</div>
+												<div class="reviewForm4">${review.review_reg_date}</div>
+												<div class="reviewForm5">good : ${review.good} / bad : ${review.bad}</div>
 											</div>
 										</c:forEach>
 									</div>
 								</section>
 								
 								<section style="width: 100%; word-wrap: break-word;">
-									${book}
+									${book}<br>
+									${reviews}
 								</section>
 								
 						</div>
@@ -315,7 +365,6 @@
 					function check_before_input(){
 						if(${empty user}){
 							alert("로그인이 필요한 서비스 입니다");
-							alert($('input[name=book_id]').val() + "\n" + $('input[name=rating]').val());
 							return false;
 						}else if($('textarea.form-control').eq(0).val()==""){
 							alert("글을 입력해 주세요");

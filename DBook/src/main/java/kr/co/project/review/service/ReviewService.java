@@ -20,14 +20,7 @@ public class ReviewService {
 	}
 	
 	public List<ReviewVO> reviewListByBook_id(String book_id) {
-		System.out.println(book_id);
-		List<ReviewVO> a = new ArrayList<ReviewVO>();
-		try{
-			a = dao.reviewListByBook_id(book_id);
-		}catch(Exception e){
-			System.out.println("안된다");
-		}
-		return a;
+		return dao.reviewListByBook_id(book_id);
 	}
 	
 }

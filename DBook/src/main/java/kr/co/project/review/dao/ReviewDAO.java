@@ -1,5 +1,6 @@
 package kr.co.project.review.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,7 +20,7 @@ public class ReviewDAO {
 	}
 	
 	public List<ReviewVO> reviewListByBook_id(String book_id) {
-		List<ReviewVO> reviews = sqlSessionTemplate.selectList(book_id);
+		List<ReviewVO> reviews = sqlSessionTemplate.selectList("kr.co.project.review.dao.ReviewDAO.reviewListByBook_id", book_id);
 		
 		for(ReviewVO review : reviews) {
 			System.out.println(review);
