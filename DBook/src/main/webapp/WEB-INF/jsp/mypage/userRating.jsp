@@ -31,17 +31,20 @@
 		}
 		
 		.bookList_base{
+			display: block;
+			min-height: 1200px;
 		}
 		
 		.bookList{
+			
 		}
 		
 		.book{
 			position: relative;
 			display:block;
 			margin: 1.4%;
-			width:11%;
-			height:15.56%;
+			width:11.485%;
+			height:16.242%;
 			float: left;
 		}
 		
@@ -75,6 +78,7 @@
 		
 		.book_overlay_rating{
 			display: inline-block;
+			padding-bottom: 5px;
 		}
 		
 		.hidden{
