@@ -6,15 +6,16 @@
 	
 	<!-- 리뷰 등록 -->	
 	<insert id="writeReview" parameterType="reviewVO">
-		insert into review(id, book_id, rating, content, good, bad)
-			   values(#{id}, #{book_id}, #{rating}, #{content}, #{good}, #{bad})
+		insert into review(review_no, id, book_id, rating, content, good, bad)
+			   values(review_no.nextval, #{id}, #{book_id}, #{rating}, #{content}, #{good}, #{bad})
 	</insert>
 	
 	<!-- 리뷰 book_id로 불러오기 -->	
 	<select id="reviewListByBook_id" resultType="reviewVO" parameterType="string">
-		select id, book_id, rating, content, good, bad, to_char(review_reg_date, 'yyyy-mm-dd') as review_reg_date
+		select review_no, id, book_id, rating, content, good, bad, to_char(review_reg_date, 'yyyy-mm-dd') as review_reg_date
 		  from review
 		  where book_id = #{book_id}
+		  order by review_no desc
 	</select>
 	
 </mapper>

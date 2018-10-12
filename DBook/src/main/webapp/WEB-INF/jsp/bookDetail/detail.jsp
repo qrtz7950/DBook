@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/autocomplete.css" />
 	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/TopMenu.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/category.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/detail.css" />
 	
 	<title>DBook</title>
 	<style type="text/css">
@@ -34,6 +34,12 @@
 	}
 	
 	/* 책 이미지, 설명 */
+	#book_info{
+		width: 700px;
+		float: left;
+		text-align: center;
+	}
+	
 	#cover_image {
 		width: 25%;
 		height: auto;
@@ -71,6 +77,12 @@
 	
 	.book_info_col2 {
 		width: 32%;
+	}
+	
+	#avg_rating_point {
+	    float: right;
+	    margin-left: 20px;
+	    font-size: 1.5em;
 	}
 	
 	
@@ -125,6 +137,9 @@
 	
 	
 	/* 리뷰 */
+	#reviews {
+		padding-left: 20px;
+	}
 	.reviewForm1 {
 	    font-size: 15px;
 	    color: #2a2a2a;
@@ -210,7 +225,7 @@
 								</section>
 								
 								<section style="width: 100%; height: auto; padding-top: 30px; float: left; border-top: 0px;">
-									<div style="width:100%; float: left; text-align: center;">
+									<div id="book_info">
 										<div id="cover_image">
 											<img src="${requestScope.book.cover}" style="width:100%; height:auto;"/>
 										</div>
@@ -258,6 +273,7 @@
 														<span class="starR2"></span>
 														<span class="starR1"></span>
 														<span class="starR2"></span>
+														<div id="avg_rating_point"></div>
 													</div>
 												</div>
 											</div>
@@ -318,7 +334,7 @@
 										</form>
 									</div>
 									
-									<h3>의견</h3>
+									<h3>의견 ( ${requestScope.reviews.size()} )</h3>
 									<div id="reviews">
 										<c:forEach var="review" items="${requestScope.reviews}" varStatus="status">
 											<div id="review${status.count}" class="review">
@@ -367,8 +383,8 @@
 			<script>
 					$(document).ready(function() {
 						detailForm();
-						avg_rating();
 						review_rating();
+						avg_rating();
 					});
 		
 					$(window).resize(function(){
@@ -386,13 +402,26 @@
 					
 				/* 책 평점 출력 */
 					function avg_rating(){
+						var rating_point = 0;
 						
+						for(var i=1; i<$(".review").length+1; i++){
+							rating_point += parseInt($("#review"+i).children(".reviewForm2").children(".rating_point").text());
+						}
+						
+						rating_point = rating_point / $(".review").length;
+						
+						$("#avg_rating_point").text(rating_point.toFixed(2));
+						
+						rating_point = Math.floor(rating_point - 1);
+						
+						console.log(rating_point);
+						$("#avg_rating").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on');
 					};
 					
 					function review_rating(){
 						for(var i=1; i<$(".review").length+1; i++){
 							var rating_point = $("#review"+i).children(".reviewForm2").children(".rating_point").text()-1;
-							$("#review"+i).children(".reviewForm2").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on')
+							$("#review"+i).children(".reviewForm2").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on');
 						}
 					};
 				
@@ -413,7 +442,7 @@
 						return $("#rating span.on").length;
 					};
 					
-					
+				/* 창크기 반응 */
 					function detailForm(){
 						
 						if($(window).width()>660){

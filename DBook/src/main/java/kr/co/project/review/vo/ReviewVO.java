@@ -2,6 +2,7 @@ package kr.co.project.review.vo;
 
 public class ReviewVO {
 	
+	private int review_no;
 	private String id;
 	private String book_id;
 	private int rating;
@@ -14,7 +15,8 @@ public class ReviewVO {
 		
 	}
 
-	public ReviewVO(String id, String book_id, int rating, String content, int good, int bad, String review_reg_date) {
+	public ReviewVO(int review_no, String id, String book_id, int rating, String content, int good, int bad, String review_reg_date) {
+		this.review_no = review_no;
 		this.id = id;
 		this.book_id = book_id;
 		this.rating = rating;
@@ -22,6 +24,14 @@ public class ReviewVO {
 		this.good = good;
 		this.bad = bad;
 		this.review_reg_date = review_reg_date;
+	}
+
+	public int getReview_no() {
+		return review_no;
+	}
+
+	public void setReview_no(int review_no) {
+		this.review_no = review_no;
 	}
 
 	public String getId() {
@@ -82,9 +92,10 @@ public class ReviewVO {
 
 	@Override
 	public String toString() {
-		return "ReviewVO [id=" + id + ", book_id=" + book_id + ", rating=" + rating + ", content=" + content + ", good="
-				+ good + ", bad=" + bad + ", review_reg_date=" + review_reg_date + "]";
+		return "ReviewVO [bad=" + bad + ", book_id=" + book_id + ", content=" + content + ", good=" + good + ", id="
+				+ id + ", rating=" + rating + ", review_no=" + review_no + ", review_reg_date=" + review_reg_date + "]";
 	}
+	
 	
 	
 }
