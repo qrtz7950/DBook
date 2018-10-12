@@ -14,6 +14,7 @@ create sequence seq_db_user_no;
 create table db_user (
         no              number(10)      not null 
     ,   id              varchar2(30)      primary key
+    ,   password        varchar2(30)
     ,   profile_image   varchar2(120)
     ,   thumbnail_image varchar2(120)
     ,   nickname        varchar2(30)
