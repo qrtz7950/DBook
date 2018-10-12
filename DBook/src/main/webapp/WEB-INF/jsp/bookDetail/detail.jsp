@@ -76,7 +76,7 @@
 	
 	/* 별점 */
 	.starR1 {
-	    background: url('${pageContext.request.contextPath}/resources/images/star.jpg') no-repeat -52px 0;
+	    background: url('${pageContext.request.contextPath}/resources/images/star.png') no-repeat -52px 0;
 	    background-size: auto 100%;
 	    width: 15px;
 	    height: 30px;
@@ -84,10 +84,26 @@
 	    text-indent: -9999px;
 	}
 	.starR2 {
-	    background: url('${pageContext.request.contextPath}/resources/images/star.jpg') no-repeat right 0;
+	    background: url('${pageContext.request.contextPath}/resources/images/star.png') no-repeat right 0;
 	    background-size: auto 100%;
 	    width: 15px;
 	    height: 30px;
+	    float:left;
+	    text-indent: -9999px;
+	}
+	.star_smallR1 {
+	    background: url('${pageContext.request.contextPath}/resources/images/star_small.png') no-repeat -26px 0;
+	    background-size: auto 100%;
+	    width: 7.5px;
+	    height: 15px;
+	    float:left;
+	    text-indent: -9999px;
+	}
+	.star_smallR2 {
+	    background: url('${pageContext.request.contextPath}/resources/images/star_small.png') no-repeat right 0;
+	    background-size: auto 100%;
+	    width: 7.5px;
+	    height: 15px;
 	    float:left;
 	    text-indent: -9999px;
 	}
@@ -95,13 +111,17 @@
 	#avg_rating {display: inline-block; height: 30px;}
 	#rating {
 		display: inline-block;
-		height: 20px;
-		margin-left: 20px;
+	    height: 20px;
+	    margin-left: 20px;
+	    position: relative;
+	    top: -3px;
 	}
 	.reviewForm2 > span{width: 8px; height: 16px;}
 	
 	.starR1.on {background-position:0 0;}
 	.starR2.on {background-position:-15px 0;}
+	.star_smallR1.on {background-position:0 0;}
+	.star_smallR2.on {background-position:-7.5px 0;}
 	
 	
 	/* 리뷰 */
@@ -113,8 +133,10 @@
 	    display: inline;
 	}
 	.reviewForm2 {
-	    display: inline-block;
+        display: inline-block;
 	    margin-left: 15px;
+	    position: relative;
+	    top: 2px;
 	}
 	.reviewForm3 {
 	    font-size: 13px;
@@ -130,6 +152,8 @@
 		float: right;
 		display: inline-block;
 	}
+	
+	.rating_point {display: none;}
 	
 	</style>
 </head>
@@ -188,7 +212,7 @@
 								<section style="width: 100%; height: auto; padding-top: 30px; float: left; border-top: 0px;">
 									<div style="width:100%; float: left; text-align: center;">
 										<div id="cover_image">
-											<img src="${pageContext.request.contextPath}/resources/images/book01.jpg" style="width:100%; height:auto;"/>
+											<img src="${requestScope.book.cover}" style="width:100%; height:auto;"/>
 										</div>
 										<div class="book_info_table">
 											<div class="book_info_row">
@@ -294,26 +318,29 @@
 										</form>
 									</div>
 									
+									<h3>의견</h3>
 									<div id="reviews">
-										<c:forEach var="review" items="${requestScope.reviews}">
-											<div class="review">
+										<c:forEach var="review" items="${requestScope.reviews}" varStatus="status">
+											<div id="review${status.count}" class="review">
 												<div class="reviewForm1">${review.id}</div>
-												<div class="reviewForm2">평점 : ${review.rating}
-													<span class="starR1"></span>
-													<span class="starR2"></span>
-													<span class="starR1"></span>
-													<span class="starR2"></span>
-													<span class="starR1"></span>
-													<span class="starR2"></span>
-													<span class="starR1"></span>
-													<span class="starR2"></span>
-													<span class="starR1"></span>
-													<span class="starR2"></span>
+												<div class="reviewForm2">
+													<div class="rating_point">${review.rating}</div>
+													<span class="star_smallR1"></span>
+													<span class="star_smallR2"></span>
+													<span class="star_smallR1"></span>
+													<span class="star_smallR2"></span>
+													<span class="star_smallR1"></span>
+													<span class="star_smallR2"></span>
+													<span class="star_smallR1"></span>
+													<span class="star_smallR2"></span>
+													<span class="star_smallR1"></span>
+													<span class="star_smallR2"></span>
 												</div>
 												<div class="reviewForm3">${review.content}</div>
 												<div class="reviewForm4">${review.review_reg_date}</div>
 												<div class="reviewForm5">good : ${review.good} / bad : ${review.bad}</div>
 											</div>
+											<br>
 										</c:forEach>
 									</div>
 								</section>
@@ -341,6 +368,7 @@
 					$(document).ready(function() {
 						detailForm();
 						avg_rating();
+						review_rating();
 					});
 		
 					$(window).resize(function(){
@@ -356,9 +384,16 @@
 		
 		
 					
-				/* 책 리뷰 평점 평균 출력 */
+				/* 책 평점 출력 */
 					function avg_rating(){
 						
+					};
+					
+					function review_rating(){
+						for(var i=1; i<$(".review").length+1; i++){
+							var rating_point = $("#review"+i).children(".reviewForm2").children(".rating_point").text()-1;
+							$("#review"+i).children(".reviewForm2").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on')
+						}
 					};
 				
 				/* 리뷰 보내기전 확인 */
