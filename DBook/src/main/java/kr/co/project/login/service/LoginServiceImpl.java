@@ -48,6 +48,20 @@ public class LoginServiceImpl implements LoginService{
 		}
 		return user;
 	}
+
+	@Override
+	public String idDupCheck(LoginVO user) {
+		
+		String idDupCheck = null;
+		
+		if(dao.overlapCheck(user)) {
+			idDupCheck = "중복된 ID입니다";
+		} else {
+			idDupCheck = "사용하셔도 좋은 ID입니다";
+		}
+		
+		return idDupCheck;
+	}
 	
 	
 	

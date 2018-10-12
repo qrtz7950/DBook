@@ -37,6 +37,22 @@ function signCheckForm() {
 		return false;
 	}
 	
+	if(idState == '중복된 ID입니다'){
+		alert(idState);
+		$('#sign_id').focus();
+		return false;
+	}
+	
+	if(isNull($('#sign_nickname'), '닉네임를 입력해주세요')) {
+		return false;
+	}
+	
+	if($('#sign_nickname').val().length > 15) {
+		alert('닉네임는 15자 이내만 가능합니다');
+		$('#sign_nickname').focus();
+		return false;
+	}
+	
 	if(isNull($('#sign_password'), '패스워드를 입력해주세요')) {
 		return false;
 	}
@@ -83,7 +99,44 @@ function isNull(obj, msg) {
 	return false;
 }
 
+var idState = '';
+
+function callback(data) {
+	
+	idState = data;
+	
+	if($("#sign_id").val() != ''){
+		if(idState == "사용하셔도 좋은 ID입니다"){
+			$('#OKicon').removeClass('hidden');
+			$('#NOicon').addClass('hidden');
+		} else {
+			$('#NOicon').removeClass('hidden');
+			$('#OKicon').addClass('hidden');
+		}
+	} else {
+		$('#OKicon').addClass('hidden');
+		$('#NOicon').addClass('hidden');
+	}
+}
+
 $(document).ready(function() {
+	
+	 
+	
+	$("#sign_id").keyup(function(){
+
+		var word=$("#sign_id").val();
+
+		$.ajax({
+			delay: 500,
+			url : "../user/idDupCheck.json",
+			data : {
+				id:word
+			},
+			dataType : "json",
+			success : callback
+		});
+	});
 	
 	$('#signIn').click(function() {
 		
@@ -94,17 +147,12 @@ $(document).ready(function() {
 			age = age - (age % 10);
 			age = age + "~" + (age + 9);
 			
-			console.log($('#sign_id').val());
-			console.log($('#sign_password').val());
-			console.log(age);
-			console.log($('#sign_gender').val());
-			
 			var id = $('#sign_id').val();
 			var password = $('#sign_password').val();
 			var gender = $('#sign_gender').val();
 			var profile_image = "none";
 			var thumbnail_image = "none";
-			var nickname = "none";
+			var nickname = $('#sign_nickname').val();
 			
 			$.ajax({
 				success : function(){
@@ -137,6 +185,11 @@ $(document).ready(function() {
 		});
 	});
 });
+
+/////////////////////////
+//    카카오 로그아웃		 ////
+//Kakao.Auth.logout()////
+/////////////////////////
 
 // 사용할 앱의 JavaScript 키
 Kakao.init('70b6dca9bb4272bcec25e71ea7ab0125');

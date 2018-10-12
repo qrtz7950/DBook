@@ -33,4 +33,11 @@ public interface LoginService {
 	 */
 	public LoginVO kakaoLogin(LoginVO user);
 
+	/**
+	 * ajax로 구현된 id 중복체크를 위해 스트링을 반환하는 리스폰스 메소드 
+	 * @param id
+	 * @return
+	 */
+	 public String idDupCheck(LoginVO user);
+
 }

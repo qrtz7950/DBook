@@ -89,6 +89,7 @@
 }
 
 .form .register-form {
+	position:relative;
 	display: none;
 }
 
@@ -173,4 +174,18 @@ strong{
 
 .login-form button {
 	margin-bottom: 15px;
+}
+
+#isDupId{
+	position: absolute;
+	right: 15px;
+	top: 10px;
+}
+
+#isDupId img{
+	width: 30px;
+}
+
+.hidden{
+	display: none;
 }

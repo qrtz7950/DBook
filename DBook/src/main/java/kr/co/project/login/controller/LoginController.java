@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.project.login.service.LoginService;
 import kr.co.project.login.vo.LoginVO;
 
+@RestController
 @Controller
 public class LoginController {
 
@@ -132,6 +134,16 @@ public class LoginController {
 		}
 		
 		return mav;
+	}
+	
+	@RequestMapping(value="/user/idDupCheck.json")
+	public String idDupCheck(@ModelAttribute LoginVO user) {
+		
+		System.out.println(user);
+		
+		String isIdDup = loginService.idDupCheck(user);
+		
+		return isIdDup;
 	}
 	
 	@RequestMapping(value="/user/logout.do")

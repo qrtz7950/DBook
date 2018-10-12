@@ -47,8 +47,6 @@ public interface LoginDAO {
 	 * 카카오 채널링 유저 회원가입
 	 * @param user
 	 */
-	void kakaoSignIn(LoginVO user);
-	
-	
+	public void kakaoSignIn(LoginVO user);
 	
 }

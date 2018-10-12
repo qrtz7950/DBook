@@ -13,7 +13,7 @@ drop sequence seq_db_user_no;
 create sequence seq_db_user_no;
 create table db_user (
         no              number(10)      not null 
-    ,   id              number(10)      primary key
+    ,   id              varchar2(30)      primary key
     ,   profile_image   varchar2(120)
     ,   thumbnail_image varchar2(120)
     ,   nickname        varchar2(30)
@@ -42,7 +42,7 @@ create table book (
 
 create table user_rating (
         book_id             varchar2(20)
-    ,   id                  number(10)
+    ,   id                  varchar2(30)
     ,   rating              number(2)
     ,   constraint user_rating_id_fk foreign key(id)
         references db_user(id) on delete cascade
@@ -58,7 +58,7 @@ create table best_seller (
 );
 
 create table interest (
-        id              number(10)
+        id              varchar2(30)
     ,   book_id         varchar2(20)
     ,   constraint interest_id_fk foreign key(id)
         references db_user(id) on delete cascade
@@ -67,7 +67,7 @@ create table interest (
 );
 
 create table recent_view (
-        id              number(10)
+        id              varchar2(30)
     ,   book_id         varchar2(20)
     ,   constraint recent_view_id_fk foreign key(id)
         references db_user(id) on delete cascade
@@ -76,7 +76,7 @@ create table recent_view (
 );
 
 create table review (
-        id              number(10)
+        id              varchar2(30)
     ,   book_id         varchar2(20)
     ,   rating          number(2)
     ,   content         varchar2(4000)  not null

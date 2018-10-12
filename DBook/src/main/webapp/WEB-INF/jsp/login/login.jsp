@@ -18,6 +18,11 @@
 	  <div class="form">
 	    <form class="register-form">
 	      <input id="sign_id" type="text" placeholder="ID"/>
+	      <div id="isDupId">
+	      	<img id="OKicon" class="hidden" alt="OK" src="${pageContext.request.contextPath}/resources/images/OK.png">
+	      	<img id="NOicon" class="hidden" alt="NO" src="${pageContext.request.contextPath}/resources/images/NO.png">
+	      </div>
+	      <input id="sign_nickname" type="text" placeholder="NICKNAME"/>
 	      <input id="sign_password" type="password" placeholder="PASSWORD"/>
 	      <input id="sign_password_check" type="password" placeholder="CONFIRM PASSWORD"/>
 	      <input id="sign_age_range" type="text" placeholder="AGE   ex)29"/>
