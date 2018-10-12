@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/css/swiper.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/layerPopUp.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/category.css" />
-<title>${param.id}의 My Page</title>
+<title>${param.nickname}의 My Page</title>
 <style>
 		#topMenu {
 			position: fixed;
@@ -66,20 +66,6 @@
 			width: 80%;
 			display: inline-flex;
 			float:left;"
-		}
-		
-		#category_select{
-			display: -webkit-box;
-			height: 50px;
-			vertical-align:middle;
-			border-bottom: 1px solid #7f888f;
-			margin-bottom: 20px;
-		}
-		
-		#category_select select{
-			height: 1.75em;
-			margin-left: 5px;
-			margin-right: 5px;
 		}
 		.major {
 			margin-top: 20px;
