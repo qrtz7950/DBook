@@ -7,7 +7,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<%-- <jsp:include page="../include/CSS.jsp" /> --%>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/slide2css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/SlideMenu.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/autocomplete.css" />
 	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
@@ -82,6 +81,9 @@
 			margin-left: 5px;
 			margin-right: 5px;
 		}
+		.major {
+			margin-top: 20px;
+		}
 	</style>
 </head>
 <body>
@@ -107,6 +109,7 @@
 										</div>
 										<div id="sideCategoryMenu_title_category">
 											<ul>
+												<a href="${pageContext.request.contextPath}/mypage/library.do">My Page</a>
 												<li><a href="${pageContext.request.contextPath}/mypage/bookmark.do">책 즐겨찾기</a></li>
 												<li><a href="${pageContext.request.contextPath}/mypage/rated.do">평가한 도서</a></li>
 												<li><a href="${pageContext.request.contextPath}/mypage/allreview.do">내가 쓴 리뷰</a></li>
@@ -194,7 +197,6 @@
 		<!-- Scripts -->
 			<jsp:include page="../include/JS.jsp"></jsp:include>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
-			<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
 			
 		<!-- 달지마 -->
 			<script>
@@ -207,8 +209,6 @@
 						menuButton();
 						
 					});
-				
-				 
 			</script>
 			
 		<!-- script function -->
