@@ -14,7 +14,7 @@ public class MypageController {
 		System.out.println("mypage()진입");
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("mypage/library");
+		mav.setViewName("mypage/library2");
 		
 		return mav;
 	}
