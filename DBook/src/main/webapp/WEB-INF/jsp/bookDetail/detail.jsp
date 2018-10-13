@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/autocomplete.css" />
 	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/TopMenu.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/category.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/detail.css" />
 	
 	<title>DBook</title>
 	<style type="text/css">
@@ -34,6 +34,12 @@
 	}
 	
 	/* 책 이미지, 설명 */
+	#book_info{
+		width: 100%;
+		text-align: center;
+		margin: auto;
+	}
+	
 	#cover_image {
 		width: 25%;
 		height: auto;
@@ -60,7 +66,7 @@
 	
 	.book_info_cell {
 		display: table-cell;
-		padding: 10px;
+		padding: 8px;
 	}
 	
 	.book_info_col1 {
@@ -71,6 +77,12 @@
 	
 	.book_info_col2 {
 		width: 32%;
+	}
+	
+	#avg_rating_point {
+	    float: right;
+	    margin-left: 20px;
+	    font-size: 1.5em;
 	}
 	
 	
@@ -125,6 +137,9 @@
 	
 	
 	/* 리뷰 */
+	#reviews {
+		padding-left: 20px;
+	}
 	.reviewForm1 {
 	    font-size: 15px;
 	    color: #2a2a2a;
@@ -154,6 +169,17 @@
 	}
 	
 	.rating_point {display: none;}
+	
+	#review-submit {
+		font-family: "Roboto", sans-serif;
+	    text-transform: uppercase;
+	    outline: 0;
+	    border: 0;
+	    font-size: 12px;
+	    cursor: pointer;
+	    border-radius: 5px;
+	    margin: -30px 0 10px 15px;
+	}
 	
 	</style>
 </head>
@@ -210,7 +236,7 @@
 								</section>
 								
 								<section style="width: 100%; height: auto; padding-top: 30px; float: left; border-top: 0px;">
-									<div style="width:100%; float: left; text-align: center;">
+									<div id="book_info">
 										<div id="cover_image">
 											<img src="${requestScope.book.cover}" style="width:100%; height:auto;"/>
 										</div>
@@ -258,6 +284,7 @@
 														<span class="starR2"></span>
 														<span class="starR1"></span>
 														<span class="starR2"></span>
+														<div id="avg_rating_point"></div>
 													</div>
 												</div>
 											</div>
@@ -305,20 +332,18 @@
 									</div>
 									
 									<div id="reviewInput" style="margin-top: 20px; margin-bottom: 20px;">
-										<form action="${pageContext.request.contextPath}/review/write.do" onsubmit="return check_before_input()" method="post">
+										<form name="reviewInputForm" action="${pageContext.request.contextPath}/review/write.do" onsubmit="return check_before_input()" method="post">
 											<div class="input-group" style="width:95%;  margin: 0 auto;">
 												  <input type="hidden" name="id" value="${sessionScope.user.id}">
 												  <input type="hidden" name="book_id" value="${requestScope.book.book_id}">
 												  <input type="hidden" name="rating" value="0">							  
 												  <textarea type="text" class="form-control" placeholder="남기고 싶은 글을 남기세요" name="content"></textarea>
-												  <div class="input-group-append" style="margin-top: 10px;">
-												    <button type="submit" id="button-addon">제출</button>
-												  </div>
 											</div>
 										</form>
+												  <button type="submit" id="review-submit">등록</button>
 									</div>
 									
-									<h3>의견</h3>
+									<h3>의견 ( ${requestScope.reviews.size()} )</h3>
 									<div id="reviews">
 										<c:forEach var="review" items="${requestScope.reviews}" varStatus="status">
 											<div id="review${status.count}" class="review">
@@ -367,8 +392,8 @@
 			<script>
 					$(document).ready(function() {
 						detailForm();
-						avg_rating();
 						review_rating();
+						avg_rating();
 					});
 		
 					$(window).resize(function(){
@@ -382,17 +407,51 @@
 						  $('input[name=rating]').attr("value", getInputRating());
 						});
 		
-		
+				/* 리뷰 등록 */
+					$("#review-submit").click(function(){
+						if(check_before_input()){
+							console.log($("form[name=reviewInputForm]").serialize());
+							$.ajax({
+								type : 'post',
+								url : '${pageContext.request.contextPath}/review/write.do',
+								data : $("form[name=reviewInputForm]").serialize(),
+								error : function(request, status, error){
+							       	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							    },
+								success : function(){
+									$("#rating").children('span').removeClass('on');
+									$("#reviewInput").children().eq("0").children().eq("0").children().eq("3").val('');
+									
+									
+									review_rating();
+									avg_rating();
+								}
+							});
+						}
+					})
 					
 				/* 책 평점 출력 */
 					function avg_rating(){
+						var rating_point = 0;
 						
+						for(var i=1; i<$(".review").length+1; i++){
+							rating_point += parseInt($("#review"+i).children(".reviewForm2").children(".rating_point").text());
+						}
+						
+						rating_point = rating_point / $(".review").length;
+						
+						$("#avg_rating_point").text(rating_point.toFixed(2));
+						
+						rating_point = Math.floor(rating_point - 1);
+						
+						console.log(rating_point);
+						$("#avg_rating").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on');
 					};
 					
 					function review_rating(){
 						for(var i=1; i<$(".review").length+1; i++){
 							var rating_point = $("#review"+i).children(".reviewForm2").children(".rating_point").text()-1;
-							$("#review"+i).children(".reviewForm2").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on')
+							$("#review"+i).children(".reviewForm2").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on');
 						}
 					};
 				
@@ -413,14 +472,21 @@
 						return $("#rating span.on").length;
 					};
 					
-					
+				/* 창크기 반응 */
 					function detailForm(){
 						
-						if($(window).width()>660){
+						if($(window).width()>900){
+							$("#book_info").css("width","700px");
+							$("#cover_image").css("width","25%");
+							$(".book_info_table").css("width","75%");
+						}
+						else if($(window).width()>660){
+							$("#book_info").css("width","100%");
 							$("#cover_image").css("width","25%");
 							$(".book_info_table").css("width","75%");
 					    }
 						else{
+							$("#book_info").css("width","100%");
 							$("#cover_image").css("width","100%");
 							$(".book_info_table").css("width","100%");							
 					    }
