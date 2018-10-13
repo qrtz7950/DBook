@@ -35,9 +35,9 @@
 	
 	/* 책 이미지, 설명 */
 	#book_info{
-		width: 700px;
-		float: left;
+		width: 100%;
 		text-align: center;
+		margin: auto;
 	}
 	
 	#cover_image {
@@ -66,7 +66,7 @@
 	
 	.book_info_cell {
 		display: table-cell;
-		padding: 10px;
+		padding: 8px;
 	}
 	
 	.book_info_col1 {
@@ -169,6 +169,17 @@
 	}
 	
 	.rating_point {display: none;}
+	
+	#review-submit {
+		font-family: "Roboto", sans-serif;
+	    text-transform: uppercase;
+	    outline: 0;
+	    border: 0;
+	    font-size: 12px;
+	    cursor: pointer;
+	    border-radius: 5px;
+	    margin: -30px 0 10px 15px;
+	}
 	
 	</style>
 </head>
@@ -321,17 +332,15 @@
 									</div>
 									
 									<div id="reviewInput" style="margin-top: 20px; margin-bottom: 20px;">
-										<form action="${pageContext.request.contextPath}/review/write.do" onsubmit="return check_before_input()" method="post">
+										<form name="reviewInputForm" action="${pageContext.request.contextPath}/review/write.do" onsubmit="return check_before_input()" method="post">
 											<div class="input-group" style="width:95%;  margin: 0 auto;">
 												  <input type="hidden" name="id" value="${sessionScope.user.id}">
 												  <input type="hidden" name="book_id" value="${requestScope.book.book_id}">
 												  <input type="hidden" name="rating" value="0">							  
 												  <textarea type="text" class="form-control" placeholder="남기고 싶은 글을 남기세요" name="content"></textarea>
-												  <div class="input-group-append" style="margin-top: 10px;">
-												    <button type="submit" id="button-addon">제출</button>
-												  </div>
 											</div>
 										</form>
+												  <button type="submit" id="review-submit">등록</button>
 									</div>
 									
 									<h3>의견 ( ${requestScope.reviews.size()} )</h3>
@@ -398,7 +407,28 @@
 						  $('input[name=rating]').attr("value", getInputRating());
 						});
 		
-		
+				/* 리뷰 등록 */
+					$("#review-submit").click(function(){
+						if(check_before_input()){
+							console.log($("form[name=reviewInputForm]").serialize());
+							$.ajax({
+								type : 'post',
+								url : '${pageContext.request.contextPath}/review/write.do',
+								data : $("form[name=reviewInputForm]").serialize(),
+								error : function(request, status, error){
+							       	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							    },
+								success : function(){
+									$("#rating").children('span').removeClass('on');
+									$("#reviewInput").children().eq("0").children().eq("0").children().eq("3").val('');
+									
+									
+									review_rating();
+									avg_rating();
+								}
+							});
+						}
+					})
 					
 				/* 책 평점 출력 */
 					function avg_rating(){
@@ -445,11 +475,18 @@
 				/* 창크기 반응 */
 					function detailForm(){
 						
-						if($(window).width()>660){
+						if($(window).width()>900){
+							$("#book_info").css("width","700px");
+							$("#cover_image").css("width","25%");
+							$(".book_info_table").css("width","75%");
+						}
+						else if($(window).width()>660){
+							$("#book_info").css("width","100%");
 							$("#cover_image").css("width","25%");
 							$(".book_info_table").css("width","75%");
 					    }
 						else{
+							$("#book_info").css("width","100%");
 							$("#cover_image").css("width","100%");
 							$(".book_info_table").css("width","100%");							
 					    }

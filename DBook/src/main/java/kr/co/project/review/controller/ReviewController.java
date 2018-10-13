@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.project.review.service.ReviewService;
@@ -22,17 +23,15 @@ public class ReviewController {
 	private ReviewService reviewService;
 	
 	@RequestMapping(value="/write.do", method=RequestMethod.POST)
-	public ModelAndView reviewInput(@ModelAttribute ReviewVO review) {
+	@ResponseBody
+	public void reviewInput(@ModelAttribute ReviewVO review) {
 		
 		System.out.println("reviewInput()진입");
 		System.out.println(review);
 		
 		reviewService.writeReview(review);
 		
-		
-		ModelAndView mav = new ModelAndView();
-		
-		return mav;
+		return;
 	}
 	
 	@RequestMapping(value="/bookDetail_review.do")
