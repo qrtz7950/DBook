@@ -314,7 +314,7 @@
 		margin-left: 8.33333%;
 	}
 
-	@media screen and (max-width: 1680px) {
+	@media screen and (max-width: 1920px) {
 
 		.row > * {
 			padding: 0 0 0 1.5em;
@@ -1819,7 +1819,7 @@
 
 	}
 
-	@media screen and (min-width: 481px) and (max-width: 1680px) {
+	@media screen and (min-width: 481px) and (max-width: 1920px) {
 
 		.row > * {
 			padding: 0 0 0 1.5em;
@@ -2077,7 +2077,7 @@
 		line-height: 1.65;
 	}
 
-		@media screen and (max-width: 1680px) {
+		@media screen and (max-width: 1920px) {
 
 			body, input, select, textarea {
 				font-size: 11pt;
@@ -2172,7 +2172,7 @@
 		font-size: 0.7em;
 	}
 
-	@media screen and (max-width: 1680px) {
+	@media screen and (max-width: 1920px) {
 
 		h1 {
 			font-size: 3.5em;
@@ -3286,6 +3286,16 @@
 		margin: 0 0 2em 0;
 		width: calc(100% + 6em);
 	}
+		
+		.posts h3 {
+				margin: 0 0 0.25em 0;
+		}
+		
+		.posts a {
+				margin: 0 0 0.25em 0;
+				text-decoration: none;
+				color: #7f888f;
+		}
 
 		.posts article {
 			-moz-flex-grow: 0;
@@ -3296,7 +3306,7 @@
 			-webkit-flex-shrink: 1;
 			-ms-flex-shrink: 1;
 			flex-shrink: 1;
-			margin: 0 4em 6em 2em;
+			margin: 0 4em 2em;
 			position: relative;
 			width: calc(33.33333% - 6em);
 		}
@@ -3307,14 +3317,14 @@
 
 			.posts article .image {
 				display: block;
-				margin: 0 0 2em 0;
+				margin: 0 0 1em 0;
 			}
 
 				.posts article .image img {
 					display: block;
 					width: 100%;
 				}
-
+				
 		@media screen and (min-width: 1681px) {
 
 			.posts article:nth-child(3n + 1):before {
@@ -3339,10 +3349,10 @@
 
 		}
 
-		@media screen and (max-width: 1680px) {
+		@media screen and (max-width: 1920px) {
 
 			.posts article {
-				width: calc(25% - 6em);
+				width: 20%;
 			}
 
 				.posts article:nth-last-child(3) {
@@ -3351,7 +3361,7 @@
 
 		}
 
-		@media screen and (min-width: 481px) and (max-width: 1680px) {
+		@media screen and (min-width: 481px) and (max-width: 1920px) {
 
 			.posts article:nth-child(2n + 1):before {
 				display: none;
@@ -3378,7 +3388,7 @@
 		@media screen and (max-width: 736px) {
 
 			.posts {
-				margin: 0 0 2em -4.5em;
+				/* margin: 0 0 2em -4.5em; */
 				width: calc(100% + 4.5em);
 			}
 
@@ -3476,7 +3486,7 @@
 					border-top: 0 !important;
 				}
 
-		@media screen and (max-width: 1680px) {
+		@media screen and (max-width: 1920px) {
 
 			#main > .inner {
 				padding: 0 5em 0.1em 5em ;
@@ -3652,7 +3662,7 @@
 			margin-left: -26em;
 		}
 
-		@media screen and (max-width: 1680px) {
+		@media screen and (max-width: 1920px) {
 
 			#sidebar {
 				width: 24em;
@@ -3794,7 +3804,7 @@
 			text-align: right;
 		}
 
-		@media screen and (max-width: 1680px) {
+		@media screen and (max-width: 1920px) {
 
 			#header {
 				padding-top: 5em;
