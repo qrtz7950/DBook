@@ -392,45 +392,17 @@
 			<script>
 					$(document).ready(function() {
 						detailForm();
-						review_rating();
+						reviews_rating();
 						avg_rating();
 					});
 		
 					$(window).resize(function(){
 						detailForm();
 					});
-					
-				/* 별 누를때 */
-					$("#rating span").click(function(){
-						  $(this).parent().children('span').removeClass('on');
-						  $(this).addClass('on').prevAll('span').addClass('on');
-						  $('input[name=rating]').attr("value", getInputRating());
-						});
-		
-				/* 리뷰 등록 */
-					$("#review-submit").click(function(){
-						if(check_before_input()){
-							console.log($("form[name=reviewInputForm]").serialize());
-							$.ajax({
-								type : 'post',
-								url : '${pageContext.request.contextPath}/review/write.do',
-								data : $("form[name=reviewInputForm]").serialize(),
-								error : function(request, status, error){
-							       	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-							    },
-								success : function(){
-									$("#rating").children('span').removeClass('on');
-									$("#reviewInput").children().eq("0").children().eq("0").children().eq("3").val('');
-									
-									
-									review_rating();
-									avg_rating();
-								}
-							});
-						}
-					})
-					
-				/* 책 평점 출력 */
+				
+				
+				/* 책 정보 */
+					/* 평점 계산 후 출력 */
 					function avg_rating(){
 						var rating_point = 0;
 						
@@ -444,33 +416,108 @@
 						
 						rating_point = Math.floor(rating_point - 1);
 						
-						console.log(rating_point);
+						//console.log(rating_point);
 						$("#avg_rating").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on');
 					};
 					
-					function review_rating(){
-						for(var i=1; i<$(".review").length+1; i++){
-							var rating_point = $("#review"+i).children(".reviewForm2").children(".rating_point").text()-1;
-							$("#review"+i).children(".reviewForm2").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on');
-						}
-					};
-				
-				/* 리뷰 보내기전 확인 */
-					function check_before_input(){
-						if(${empty user}){
-							alert("로그인이 필요한 서비스 입니다");
-							return false;
-						}else if($('textarea.form-control').eq(0).val()==""){
-							alert("글을 입력해 주세요");
-							return false;
-						}
-						return true;
-					};
-				
-				/* 별점 입력값 구하기 */
-					function getInputRating(){
-						return $("#rating span.on").length;
-					};
+				/* 리뷰 */
+					/* 별 누를때 */
+						$("#rating span").click(function(){
+							  $(this).parent().children('span').removeClass('on');
+							  $(this).addClass('on').prevAll('span').addClass('on');
+							  $('input[name=rating]').attr("value", getInputRating());
+							});
+			
+					/* 리뷰 등록 */
+						$("#review-submit").click(function(){
+							if(check_before_input()){
+								$.ajax({
+									type : 'post',
+									url : '${pageContext.request.contextPath}/review/write.do',
+									data : $("form[name=reviewInputForm]").serialize(),
+									error : function(request, status, error){
+								       	alert("code:"+request.status+"\n"+"error:"+error);
+								    },
+									success : function(){
+										$("#rating").children('span').removeClass('on');
+										$("#reviewInput").children().eq("0").children().eq("0").children().eq("3").val('');
+										
+										$("#reviews").children().remove()
+										reviews_print();
+										setTimeout(function(){
+											reviews_rating();
+											avg_rating();
+										}, 100);
+									}
+								});
+							}
+						})
+						
+					
+					/* 리뷰별 별점 출력 */
+						function reviews_rating(){
+							console.log($(".review").length+1);
+							for(var i=1; i<$(".review").length+1; i++){
+								var rating_point = $("#review"+i).children(".reviewForm2").children(".rating_point").text()-1;
+								$("#review"+i).children(".reviewForm2").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on');
+							}
+						};
+					
+					/* 리뷰 보내기전 확인 */
+						function check_before_input(){
+							if(${empty user}){
+								alert("로그인이 필요한 서비스 입니다");
+								return false;
+							}else if($('textarea.form-control').eq(0).val()==""){
+								alert("글을 입력해 주세요");
+								return false;
+							}
+							return true;
+						};
+					
+					/* 별점 입력값 구하기 */
+						function getInputRating(){
+							return $("#rating span.on").length;
+						};
+						
+					/* 리뷰 db에서 가져와서 출력 */
+						function reviews_print(){
+							$.ajax({
+								type : 'post',
+								url : '${pageContext.request.contextPath}/review/bookDetail_review2.do',
+								type : 'POST',
+								dataType : 'json',
+								data : {book_id :'${requestScope.book.book_id}'},
+								error : function(request, status, error){
+							       	alert("code:"+request.status+"\n"+"error:"+error);
+							    },
+								success : function(reviews){
+									var a = '';
+									for(var i=0; i<reviews.items.length; i++){
+										a += '<div id="review' + (i+1) + '" class="review">';
+										a += 	'<div class="reviewForm1">' + reviews.items[i].id + '</div>';
+										a +=	'<div class="reviewForm2">';
+										a +=		'<div class="rating_point">' + reviews.items[i].rating + '</div>';
+										a +=		'<span class="star_smallR1"></span>';
+										a +=		'<span class="star_smallR2"></span>';
+										a +=		'<span class="star_smallR1"></span>';
+										a +=		'<span class="star_smallR2"></span>';
+										a +=		'<span class="star_smallR1"></span>';
+										a +=		'<span class="star_smallR2"></span>';
+										a +=		'<span class="star_smallR1"></span>';
+										a +=		'<span class="star_smallR2"></span>';
+										a +=		'<span class="star_smallR1"></span>';
+										a +=		'<span class="star_smallR2"></span>';
+										a +=	'</div>';
+										a +=	'<div class="reviewForm3">' + reviews.items[i].content + '</div>';
+										a +=	'<div class="reviewForm4">' + reviews.items[i].reg_date + '</div>';
+										a +=	'<div class="reviewForm5">good : ' + reviews.items[i].good + ' / bad : ' + reviews.items[i].bad + '</div>';
+										a += '</div>';
+									}
+									$("#reviews").append(a);
+								}
+							});
+						};
 					
 				/* 창크기 반응 */
 					function detailForm(){

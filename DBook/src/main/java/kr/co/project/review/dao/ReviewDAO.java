@@ -21,10 +21,11 @@ public class ReviewDAO {
 	
 	public List<ReviewVO> reviewListByBook_id(String book_id) {
 		List<ReviewVO> reviews = sqlSessionTemplate.selectList("kr.co.project.review.dao.ReviewDAO.reviewListByBook_id", book_id);
-		
+		/*
 		for(ReviewVO review : reviews) {
 			System.out.println(review);
 		}
+		*/
 		return reviews;
 	}
 	
