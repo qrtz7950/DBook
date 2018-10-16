@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/css/swiper.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/layerPopUp.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/category.css" />
-<title>${param.id}의 My Page</title>
+<title>${param.nickname}의 My Page</title>
 <style>
 		#topMenu {
 			position: fixed;
@@ -45,6 +45,7 @@
 		}
 		#sideCategoryMenu{
 			width : 15%;
+			height : 2700px;
 			display: block;
 			margin-left:30px;
 			float: left;
@@ -66,20 +67,6 @@
 			width: 80%;
 			display: inline-flex;
 			float:left;"
-		}
-		
-		#category_select{
-			display: -webkit-box;
-			height: 50px;
-			vertical-align:middle;
-			border-bottom: 1px solid #7f888f;
-			margin-bottom: 20px;
-		}
-		
-		#category_select select{
-			height: 1.75em;
-			margin-left: 5px;
-			margin-right: 5px;
 		}
 		.more {
 			height: 40px;
@@ -114,16 +101,14 @@
 												<li><a href="${pageContext.request.contextPath}/mypage/bookmark.do">책 즐겨찾기</a></li>
 												<li><a href="${pageContext.request.contextPath}/mypage/rated.do">평가한 도서</a></li>
 												<li><a href="${pageContext.request.contextPath}/mypage/allreview.do">내가 쓴 리뷰</a></li>
-												<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-												<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 											</ul>
 										</div>
 									</div>
-									<br>
-									<div style="height:80px;">
+									<div style="height:120px;">
 										<font size=10pt color=#f56a6a>&nbsp;My Page</font>
-										<br><Br>
+										<br><HR style="height:2px;" color=#f56a6a>
 									</div>
+								<div class=container>
 									<header class="major">
 										<h2>책 즐겨찾기</h2>
 									</header>
@@ -153,7 +138,7 @@
 		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
 		                              </article>
 		                           </div>
-		                           
+		                           <Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><hr style="height:2px;" color=#f56a6a>
 									<header class="major">
 										<h2>평가한 도서</h2>
 									</header>
@@ -183,7 +168,7 @@
 		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
 		                              </article>
 		                           </div>
-		                           
+		                           <Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><hr style="height:2px;" color=#f56a6a>
 									<header class="major">
 										<h2>내가 쓴 리뷰</h2>
 									</header>
@@ -216,7 +201,16 @@
 												<li><a href="#" class="button">More</a></li>
 											</ul>
 										</article>
+										<article>
+											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic04.jpg" alt="" /></a>
+											<h3>Sed etiam facilis</h3>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+											<ul class="actions">
+												<li><a href="#" class="button">More</a></li>
+											</ul>
+										</article>
 		                          	 </div>
+								</div>
 							</section>
 
 						</div>
