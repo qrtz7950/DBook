@@ -9,6 +9,7 @@ drop table db_category CASCADE CONSTRAINTS;
 drop table db_category_management CASCADE CONSTRAINTS;
 
 drop sequence seq_db_user_no;
+drop sequence review_no;
 
 create sequence seq_db_user_no;
 create table db_user (
