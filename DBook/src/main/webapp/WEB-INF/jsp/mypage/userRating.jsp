@@ -103,13 +103,25 @@
 			padding: 1px;
 		}
 		
-		.progrecess_bar_blank span{
+		#progrecess_bar{
+			position:relative;
 			vertical-align:middle;
 			float:left;
-			width:50%;
-			height: 6px;
+			width:0%;
+			height:100%;
 			background-color: #f56a6a;
 		}
+		
+		.progrecess_title{
+		}
+		
+		#progrecess_num{
+		}
+		
+		.rating_point{
+			display: none;
+		}
+		
 		
 		/* 별점 */
 		.starR1 {
@@ -154,10 +166,10 @@
 
 				<div class="progrecess_base">
 					<div id="progrecess_num">0</div>
-					<div>최소 10개 이상의 작품을 평가해주세요</div>
+					<div class="progrecess_title">최소 10개 이상의 작품을 평가해주세요</div>
 					<div align="center" class="progrecess_bar_base">
 						<div class="progrecess_bar_blank">
-							<span class="progrecess_bar"></span>
+							<div id="progrecess_bar"></div>
 						</div>
 					</div>
 				</div>
@@ -165,15 +177,17 @@
 				<div class="bookList_base">
 					<div class="bookList">
 					
-					<c:forEach begin="1" end="30">
+					<c:forEach var="bookOrder" items="${asd}">
 					
-						<div class="book">
+						<div class="book" id=book${bookOrder}>
 							<div class="book_cover">
 								<img src="/DBook/resources/images/book01.jpg">
 							</div>
 							<div class="book_overlay hidden">
 								<div class="book_overlay_title">죽고 싶지만 떡볶이는 먹고싶어</div>
 								<div class="book_overlay_date">2018</div>
+								<div class="hidden isRatingCheck"></div>
+								<input type="hidden" name="rating" value="0">
 								<div class="book_overlay_rating">
 									<span class="starR1"></span>
 									<span class="starR2"></span>
@@ -205,6 +219,56 @@
 			<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
 			<script type="text/javascript">
 			
+			var progressCnt = 0;
+			
+			function post_to_url(path, params, method) {
+			    
+				method = method || "post"; 
+
+			    var form = document.createElement("form");
+			    form.setAttribute("method", method);
+			    form.setAttribute("action", path);
+			 
+			    for(var key in params) {
+			        var hiddenField = document.createElement("input");
+			        hiddenField.setAttribute("type", "hidden");
+			        hiddenField.setAttribute("name", key);
+			        hiddenField.setAttribute("value", params[key]);
+			 
+			        form.appendChild(hiddenField);
+			    }
+			 
+			    document.body.appendChild(form);
+			    form.submit();
+			}
+			
+			/* 별점 입력값 구하기 */
+			function getInputRating(obj){
+				return obj.find('span.on').length; 
+			};
+			
+			function progressCntPlus() {
+				if(progressCnt<100){
+					progressCnt += 10;
+					progressBarPlus(progressCnt);
+					$('#progrecess_num').empty();
+					$('#progrecess_num').text(progressCnt/10);
+				} else{
+					$.ajax({
+						success : function(){
+							post_to_url("../mypage/ratingSubmit.do",
+								{ "bookIds": bookIds,
+								  "ratingScore" : ratingScore 
+								});
+								  }
+						  });
+				}
+			}
+			
+			function progressBarPlus(num) {
+				$('#progrecess_bar').animate({width:num+'%'});
+			}
+			
 			$('.book').hover(function() {
 				$(this).find('.book_overlay').removeClass('hidden');
 			}, function() {
@@ -212,10 +276,24 @@
 			});
 			
 			$(".book_overlay_rating span").click(function(){
-				  $(this).parent().children('span').removeClass('on');
-				  $(this).addClass('on').prevAll('span').addClass('on');
-				  $('input[name=rating]').attr("value", getInputRating());
-				});
+				$(this).parent().children('span').removeClass('on');
+				$(this).addClass('on').prevAll('span').addClass('on');
+
+				var book1 = $(this).parent().parent().parent();
+				book1.find('input[name=rating]').attr("value", getInputRating(book1));
+				
+				var bookCheck = book1.find('.isRatingCheck')
+				if(bookCheck.val() == ''){
+					bookCheck.text('check');
+				} else{
+					bookCheck.empty();
+				}
+					
+				
+				progressCntPlus();
+			});
+			
+			
 			
 			</script>
 </body>

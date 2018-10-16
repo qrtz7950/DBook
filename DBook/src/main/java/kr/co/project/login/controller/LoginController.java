@@ -113,7 +113,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value="/user/signIn.do", method=RequestMethod.POST)
-	public ModelAndView signIn(@ModelAttribute LoginVO user) {
+	public ModelAndView signIn(@ModelAttribute LoginVO user, HttpSession session) {
 		
 		System.out.println("signIn()진입...");
 		System.out.println(user);
@@ -128,11 +128,11 @@ public class LoginController {
 			mav.addObject("msg", msg);
 			mav.setViewName("login/login");
 		} else {
-			msg = "가입완료!";
-			mav.addObject("msg", msg);
-			mav.setViewName("login/login");
+			System.out.println("회원가입후 바로 그 정보로 로그인");
+			System.out.println(user);
+			session.setAttribute("user", user);
+			mav.setViewName("redirect:/main/home.do");
 		}
-		
 		return mav;
 	}
 	

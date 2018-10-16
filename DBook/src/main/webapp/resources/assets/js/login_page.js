@@ -121,8 +121,6 @@ function callback(data) {
 
 $(document).ready(function() {
 	
-	 
-	
 	$("#sign_id").keyup(function(){
 
 		var word=$("#sign_id").val();

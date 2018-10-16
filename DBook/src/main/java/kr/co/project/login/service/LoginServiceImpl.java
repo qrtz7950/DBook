@@ -45,6 +45,7 @@ public class LoginServiceImpl implements LoginService{
 			user = null;
 		} else {
 			dao.signIn(user);
+			user = dao.login(user);
 		}
 		return user;
 	}
