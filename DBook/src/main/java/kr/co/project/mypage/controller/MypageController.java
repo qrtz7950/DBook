@@ -72,23 +72,4 @@ public class MypageController {
 		
 		return mav;
 	}
-	
-	@RequestMapping(("/ratingSubmit.do"))
-	public void ratingSubmit(@RequestParam String[] bookId,@RequestParam int[] bookRating, HttpSession session) {
-		System.out.println("ratingSubmit()진입");
-		
-		List<ReviewVO> list = new ArrayList<>(); 
-		
-		LoginVO user = (LoginVO) session.getAttribute("user");
-		
-		for(int i = 0; i<10; i++) {
-			ReviewVO mp = new ReviewVO();
-			mp.setBook_id(bookId[i]);
-			mp.setRating(bookRating[i]);
-			mp.setId(user.getId());
-			list.add(mp);
-		}
-		
-		mpService.addUserRating(list);
-	}
 }

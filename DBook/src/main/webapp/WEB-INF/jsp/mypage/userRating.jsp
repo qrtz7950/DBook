@@ -16,14 +16,47 @@
 		.forMarginTop{
 		}
 		
-		.userRating_overlay {
+		.userrating-overlay-base {
 		    position: fixed;
 		    left: 0;
 		    top: 0;
 		    height: 100%;
 		    width: 100%;
-		    z-index: 500;
+		    z-index: 998;
 		    background-color: rgba(0,0,0,0.8);
+		}
+		.userrating-overlay {
+			position: fixed;
+			vertical-align: middle;
+			width: 50%;
+			left: 25%;
+			top: 20%;
+			height: auto;
+			color:#fffff;
+			z-index: 999;
+			font-size: 25pt;
+			text-align: center;
+		}
+		.userrating-overlay-img{
+			margin-bottom: 3%;
+		}
+		
+		.userrating-overlay-text{
+		}
+		
+		.userrating-overlay-button{
+			width:50%;
+			border-radius: 30px;
+			background-color: #f56a6a;
+			border: 5px solid #f56a6a;
+			color: white;
+			display: inline-block;
+		}
+		
+		.userrating-overlay-button:hover{
+			background-color: #f14e4e;
+			border: 5px solid white;
+			cursor: pointer;
 		}
 		
 		.userRating_base{
@@ -122,7 +155,6 @@
 			display: none;
 		}
 		
-		
 		/* 별점 */
 		.starR1 {
 		    background: url('${pageContext.request.contextPath}/resources/images/star_middle.png') no-repeat -39px 0;
@@ -165,6 +197,20 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div class="userrating-overlay-base">
+	</div>
+	<div class="userrating-overlay">
+		<div class="userrating-overlay-img">
+			<img src="/DBook/resources/images/big_star.png">
+		</div>
+		<div class="userrating-overlay-text">
+			서비스를 이용하기 위해 책을 평가해 주세요
+		</div>
+		<div class="userrating-overlay-button">
+			계속하기
+		</div>
+	</div>
+
 	<!-- topMenu -->
 			<jsp:include page="../include/TopMenu.jsp"/>
 
@@ -264,29 +310,11 @@
 			
 			/* 0-10 진행도 체크 및 10에 도달 후 평가점수 Ajax로 입력  */
 			function progressCntPlus() {
-				if(progressCnt<90){
+				if(progressCnt<=90){
 					progressCnt += 10;
 					progressBarPlus(progressCnt);
 					$('#progrecess_num').empty();
 					$('#progrecess_num').text(progressCnt/10);
-				} else{
-					
-					$.ajaxSettings.traditional = true;
-					$.ajax({
-						type : 'post',
-						url:"../mypage/ratingSubmit.do",
-						dataType : "text",
-						data:{
-							"bookId": bookId,
-							"bookRating" : bookRating
-							},
-						success:function(){
-							alert('성공!');
-						},
-						error:function(){
-							alert('실패!');
-						}
-						  });
 				}
 			}
 			
@@ -324,9 +352,9 @@
 				
 				if(bookCheck.text() == ''){
 					bookCheck.text('check');
-					progressCntPlus();
 					bookId.push(id);
 					bookRating.push(rating.attr('value'));
+					progressCntPlus();
 				} else {
 					bookId.pop();
 					bookRating.pop();
@@ -339,7 +367,29 @@
 				console.log(bookRating);
 				console.log(progressCnt);
 				console.log("-----------------");
+				
+				if(progressCnt==100){
+					$.ajaxSettings.traditional = true;
+					$.ajax({
+						type : 'post',
+						url:"../review/ratingSubmit.do",
+						dataType : "text",
+						data:{
+							"bookId": bookId,
+							"bookRating" : bookRating
+							},
+						success:function(){
+							
+						}
+					});
+					alert('끗');
+				}
 			});
+			$(".userrating-overlay-button").click(function(){
+				$('.userrating-overlay-base').addClass('hidden');
+				$('.userrating-overlay').addClass('hidden');
+			});
+			
 			</script>
 </body>
 </html>

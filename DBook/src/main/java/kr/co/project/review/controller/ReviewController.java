@@ -1,8 +1,10 @@
 package kr.co.project.review.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.project.login.vo.LoginVO;
 import kr.co.project.review.service.ReviewService;
 import kr.co.project.review.vo.ReviewVO;
 
@@ -86,5 +89,31 @@ public class ReviewController {
 		
 		return reviews;
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(("/ratingSubmit.do"))
+	public void ratingSubmit(@RequestParam String[] bookId,@RequestParam int[] bookRating, HttpSession session) {
+		System.out.println("ratingSubmit()진입");
+		
+		List<ReviewVO> list = new ArrayList<>(); 
+		
+		LoginVO user = (LoginVO) session.getAttribute("user");
+		
+		System.out.println(bookId.length);
+		System.out.println(bookRating.length);
+		
+		for(int i = 0; i<10; i++) {
+			ReviewVO mp = new ReviewVO();
+			System.out.println("bookId[" + i + "] : " + bookId[i]);
+			System.out.println("bookRating[" + i + "] : " + bookRating[i]);
+			mp.setBook_id(bookId[i]);
+			mp.setRating(bookRating[i]);
+			mp.setId(user.getId());
+			list.add(mp);
+		}
+		
+		reviewService.addUserRating(list);
+		
+		return;
+	}
 }
