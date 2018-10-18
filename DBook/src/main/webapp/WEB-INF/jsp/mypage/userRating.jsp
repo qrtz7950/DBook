@@ -141,6 +141,16 @@
 		    text-indent: -9999px;
 		}
 		.book_overlay_rating > span {cursor: pointer;}
+		
+		.book_overlay_rating > span .starNone {
+			width: 11.25px;
+			height: 22.5px;
+		}
+		.book_overlay_rating > span .starMargin {
+			width: 11.25px;
+			height: 22.5px;
+		}
+		
 				
 		.starR1.on {background-position:0 0;}
 		.starR2.on {background-position:-11.25px 0;}
@@ -189,6 +199,7 @@
 								<div class="hidden isRatingCheck"></div>
 								<input type="hidden" name="rating" value="0">
 								<div class="book_overlay_rating">
+									<span class="starNone"></span>
 									<span class="starR1"></span>
 									<span class="starR2"></span>
 									<span class="starR1"></span>
@@ -199,6 +210,7 @@
 									<span class="starR2"></span>
 									<span class="starR1"></span>
 									<span class="starR2"></span>
+									<span class="starMargin"></span>
 								</div>
 							</div>
 						</div>
@@ -209,7 +221,6 @@
 				</div>
 			</div>
 			
-				
 	<!-- Sidebar -->
 			<jsp:include page="../include/SlideSideMenu.jsp"></jsp:include>
 			<jsp:include page="../include/SlideTopMenu.jsp"></jsp:include>
@@ -219,8 +230,12 @@
 			<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
 			<script type="text/javascript">
 			
+			/* 진행도 및 평가한 책의 아이디 및 점수 배열 */
 			var progressCnt = 0;
+			var bookId = [];
+			var bookRating = [];
 			
+			/* post형식 전송 함수 */
 			function post_to_url(path, params, method) {
 			    
 				method = method || "post"; 
@@ -247,8 +262,9 @@
 				return obj.find('span.on').length; 
 			};
 			
+			/* 0-10 진행도 체크 및 10에 도달 후 평가점수 Ajax로 입력  */
 			function progressCntPlus() {
-				if(progressCnt<100){
+				if(progressCnt<90){
 					progressCnt += 10;
 					progressBarPlus(progressCnt);
 					$('#progrecess_num').empty();
@@ -257,44 +273,65 @@
 					$.ajax({
 						success : function(){
 							post_to_url("../mypage/ratingSubmit.do",
-								{ "bookIds": bookIds,
-								  "ratingScore" : ratingScore 
+								{ "bookId": bookId,
+								  "bookRating" : bookRating 
 								});
 								  }
 						  });
 				}
 			}
 			
+			/* 진행사항 증가 애니매이션 */
 			function progressBarPlus(num) {
 				$('#progrecess_bar').animate({width:num+'%'});
 			}
 			
+			/* 책 위에 마우스 호버시 오버레이 나타남 체크된 책은 없어지지않음 */
 			$('.book').hover(function() {
 				$(this).find('.book_overlay').removeClass('hidden');
 			}, function() {
-				$(this).find('.book_overlay').addClass('hidden');
+				var checkChecked = $(this).find('input[name=rating]');
+				if(checkChecked.val() == 0) {
+					$(this).find('.book_overlay').addClass('hidden');
+				}
 			});
 			
+			/* 별점 입력시 별점생성 및 해당하는 책의 id와 점수를 스크립트 전역변수 배열에 추가 
+			   check 텍스트를 넣어 해당 책의 평가 여부 구분*/
 			$(".book_overlay_rating span").click(function(){
 				$(this).parent().children('span').removeClass('on');
 				$(this).addClass('on').prevAll('span').addClass('on');
 
-				var book1 = $(this).parent().parent().parent();
-				book1.find('input[name=rating]').attr("value", getInputRating(book1));
+				//var book = $(this).parent('.book');
+				var book = $(this).parent().parent().parent();
+				var id = book.attr('id');
+				var rating = book.find('input[name=rating]');
 				
-				var bookCheck = book1.find('.isRatingCheck')
-				if(bookCheck.val() == ''){
+				console.log(book);
+				
+				rating.attr("value", getInputRating(book));
+	
+				var bookCheck = book.find('.isRatingCheck')
+				
+				if(bookCheck.text() == ''){
 					bookCheck.text('check');
-				} else{
-					bookCheck.empty();
+					progressCntPlus();
+					bookId.push(id);
+					bookRating.push(rating.attr('value'));
+				} else {
+					bookId.pop();
+					bookRating.pop();
+					bookId.push(id);
+					bookRating.push(rating.attr('value'));
 				}
-					
 				
-				progressCntPlus();
+				console.log("-----------------");
+				console.log(bookId);
+				console.log(bookRating);
+				console.log(progressCnt);
+				console.log("-----------------");
 			});
-			
-			
-			
 			</script>
 </body>
 </html>
+

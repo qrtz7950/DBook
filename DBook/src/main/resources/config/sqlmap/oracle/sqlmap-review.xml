@@ -10,6 +10,12 @@
 			   values(review_no.nextval, #{id}, #{book_id}, #{rating}, #{content}, #{good}, #{bad})
 	</insert>
 	
+	<!-- 회원가입 리뷰 등록 -->	
+	<insert id="addUserRating" parameterType="reviewVO">
+		insert into review(review_no, id, book_id, rating)
+			   values(review_no.nextval, #{id}, #{book_id}, #{rating})
+	</insert>
+	
 	<!-- 리뷰 book_id로 불러오기 -->	
 	<select id="reviewListByBook_id" resultType="reviewVO" parameterType="string">
 		select review_no, id, book_id, rating, content, good, bad, to_char(review_reg_date, 'yyyy-mm-dd') as review_reg_date

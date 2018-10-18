@@ -1,6 +1,5 @@
 package kr.co.project.review.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,12 @@ public class ReviewService {
 	
 	public List<ReviewVO> reviewListByBook_id(String book_id) {
 		return dao.reviewListByBook_id(book_id);
+	}
+
+	public void addUserRating(List<ReviewVO> list) {
+		for(ReviewVO review : list) {
+			dao.addUserRating(review);
+		}
 	}
 	
 }

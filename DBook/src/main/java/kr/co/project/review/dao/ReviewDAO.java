@@ -28,5 +28,9 @@ public class ReviewDAO {
 		*/
 		return reviews;
 	}
+
+	public void addUserRating(ReviewVO review) {
+		sqlSessionTemplate.insert("kr.co.project.review.dao.ReviewDAO.addUserRating", review);
+	}
 	
 }
