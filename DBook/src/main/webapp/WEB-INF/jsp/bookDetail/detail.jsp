@@ -170,6 +170,13 @@
 	
 	.rating_point {display: none;}
 	
+	.page-number {
+	    text-align: center;
+	    padding: 14px 16px;
+	    text-decoration: none;
+	    border: none;
+	}
+	
 	#review-submit {
 		font-family: "Roboto", sans-serif;
 	    text-transform: uppercase;
@@ -179,6 +186,10 @@
 	    cursor: pointer;
 	    border-radius: 5px;
 	    margin: -30px 0 10px 15px;
+	}
+	
+	#review-page {
+		text-align: center;
 	}
 	
 	</style>
@@ -379,7 +390,7 @@
 						setTimeout(function(){
 							reviews_rating();
 							avg_rating();	
-						}, 200);
+						}, 500);
 					});
 		
 					$(window).resize(function(){
@@ -428,13 +439,7 @@
 										$("#rating").children('span').removeClass('on');
 										$("#reviewInput").children().eq("0").children().eq("0").children().eq("3").val('');
 										
-										$("#reviews").children().remove()
 										reviews_print(1);
-										setTimeout(function(){
-											reviews_rating();
-											avg_rating();
-											$('input[name=rating]').attr("value", getInputRating());
-										}, 200);
 									}
 								});
 							}
@@ -442,9 +447,9 @@
 						
 					
 					/* 리뷰별 별점 출력 */
-						function reviews_rating(){
+						function reviews_rating(curPage){
 							console.log($(".review").length+1);
-							for(var i=1; i<$(".review").length+1; i++){
+							for(var i=(curPage-1)*10+1; i<=curPage*10; i++){
 								if($("#review"+i).children(".reviewForm2").children(".rating_point").text() != 0){
 									rating_point = $("#review"+i).children(".reviewForm2").children(".rating_point").text()-1;
 									$("#review"+i).children(".reviewForm2").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on');
@@ -481,6 +486,8 @@
 							       	alert("code:"+request.status+"\n"+"error:"+error);
 							    },
 								success : function(reviews){
+									$("#reviews").children().remove()
+									
 									var totalPage = 0;
 									var numPerPage = 10;
 									
@@ -516,8 +523,32 @@
 											a += '</div><br>';
 										}
 									}
-									console.log(a);
 									$("#reviews").append(a);
+									
+									$("#review-page").empty();
+									var b = '';
+									b += '<a class="page-number" href="javascript:reviews_print(1)"> << </a>';
+									if(curPage<5){
+										for(var i=1; i<=(totalPage<5?totalPage:5); i++){
+											b += '<a class="page-number" href="javascript:reviews_print(' + i + ')">' + i + '</a>';
+										}
+									}else if(curPage+3 > totalPage){
+										for(var i=totalPage-4; i<=totalPage; i++){
+											b += '<a class="page-number" href="javascript:reviews_print(' + i + ')">' + i + '</a>';
+										}
+									}else{
+										for(var i=curPage-2; i<=curPage+2; i++){
+											b += '<a class="page-number" href="javascript:reviews_print(' + i + ')">' + i + '</a>';
+										}
+									}
+									b += '<a class="page-number" href="javascript:reviews_print(' + totalPage + ')"> >> </a>'
+									$("#review-page").append(b);
+									
+									setTimeout(function(){
+										reviews_rating(curPage);
+										avg_rating();
+										$('input[name=rating]').attr("value", getInputRating());
+									}, 500);
 								}
 							});
 						};
