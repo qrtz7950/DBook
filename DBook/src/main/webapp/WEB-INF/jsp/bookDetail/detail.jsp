@@ -343,38 +343,21 @@
 												  <button type="submit" id="review-submit">등록</button>
 									</div>
 									
-									<h3>의견 ( ${requestScope.reviews.size()} )</h3>
+									<h3 id="reviews-count">의견 ( ${requestScope.reviews.size()} )</h3>
 									<div id="reviews">
-										<c:forEach var="review" items="${requestScope.reviews}" varStatus="status">
-											<div id="review${status.count}" class="review">
-												<div class="reviewForm1">${review.id}</div>
-												<div class="reviewForm2">
-													<div class="rating_point">${review.rating}</div>
-													<span class="star_smallR1"></span>
-													<span class="star_smallR2"></span>
-													<span class="star_smallR1"></span>
-													<span class="star_smallR2"></span>
-													<span class="star_smallR1"></span>
-													<span class="star_smallR2"></span>
-													<span class="star_smallR1"></span>
-													<span class="star_smallR2"></span>
-													<span class="star_smallR1"></span>
-													<span class="star_smallR2"></span>
-												</div>
-												<div class="reviewForm3">${review.content}</div>
-												<div class="reviewForm4">${review.review_reg_date}</div>
-												<div class="reviewForm5">good : ${review.good} / bad : ${review.bad}</div>
-											</div>
-											<br>
-										</c:forEach>
+										
+									</div>
+									<div id ="review-page">
+									
 									</div>
 								</section>
 								
+								<%-- 
 								<section style="width: 100%; word-wrap: break-word;">
 									${book}<br>
 									${reviews}
 								</section>
-								
+								 --%>
 						</div>
 					</div>
 			</div>
@@ -392,8 +375,11 @@
 			<script>
 					$(document).ready(function() {
 						detailForm();
-						reviews_rating();
-						avg_rating();
+						reviews_print(1);
+						setTimeout(function(){
+							reviews_rating();
+							avg_rating();	
+						}, 200);
 					});
 		
 					$(window).resize(function(){
@@ -443,11 +429,12 @@
 										$("#reviewInput").children().eq("0").children().eq("0").children().eq("3").val('');
 										
 										$("#reviews").children().remove()
-										reviews_print();
+										reviews_print(1);
 										setTimeout(function(){
 											reviews_rating();
 											avg_rating();
-										}, 100);
+											$('input[name=rating]').attr("value", getInputRating());
+										}, 200);
 									}
 								});
 							}
@@ -458,8 +445,10 @@
 						function reviews_rating(){
 							console.log($(".review").length+1);
 							for(var i=1; i<$(".review").length+1; i++){
-								var rating_point = $("#review"+i).children(".reviewForm2").children(".rating_point").text()-1;
-								$("#review"+i).children(".reviewForm2").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on');
+								if($("#review"+i).children(".reviewForm2").children(".rating_point").text() != 0){
+									rating_point = $("#review"+i).children(".reviewForm2").children(".rating_point").text()-1;
+									$("#review"+i).children(".reviewForm2").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on');
+								}
 							}
 						};
 					
@@ -481,7 +470,7 @@
 						};
 						
 					/* 리뷰 db에서 가져와서 출력 */
-						function reviews_print(){
+						function reviews_print(curPage){
 							$.ajax({
 								type : 'post',
 								url : '${pageContext.request.contextPath}/review/bookDetail_review2.do',
@@ -492,28 +481,42 @@
 							       	alert("code:"+request.status+"\n"+"error:"+error);
 							    },
 								success : function(reviews){
+									var totalPage = 0;
+									var numPerPage = 10;
+									
+									if(reviews.items.length != 0){
+										totalPage = Math.ceil(reviews.items.length / numPerPage);
+									}
+									
+									$("#reviews-count").empty();
+									var text = "의견 (" + reviews.items.length + ")";
+									$("#reviews-count").append(text);
+									
 									var a = '';
 									for(var i=0; i<reviews.items.length; i++){
-										a += '<div id="review' + (i+1) + '" class="review">';
-										a += 	'<div class="reviewForm1">' + reviews.items[i].id + '</div>';
-										a +=	'<div class="reviewForm2">';
-										a +=		'<div class="rating_point">' + reviews.items[i].rating + '</div>';
-										a +=		'<span class="star_smallR1"></span>';
-										a +=		'<span class="star_smallR2"></span>';
-										a +=		'<span class="star_smallR1"></span>';
-										a +=		'<span class="star_smallR2"></span>';
-										a +=		'<span class="star_smallR1"></span>';
-										a +=		'<span class="star_smallR2"></span>';
-										a +=		'<span class="star_smallR1"></span>';
-										a +=		'<span class="star_smallR2"></span>';
-										a +=		'<span class="star_smallR1"></span>';
-										a +=		'<span class="star_smallR2"></span>';
-										a +=	'</div>';
-										a +=	'<div class="reviewForm3">' + reviews.items[i].content + '</div>';
-										a +=	'<div class="reviewForm4">' + reviews.items[i].reg_date + '</div>';
-										a +=	'<div class="reviewForm5">good : ' + reviews.items[i].good + ' / bad : ' + reviews.items[i].bad + '</div>';
-										a += '</div>';
+										if(i>=(curPage-1)*numPerPage && i<curPage*numPerPage){
+											a += '<div id="review' + (i+1) + '" class="review">';
+											a += 	'<div class="reviewForm1">' + reviews.items[i].id + '</div>';
+											a +=	'<div class="reviewForm2">';
+											a +=		'<div class="rating_point">' + reviews.items[i].rating + '</div>';
+											a +=		'<span class="star_smallR1"></span>';
+											a +=		'<span class="star_smallR2"></span>';
+											a +=		'<span class="star_smallR1"></span>';
+											a +=		'<span class="star_smallR2"></span>';
+											a +=		'<span class="star_smallR1"></span>';
+											a +=		'<span class="star_smallR2"></span>';
+											a +=		'<span class="star_smallR1"></span>';
+											a +=		'<span class="star_smallR2"></span>';
+											a +=		'<span class="star_smallR1"></span>';
+											a +=		'<span class="star_smallR2"></span>';
+											a +=	'</div>';
+											a +=	'<div class="reviewForm3">' + reviews.items[i].content + '</div>';
+											a +=	'<div class="reviewForm4">' + reviews.items[i].review_reg_date + '</div>';
+											a +=	'<div class="reviewForm5">good : ' + reviews.items[i].good + ' / bad : ' + reviews.items[i].bad + '</div>';
+											a += '</div><br>';
+										}
 									}
+									console.log(a);
 									$("#reviews").append(a);
 								}
 							});

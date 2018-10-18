@@ -72,6 +72,7 @@ public class ReviewController {
 				j.put("content", review_list.get(i).getContent());
 				j.put("good", review_list.get(i).getGood());
 				j.put("bad", review_list.get(i).getBad());
+				j.put("review_reg_date", review_list.get(i).getReview_reg_date());
 				jArray.add(j);
 			}
 			
