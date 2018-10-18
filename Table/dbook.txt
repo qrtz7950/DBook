@@ -83,7 +83,7 @@ create table review (
     ,   id              varchar2(30)
     ,   book_id         varchar2(20)
     ,   rating          number(2)
-    ,   content         varchar2(4000)  not null
+    ,   content         varchar2(4000)
     ,   good            number(5)
     ,   bad             number(5)
     ,   review_reg_date date            default sysdate
@@ -126,5 +126,19 @@ insert into db_category_management values(3, '시/에세이', 1);
 insert into db_category_management values(10, '나라별 에세이', 3);
 
 insert into db_category values('KOR9791196394509', 10);
+
+insert into book (book_id, book_name) values('book1','book1');
+insert into book (book_id, book_name) values('book2','book2');
+insert into book (book_id, book_name) values('book3','book3');
+insert into book (book_id, book_name) values('book4','book4');
+insert into book (book_id, book_name) values('book5','book5');
+insert into book (book_id, book_name) values('book6','book6');
+insert into book (book_id, book_name) values('book7','book7');
+insert into book (book_id, book_name) values('book8','book8');
+insert into book (book_id, book_name) values('book9','book9');
+insert into book (book_id, book_name) values('book10','book10');
+
+select * from book;
+select * from review;
 
 commit;

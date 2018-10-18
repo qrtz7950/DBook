@@ -270,13 +270,22 @@
 					$('#progrecess_num').empty();
 					$('#progrecess_num').text(progressCnt/10);
 				} else{
+					
+					$.ajaxSettings.traditional = true;
 					$.ajax({
-						success : function(){
-							post_to_url("../mypage/ratingSubmit.do",
-								{ "bookId": bookId,
-								  "bookRating" : bookRating 
-								});
-								  }
+						type : 'post',
+						url:"../mypage/ratingSubmit.do",
+						dataType : "text",
+						data:{
+							"bookId": bookId,
+							"bookRating" : bookRating
+							},
+						success:function(){
+							alert('성공!');
+						},
+						error:function(){
+							alert('실패!');
+						}
 						  });
 				}
 			}
@@ -309,7 +318,7 @@
 				
 				console.log(book);
 				
-				rating.attr("value", getInputRating(book));
+				rating.attr("value", getInputRating(book) - 1);
 	
 				var bookCheck = book.find('.isRatingCheck')
 				
