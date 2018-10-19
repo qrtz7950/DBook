@@ -23,4 +23,9 @@ public class BookService {
 		return book;
 	}
 	
+	// 책 조회수 올리기
+	public void upView_cnt(String book_id) {
+		
+		dao.upView_cnt(book_id);
+	}
 }

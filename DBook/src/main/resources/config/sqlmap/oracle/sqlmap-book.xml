@@ -4,12 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.project.book.dao.BookDAO">
 	
-	<!-- 회원가입 -->	
+	<!-- book_id로 책 정보 조회 -->	
 	<select id="bookDetail" resultType="bookVO" parameterType="bookVO">
 		select book_id, book_name, cover, author, translator, publisher, to_char(published_date, 'yyyy-mm-dd') as published_date,
 			   is_ebook, form_detail, isbn_10, isbn_13, book_introduction, author_introduction, contents, view_cnt 
 		  from book
 		  where book_id = #{book_id}
 	</select>
+	
+	<!-- 책 조회수 올리기 -->
+	<update id="upView_cnt" parameterType="string">
+		update book 
+			set		view_cnt = view_cnt + 1
+			where 	book_id = #{book_id}
+	</update>
 	
 </mapper>
