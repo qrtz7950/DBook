@@ -15,10 +15,6 @@
 	<title>DBook</title>
 	<style type="text/css">
 	
-	section {
-		padding-top:
-	}
-	
 	#category_select{
 		display: -webkit-box;
 		height: 50px;
@@ -401,21 +397,24 @@
 				/* 책 정보 */
 					/* 평점 계산 후 출력 */
 					function avg_rating(){
-						var rating_point = 0;
-						
-						for(var i=1; i<$(".review").length+1; i++){
-							rating_point += parseInt($("#review"+i).children(".reviewForm2").children(".rating_point").text());
-						}
-						
-						rating_point = rating_point / $(".review").length;
-						
-						$("#avg_rating_point").text(rating_point.toFixed(2));
-						
-						rating_point = Math.floor(rating_point - 1);
-						
-						//console.log(rating_point);
-						$("#avg_rating").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on');
-					};
+						$.ajax({
+							type : 'post',
+							url : '${pageContext.request.contextPath}/review/avg_rating.do',
+							data : {book_id :'${requestScope.book.book_id}'},
+							error : function(request, status, error){
+						       	alert("code:"+request.status+"\n"+"error:"+error);
+						    },
+							success : function(avg_rating){
+								var rating_point = avg_rating;
+								
+								$("#avg_rating_point").text(rating_point);
+								
+								rating_point = Math.floor(rating_point - 1);
+								
+								$("#avg_rating").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on');
+							}
+						});
+					}
 					
 				/* 리뷰 */
 					/* 별 누를때 */
@@ -443,42 +442,42 @@
 									}
 								});
 							}
-						})
+						});
 						
 					
 					/* 리뷰별 별점 출력 */
 						function reviews_rating(curPage){
-							console.log($(".review").length+1);
 							for(var i=(curPage-1)*10+1; i<=curPage*10; i++){
 								if($("#review"+i).children(".reviewForm2").children(".rating_point").text() != 0){
 									rating_point = $("#review"+i).children(".reviewForm2").children(".rating_point").text()-1;
 									$("#review"+i).children(".reviewForm2").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on');
 								}
 							}
-						};
+						}
 					
 					/* 리뷰 보내기전 확인 */
 						function check_before_input(){
 							if(${empty user}){
 								alert("로그인이 필요한 서비스 입니다");
+								location.href = "${pageContext.request.contextPath}/user/login.do";
 								return false;
 							}else if($('textarea.form-control').eq(0).val()==""){
 								alert("글을 입력해 주세요");
 								return false;
 							}
 							return true;
-						};
+						}
 					
 					/* 별점 입력값 구하기 */
 						function getInputRating(){
 							return $("#rating span.on").length;
-						};
+						}
 						
 					/* 리뷰 db에서 가져와서 출력 */
 						function reviews_print(curPage){
 							$.ajax({
 								type : 'post',
-								url : '${pageContext.request.contextPath}/review/bookDetail_review2.do',
+								url : '${pageContext.request.contextPath}/review/bookDetail_review.do',
 								type : 'POST',
 								dataType : 'json',
 								data : {book_id :'${requestScope.book.book_id}'},
@@ -503,7 +502,7 @@
 									for(var i=0; i<reviews.items.length; i++){
 										if(i>=(curPage-1)*numPerPage && i<curPage*numPerPage){
 											a += '<div id="review' + (i+1) + '" class="review">';
-											a += 	'<div class="reviewForm1">' + reviews.items[i].id + '</div>';
+											a += 	'<div class="reviewForm1">' + reviews.items[i].nickname + ' (' + reviews.items[i].id + ')</div>';
 											a +=	'<div class="reviewForm2">';
 											a +=		'<div class="rating_point">' + reviews.items[i].rating + '</div>';
 											a +=		'<span class="star_smallR1"></span>';
@@ -551,7 +550,7 @@
 									}, 500);
 								}
 							});
-						};
+						}
 					
 				/* 창크기 반응 */
 					function detailForm(){
@@ -571,7 +570,7 @@
 							$("#cover_image").css("width","100%");
 							$(".book_info_table").css("width","100%");							
 					    }
-					};
+					}
 			</script>
 			
 			

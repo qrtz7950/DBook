@@ -4,6 +4,7 @@ public class ReviewVO {
 	
 	private int review_no;
 	private String id;
+	private String nickname;
 	private String book_id;
 	private int rating;
 	private String content;
@@ -15,9 +16,12 @@ public class ReviewVO {
 		
 	}
 
-	public ReviewVO(int review_no, String id, String book_id, int rating, String content, int good, int bad, String review_reg_date) {
+	public ReviewVO(int review_no, String id, String nickname, String book_id, int rating, String content, int good,
+			int bad, String review_reg_date) {
+		super();
 		this.review_no = review_no;
 		this.id = id;
+		this.nickname = nickname;
 		this.book_id = book_id;
 		this.rating = rating;
 		this.content = content;
@@ -40,6 +44,14 @@ public class ReviewVO {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getBook_id() {
@@ -92,10 +104,9 @@ public class ReviewVO {
 
 	@Override
 	public String toString() {
-		return "ReviewVO [bad=" + bad + ", book_id=" + book_id + ", content=" + content + ", good=" + good + ", id="
-				+ id + ", rating=" + rating + ", review_no=" + review_no + ", review_reg_date=" + review_reg_date + "]";
+		return "ReviewVO [review_no=" + review_no + ", id=" + id + ", nickname=" + nickname + ", book_id=" + book_id
+				+ ", rating=" + rating + ", content=" + content + ", good=" + good + ", bad=" + bad
+				+ ", review_reg_date=" + review_reg_date + "]";
 	}
-	
-	
-	
+
 }

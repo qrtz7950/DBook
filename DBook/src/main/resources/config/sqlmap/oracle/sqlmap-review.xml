@@ -18,10 +18,19 @@
 	
 	<!-- 리뷰 book_id로 불러오기 -->	
 	<select id="reviewListByBook_id" resultType="reviewVO" parameterType="string">
-		select review_no, id, book_id, rating, content, good, bad, to_char(review_reg_date, 'yyyy-mm-dd') as review_reg_date
-		  from review
+		select review_no, r.id, book_id, rating, content, good, bad, to_char(review_reg_date, 'yyyy-mm-dd') as review_reg_date, nickname
+		  from review r inner join db_user u
+		    on r.id = u.id
 		  where book_id = #{book_id}
 		  order by review_no desc
 	</select>
+	
+	<!-- 책 평점 불러오기 -->	
+	<select id="book_avg_rating" resultType="Integer" parameterType="string">
+		select rating
+		  from review
+		  where book_id = #{book_id}
+	</select>
+	
 	
 </mapper>

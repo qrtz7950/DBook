@@ -16,5 +16,9 @@ public class BookDAO {
 		book = sqlSessionTemplate.selectOne("kr.co.project.book.dao.BookDAO.bookDetail", book);
 		return book;
 	}
+
+	public void upView_cnt(String book_id) {
+		sqlSessionTemplate.update("kr.co.project.book.dao.BookDAO.upView_cnt", book_id);		
+	}
 	
 }

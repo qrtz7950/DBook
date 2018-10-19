@@ -59,6 +59,7 @@ public class BookController {
 		System.out.println("bookDetail()진입");
 		ReviewService reviewService = new ReviewService();
 		
+		bookService.upView_cnt(book_id);
 		BookVO book = bookService.bookDetail(book_id);
 		
 		ModelAndView mav = new ModelAndView();
@@ -72,7 +73,8 @@ public class BookController {
 			mav.addObject("book_introduction", book_introduction);
 			mav.addObject("author_introduction", author_introduction);
 			mav.addObject("contents", contents);
-			mav.setViewName("forward:/review/bookDetail_review.do");
+			//mav.setViewName("forward:/review/bookDetail_review.do");
+			mav.setViewName("/bookDetail/detail");
 		}
 		else {
 			mav.setViewName("error/error");

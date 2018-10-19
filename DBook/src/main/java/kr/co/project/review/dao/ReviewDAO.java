@@ -32,5 +32,15 @@ public class ReviewDAO {
 	public void addUserRating(ReviewVO review) {
 		sqlSessionTemplate.insert("kr.co.project.review.dao.ReviewDAO.addUserRating", review);
 	}
+
+	public List<Integer> book_avg_rating(String book_id) {
+		List<Integer> rating_points = sqlSessionTemplate.selectList("kr.co.project.review.dao.ReviewDAO.book_avg_rating", book_id);
+		/*
+		for(int rating : rating_points) {
+			System.out.println(rating);
+		}
+		*/
+		return rating_points;
+	}
 	
 }
