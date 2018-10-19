@@ -6,77 +6,110 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<%-- <jsp:include page="../include/CSS.jsp" /> --%>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/SlideMenu.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/autocomplete.css" />
 	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/TopMenu.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/css/swiper.min.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/layerPopUp.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/category.css" />
-<title>${param.nickname}의 My Page</title>
-<style>
-		#topMenu {
-			position: fixed;
-			width: 100%;
-		    list-style-type: none;
-		    margin: 0;
-		    padding: 0;
-		    overflow: hidden;
-		    background-color: #333;
-		    z-index: 900;
-		}
-		#topMenu > li {
-		    float: left;
-		}
-		#topMenu > li a {
-		    display: block;
-		    color: white;
-		    text-align: center;
-		    padding: 14px 16px;
-		    text-decoration: none;
-		    border: none;
-		}
-		#topMenu > li a:hover {
-		    background-color: #111;
-		}
-		#topMenu > li.topMenu-right {
-			float: right;
-		}
-		#sideCategoryMenu{
-			width : 15%;
-			height : 2700px;
-			display: block;
-			margin-left:30px;
-			float: left;
-		}
-		
-		#sideCategoryMenu_title{
-			background-color: rgb(245, 106, 106);
-			text-align: center;
-			vertical-align: middle;
-			font-weight: bold;
-			color: white;
-		}
-		#sideCategoryMenu_title_category{
-			padding: 5px;
-			padding-left: 10px;
-		}
-		
-		#Category_content{
-			width: 80%;
-			display: inline-flex;
-			float:left;"
-		}
-		.more {
-			height: 40px;
-			text-align: right;
-		}
+	
+	<title>DBook</title>
+	<style type="text/css">
+	
+	#side-category-menu{
+		width : 15%;
+		display: block;
+		margin-left:1.5%;
+		float: left;
+	}
+	
+	#side-category-menu_title{
+		background-color: rgb(245, 106, 106);
+		text-align: center;
+		vertical-align: middle;
+		font-weight: bold;
+		color: white;
+	}
+	#side-category-menu_title_category{
+		padding: 5px;
+		padding-left: 10px;
+	}
+	
+	#side-category-menu_title_category a{
+		text-decoration: none;
+		border-bottom: none;
+		color: #7f888f;	
+	}
+	
+	#category-content{
+		width:83%;
+		display: inline-flex;
+	}
+	
+	#category-content .posts {
+		display: -moz-flex;
+		display: -webkit-flex;
+		display: -ms-flex;
+		display: flex;
+		-moz-flex-wrap: wrap;
+		-webkit-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		margin: 0 0 0 0;
+		width:100%;
+	}
+	
+	.posts article {
+    -moz-flex-grow: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-grow: 0;
+    flex-grow: 0;
+    -moz-flex-shrink: 1;
+    -webkit-flex-shrink: 1;
+    -ms-flex-shrink: 1;
+    flex-shrink: 1;
+    margin: 0 0 3% 4%;
+    position: relative;
+    /*width: calc(33.33333% - 6em);*/
+	}
+	
+	.mypage-title{
+		font-size: 3em;
+		color: #f56a6a;
+		width: 100%;
+		border-bottom: 1px solid #7f888f;
+		margin: 0 0 20px 0;
+		padding: 0 0 15px 3%;
+	}
+	
+	.mypage-subtitle{
+		font-size: 2em;
+		margin: 5% 0 3% 3%;
+		width: 100%;
+	}
+	
+	.mypage-subtitle a{
+		padding-bottom:1%;
+		margin:0;
+		border-bottom: solid 3px #f58a8a;
+	}
+	
+	.mypage-subtitle :last-child{
+		font-size:0.7em;
+		padding:1.5% 0 0 0;
+		float:right;
+		margin:0 5% 0 0;
+		bottom:0;
+		border-bottom: dotted 1px;
+		color: #f56a6a;
+		text-decoration: none; 
+	}
+	
 	</style>
 </head>
 <body>
+
 	<!-- topMenu -->
-			<jsp:include page="../include/TopMenu.jsp"></jsp:include>
+			<jsp:include page="../include/TopMenu.jsp"/>
 			
 	<!-- Wrapper -->
 			<button id="showLeft" style="position: fixed; right: 0px; z-index: 100;">Menu</button>
@@ -90,132 +123,84 @@
 							
 							<!-- Section -->
 								<section style="padding-top: 15px; height: auto;">
+								
+									<div class="mypage-title">
+												My Page
+									</div>
+									
+									<div id="category_main_base">
 
-									<div id="sideCategoryMenu">
-										<div id="sideCategoryMenu_title">
-											M y P a g e
+										<div id="side-category-menu">
+											<div id="side-category-menu_title">
+												My Page
+											</div>
+											<div id="side-category-menu_title_category">
+												<ul>
+													<li><a href="${pageContext.request.contextPath}/mypage/bookmark.do">즐겨찾기한 책</a></li>
+													<li><a href="${pageContext.request.contextPath}/mypage/rated.do">평가한 도서</a></li>
+													<li><a href="${pageContext.request.contextPath}/mypage/allreview.do">내가 쓴 리뷰</a></li>
+												</ul>
+											</div>
 										</div>
-										<div id="sideCategoryMenu_title_category">
-											<ul>
-												<a href="${pageContext.request.contextPath}/mypage/library.do">My Page</a>
-												<li><a href="${pageContext.request.contextPath}/mypage/bookmark.do">책 즐겨찾기</a></li>
-												<li><a href="${pageContext.request.contextPath}/mypage/rated.do">평가한 도서</a></li>
-												<li><a href="${pageContext.request.contextPath}/mypage/allreview.do">내가 쓴 리뷰</a></li>
-											</ul>
-										</div>
-									</div>
-									<div style="height:120px;">
-										<font size=10pt color=#f56a6a>&nbsp;My Page</font>
-										<br><HR style="height:2px;" color=#f56a6a>
-									</div>
-								<div class=container>
-									<header class="major">
-										<h2>책 즐겨찾기</h2>
-									</header>
-									<div class="more">
-										<a href="${pageContext.request.contextPath}/mypage/bookmark.do">M O R E</a>
-										<br>
-									</div>
-									<div id="Category_content" class="posts">
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
+									
+										<div id="category-content" class="posts">
+											
+											<div class="mypage-subtitle" style="margin-top: 0;">
+												<a>즐겨찾기한 책</a>
+												<a href="${pageContext.request.contextPath}/mypage/bookmark.do">M O R E</a>
+											</div>
+											
+											<c:forEach begin="1" end="4">
+											
+											<article>
+											   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
+											   <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
+											   <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
+											</article>
+											
+											</c:forEach>
+											
+											<div class="mypage-subtitle">
+												<a>평가한 도서</a>
+												<a href="${pageContext.request.contextPath}/mypage/rated.do">M O R E</a>
+											</div>
+											
+											<c:forEach begin="1" end="4">
+											
+											<article>
+											   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
+											   <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
+											   <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
+											</article>
+											
+											</c:forEach>
+											
+											<div class="mypage-subtitle">
+												<a>내가 쓴 리뷰</a>
+												<a href="${pageContext.request.contextPath}/mypage/allreview.do">M O R E</a>
+											</div>
+											
+											<c:forEach begin="1" end="4">
+											
+											<article>
+											   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
+											   <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
+											   <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
+											</article>
+											
+											</c:forEach>
+											
+			                             </div>
+		                           
 		                           </div>
-		                           <Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><hr style="height:2px;" color=#f56a6a>
-									<header class="major">
-										<h2>평가한 도서</h2>
-									</header>
-									<div class="more">
-										<a href="${pageContext.request.contextPath}/mypage/rated.do">M O R E</a>
-										<br>
-									</div>
-									<div id="Category_content" class="posts">
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                              <article>
-		                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-		                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-		                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-		                              </article>
-		                           </div>
-		                           <Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><hr style="height:2px;" color=#f56a6a>
-									<header class="major">
-										<h2>내가 쓴 리뷰</h2>
-									</header>
-									<div class="more">
-										<a href="${pageContext.request.contextPath}/mypage/allreview.do">M O R E</a>
-										<br>
-									</div>
-									<div id="Category_content" class="posts">
-		                              	<article>
-											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic01.jpg" alt="" /></a>
-											<h3>Interdum aenean</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic02.jpg" alt="" /></a>
-											<h3>Nulla amet dolore</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic03.jpg" alt="" /></a>
-											<h3>Tempus ullamcorper</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic04.jpg" alt="" /></a>
-											<h3>Sed etiam facilis</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-		                          	 </div>
-								</div>
 							</section>
+								
 
+							<%-- <a href="${pageContext.request.contextPath}/login/login.do">카톡로그인</a> --%>
 						</div>
 					</div>
 			</div>
+			
 		<!-- Sidebar -->
 			<jsp:include page="../include/SlideSideMenu.jsp"></jsp:include>
 			<jsp:include page="../include/SlideTopMenu.jsp"></jsp:include>
@@ -224,44 +209,47 @@
 		<!-- Scripts -->
 			<jsp:include page="../include/JS.jsp"></jsp:include>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
+			<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
+			<script type="text/javascript">
 			
-		<!-- 달지마 -->
-			<script>
-				/* MenuButton */
-					$(document).ready(function() {
-						menuButton();
-					});
+			$(document).ready(function() {
+				category_toggle();
+			});
+
+			$(window).resize(function(){
+				category_toggle();
 				
-					$(window).resize(function(){
-						menuButton();
-						
-					});
+			});
+			
+			function category_toggle(){
+			
+				if($(window).width()<480){
+					$("#side-category-menu").hide();
+					$("#category-content").css("width","100%");
+				}
+				
+				if($(window).width()>480){
+					$("#side-category-menu").show();
+					$("#category-content").css("width","83%");
+				}
+			}
+			
 			</script>
 			
-		<!-- script function -->
 			<script>
-				function menuButton(){
-					$.ajax({
-						type : 'get',
-						url : '',
-						dataType : '',
-						data : '' ,
-						success : function(){
-							if($(window).width()<660){
-						        $("#showLeft").hide();
-						        $("#cbp-spmenu-s1").hide();
-						        $("#topMenu-search").hide();
-								$("#showTop").show();
-						    }else{
-						        $("#showTop").hide();
-								$("#showLeft").show();
-								$("#cbp-spmenu-s1").show();
-								$("#topMenu-search").show();								
-						    }
-						}
-					});
-					/* setTimeout("menuButton()", 100); */
-				}
+	
+			$(document).ready(function(){
+				
+				$("#category1").each(function(){
+					
+					if($(this).val()=="${requestScope.categories[0]}"){
+						$(this).attr()
+					}
+					
+				});	
+			}); 
 			</script>
+			
+			
 </body>
 </html>

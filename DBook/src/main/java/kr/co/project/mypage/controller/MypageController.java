@@ -28,7 +28,7 @@ public class MypageController {
 		System.out.println("mypage()진입");
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("mypage/library2");
+		mav.setViewName("mypage/library");
 		
 		return mav;
 	}
@@ -65,6 +65,7 @@ public class MypageController {
 		System.out.println("userRating()진입");
 		
 		String[] asd = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
+		// 적재된 책을 꺼내와서 페이지로 쏴주는 코드 작성필요
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mypage/userRating");

@@ -28,28 +28,47 @@
 		.userrating-overlay {
 			position: fixed;
 			vertical-align: middle;
-			width: 50%;
-			left: 25%;
-			top: 20%;
-			height: auto;
-			color:#fffff;
+			width: 500px;
+			left: calc((100% - 500px)/2);
+			top: 30%;
+			color: #fffff;
 			z-index: 999;
-			font-size: 25pt;
 			text-align: center;
 		}
-		.userrating-overlay-img{
-			margin-bottom: 3%;
+		.userrating-overlay > div {
+			margin-bottom: 5%;
+		}
+		.userrating-overlay-img > img{
+			display:inline-block;
+			width: 30%;
+			height: 38%;
 		}
 		
-		.userrating-overlay-text{
+		.userrating-overlay-text1{
+			color: white; 
+			font-size: 25pt;
+			font-weight: bold;
+		}
+		
+		.userrating-overlay-text2{
+			margin-bottom: 3%;
+			font-size: 15pt;
+		}
+		
+		.yes-or-no{
 		}
 		
 		.userrating-overlay-button{
-			width:50%;
+			width:27%;
+			height:8%;
 			border-radius: 30px;
 			background-color: #f56a6a;
 			border: 5px solid #f56a6a;
 			color: white;
+			font-size: 15pt;
+			margin: 0 9% 0;
+			padding: 1% 0 1%;
+			font-weight: bold;
 			display: inline-block;
 		}
 		
@@ -64,12 +83,12 @@
 		}
 		
 		.bookList_base{
+			margin-top:1em;
 			display: block;
 			min-height: 1200px;
 		}
 		
 		.bookList{
-			
 		}
 		
 		.book{
@@ -99,7 +118,7 @@
 			bottom:0px;
 			left:0px;
 			width:100%;
-			z-index: 500;
+			z-index: 10;
 			text-align:center;
 			vertical-align:middle;
 			background-color: rgba(18,17,24,0.9);
@@ -118,8 +137,20 @@
 			display: none;
 		}
 		
+		.inside-topmenu{
+			position: fixed;
+		    top: 3.2em;
+		    left: 0;
+		    right: 0;
+		    width: 100%;
+		    height: 180px;
+		    z-index: 400;
+		    background: linear-gradient(to top, rgba(255,255,255,0), #ffffff 20%);
+		    text-align: center;
+		}
+		
 		.progrecess_base{
-			padding: 1em;
+			padding: 1%;
 			text-align: center;
 			display: grid;
 		}
@@ -146,9 +177,45 @@
 		}
 		
 		.progrecess_title{
+			font-size: 13pt;
 		}
 		
 		#progrecess_num{
+			font-size: 20pt;
+		}
+		
+		.overrating-base{
+		    padding-top: 1%;
+		}
+		
+		.overrating-base > div{
+		}
+		
+		.overrating-title{
+		    font-size: 150%;
+		}
+		
+		.overrating-subtitle{
+			font-size: 100%;
+		}
+		
+		.overrating-button{
+			position:absolute;
+			right:3%;
+			top:10%;
+			border-radius: 30px;
+		    background-color: #f56a6a;
+		    border: 5px solid #f56a6a;
+		    color: white;
+		    margin: 0 1.4% 0;
+		    padding: 0.25% 0.25% 0.25%;
+		    font-size:150%;
+		    font-weight: bold;
+		    display: inline-block;
+		}
+		.overrating-button:hover{
+			background-color: #f14e4e;
+			cursor: pointer;
 		}
 		
 		.rating_point{
@@ -186,28 +253,25 @@
 				
 		.starR1.on {background-position:0 0;}
 		.starR2.on {background-position:-11.25px 0;}
-		
-		/*
-		
-		책표지 크기는 A4용지 비율 사이즈인 1 :1.41
-		
-		*/
 	
 	</style>
 <title>Insert title here</title>
 </head>
 <body>
+
+	<!-- 오버레이 -->
 	<div class="userrating-overlay-base">
 	</div>
 	<div class="userrating-overlay">
 		<div class="userrating-overlay-img">
-			<img src="/DBook/resources/images/big_star.png">
+			<img src="${pageContext.request.contextPath}/resources/images/star150.png">
 		</div>
 		<div class="userrating-overlay-text">
-			서비스를 이용하기 위해 책을 평가해 주세요
+			<div class="userrating-overlay-text1">10개 이상의 평가가 필요해요</div>
+			<div class="userrating-overlay-text2">취향에 맞는 책을 추천드리려고요!</div>
 		</div>
-		<div class="userrating-overlay-button">
-			계속하기
+		<div class="yes-or-no">
+			<div class="userrating-overlay-button yes">좋아요</div>
 		</div>
 	</div>
 
@@ -219,14 +283,26 @@
 				
 				<!-- Header -->
 				<jsp:include page="../include/HeaderMenu.jsp"/>
-
-				<div class="progrecess_base">
-					<div id="progrecess_num">0</div>
-					<div class="progrecess_title">최소 10개 이상의 작품을 평가해주세요</div>
-					<div align="center" class="progrecess_bar_base">
-						<div class="progrecess_bar_blank">
-							<div id="progrecess_bar"></div>
+				
+				<!-- inside Topmenu -->
+				
+				<div class="inside-topmenu">
+					<!-- 진행상황 -->
+					<div class="progrecess_base hidden">
+						<div id="progrecess_num">0</div>
+						<div class="progrecess_title">10개 이상의 작품을 평가해주세요</div>
+						<div align="center" class="progrecess_bar_base">
+							<div class="progrecess_bar_blank">
+								<div id="progrecess_bar"></div>
+							</div>
 						</div>
+					</div>
+					
+					<!-- 추가 평가 -->
+					<div class="overrating-base" style="display: none;">
+						<div class="overrating-title">이제 저희가 책 추천을 해 드릴 수 있겠네요</div>
+						<div class="overrating-subtitle">평가를 많이 할 수록 더욱 성향에 맞는 추천이 가능해요!</div>
+						<div class="next overrating-button">넘어가기</div>
 					</div>
 				</div>
 
@@ -281,43 +357,66 @@
 			var bookId = [];
 			var bookRating = [];
 			
-			/* post형식 전송 함수 */
-			function post_to_url(path, params, method) {
-			    
-				method = method || "post"; 
-
-			    var form = document.createElement("form");
-			    form.setAttribute("method", method);
-			    form.setAttribute("action", path);
-			 
-			    for(var key in params) {
-			        var hiddenField = document.createElement("input");
-			        hiddenField.setAttribute("type", "hidden");
-			        hiddenField.setAttribute("name", key);
-			        hiddenField.setAttribute("value", params[key]);
-			 
-			        form.appendChild(hiddenField);
-			    }
-			 
-			    document.body.appendChild(form);
-			    form.submit();
-			}
-			
 			/* 별점 입력값 구하기 */
 			function getInputRating(obj){
 				return obj.find('span.on').length; 
 			};
 			
+			/*Ajax 별점 전송 함수*/
+			function sendUserRating() {
+				$.ajaxSettings.traditional = true;
+				$.ajax({
+					type : 'post',
+					url:"../review/ratingSubmit.do",
+					dataType : "text",
+					data:{
+						"bookId": bookId,
+						"bookRating" : bookRating
+						},
+					success:function(){
+						$('.progrecess_base').slideUp();
+						$( ".overrating-base" ).fadeIn(500);
+					}
+				});						
+			}
+			
 			/* 0-10 진행도 체크 및 10에 도달 후 평가점수 Ajax로 입력  */
 			function progressCntPlus() {
-				if(progressCnt<=90){
+				if(progressCnt<90){
+					if (progressCnt == 20) {
+						$('.progrecess_title').text("성향을 파악하는 중...");
+					} else if (progressCnt == 50) {
+						$('.progrecess_title').text("너 그런거 보니...?");
+					} else if (progressCnt == 80) {
+						$('.progrecess_title').text("거의 다 됬어요!");
+					}
 					progressCnt += 10;
 					progressBarPlus(progressCnt);
-					$('#progrecess_num').empty();
 					$('#progrecess_num').text(progressCnt/10);
+				} else if(progressCnt == 90){
+					progressCnt += 10;
+					progressBarPlus(progressCnt);
+					$('#progrecess_num').text(progressCnt/10);
+					sendUserRating();
+					bookId = [];
+					bookRating = [];
 				}
 			}
 			
+			function checkedBookRationInput(id, rating, bookCheck) {
+				
+				if(bookCheck.text() == ''){
+					bookCheck.text('check');
+					bookId.push(id);
+					bookRating.push(rating.attr('value'));
+					progressCntPlus();
+				} else {
+					bookId.pop();
+					bookRating.pop();
+					bookId.push(id);
+					bookRating.push(rating.attr('value'));
+				}
+			}
 			/* 진행사항 증가 애니매이션 */
 			function progressBarPlus(num) {
 				$('#progrecess_bar').animate({width:num+'%'});
@@ -333,63 +432,39 @@
 				}
 			});
 			
-			/* 별점 입력시 별점생성 및 해당하는 책의 id와 점수를 스크립트 전역변수 배열에 추가 
+			/* 별점 입력시
+			       해당 책에 히든 속성으로 점수 입력
+			       별점생성 및 해당하는 책의 id와 점수를 스크립트 전역변수 배열에 추가 
 			   check 텍스트를 넣어 해당 책의 평가 여부 구분*/
 			$(".book_overlay_rating span").click(function(){
 				$(this).parent().children('span').removeClass('on');
 				$(this).addClass('on').prevAll('span').addClass('on');
 
-				//var book = $(this).parent('.book');
 				var book = $(this).parent().parent().parent();
+
 				var id = book.attr('id');
 				var rating = book.find('input[name=rating]');
-				
-				console.log(book);
+				var bookCheck = book.find('.isRatingCheck');
 				
 				rating.attr("value", getInputRating(book) - 1);
-	
-				var bookCheck = book.find('.isRatingCheck')
-				
-				if(bookCheck.text() == ''){
-					bookCheck.text('check');
-					bookId.push(id);
-					bookRating.push(rating.attr('value'));
-					progressCntPlus();
-				} else {
-					bookId.pop();
-					bookRating.pop();
-					bookId.push(id);
-					bookRating.push(rating.attr('value'));
-				}
+				checkedBookRationInput(id, rating, bookCheck)
 				
 				console.log("-----------------");
 				console.log(bookId);
 				console.log(bookRating);
 				console.log(progressCnt);
 				console.log("-----------------");
-				
-				if(progressCnt==100){
-					$.ajaxSettings.traditional = true;
-					$.ajax({
-						type : 'post',
-						url:"../review/ratingSubmit.do",
-						dataType : "text",
-						data:{
-							"bookId": bookId,
-							"bookRating" : bookRating
-							},
-						success:function(){
-							
-						}
-					});
-					alert('끗');
-				}
 			});
-			$(".userrating-overlay-button").click(function(){
+			
+			$(".yes").click(function(){
 				$('.userrating-overlay-base').addClass('hidden');
 				$('.userrating-overlay').addClass('hidden');
 			});
-			
+			$(".next").click(function(){
+				sendUserRating();
+				location.href="../mypage/library.do";
+			});
+
 			</script>
 </body>
 </html>

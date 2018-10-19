@@ -141,4 +141,6 @@ insert into book (book_id, book_name) values('book10','book10');
 select * from book;
 select * from review;
 
+Insert into HR.DB_USER (NO,ID,PASSWORD,PROFILE_IMAGE,THUMBNAIL_IMAGE,NICKNAME,AGE_RANGE,GENDER,REG_DATE) values (1,'q','q',null,null,null,'20~29','male',to_date('18/10/19','RR/MM/DD'));
+
 commit;
