@@ -3,22 +3,29 @@ package kr.co.project.login.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.project.login.dao.LoginDAOImpl;
+import kr.co.project.login.dao.LoginDAO;
 import kr.co.project.login.vo.LoginVO;
 
 @Service
-public class LoginServiceImpl implements LoginService{
+public class LoginService{
 
 	@Autowired
-	private LoginDAOImpl dao;
+	private LoginDAO dao;
 	
-	@Override
+	/**
+	 * 카카오 api를 이용한 로그인을 위한 method
+	 * 가입되어 있지 않은 유저일 경우 DB에 정보를 추가한다
+	 */
 	public LoginVO Login(LoginVO user) {
 		user = dao.login(user);
 		return user;
 	}
 	
-	@Override
+	/**
+	 * 카카오 채널링 유저 로그인
+	 * @param user
+	 * @return
+	 */
 	public LoginVO kakaoLogin(LoginVO user) {
 		
 		if(dao.overlapCheck(user)) {
@@ -30,7 +37,12 @@ public class LoginServiceImpl implements LoginService{
 		
 		return user;
 	}
-	@Override
+	
+	/**
+	 * 메인에서 추가로 입력된 추가정보를 매개변수 객체의 id에 추가
+	 * @param user
+	 * @return
+	 */
 	public LoginVO addUserInfo(LoginVO user) {
 		
 		dao.addUserInfo(user);
@@ -38,7 +50,11 @@ public class LoginServiceImpl implements LoginService{
 		return user;
 	}
 	
-	@Override
+	/**
+	 * 일반 유저 회원가입 썸네일, 프로필이미지, 닉네임 등의 정보는 제외된다
+	 * @param user
+	 * @return
+	 */
 	public LoginVO signIn(LoginVO user) {
 		
 		if(dao.overlapCheck(user)) {
@@ -50,7 +66,11 @@ public class LoginServiceImpl implements LoginService{
 		return user;
 	}
 
-	@Override
+	/**
+	 * ajax로 구현된 id 중복체크를 위해 스트링을 반환하는 리스폰스 메소드 
+	 * @param id
+	 * @return
+	 */
 	public String idDupCheck(LoginVO user) {
 		
 		String idDupCheck = null;

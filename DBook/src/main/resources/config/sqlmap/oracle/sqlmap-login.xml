@@ -6,8 +6,8 @@
 	
 	<!-- 회원가입 -->	
 	<insert id="signIn" parameterType="loginVO">
-		insert into db_user(no, id, password, age_range, gender)
-		 			values(seq_db_user_no.nextval, #{id}, #{password}, #{age_range}, #{gender})
+		insert into db_user(no, id, nickname, password, age_range, gender)
+		 			values(seq_db_user_no.nextval, #{id}, #{nickname}, #{password}, #{age_range}, #{gender})
 	</insert>
 	
 	<!-- 카카오 회원가입 -->
