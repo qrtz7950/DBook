@@ -1,9 +1,11 @@
 package kr.co.project.book.controller;
 
+import org.junit.runners.Parameterized.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.project.book.service.BookService;
@@ -38,11 +40,12 @@ public class BookController {
 	
 	// 키워드 검색 페이지
 	@RequestMapping("/bookSearch/searchResult.do")
-	public ModelAndView booksearchByKeyword() {
+	public ModelAndView booksearchByKeyword(@RequestParam("keyword") String keyword) {
 		
 		System.out.println("booksearchByKeyword()진입");
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("keyword", keyword);
 		mav.setViewName("bookSearch/searchResult");
 		
 		return mav;

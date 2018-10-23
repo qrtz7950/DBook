@@ -20,147 +20,78 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/layerPopUp.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/category.css" />
 	
-	<%
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		String keyword = request.getParameter("keyword");
-	%>
-	
-	<title>${param.keyword }:: 검색결과 - DBooK</title>
-	
-	<style>
-		#topMenu {
-			position: fixed;
-			width: 100%;
-		    list-style-type: none;
-		    margin: 0;
-		    padding: 0;
-		    overflow: hidden;
-		    background-color: #333;
-		    z-index: 900;
-		}
-		#topMenu > li {
-		    float: left;
-		}
-		#topMenu > li a {
-		    display: block;
-		    color: white;
-		    text-align: center;
-		    padding: 14px 16px;
-		    text-decoration: none;
-		    border: none;
-		}
-		#topMenu > li a:hover {
-		    background-color: #111;
-		}
-		#topMenu > li.topMenu-right {
-			float: right;
-		}
-		#sideCategoryMenu{
-			width : 15%;
-			display: block;
-			margin-left:30px;
-			float: left;
-		}
-		
-		#sideCategoryMenu_title{
-			background-color: rgb(245, 106, 106);
-			text-align: center;
-			vertical-align: middle;
-			font-weight: bold;
-			color: white;
-		}
-		#sideCategoryMenu_title_category{
-			padding: 5px;
-			padding-left: 10px;
-		}
-		
-		#Category_content{
-			width: 80%;
-			display: inline-flex;
-			float:left;"
-		}
-		
-		#category_select{
-			display: -webkit-box;
-			height: 50px;
-			vertical-align:middle;
-			border-bottom: 1px solid #7f888f;
-			margin-bottom: 20px;
-		}
-		
-		#category_select select{
-			height: 1.75em;
-			margin-left: 5px;
-			margin-right: 5px;
-		}
-	</style>
+	<title>${param.keyword}:: 검색결과 - DBooK</title>
 
 </head>
 <body>
-		<!-- topMenu -->
-			<jsp:include page="../include/TopMenu.jsp"></jsp:include>
+
+	<!-- topMenu -->
+			<jsp:include page="../include/TopMenu.jsp"/>
 			
-		<!-- Wrapper -->
+	<!-- Wrapper -->
+			<button id="showLeft" style="position: fixed; right: 0px; z-index: 100;">Menu</button>
 			<div id="wrapper">
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-
+						
 							<!-- Header -->
 							<jsp:include page="../include/HeaderMenu.jsp"/>
-								
-
-							<!-- Banner -->
-								<section id="banner" style="padding-top: 25px; padding-bottom: 0px;">
-									<h2><strong>'<%=keyword %>'</strong> 로 검색한 결과</h2>
-								</section>
-
+							
 							<!-- Section -->
-								<section>
-								<div id="sideCategoryMenu">
-										<div id="sideCategoryMenu_title">
-											카테고리
-										</div>
-										<div id="sideCategoryMenu_title_category">
-											<ul>
-												<li><a href="${pageContext.request.contextPath}/booklist/category/국내도서>소설.do">소설</a></li>
-												<li><a href="#">시/에세이</a></li>
-												<li><a href="#">인문</a></li>
-												<li><a href="#">가정/생활</a></li>
-												<li><a href="#">요리</a></li>
-												<li><a href="#">건강</a></li>
-												<li><a href="#">취미/스포츠</a></li>
-												<li><a href="#">경제/경영</a></li>
-												<li><a href="#">자기계발</a></li>
-												<li><a href="#">정치/사회</a></li>
-												<li><a href="#">정부간행물</a></li>
-												<li><a href="#">역사/문화</a></li>
-												<li><a href="#">종교</a></li>
-												<li><a href="#">예술/대중문화</a></li>
-												<li><a href="#">중/고학습</a></li>
-												<li><a href="#">기술/공학</a></li>
-												<li><a href="#">외국어</a></li>
-												<li><a href="#">과학</a></li>
-												<li><a href="#">취업/수험서</a></li>
-												<li><a href="#">여행</a></li>
-												<li><a href="#">컴퓨터/IT</a></li>
-												<li><a href="#">잡지</a></li>
-												<li><a href="#">사전</a></li>
-												<li><a href="#">청소년</a></li>
-												<li><a href="#">초등학습</a></li>
-												<li><a href="#">유아</a></li>
-												<li><a href="#">아동</a></li>
-												<li><a href="#">어린이영어</a></li>
-												<li><a href="#">만화</a></li>
-												<li><a href="#">아동/유아전집</a></li>
-												<li><a href="#">한국소개도서</a></li>
-												<li><a href="#">PB상품</a></li>
-											</ul>
-										</div>
+								<section style="padding-top: 15px; height: auto;">
+								
+									<div id="category_select">
+										<h2><strong>'${param.keyword}'</strong> 로 검색한 결과</h2>
 									</div>
-									<div id="Category_content" class="posts">
-				                            <c:forEach begin="1" end="21">
+									
+									<div id="category_main_base">
+
+										<div id="side-category-menu">
+											<div id="side-category-menu_title">
+												카테고리
+											</div>
+											<div id="side-category-menu_title_category">
+												<ul>
+													<li><a href="${pageContext.request.contextPath}/booklist/category/국내도서>소설.do">소설</a></li>
+													<li><a href="#">시/에세이</a></li>
+													<li><a href="#">인문</a></li>
+													<li><a href="#">가정/생활</a></li>
+													<li><a href="#">요리</a></li>
+													<li><a href="#">건강</a></li>
+													<li><a href="#">취미/스포츠</a></li>
+													<li><a href="#">경제/경영</a></li>
+													<li><a href="#">자기계발</a></li>
+													<li><a href="#">정치/사회</a></li>
+													<li><a href="#">정부간행물</a></li>
+													<li><a href="#">역사/문화</a></li>
+													<li><a href="#">종교</a></li>
+													<li><a href="#">예술/대중문화</a></li>
+													<li><a href="#">중/고학습</a></li>
+													<li><a href="#">기술/공학</a></li>
+													<li><a href="#">외국어</a></li>
+													<li><a href="#">과학</a></li>
+													<li><a href="#">취업/수험서</a></li>
+													<li><a href="#">여행</a></li>
+													<li><a href="#">컴퓨터/IT</a></li>
+													<li><a href="#">잡지</a></li>
+													<li><a href="#">사전</a></li>
+													<li><a href="#">청소년</a></li>
+													<li><a href="#">초등학습</a></li>
+													<li><a href="#">유아</a></li>
+													<li><a href="#">아동</a></li>
+													<li><a href="#">어린이영어</a></li>
+													<li><a href="#">만화</a></li>
+													<li><a href="#">아동/유아전집</a></li>
+													<li><a href="#">한국소개도서</a></li>
+													<li><a href="#">PB상품</a></li>
+												</ul>
+											</div>
+										</div>
+									
+										<div id="category-content" class="posts">
+											
+											<c:forEach begin="1" end="21">
 											
 											<article>
 											   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
@@ -169,12 +100,18 @@
 											</article>
 											
 											</c:forEach>
-				                           </div>
-								</section>
+											
+			                             </div>
+		                           
+		                           </div>
+							</section>
+								
 
+							<%-- <a href="${pageContext.request.contextPath}/login/login.do">카톡로그인</a> --%>
 						</div>
 					</div>
 			</div>
+			
 		<!-- Sidebar -->
 			<jsp:include page="../include/SlideSideMenu.jsp"></jsp:include>
 					
@@ -193,7 +130,6 @@
 				
 					$(window).resize(function(){
 						menuButton();
-						
 					});
 				
 				 
