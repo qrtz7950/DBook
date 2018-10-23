@@ -160,51 +160,15 @@
 										</div>
 									</div>
 									<div id="Category_content" class="posts">
-				                              <article>
-				                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-				                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-				                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-				                              </article>
-				                              <article>
-				                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-				                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-				                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-				                              </article>
-				                              <article>
-				                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-				                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-				                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-				                              </article>
-				                              <article>
-				                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-				                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-				                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-				                              </article>
-				                              <article>
-				                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-				                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-				                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-				                              </article>
-				                              <article>
-				                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-				                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-				                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-				                              </article>
-				                              <article>
-				                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-				                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-				                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-				                              </article>
-				                              <article>
-				                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-				                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-				                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-				                              </article>
-				                              <article>
-				                                 <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg" alt=""></a>
-				                                 <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-				                                 <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
-				                              </article>
+				                            <c:forEach begin="1" end="21">
+											
+											<article>
+											   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
+											   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
+											   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
+											</article>
+											
+											</c:forEach>
 				                           </div>
 								</section>
 

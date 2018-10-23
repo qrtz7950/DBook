@@ -22,8 +22,6 @@ public class BookVO {
 	private String category3;
 	
 	public BookVO() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public BookVO(String book_id, String book_name, String cover, String author, String translator, String publisher,

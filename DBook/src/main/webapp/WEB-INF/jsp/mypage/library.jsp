@@ -63,8 +63,8 @@
 											
 											<article>
 											   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
-											   <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-											   <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
+											   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
+											   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
 											</article>
 											
 											</c:forEach>
@@ -78,8 +78,8 @@
 											
 											<article>
 											   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
-											   <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-											   <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
+											   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
+											   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
 											</article>
 											
 											</c:forEach>
@@ -93,8 +93,8 @@
 											
 											<article>
 											   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
-											   <a href="#"><h3>죽고 싶지만 떡볶이는 먹고 싶어</h3></a>
-											   <a href="#"><p>백세희 지음<br><a href="">흔</a></p></a>
+											   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
+											   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
 											</article>
 											
 											</c:forEach>
@@ -127,7 +127,6 @@
 
 			$(window).resize(function(){
 				category_toggle();
-				
 			});
 			
 			function category_toggle(){
@@ -146,7 +145,7 @@
 			</script>
 			
 			<script>
-	
+			/*
 			$(document).ready(function(){
 				
 				$("#category1").each(function(){
@@ -156,7 +155,8 @@
 					}
 					
 				});	
-			}); 
+			});
+			*/
 			</script>
 			
 			

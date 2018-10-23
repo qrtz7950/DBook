@@ -1,8 +1,5 @@
 package kr.co.project.book.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.project.book.service.BookService;
 import kr.co.project.book.vo.BookVO;
 import kr.co.project.review.service.ReviewService;
-import kr.co.project.review.vo.ReviewVO;
 
 @Controller
 @RequestMapping("/book")

@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="login-page">
-	  <a style="text-decoration: none;" href="${pageContext.request.contextPath}/main/home.do"><h1><strong>DB</strong>ook</h1></a>
+	  <h1><a style="text-decoration: none;" href="${pageContext.request.contextPath}/main/home.do"><strong>DB</strong>ook</a></h1>
 	  <hr>
 	  <div class="form">
 	    <form class="register-form">
