@@ -74,6 +74,8 @@ create table review (
     ,   book_id         varchar2(20)
     ,   rating          number(2)
     ,   content         varchar2(4000)
+    ,   good            number(10)     
+    ,   bad             number(10)
     ,   review_reg_date date              default sysdate
     ,   constraint review_id_fk foreign key(id)
         references db_user(id) on delete cascade
@@ -87,6 +89,8 @@ create table review_reaction (
     ,   good_or_bad     number(1)
     ,   constraint review_reaction_no_fk foreign key(review_no)
         references review(review_no) on delete cascade
+    ,   constraint review_reaction_id_fk foreign key(id)
+        references db_user(id) on delete cascade
 );
 
 create table db_category_management (
@@ -134,10 +138,40 @@ insert into book (book_id, book_name) values('book8','book8');
 insert into book (book_id, book_name) values('book9','book9');
 insert into book (book_id, book_name) values('book10','book10');
 
+Insert into HR.DB_USER (NO,ID,PASSWORD,PROFILE_IMAGE,THUMBNAIL_IMAGE,NICKNAME,AGE_RANGE,GENDER) values (seq_db_user_no.nextval,'q','q',null,null,'q','20~29','male');
+Insert into HR.DB_USER (NO,ID,PASSWORD,PROFILE_IMAGE,THUMBNAIL_IMAGE,NICKNAME,AGE_RANGE,GENDER) values (seq_db_user_no.nextval,'w','w',null,null,'w','20~29','male');
+Insert into HR.DB_USER (NO,ID,PASSWORD,PROFILE_IMAGE,THUMBNAIL_IMAGE,NICKNAME,AGE_RANGE,GENDER) values (seq_db_user_no.nextval,'e','e',null,null,'e','20~29','male');
+Insert into HR.DB_USER (NO,ID,PASSWORD,PROFILE_IMAGE,THUMBNAIL_IMAGE,NICKNAME,AGE_RANGE,GENDER) values (seq_db_user_no.nextval,'r','r',null,null,'r','20~29','male');
+
+insert into review(review_no,id,book_id,rating,content) values(review_no.nextval,'q','KOR9791196394509',5,'1번');
+insert into review(review_no,id,book_id,rating,content) values(review_no.nextval,'w','KOR9791196394509',6,'2번');
+insert into review(review_no,id,book_id,rating,content) values(review_no.nextval,'e','KOR9791196394509',7,'3번');
+insert into review(review_no,id,book_id,rating,content) values(review_no.nextval,'r','KOR9791196394509',8,'4번');
+insert into review(review_no,id,book_id,rating,content) values(review_no.nextval,'r','KOR9791196394509',8,'5번');
+
+insert into review_reaction (review_no, id, good_or_bad) values(1,'q',1);
+insert into review_reaction (review_no, id, good_or_bad) values(1,'w',1);
+insert into review_reaction (review_no, id, good_or_bad) values(1,'e',0);
+insert into review_reaction (review_no, id, good_or_bad) values(1,'r',0);
+
+insert into review_reaction (review_no, id, good_or_bad) values(2,'q',1);
+insert into review_reaction (review_no, id, good_or_bad) values(2,'w',1);
+insert into review_reaction (review_no, id, good_or_bad) values(2,'e',1);
+insert into review_reaction (review_no, id, good_or_bad) values(2,'r',0);
+
+insert into review_reaction (review_no, id, good_or_bad) values(3,'q',0);
+insert into review_reaction (review_no, id, good_or_bad) values(3,'w',0);
+insert into review_reaction (review_no, id, good_or_bad) values(3,'e',0);
+insert into review_reaction (review_no, id, good_or_bad) values(3,'r',1);
+
+insert into review_reaction (review_no, id, good_or_bad) values(4,'q',0);
+insert into review_reaction (review_no, id, good_or_bad) values(4,'w',0);
+insert into review_reaction (review_no, id, good_or_bad) values(4,'e',1);
+insert into review_reaction (review_no, id, good_or_bad) values(4,'r',0);
+
 select * from db_user;
 select * from book;
 select * from review;
-
-Insert into HR.DB_USER (NO,ID,PASSWORD,PROFILE_IMAGE,THUMBNAIL_IMAGE,NICKNAME,AGE_RANGE,GENDER,REG_DATE) values (1,'q','q',null,null,'q','20~29','male',to_date('18/10/19','RR/MM/DD'));
+select * from review_reaction;
 
 commit;
