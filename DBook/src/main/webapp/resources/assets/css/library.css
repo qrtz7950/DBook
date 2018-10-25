@@ -65,26 +65,57 @@
 	margin: 0 0 20px 0;
 	padding: 0 0 19px 3%;
 }
+.mypage-title a{
+	border-bottom: none;
+}
 
 .mypage-subtitle{
 	font-size: 2em;
-	margin: 5% 0 3% 3%;
+	padding: 0 0 3% 3%;
 	width: 100%;
 }
 
-.mypage-subtitle a{
-	padding-bottom:1%;
+.mypage-subtitle span{
+	padding:0;
 	margin:0;
 	border-bottom: solid 3px #f58a8a;
 }
 
 .mypage-subtitle :last-child{
 	font-size:0.7em;
-	padding:1.5% 0 0 0;
+	padding:1% 0 0 0;
 	float:right;
-	margin:0 5% 0 0;
+	margin:0 4% 0 0;
 	bottom:0;
 	border-bottom: dotted 1px;
 	color: #f56a6a;
 	text-decoration: none; 
+}
+
+.bookmark-book-content{
+	width: 100%;
+}
+
+.articles{
+	margin:0;
+	padding:0;
+	width: 100%;
+	float: left;
+	display: inline-flex;
+}
+
+.more:hover{
+	cursor: pointer;
+	font-weight: bold;
+	border-bottom: dotted 3px;
+}
+
+.view-more{
+	width:100%;
+	text-align:center;
+	display: block;
+}
+
+.hidden{
+	display: none;
 }

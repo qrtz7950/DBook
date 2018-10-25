@@ -1,29 +1,66 @@
 package kr.co.project.mypage.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.co.project.review.service.ReviewService;
+import kr.co.project.login.vo.LoginVO;
+import kr.co.project.mypage.service.MypageService;
 
 @Controller
+@RestController
 @RequestMapping("/mypage")
 public class MypageController {
 
 	@Autowired
-	private ReviewService mpService;
+	private MypageService mpService;
 	
 	// 마이 페이지
 	@RequestMapping(("/library.do"))
-	public ModelAndView mypage() {
+	public ModelAndView mypage(HttpSession session) {
 		System.out.println("mypage()진입");
-		
 		ModelAndView mav = new ModelAndView();
+		
+		LoginVO user = (LoginVO) session.getAttribute("user");
+		
+		//최초로 보여줄 3개의 카테고리의 4개를 뽑아와야함
+		
+		//북마크
+		JSONObject books = mpService.bookmarkBooks(user.getId(),1 ,4);
+		
+		System.out.println(books);
+		
+		//최근에 본 책
+		
+		//리뷰
+		
 		mav.setViewName("mypage/library");
+		
 		
 		return mav;
 	}
+	
+	@ResponseBody
+	@RequestMapping(("/bookmark.json"))
+	public JSONObject bookmark(@RequestParam(value="id") String id, @RequestParam(value="nTh") int nTh) {
+		System.out.println("bookmark()진입");
+		int start = 4 * nTh + 1;
+		int end = 4 * nTh + 4;
+		System.out.println("해당 시행은 " + nTh + "번째 시행입니다");
+		System.out.println(id + "의 즐겨찾기를 가져옴" + start + "번째부터" + end + "번째까지");
+		
+		JSONObject books = mpService.bookmarkBooks(id,start,end);
+		
+		return books;
+	}
+	
 	@RequestMapping(("/allreview.do"))
 	public ModelAndView allreview() {
 		System.out.println("allreview()진입");
@@ -33,15 +70,7 @@ public class MypageController {
 		
 		return mav;
 	}
-	@RequestMapping(("/bookmark.do"))
-	public ModelAndView bookmark() {
-		System.out.println("bookmark()진입");
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("mypage/bookmark");
-		
-		return mav;
-	}
+	
 	@RequestMapping(("/rated.do"))
 	public ModelAndView rated() {
 		System.out.println("rated()진입");
@@ -66,3 +95,5 @@ public class MypageController {
 		return mav;
 	}
 }
+
+

@@ -34,7 +34,7 @@
 								<section style="padding-top: 15px; height: auto;">
 								
 									<div class="mypage-title">
-												My Page
+												<a href="../mypage/library.do">내 서재</a>
 									</div>
 									
 									<div id="category_main_base">
@@ -45,59 +45,73 @@
 											</div>
 											<div id="side-category-menu_title_category">
 												<ul>
-													<li><a href="${pageContext.request.contextPath}/mypage/bookmark.do">즐겨찾기한 책</a></li>
-													<li><a href="${pageContext.request.contextPath}/mypage/rated.do">평가한 도서</a></li>
-													<li><a href="${pageContext.request.contextPath}/mypage/allreview.do">내가 쓴 리뷰</a></li>
+													<li class="bookmark-book">관심있는 책</li>
+													<li class="rated-book">최근에 본 도서</li>
+													<li class="review-book">내가 쓴 리뷰</li>
 												</ul>
 											</div>
 										</div>
 									
 										<div id="category-content" class="posts">
-											
-											<div class="mypage-subtitle" style="margin-top: 0;">
-												<a>즐겨찾기한 책</a>
-												<a href="${pageContext.request.contextPath}/mypage/bookmark.do">M O R E</a>
+										
+											<div class="bookmark-book-content">
+												<div class="mypage-subtitle">
+													<span>관심있는 책</span>
+													<a class="bookmark-book more">M O R E</a>
+												</div>
+												
+												<div class="articles">
+													<c:forEach begin="1" end="4">
+													<article>
+													   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
+													   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
+													   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
+													</article>
+													
+													</c:forEach>
+												</div>
+												<div class="view-more hidden bookmark-view-more"><img src="/DBook/resources/images/arrow-60.png"></div>
 											</div>
 											
-											<c:forEach begin="1" end="4">
-											
-											<article>
-											   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
-											   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
-											   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
-											</article>
-											
-											</c:forEach>
-											
-											<div class="mypage-subtitle">
-												<a>평가한 도서</a>
-												<a href="${pageContext.request.contextPath}/mypage/rated.do">M O R E</a>
+											<div class="rated-book-content">
+												<div class="mypage-subtitle">
+													<span>최근에 본 도서</span>
+													<a class="rated-book more">M O R E</a>
+												</div>
+												
+												<div class="articles">
+													<c:forEach begin="1" end="4">
+													
+													<article>
+													   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
+													   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
+													   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
+													</article>
+													
+													</c:forEach>
+												</div>
+												<div class="view-more hidden rated-view-more"><img src="/DBook/resources/images/arrow-60.png"></div>
 											</div>
 											
-											<c:forEach begin="1" end="4">
-											
-											<article>
-											   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
-											   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
-											   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
-											</article>
-											
-											</c:forEach>
-											
-											<div class="mypage-subtitle">
-												<a>내가 쓴 리뷰</a>
-												<a href="${pageContext.request.contextPath}/mypage/allreview.do">M O R E</a>
+											<div class="review-book-content">
+												<div class="mypage-subtitle">
+													<span>내가 쓴 리뷰</span>
+													<a class="review-book more">M O R E</a>
+												</div>
+												
+												<div class="articles">
+													<c:forEach begin="1" end="4">
+													
+													<article>
+													   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
+													   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
+													   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
+													</article>
+													
+													</c:forEach>
+												</div>
+												<div class="view-more hidden review-view-more"><img src="/DBook/resources/images/arrow-60.png"></div>
 											</div>
-											
-											<c:forEach begin="1" end="4">
-											
-											<article>
-											   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
-											   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
-											   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
-											</article>
-											
-											</c:forEach>
 											
 			                             </div>
 		                           
@@ -141,6 +155,52 @@
 					$("#category-content").css("width","83%");
 				}
 			}
+			
+			$('.bookmark-book').click(function() {
+				$('.more').slideUp(500);
+				$('.view-more').slideDown(500);
+				$('.bookmark-book-content').slideDown(500);
+				$('.rated-book-content').slideUp(500);
+				$('.review-book-content').slideUp(500);
+			});
+			
+			$('.rated-book').click(function() {
+				$('.more').slideUp(500);
+				$('.view-more').slideDown(500);
+				$('.rated-book-content').slideDown(500);
+				$('.bookmark-book-content').slideUp(500);
+				$('.review-book-content').slideUp(500);
+			});
+						
+			$('.review-book').click(function() {
+				$('.more').slideUp(500);
+				$('.view-more').slideDown(500);
+				$('.review-book-content').slideDown(500);
+				$('.bookmark-book-content').slideUp(500);
+				$('.rated-book-content').slideUp(500);
+			});
+			
+			var bookmarkNTh = 1;
+			var ratedNTh = 1;
+			var reviewNTh = 1;			
+			
+			$('.bookmark-view-more').click(function() {
+				$.ajax({
+					url : '../mypage/bookmark.json',
+					type : 'POST',
+					dataType : 'json',
+					data : {id :'${sessionScope.user.id}', nTh:bookmarkNTh},
+					error : function(request, status, error){
+				       	alert("code:"+request.status+"\n"+"error:"+error);
+				    },
+					success : function(data){
+						console.log(data);
+						bookmarkNTh++;
+					}
+				});
+			});
+			
+			
 			
 			</script>
 			

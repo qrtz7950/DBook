@@ -8,6 +8,7 @@
 		<typeAlias type="kr.co.project.login.vo.LoginVO" alias="loginVO"/>
 		<typeAlias type="kr.co.project.book.vo.BookVO" alias="bookVO"/>
 		<typeAlias type="kr.co.project.review.vo.ReviewVO" alias="reviewVO"/>
+		<typeAlias type="kr.co.project.mypage.vo.MinBookVO" alias="MinBookVO"/>
 	</typeAliases>
 	
 </configuration>
