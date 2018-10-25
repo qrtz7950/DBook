@@ -1,3 +1,1 @@
 # DBook
-
-<script>alert('!')</script>
