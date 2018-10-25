@@ -57,6 +57,11 @@
    /*width: calc(33.33333% - 6em);*/
 }
 
+.posts article .image img {
+    display: block;
+    width: 100%;
+}
+
 .mypage-title{
 	font-size: 3em;
 	color: #f56a6a;
@@ -101,7 +106,7 @@
 	padding:0;
 	width: 100%;
 	float: left;
-	display: inline-flex;
+	display: inline-block;
 }
 
 .more:hover{
@@ -119,3 +124,15 @@
 .hidden{
 	display: none;
 }
+
+.cursor {
+	cursor:pointer; 
+}
+
+.bookmark-div-articles{
+	display:inline-flex;
+}
+.recent-div-articles{
+	display:inline-flex;
+}
+

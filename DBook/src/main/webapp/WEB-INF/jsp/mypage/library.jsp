@@ -45,9 +45,9 @@
 											</div>
 											<div id="side-category-menu_title_category">
 												<ul>
-													<li class="bookmark-book">관심있는 책</li>
-													<li class="rated-book">최근에 본 도서</li>
-													<li class="review-book">내가 쓴 리뷰</li>
+													<li class="bookmark-book cursor">관심있는 책</li>
+													<li class="recent-book cursor">최근에 본 도서</li>
+													<li class="review-book cursor">내가 쓴 리뷰</li>
 												</ul>
 											</div>
 										</div>
@@ -57,49 +57,44 @@
 											<div class="bookmark-book-content">
 												<div class="mypage-subtitle">
 													<span>관심있는 책</span>
-													<a class="bookmark-book more">M O R E</a>
+													<a class="bookmark-book more cursor">M O R E</a>
 												</div>
 												
-												<div class="articles">
-													<c:forEach begin="1" end="4">
-													<article>
-													   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
-													   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
-													   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
-													</article>
-													
-													</c:forEach>
+												<div class="articles bookmark-book-list">
 												</div>
 												<div class="view-more hidden bookmark-view-more"><img src="/DBook/resources/images/arrow-60.png"></div>
 											</div>
 											
-											<div class="rated-book-content">
+											<div class="recent-book-content">
 												<div class="mypage-subtitle">
 													<span>최근에 본 도서</span>
-													<a class="rated-book more">M O R E</a>
+													<a class="recent-book more cursor">M O R E</a>
 												</div>
 												
-												<div class="articles">
-													<c:forEach begin="1" end="4">
-													
-													<article>
-													   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
-													   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
-													   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
-													</article>
-													
-													</c:forEach>
+												<div class="articles recent-book-list">
+												
+													<div class = "recent-div-articles">
+														<c:forEach begin="1" end="4">
+														
+														<article>
+														   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
+														   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
+														   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
+														</article>
+														
+														</c:forEach>
+													</div>
 												</div>
-												<div class="view-more hidden rated-view-more"><img src="/DBook/resources/images/arrow-60.png"></div>
+												<div class="view-more hidden recent-view-more"><img src="/DBook/resources/images/arrow-60.png"></div>
 											</div>
 											
 											<div class="review-book-content">
 												<div class="mypage-subtitle">
 													<span>내가 쓴 리뷰</span>
-													<a class="review-book more">M O R E</a>
+													<a class="review-book more cursor">M O R E</a>
 												</div>
 												
-												<div class="articles">
+												<div class="articles review-book-list">
 													<c:forEach begin="1" end="4">
 													
 													<article>
@@ -136,6 +131,8 @@
 			<script type="text/javascript">
 			
 			$(document).ready(function() {
+				bookmarkViewMore();
+				reviewViewMore();
 				category_toggle();
 			});
 
@@ -160,14 +157,14 @@
 				$('.more').slideUp(500);
 				$('.view-more').slideDown(500);
 				$('.bookmark-book-content').slideDown(500);
-				$('.rated-book-content').slideUp(500);
+				$('.recent-book-content').slideUp(500);
 				$('.review-book-content').slideUp(500);
 			});
 			
-			$('.rated-book').click(function() {
+			$('.recent-book').click(function() {
 				$('.more').slideUp(500);
 				$('.view-more').slideDown(500);
-				$('.rated-book-content').slideDown(500);
+				$('.recent-book-content').slideDown(500);
 				$('.bookmark-book-content').slideUp(500);
 				$('.review-book-content').slideUp(500);
 			});
@@ -177,14 +174,13 @@
 				$('.view-more').slideDown(500);
 				$('.review-book-content').slideDown(500);
 				$('.bookmark-book-content').slideUp(500);
-				$('.rated-book-content').slideUp(500);
+				$('.recent-book-content').slideUp(500);
 			});
 			
-			var bookmarkNTh = 1;
-			var ratedNTh = 1;
-			var reviewNTh = 1;			
+			var bookmarkNTh = 0;
+			var reviewNTh = 0;			
 			
-			$('.bookmark-view-more').click(function() {
+			function bookmarkViewMore() {
 				$.ajax({
 					url : '../mypage/bookmark.json',
 					type : 'POST',
@@ -194,10 +190,60 @@
 				       	alert("code:"+request.status+"\n"+"error:"+error);
 				    },
 					success : function(data){
-						console.log(data);
+						addBook(data);
 						bookmarkNTh++;
 					}
 				});
+			}
+			
+			function addBook(data) {
+				console.log(data);
+				console.log(data.items[0].cover);
+				console.log(data.items[0].book_id);
+				console.log(data.items[0].book_name);
+				console.log(data.items[0].publisher);
+				console.log(data.items[0].author);
+				
+				var s = "";
+					s += '<div class = "bookmark-div-articles">';
+				for(var i =0; i<data.items.length; i++){
+					s += '<article>';
+					s += '	<a href="" class="image"><img src=' + data.items[i].cover + '></a>';
+					s += '	<h3><a href="#">' + data.items[i].book_name + '</a></h3>';
+					s += '	<p><a href="#">' + data.items[i].author + '</a><br><a href="#">' + data.items[i].publisher + '</a></p>';
+					s += '</article>';
+				}
+				s += '</div>';
+				$('.bookmark-book-list').append(s);
+				
+			}
+			
+			function addReview(data) {
+				console.log(data);
+			}
+			
+			function reviewViewMore() {
+				$.ajax({
+					url : '../mypage/review.json',
+					type : 'POST',
+					dataType : 'json',
+					data : {id :'${sessionScope.user.id}', nTh:reviewNTh},
+					error : function(request, status, error){
+				       	alert("code:"+request.status+"\n"+"error:"+error);
+				    },
+					success : function(data){
+						addReview(data);
+						reviewNTh++;
+					}
+				});
+			}
+			
+			$('.bookmark-view-more').click(function() {
+				bookmarkViewMore();
+			});
+			
+			$('.review-view-more').click(function() {
+				reviewViewMore();
 			});
 			
 			

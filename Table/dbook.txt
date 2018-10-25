@@ -115,11 +115,41 @@ insert into book values('KOR9791196394509', '죽고 싶지만 떡볶이는 먹�
                         , '1990년 서울에서 태어났다. 문예창작학과를 졸업한 뒤 출 판사에서 5년간 일했다. 10년 넘게 기분부전장애(경도의 우울증)와 불안장애를 앓으며 정신과를 전전했고, 2017년 잘 맞는 병원을 찾아 약물치료와 상담치료를 병행하고 있다. 책을 읽고 글을 쓰며, 가장 좋아하는 음식은 떡볶이다.'
                         , '시작하며 별일 없이 사는데 왜 마음은 허전할까;;1주 그냥 좀 우울해서요;2주 저 혹시 허언증인가요?', 0);
 
-select book_id, book_name, cover, author, translator, publisher, to_char(published_date, 'yyyy-mm-dd') as published_date,
-      is_ebook, form_detail, isbn_10, isbn_13, book_introduction, author_introduction, contents, view_cnt 
-  from book
-  where book_id = 'KOR9791196394509';
-  
+insert into book values('14036994', '골든아워 1', 'https://bookthumb-phinf.pstatic.net/cover/140/369/14036994.jpg'
+                        , '이국종', '없음', '흐름출판', '2018.10.02', 1, '페이지 438', '1111111111', '9788965962823'
+                        , '골든아워 60분에 생사가 달린 목숨들, 그리고 그들을 지키려 애써온 사람들의 생생한 이야기!
+
+외상외과 의사 이국종 교수가 대한민국 중증외상 의료 현실에 대한 냉정한 보고서이자, 시스템이 기능하지 않는 현실 속에서도 생명을 지키려 애써온 사람들의 분투를 날 것 그대로 담아낸 『골든아워』 제1권. 2002년 지도교수의 권유로 외상외과에 발을 내딛으며 인생의 전환점을 맞이한 저자는 대한민국에 국제 표준의 중증외상 시스템을 정착하기 위해 지난한 싸움을 했고, 17년간 외상외과 의사로서 맞닥뜨린 냉혹한 현실, 고뇌와 사색, 의료 시스템에 대한 문제의식 등을 기록해왔다.
+
+이 책은 저자가 외상외과에 발을 내딛은 2002년에서 2018년 상반기까지의 각종 진료기록과 수술기록 등을 바탕으로 저자의 기억들을.'
+                        , '이국종
+저자 : 이국종
+중증외상 분야 외과 전문의이자, 외상 및 외상 후 후유증, 총상 등 복합중증 외상치료 권위자. 이국종 교수가 이끄는 외상외과 의료팀은 국내 최고 수준으로 꼽힌다. 1995년 아주대학교 의과대학을 졸업하고 연구강사 생활을 시작했다.
+
+2002년 동 대학원에서 박사 학위를 받으며 외상외과에 발을 내딛었다. 2003년 미국 UC 샌디에이고 외상센터에서, 2007년 런던로열병원 외상센터에서 연수하며 의료 선진국의 현실을 목도했다. 
+
+2005년 논문 <중증외상센터 설립 방안>을 발표했다. 이 논문은 국내 병원들의 중증외상센터 건립안의 기초 자료가 되었다. 2011년 그의 의료팀이 아덴만 여명 작전으로 부상당한 석해균 선장을 살려내면서 중증외상 치료의 특수성과 중요성이 세상에 알려졌으며 이는 2012년 전국 거점 지역에 권역외상센터를 설립하고 국가가 행정적, 재정적으로 지원하도록 하는 응급의료법 개정안이 통과되는 계기가 되었다.
+
+현재 아주대학교병원 외상외과 과장이자 경기남부권역 중증외상센터장으로 재직하며 국제 표준에 맞는 중증외상 의료 시스템을 우리나라에 정착시키기 위해 노력하고 있다.'
+                        , '서문 
+2013년 스승의 날 | 외과 의사 | 회귀 
+남루한 시작 | 원흉 | 깊고 붉은 심연 | 갱의실 
+삶의 태도 | 환골탈태 | 암흑 전야 ', 0);
+
+insert into book (book_id, book_name, cover, author, publisher) values('14032058', '상식 밖의 경제학', 'https://bookthumb-phinf.pstatic.net/cover/140/320/14032058.jpg', '김제희', '비트교육');
+insert into book (book_id, book_name, cover, author, publisher) values('14076212', '트렌드 코리아 2019', 'https://bookthumb-phinf.pstatic.net/cover/140/762/14076212.jpg', '김제희', '비트교육');
+insert into book (book_id, book_name, cover, author, publisher) values('11211133', '82년생 김지영', 'https://bookthumb-phinf.pstatic.net/cover/112/111/11211133.jpg', '김제희', '비트교육');
+insert into book (book_id, book_name, cover, author, publisher) values('14037667', '메르타 할머니의 우아한 강도 인생', 'https://bookthumb-phinf.pstatic.net/cover/140/376/14037667.jpg', '김제희', '비트교육');
+insert into book (book_id, book_name, cover, author, publisher) values('14067057', '왕자님을 만날래요 신데렐라는 뻔뻔하게 말했다', 'https://bookthumb-phinf.pstatic.net/cover/140/670/14067057.jpg?', '김제희', '비트교육');
+insert into book (book_id, book_name, cover, author, publisher) values('14031674', '미스터 션샤인 포토에세이', 'https://bookthumb-phinf.pstatic.net/cover/140/316/14031674.jpg', '김제희', '비트교육');
+insert into book (book_id, book_name, cover, author, publisher) values('13993934', '초격차', 'https://bookthumb-phinf.pstatic.net/cover/139/939/13993934.jpg', '김제희', '비트교육');
+insert into book (book_id, book_name, cover, author, publisher) values('11113759', '장미의 이름', 'https://bookthumb-phinf.pstatic.net/cover/111/137/11113759.jpg', '김제희', '비트교육');
+insert into book (book_id, book_name, cover, author, publisher) values('14049497', '마흔에게', 'https://bookthumb-phinf.pstatic.net/cover/140/494/14049497.jpg', '김제희', '비트교육');
+insert into book (book_id, book_name, cover, author, publisher) values('2954833', '테메레르 1', 'https://bookthumb-phinf.pstatic.net/cover/140/369/14036994.jpg', ' 나오미 노빅', '비트교육');
+insert into book (book_id, book_name, cover, author, publisher) values('10961795', '해리포터와 마법사의 돌', 'https://bookthumb-phinf.pstatic.net/cover/109/617/10961795.jpg', '조앤 K. 롤링', '비트교육');
+insert into book (book_id, book_name, cover, author, publisher) values('8788213', '군주론', 'https://bookthumb-phinf.pstatic.net/cover/087/882/08788213.jpg', '마키아벨리', '비트교육');
+insert into book (book_id, book_name, cover, author, publisher) values('9868997', '자본론 1/상', 'https://bookthumb-phinf.pstatic.net/cover/098/689/09868997.jpg', '칼마르크스', '비트교육');
+
 insert into db_category_management(category_no, category) values(1, '국내도서');
 insert into db_category_management(category_no, category) values(2, '국외도서');
 insert into db_category_management values(3, '시/에세이', 1);
@@ -143,31 +173,55 @@ Insert into HR.DB_USER (NO,ID,PASSWORD,PROFILE_IMAGE,THUMBNAIL_IMAGE,NICKNAME,AG
 Insert into HR.DB_USER (NO,ID,PASSWORD,PROFILE_IMAGE,THUMBNAIL_IMAGE,NICKNAME,AGE_RANGE,GENDER) values (seq_db_user_no.nextval,'e','e',null,null,'e','20~29','male');
 Insert into HR.DB_USER (NO,ID,PASSWORD,PROFILE_IMAGE,THUMBNAIL_IMAGE,NICKNAME,AGE_RANGE,GENDER) values (seq_db_user_no.nextval,'r','r',null,null,'r','20~29','male');
 
-insert into review(review_no,id,book_id,rating,content) values(review_no.nextval,'q','KOR9791196394509',5,'1번');
-insert into review(review_no,id,book_id,rating,content) values(review_no.nextval,'w','KOR9791196394509',6,'2번');
-insert into review(review_no,id,book_id,rating,content) values(review_no.nextval,'e','KOR9791196394509',7,'3번');
-insert into review(review_no,id,book_id,rating,content) values(review_no.nextval,'r','KOR9791196394509',8,'4번');
-insert into review(review_no,id,book_id,rating,content) values(review_no.nextval,'r','KOR9791196394509',8,'5번');
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (6,'q','14036994',0,'asd',0,1,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (7,'q','14036994',5,'fg',1,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (8,'q','KOR9791196394509',0,'qwe',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (1,'q','KOR9791196394509',5,'1번',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (2,'w','KOR9791196394509',6,'2번',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (3,'e','KOR9791196394509',7,'3번',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (4,'r','KOR9791196394509',8,'4번',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (5,'r','KOR9791196394509',8,'5번',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (11,'q','KOR9791196394509',0,'qwe',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (13,'q','KOR9791196394509',0,'ww',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (24,'q','KOR9791196394509',0,'ㅁㅇㅁㅇ휴',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (26,'q','KOR9791196394509',0,'ㅁㅇ공ㅁ꼬',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (28,'q','KOR9791196394509',0,'ㅁ고호',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (29,'q','KOR9791196394509',0,'ㅁㄷ곰ㅇ곻',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (30,'q','KOR9791196394509',0,'ㅁㅈㄱ홈고',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (31,'q','KOR9791196394509',0,'ㅁㅈㄱ홈ㄷ고',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (33,'q','KOR9791196394509',0,'ㅁㄷ곸ㅇ규ㅗ',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (37,'q','KOR9791196394509',0,'ㄴㅁㄷ곤ㄷ고',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (38,'q','KOR9791196394509',0,'ㅁ돔ㄷ고',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (39,'q','KOR9791196394509',0,'ㅁㄷ곰ㄷ고',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (9,'q','KOR9791196394509',6,'qwewew',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (10,'q','KOR9791196394509',0,'qwe',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (12,'q','KOR9791196394509',0,'ew',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (14,'q','KOR9791196394509',8,'rtrter',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (15,'q','KOR9791196394509',0,'wjsfght5',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (16,'q','KOR9791196394509',8,'vbsdhst',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (17,'q','KOR9791196394509',4,'srxfgh',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (18,'q','KOR9791196394509',8,'dfhdfnrtd',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (19,'q','KOR9791196394509',2,'dbndh',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (20,'q','KOR9791196394509',0,'trygh',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (21,'q','KOR9791196394509',0,'dctcghmn',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (22,'q','KOR9791196394509',0,'ㄴㅋㅇㄱㅎㅋㅇㄱㅎ',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (23,'q','KOR9791196394509',0,'ㅁ유ㅗㅋㄷ유ㅗ',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (25,'q','KOR9791196394509',0,'ㅁㅇ곰ㅇ고',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (27,'q','KOR9791196394509',0,'ㅁㅇ곰ㅇ고',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (32,'q','KOR9791196394509',0,'ㅁㄷ곰ㄷ고',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (34,'q','KOR9791196394509',0,'ㅁㄷ곰고',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (35,'q','KOR9791196394509',0,'ㅁㄷ곰ㄷ고',0,0,to_date('18/10/25','RR/MM/DD'));
+Insert into HR.REVIEW (REVIEW_NO,ID,BOOK_ID,RATING,CONTENT,GOOD,BAD,REVIEW_REG_DATE) values (36,'q','KOR9791196394509',0,'ㅁㅇ론ㅋㅇ로',0,0,to_date('18/10/25','RR/MM/DD'));
 
-insert into review_reaction (review_no, id, good_or_bad) values(1,'q',1);
-insert into review_reaction (review_no, id, good_or_bad) values(1,'w',1);
-insert into review_reaction (review_no, id, good_or_bad) values(1,'e',0);
-insert into review_reaction (review_no, id, good_or_bad) values(1,'r',0);
-
-insert into review_reaction (review_no, id, good_or_bad) values(2,'q',1);
-insert into review_reaction (review_no, id, good_or_bad) values(2,'w',1);
-insert into review_reaction (review_no, id, good_or_bad) values(2,'e',1);
-insert into review_reaction (review_no, id, good_or_bad) values(2,'r',0);
-
-insert into review_reaction (review_no, id, good_or_bad) values(3,'q',0);
-insert into review_reaction (review_no, id, good_or_bad) values(3,'w',0);
-insert into review_reaction (review_no, id, good_or_bad) values(3,'e',0);
-insert into review_reaction (review_no, id, good_or_bad) values(3,'r',1);
-
-insert into review_reaction (review_no, id, good_or_bad) values(4,'q',0);
-insert into review_reaction (review_no, id, good_or_bad) values(4,'w',0);
-insert into review_reaction (review_no, id, good_or_bad) values(4,'e',1);
-insert into review_reaction (review_no, id, good_or_bad) values(4,'r',0);
+insert into interest(id,book_id) values('q','KOR9791196394509');
+insert into interest(id,book_id) values('q','14036994');
+insert into interest(id,book_id) values('q','14032058');
+insert into interest(id,book_id) values('q','11211133');
+insert into interest(id,book_id) values('q','14037667');
+insert into interest(id,book_id) values('q','14067057');
+insert into interest(id,book_id) values('q','8788213');
+insert into interest(id,book_id) values('q','9868997');
+insert into interest(id,book_id) values('q','2954833');
 
 select * from db_user;
 select * from book;

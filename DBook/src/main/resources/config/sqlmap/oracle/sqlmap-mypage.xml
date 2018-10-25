@@ -5,11 +5,20 @@
 <mapper namespace="kr.co.project.mypage.dao.MypageDAO">
 	
 	<!-- id로 북마크 리스트 불러오기-->	
-	<select id="bookmarks" resultType="MinBookVO" parameterType="string">
+	<select id="bookmarks" resultType="minBookVO" parameterType="string">
 	select b.book_id, book_name, cover, author, publisher
   	  from book b inner join interest i
         on b.book_id = i.book_id
      where i.id = #{id}
+	</select>
+	
+	<!-- id로 리뷰 리스트 불러오기-->	
+	<select id="reviews" resultType="reviewVO" parameterType="string">
+		select review_no, r.id, book_id, rating, content, good, bad, to_char(review_reg_date, 'yyyy-mm-dd') as review_reg_date, nickname
+		  from review r inner join db_user u
+		    on r.id = u.id
+		  where r.id = #{id}
+		  order by review_no desc
 	</select>
 	
 </mapper>

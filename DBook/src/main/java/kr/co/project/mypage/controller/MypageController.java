@@ -31,18 +31,10 @@ public class MypageController {
 		LoginVO user = (LoginVO) session.getAttribute("user");
 		
 		//최초로 보여줄 3개의 카테고리의 4개를 뽑아와야함
-		
 		//북마크
-		JSONObject books = mpService.bookmarkBooks(user.getId(),1 ,4);
-		
-		System.out.println(books);
-		
 		//최근에 본 책
-		
 		//리뷰
-		
 		mav.setViewName("mypage/library");
-		
 		
 		return mav;
 	}
@@ -53,7 +45,7 @@ public class MypageController {
 		System.out.println("bookmark()진입");
 		int start = 4 * nTh + 1;
 		int end = 4 * nTh + 4;
-		System.out.println("해당 시행은 " + nTh + "번째 시행입니다");
+		System.out.println("해당 시행은 " + (nTh+1) + "번째 시행입니다");
 		System.out.println(id + "의 즐겨찾기를 가져옴" + start + "번째부터" + end + "번째까지");
 		
 		JSONObject books = mpService.bookmarkBooks(id,start,end);
@@ -61,24 +53,18 @@ public class MypageController {
 		return books;
 	}
 	
-	@RequestMapping(("/allreview.do"))
-	public ModelAndView allreview() {
-		System.out.println("allreview()진입");
+	@ResponseBody
+	@RequestMapping(("/review.json"))
+	public JSONObject ratedReview(@RequestParam(value="id") String id, @RequestParam(value="nTh") int nTh) {
+		System.out.println("ratedReview()진입");
+		int start = 10 * nTh + 1;
+		int end = 10 * nTh + 10;
+		System.out.println("해당 시행은 " + (nTh+1) + "번째 시행입니다");
+		System.out.println(id + "의 리뷰를 가져옴" + start + "번째부터" + end + "번째까지");
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("mypage/allreview");
+		JSONObject reviews = mpService.ratedReview(id,start,end);
 		
-		return mav;
-	}
-	
-	@RequestMapping(("/rated.do"))
-	public ModelAndView rated() {
-		System.out.println("rated()진입");
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("mypage/rated");
-		
-		return mav;
+		return reviews;
 	}
 	
 	@RequestMapping(("/userRating.do"))
