@@ -50,4 +50,11 @@
 		select * from db_user where id = #{id} and password = #{password}
 	</select>
 	
+	<!-- interest 조회 -->
+	<select id="check_interest" resultType="int" parameterType="reviewVO">
+		select count(*)
+		  from interest
+		  where id=#{id} and book_id=#{book_id}
+	</select>
+	
 </mapper>

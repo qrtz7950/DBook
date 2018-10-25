@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.project.login.vo.LoginVO;
+import kr.co.project.review.vo.ReviewVO;
 
 @Repository
 public class LoginDAO{
@@ -76,5 +77,12 @@ public class LoginDAO{
 	 */
 	public void addUserInfo(LoginVO user) {
 		user = sqlSessionTemplate.selectOne("kr.co.project.login.dao.LoginDAO.updateAll", user);
+	}
+
+	public int check_interest(String id, String book_id) {
+		ReviewVO review = new ReviewVO();
+		review.setId(id);
+		review.setBook_id(book_id);
+		return sqlSessionTemplate.selectOne("kr.co.project.login.dao.LoginDAO.check_interest", review);
 	}
 }

@@ -31,7 +31,8 @@ public class ReviewController {
 	@ResponseBody
 	public void reviewInput(@ModelAttribute ReviewVO review) {
 		System.out.println("reviewInput()진입");
-		//System.out.println(review);
+		review.setContent(review.getContent().replace(System.getProperty("line.separator"), "<br>"));
+		System.out.println(review);
 		
 		reviewService.writeReview(review);
 		

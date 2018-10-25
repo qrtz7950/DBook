@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -157,4 +158,13 @@ public class LoginController {
 		return mav;
    }
 	
+	// user의 interest 여부 확인
+	@ResponseBody
+	@RequestMapping(value="/user/check_interest.do")
+	public int check_interest(@RequestParam String book_id, HttpSession session) {
+		LoginVO user = (LoginVO) session.getAttribute("user");
+		String id = user.getId();
+		
+		return loginService.check_interest(id, book_id);
+	}
 }
