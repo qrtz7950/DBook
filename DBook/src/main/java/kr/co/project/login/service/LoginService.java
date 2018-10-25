@@ -84,6 +84,11 @@ public class LoginService{
 		return idDupCheck;
 	}
 	
+	// user의 interest 여부 확인
+	public int check_interest(String id, String book_id) {
+		return dao.check_interest(id, book_id);
+	}
+	
 	
 	
 }

@@ -55,10 +55,11 @@
 }
 
 #interest {
+	width: 51.5px;
+	height: 28px;
 	color: white;
-	background-color: #47a3da;
+	background-color: white;
 	border-radius: 8px;
-	width: fit-content;
 	padding: 2px 5px;
 	float: right;
 	position: inherit;
@@ -336,19 +337,12 @@
 							<option>국외도서</option>
 						</select>
 					</div>
-					<%-- 
-					<div style="padding-bottom: 10px;">
-						<h3 id="book-name">${requestScope.book.book_name}</h3>
-						<div id="interest">관심 +</div>
-						<h5 id="view-cnt">조회수 ${requestScope.book.view_cnt}</h5>
-					</div>
-					 --%>
 				</section>
 
 				<section class="detail-section info-head">
 					<div style="display: inline-block; width: 100%; padding-bottom: 20px;">
 						<h3 id="book-name">${requestScope.book.book_name}</h3>
-						<div id="interest">관심 +</div>
+						<div id="interest"></div>
 						<h5 id="view-cnt">조회수 ${requestScope.book.view_cnt}</h5>
 					</div>
 				</section>
@@ -483,8 +477,9 @@
 	<script>
 					$(document).ready(function() {
 						detailForm();
-						reviews_print(1);
 						avg_rating();
+						interest_print();						
+						reviews_print(1);
 					});
 		
 					$(window).resize(function(){
@@ -512,6 +507,32 @@
 								}
 							}
 						});
+					}
+					
+					/* 관심버튼 선택출력 */
+					function interest_print(){
+						if(${!empty user}){
+							$.ajax({
+								type : 'post',
+								url : '${pageContext.request.contextPath}/user/check_interest.do',
+								data : {book_id : '${requestScope.book.book_id}'},
+								error : function(request, status, error){
+							       	alert("code:"+request.status+"\n"+"error:"+error);
+							    },
+								success : function(r){
+									if(r == 0){
+										$('#interest').css('background-color', '#f56a6a');
+										$('#interest').append("관심+");
+									}else{
+										$('#interest').css('background-color', '#dadada');
+										$('#interest').append("관심-");
+									}
+								}
+							});							
+						}else{
+							$('#interest').css('display', 'none');
+							$('#view-cnt').css('left', '0');
+						}
 					}
 					
 				/* 리뷰 */
@@ -559,9 +580,6 @@
 							if(${empty user}){
 								alert("로그인이 필요한 서비스 입니다");
 								location.href = "${pageContext.request.contextPath}/user/login.do";
-								return false;
-							}else if($('textarea.form-control').eq(0).val()==""){
-								alert("글을 입력해 주세요");
 								return false;
 							}
 							return true;
@@ -615,7 +633,11 @@
 											a +=		'<span class="star_smallR1"></span>';
 											a +=		'<span class="star_smallR2"></span>';
 											a +=	'</div>';
-											a +=	'<div class="reviewForm3">' + reviews.items[i].content + '</div>';
+											a +=	'<div class="reviewForm3">';
+											if(reviews.items[i].content !=null){
+												a +=	reviews.items[i].content
+											}
+											a +=	'</div>';
 											a +=	'<div class="reviewForm4">' + reviews.items[i].review_reg_date + '</div>';
 											a +=	'<div class="reviewForm5">';
 											a +=		'<span class="good"><img src="${pageContext.request.contextPath}/resources/images/good.png"/><a>' + reviews.items[i].good + '</a></span>'
@@ -676,7 +698,6 @@
 							       	alert("code:"+request.status+"\n"+"error:"+error);
 							    },
 								success : function(r){
-									console.log(r.items);
 									for(var i=0; i<$(".review").length; i++){
 										if(r.items[i].reaction == 1){
 											$(".review").eq(i).children().eq("5").children().eq("0").css("border", "2px solid #f56a6a");
