@@ -74,8 +74,8 @@ create table review (
     ,   book_id         varchar2(20)
     ,   rating          number(2)
     ,   content         varchar2(4000)
-    ,   good            number(10)     
-    ,   bad             number(10)
+    ,   good            number(10)     default 0
+    ,   bad             number(10)     default 0
     ,   review_reg_date date              default sysdate
     ,   constraint review_id_fk foreign key(id)
         references db_user(id) on delete cascade

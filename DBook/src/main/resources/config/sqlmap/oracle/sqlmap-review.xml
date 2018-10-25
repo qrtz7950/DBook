@@ -59,6 +59,7 @@
 		  where review_no = #{review_no} and good_or_bad = #{good_or_bad}
 	</select>
 	
+	<!-- review good/bad 설정 -->
 	<update id="reviewGoodBadCalc" parameterType="reviewReactionVO">
 		update review
 		   set good = (select count(*)
@@ -69,5 +70,12 @@
 		                 where review_no = #{review_no} and good_or_bad = 0)
 		  where review_no = #{review_no}
 	</update>
+	
+	<!-- review_no로 book_id 조회 -->
+	<select id="getBookIdByReviewNo" resultType="string" parameterType="integer">
+		select book_id
+		  from review
+		  where review_no = #{review_no}
+	</select>
 	
 </mapper>

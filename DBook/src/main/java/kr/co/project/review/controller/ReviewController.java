@@ -98,4 +98,18 @@ public class ReviewController {
 		
 		return reaction;
 	}
+	
+	// 로그인 된 아이디와 띄어지는 review_no들을 대조하여 reaction 여부 확인
+	@ResponseBody
+	@RequestMapping(value="/reaction_border.do", method = RequestMethod.POST)
+	public JSONObject reaction_border(@RequestParam int[] review_no_list, HttpSession session) {
+		System.out.println("reaction_border() 진입");
+		
+		LoginVO user = (LoginVO) session.getAttribute("user");
+		String id = user.getId();
+		
+		JSONObject reactions = reviewService.reaction_check(id, review_no_list);
+		
+		return reactions;
+	}
 }

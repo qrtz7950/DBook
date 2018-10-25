@@ -112,4 +112,27 @@ public class ReviewService {
 		return reactions;
 	}
 	
+	// 로그인 된 아이디와 띄어지는 review_no들을 대조하여 reaction 여부 확인
+	public JSONObject reaction_check(String id, int[] review_no_list) {
+		String book_id = dao.getBookIdByReviewNo(review_no_list[0]);
+		ReviewReactionVO reviewReaction = new ReviewReactionVO();
+		reviewReaction.setId(id);
+		
+		JSONObject reactions = new JSONObject();
+		JSONArray jArray = new JSONArray();
+		
+		for(int review_no : review_no_list) {
+			JSONObject j = new JSONObject();
+			
+			reviewReaction.setReview_no(review_no);
+			int check = dao.check_review_reaction(reviewReaction);	// -1: 없음 / 0: bad / 1: good
+			j.put("reaction", check);
+			jArray.add(j);
+		}
+		reactions.put("name", "reactions");
+		reactions.put("items", jArray);
+		
+		return reactions;
+	}
+	
 }

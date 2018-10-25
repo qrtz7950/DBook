@@ -51,7 +51,14 @@ public class ReviewDAO {
 	
 	//----------------------------------------------review_reaction 관련----------------------------------------
 	
-	// review_reaction 확인
+	/**
+	 * review_reaction 확인<br>
+	 * -1 : 없음<br>
+	 * 0 : bad<br>
+	 * 1 : good
+	 * @param reviewReaction
+	 * @return int
+	 */
 	public int check_review_reaction(ReviewReactionVO reviewReaction) {
 		int check = -1;
 		ReviewReactionVO val = sqlSessionTemplate.selectOne("kr.co.project.review.dao.ReviewDAO.check_review_reaction", reviewReaction);
@@ -98,4 +105,11 @@ public class ReviewDAO {
 	public void reviewGoodBadCalc(int review_no) {
 		sqlSessionTemplate.update("kr.co.project.review.dao.ReviewDAO.reviewGoodBadCalc", review_no);
 	}
+	
+	// review_no로 book_id 조회
+	public String getBookIdByReviewNo(int review_no) {
+		return sqlSessionTemplate.selectOne("kr.co.project.review.dao.ReviewDAO.getBookIdByReviewNo", review_no);
+	}
+	
+	//--------------------------------------------------------------------------------------------------------
 }

@@ -270,6 +270,10 @@
 	cursor: pointer;
 }
 
+.good:hover, .bad:hover {
+	background-color: rgba(245, 106, 106, 0.05);
+}
+
 .good>img, .bad>img {
 	width: 15px;
 	margin-right: 2px;
@@ -579,7 +583,6 @@
 							       	alert("code:"+request.status+"\n"+"error:"+error);
 							    },
 								success : function(reviews){
-									console.log(reviews);
 									$("#reviews").children().remove()
 									
 									var totalPage = 0;
@@ -645,15 +648,51 @@
 									setTimeout(function(){
 										reviews_rating(curPage);
 										$('input[name=rating]').attr("value", getInputRating());
+										
+										reaction_border();
 									}, 500);
 								}
 							});
 						}
 					
+					/* good, bad 눌렀던 리뷰 border style 바꾸기 */
+					function reaction_border(){
+						
+						if(${!empty sessionScope.user} && $(".review").length != 0){
+							var review_no_list = new Array();
+							for(var i=0; i<$(".review").length; i++){
+								review_no_list[i] = $(".review").eq(i).children().eq("0").text();
+							}
+							
+							$.ajaxSettings.traditional = true;
+							$.ajax({
+								url : '${pageContext.request.contextPath}/review/reaction_border.do',
+								type : 'POST',
+								dataType : 'json',
+								data : {
+											review_no_list : review_no_list
+										},
+								error : function(request, status, error){
+							       	alert("code:"+request.status+"\n"+"error:"+error);
+							    },
+								success : function(r){
+									console.log(r.items);
+									for(var i=0; i<$(".review").length; i++){
+										if(r.items[i].reaction == 1){
+											$(".review").eq(i).children().eq("5").children().eq("0").css("border", "2px solid #f56a6a");
+										}else if(r.items[i].reaction ==0){
+											$(".review").eq(i).children().eq("5").children().eq("1").css("border", "2px solid #f56a6a");
+										}
+									}
+								}
+							});
+						}
+					}
+					
 					/* 리뷰 good 누를때 처리 */
 						// 동적 생성 태그는 onclick 대신 이렇게
 						$(document).on("click",".good",function (){
-							var temp_this = $(this);
+							var temp_this = $(this).parents().eq("0");
 							
 							if(${empty sessionScope.user}){
 								alert("로그인이 필요한 서비스 입니다");
@@ -662,8 +701,9 @@
 								$.ajax({
 									url : '${pageContext.request.contextPath}/review/review_react.do',
 									type : 'POST',
+									dataType : 'json',
 									data : {
-												review_no : temp_this.parents().eq("1").children().eq("0").text(),
+												review_no : temp_this.parents().eq("0").children().eq("0").text(),
 												id : '${sessionScope.user.id}',
 												good_or_bad : 1
 											},
@@ -671,9 +711,12 @@
 								       	alert("code:"+request.status+"\n"+"error:"+error);
 								    },
 									success : function(r){
-										console.log(r);
-										temp_this.children().eq("1").empty();
-										temp_this.children().eq("1").append(r.items[0].good);
+										temp_this.children().eq("0").css("border", "2px solid #f56a6a");
+										temp_this.children().eq("1").css("border", "1px solid #ededed");
+										temp_this.children().eq("0").children().eq("1").empty();
+										temp_this.children().eq("0").children().eq("1").append(r.items[0].good);
+										temp_this.children().eq("1").children().eq("1").empty();
+										temp_this.children().eq("1").children().eq("1").append(r.items[1].bad);
 									}
 								});
 							}
@@ -681,7 +724,7 @@
 					
 					/* 리뷰 bad 누를때 처리 */
 						$(document).on("click",".bad",function (){
-							var temp_this = $(this);
+							var temp_this = $(this).parents().eq("0");
 							
 							if(${empty sessionScope.user}){
 								alert("로그인이 필요한 서비스 입니다");
@@ -690,8 +733,9 @@
 								$.ajax({
 									url : '${pageContext.request.contextPath}/review/review_react.do',
 									type : 'POST',
+									dataType : 'json',
 									data : {
-												review_no : $(this).parents().eq("1").children().eq("0").text(),
+												review_no : temp_this.parents().eq("0").children().eq("0").text(),
 												id : '${sessionScope.user.id}',
 												good_or_bad : 0
 											},
@@ -699,8 +743,12 @@
 								       	alert("code:"+request.status+"\n"+"error:"+error);
 								    },
 									success : function(r){
-										temp_this.children().eq("1").empty();
-										temp_this.children().eq("1").append(r.items[1].bad);
+										temp_this.children().eq("0").css("border", "1px solid #ededed");
+										temp_this.children().eq("1").css("border", "2px solid #f56a6a");
+										temp_this.children().eq("0").children().eq("1").empty();
+										temp_this.children().eq("0").children().eq("1").append(r.items[0].good);
+										temp_this.children().eq("1").children().eq("1").empty();
+										temp_this.children().eq("1").children().eq("1").append(r.items[1].bad);
 									}
 								});
 							}
