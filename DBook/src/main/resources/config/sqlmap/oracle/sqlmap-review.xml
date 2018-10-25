@@ -32,5 +32,50 @@
 		  where book_id = #{book_id}
 	</select>
 	
+	<!-- review_reaction 확인 -->
+	<select id="check_review_reaction" resultType="reviewReactionVO" parameterType="reviewReactionVO">
+		select good_or_bad
+		  from review_reaction
+		  where review_no = #{review_no} and id = #{id}
+	</select>
+	
+	<!-- review_reaction 입력 -->
+	<insert id="insert_review_reaction" parameterType="reviewReactionVO">
+		insert into review_reaction(review_no, id, good_or_bad)
+			   values(#{review_no}, #{id}, #{good_or_bad})
+	</insert>
+	
+	<!-- review_reaction 수정 -->
+	<update id="update_review_reaction" parameterType="reviewReactionVO">
+		update review_reaction
+		   set good_or_bad = #{good_or_bad}
+		   where review_no = #{review_no} and id = #{id}
+	</update>
+	
+	<!-- review_no로 reaction 수 조회 -->
+	<select id="view_reaction_num" resultType="Integer" parameterType="reviewReactionVO">
+		select count(*)
+		  from review_reaction
+		  where review_no = #{review_no} and good_or_bad = #{good_or_bad}
+	</select>
+	
+	<!-- review good/bad 설정 -->
+	<update id="reviewGoodBadCalc" parameterType="reviewReactionVO">
+		update review
+		   set good = (select count(*)
+		                 from review_reaction
+		                 where review_no = #{review_no} and good_or_bad = 1),
+		       bad  = (select count(*)
+		                 from review_reaction
+		                 where review_no = #{review_no} and good_or_bad = 0)
+		  where review_no = #{review_no}
+	</update>
+	
+	<!-- review_no로 book_id 조회 -->
+	<select id="getBookIdByReviewNo" resultType="string" parameterType="integer">
+		select book_id
+		  from review
+		  where review_no = #{review_no}
+	</select>
 	
 </mapper>

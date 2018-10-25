@@ -213,6 +213,8 @@
 	padding: 0 20px;
 }
 
+.reviewForm0 {display: none;}
+
 .reviewForm1 {
 	font-size: 15px;
 	color: #2a2a2a;
@@ -266,6 +268,10 @@
 	border: 1px solid #ededed;
 	background-color: #fff;
 	cursor: pointer;
+}
+
+.good:hover, .bad:hover {
+	background-color: rgba(245, 106, 106, 0.05);
 }
 
 .good>img, .bad>img {
@@ -569,7 +575,6 @@
 					/* 리뷰 db에서 가져와서 출력 */
 						function reviews_print(curPage){
 							$.ajax({
-								type : 'post',
 								url : '${pageContext.request.contextPath}/review/bookDetail_review.do',
 								type : 'POST',
 								dataType : 'json',
@@ -595,6 +600,7 @@
 									for(var i=0; i<reviews.items.length; i++){
 										if(i>=(curPage-1)*numPerPage && i<curPage*numPerPage){
 											a += '<div id="review' + (i+1) + '" class="review">';
+											a += 	'<div class="reviewForm0">' + reviews.items[i].review_no + '</div>';
 											a += 	'<div class="reviewForm1">' + reviews.items[i].nickname + ' (' + reviews.items[i].id + ')</div>';
 											a +=	'<div class="reviewForm2">';
 											a +=		'<div class="rating_point">' + reviews.items[i].rating + '</div>';
@@ -642,10 +648,111 @@
 									setTimeout(function(){
 										reviews_rating(curPage);
 										$('input[name=rating]').attr("value", getInputRating());
+										
+										reaction_border();
 									}, 500);
 								}
 							});
 						}
+					
+					/* good, bad 눌렀던 리뷰 border style 바꾸기 */
+					function reaction_border(){
+						
+						if(${!empty sessionScope.user} && $(".review").length != 0){
+							var review_no_list = new Array();
+							for(var i=0; i<$(".review").length; i++){
+								review_no_list[i] = $(".review").eq(i).children().eq("0").text();
+							}
+							
+							$.ajaxSettings.traditional = true;
+							$.ajax({
+								url : '${pageContext.request.contextPath}/review/reaction_border.do',
+								type : 'POST',
+								dataType : 'json',
+								data : {
+											review_no_list : review_no_list
+										},
+								error : function(request, status, error){
+							       	alert("code:"+request.status+"\n"+"error:"+error);
+							    },
+								success : function(r){
+									console.log(r.items);
+									for(var i=0; i<$(".review").length; i++){
+										if(r.items[i].reaction == 1){
+											$(".review").eq(i).children().eq("5").children().eq("0").css("border", "2px solid #f56a6a");
+										}else if(r.items[i].reaction ==0){
+											$(".review").eq(i).children().eq("5").children().eq("1").css("border", "2px solid #f56a6a");
+										}
+									}
+								}
+							});
+						}
+					}
+					
+					/* 리뷰 good 누를때 처리 */
+						// 동적 생성 태그는 onclick 대신 이렇게
+						$(document).on("click",".good",function (){
+							var temp_this = $(this).parents().eq("0");
+							
+							if(${empty sessionScope.user}){
+								alert("로그인이 필요한 서비스 입니다");
+								location.href = "${pageContext.request.contextPath}/user/login.do";
+							}else{
+								$.ajax({
+									url : '${pageContext.request.contextPath}/review/review_react.do',
+									type : 'POST',
+									dataType : 'json',
+									data : {
+												review_no : temp_this.parents().eq("0").children().eq("0").text(),
+												id : '${sessionScope.user.id}',
+												good_or_bad : 1
+											},
+									error : function(request, status, error){
+								       	alert("code:"+request.status+"\n"+"error:"+error);
+								    },
+									success : function(r){
+										temp_this.children().eq("0").css("border", "2px solid #f56a6a");
+										temp_this.children().eq("1").css("border", "1px solid #ededed");
+										temp_this.children().eq("0").children().eq("1").empty();
+										temp_this.children().eq("0").children().eq("1").append(r.items[0].good);
+										temp_this.children().eq("1").children().eq("1").empty();
+										temp_this.children().eq("1").children().eq("1").append(r.items[1].bad);
+									}
+								});
+							}
+						});
+					
+					/* 리뷰 bad 누를때 처리 */
+						$(document).on("click",".bad",function (){
+							var temp_this = $(this).parents().eq("0");
+							
+							if(${empty sessionScope.user}){
+								alert("로그인이 필요한 서비스 입니다");
+								location.href = "${pageContext.request.contextPath}/user/login.do";
+							}else{
+								$.ajax({
+									url : '${pageContext.request.contextPath}/review/review_react.do',
+									type : 'POST',
+									dataType : 'json',
+									data : {
+												review_no : temp_this.parents().eq("0").children().eq("0").text(),
+												id : '${sessionScope.user.id}',
+												good_or_bad : 0
+											},
+									error : function(request, status, error){
+								       	alert("code:"+request.status+"\n"+"error:"+error);
+								    },
+									success : function(r){
+										temp_this.children().eq("0").css("border", "1px solid #ededed");
+										temp_this.children().eq("1").css("border", "2px solid #f56a6a");
+										temp_this.children().eq("0").children().eq("1").empty();
+										temp_this.children().eq("0").children().eq("1").append(r.items[0].good);
+										temp_this.children().eq("1").children().eq("1").empty();
+										temp_this.children().eq("1").children().eq("1").append(r.items[1].bad);
+									}
+								});
+							}
+						});
 					
 				/* 창크기 반응 */
 					function detailForm(){

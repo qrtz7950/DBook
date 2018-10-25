@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.project.login.vo.LoginVO;
 import kr.co.project.review.service.ReviewService;
 import kr.co.project.review.vo.ReviewVO;
+import kr.co.project.review_reaction.vo.ReviewReactionVO;
 
 @Controller
 @RequestMapping("/review")
@@ -75,7 +76,7 @@ public class ReviewController {
 		return;
 	}
 	
-	// book_id로 해당 책 평점 조회
+	// book_id로 해당 책 평점 평균 조회
 	@ResponseBody
 	@RequestMapping(value="/avg_rating.do", method = RequestMethod.POST)
 	public String avg_rating(@RequestParam(value="book_id") String book_id) {
@@ -84,5 +85,31 @@ public class ReviewController {
 		String rating_point  = reviewService.book_avg_rating(book_id);
 		
 		return rating_point;
+	}
+	
+	// review_no, id, good_or_bad 로 리뷰 good/bad 선택 실행
+	@ResponseBody
+	@RequestMapping(value="/review_react.do", method = RequestMethod.POST)
+	public JSONObject review_react(@ModelAttribute ReviewReactionVO reviewReaction) {
+		System.out.println("review_react() 진입");
+		//System.out.println(reviewReaction);
+		
+		JSONObject reaction = reviewService.review_react(reviewReaction);
+		
+		return reaction;
+	}
+	
+	// 로그인 된 아이디와 띄어지는 review_no들을 대조하여 reaction 여부 확인
+	@ResponseBody
+	@RequestMapping(value="/reaction_border.do", method = RequestMethod.POST)
+	public JSONObject reaction_border(@RequestParam int[] review_no_list, HttpSession session) {
+		System.out.println("reaction_border() 진입");
+		
+		LoginVO user = (LoginVO) session.getAttribute("user");
+		String id = user.getId();
+		
+		JSONObject reactions = reviewService.reaction_check(id, review_no_list);
+		
+		return reactions;
 	}
 }
