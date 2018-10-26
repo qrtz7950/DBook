@@ -57,4 +57,16 @@
 		  where id=#{id} and book_id=#{book_id}
 	</select>
 	
+	<!-- interest 등록 -->
+	<insert id="insert_interest" parameterType="reviewVO">
+		insert into interest(id, book_id)
+					values(#{id}, #{book_id})
+	</insert>
+	
+	<!-- interest 삭제 -->
+	<delete id="delete_interest" parameterType="reviewVO">
+		delete from interest
+		 where id = #{id} and book_id = #{book_id}
+	</delete>
+	
 </mapper>

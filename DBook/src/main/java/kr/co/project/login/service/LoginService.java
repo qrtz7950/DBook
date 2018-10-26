@@ -89,6 +89,17 @@ public class LoginService{
 		return dao.check_interest(id, book_id);
 	}
 	
+	// 상황에 따라 interest 입력/삭제
+	public void manage_interest(String id, String interest, String book_id) {
+		if(interest.equals("yes")) {
+			dao.insert_interest(id, book_id);
+		}else if(interest.equals("no")) {
+			dao.delete_interest(id, book_id);
+		}
+		
+		return;
+	}
+	
 	
 	
 }

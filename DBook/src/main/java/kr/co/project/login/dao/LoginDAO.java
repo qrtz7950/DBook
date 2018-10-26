@@ -78,11 +78,41 @@ public class LoginDAO{
 	public void addUserInfo(LoginVO user) {
 		user = sqlSessionTemplate.selectOne("kr.co.project.login.dao.LoginDAO.updateAll", user);
 	}
-
+	
+	/**
+	 * 해당 책 , 사용자의 interest 확인
+	 * @param id
+	 * @param book_id
+	 * @return
+	 */
 	public int check_interest(String id, String book_id) {
 		ReviewVO review = new ReviewVO();
 		review.setId(id);
 		review.setBook_id(book_id);
 		return sqlSessionTemplate.selectOne("kr.co.project.login.dao.LoginDAO.check_interest", review);
+	}
+	
+	/**
+	 * interest 등록
+	 * @param id
+	 * @param book_id
+	 */
+	public void insert_interest(String id, String book_id) {
+		ReviewVO review = new ReviewVO();
+		review.setId(id);
+		review.setBook_id(book_id);
+		sqlSessionTemplate.insert("kr.co.project.login.dao.LoginDAO.insert_interest", review);
+	}
+	
+	/**
+	 * interest 삭제
+	 * @param id
+	 * @param book_id
+	 */
+	public void delete_interest(String id, String book_id) {
+		ReviewVO review = new ReviewVO();
+		review.setId(id);
+		review.setBook_id(book_id);
+		sqlSessionTemplate.insert("kr.co.project.login.dao.LoginDAO.delete_interest", review);
 	}
 }

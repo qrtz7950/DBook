@@ -63,14 +63,25 @@ public class BookController {
 		ModelAndView mav = new ModelAndView();
 		
 		if(book!=null) {
-			String[] book_introduction = book.getBook_introduction().split(";");
-			String[] author_introduction = book.getAuthor_introduction().split(";");
-			String[] contents = book.getContents().split(";");
+			String book_intro = book.getBook_introduction();
+			String author_intro = book.getAuthor_introduction();
+			String cont = book.getContents();
+			
+			if(book_intro != null) {
+				String[] book_introduction = book.getBook_introduction().split(";");
+				mav.addObject("book_introduction", book_introduction);
+			}
+			if(author_intro != null) {
+				String[] author_introduction = book.getAuthor_introduction().split(";");
+				mav.addObject("author_introduction", author_introduction);
+			}
+			if(cont != null) {
+				String[] contents = book.getContents().split(";");
+				mav.addObject("contents", contents);
+			}
 			
 			mav.addObject("book", book);
-			mav.addObject("book_introduction", book_introduction);
-			mav.addObject("author_introduction", author_introduction);
-			mav.addObject("contents", contents);
+			
 			//mav.setViewName("forward:/review/bookDetail_review.do");
 			mav.setViewName("/bookDetail/detail");
 		}

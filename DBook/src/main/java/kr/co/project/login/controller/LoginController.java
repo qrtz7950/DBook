@@ -167,4 +167,16 @@ public class LoginController {
 		
 		return loginService.check_interest(id, book_id);
 	}
+	
+	// user의 해당책 interest 추가 삭제
+		@ResponseBody
+		@RequestMapping(value="/user/manage_interest.do")
+		public void manage_interest(@RequestParam String book_id, @RequestParam String interest, HttpSession session) {
+			LoginVO user = (LoginVO) session.getAttribute("user");
+			String id = user.getId();
+			
+			loginService.manage_interest(id, interest, book_id);
+			
+			return;
+		}
 }

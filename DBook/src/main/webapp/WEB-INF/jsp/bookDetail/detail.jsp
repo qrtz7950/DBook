@@ -65,6 +65,7 @@
 	position: inherit;
 	display: inline-block;
 	cursor: pointer;
+	text-align: center;
 }
 
 #view-cnt {
@@ -525,7 +526,7 @@
 										$('#interest').append("관심 +");
 									}else{
 										$('#interest').css('background-color', '#dadada');
-										$('#interest').append("관심 -");
+										$('#interest').append("해제");
 									}
 								}
 							});							
@@ -537,10 +538,42 @@
 					
 					/* 관심버튼 누를때 */
 					$(document).on("click","#interest",function (){
-						if($('#interest').text()=='관심 +'){
-							console.log('관심  +');
-						}else if($('#interest').text() == '관심 -'){
-							console.log('관심 -');
+						if(check_login()){
+							if($('#interest').text()=='관심 +'){
+								$.ajax({
+									type : 'post',
+									url : '${pageContext.request.contextPath}/user/manage_interest.do',
+									data : {
+												book_id : '${requestScope.book.book_id}',
+												interest : 'yes' 
+											},
+									error : function(request, status, error){
+								       	alert("code:"+request.status+"\n"+"error:"+error);
+								    },
+									success : function(){
+										$('#interest').css('background-color', '#dadada');
+										$('#interest').empty();
+										$('#interest').append("해제");
+									}
+								});
+							}else if($('#interest').text() == '해제'){
+								$.ajax({
+									type : 'post',
+									url : '${pageContext.request.contextPath}/user/manage_interest.do',
+									data : {
+										book_id :'${requestScope.book.book_id}',
+										interest : 'no' 
+									},
+									error : function(request, status, error){
+								       	alert("code:"+request.status+"\n"+"error:"+error);
+								    },
+									success : function(){
+										$('#interest').css('background-color', '#f56a6a');
+										$('#interest').empty();
+										$('#interest').append("관심 +");
+									}
+								});
+							}
 						}
 					});
 					
