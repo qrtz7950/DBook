@@ -9,7 +9,9 @@
 		<typeAlias type="kr.co.project.book.vo.BookVO" alias="bookVO"/>
 		<typeAlias type="kr.co.project.review.vo.ReviewVO" alias="reviewVO"/>
 		<typeAlias type="kr.co.project.mypage.vo.MinBookVO" alias="minBookVO"/>
+		<typeAlias type="kr.co.project.mypage.vo.MypageVO" alias="mypageVO"/>
 		<typeAlias type="kr.co.project.review_reaction.vo.ReviewReactionVO" alias="reviewReactionVO"/>
+		
 	</typeAliases>
 	
 </configuration>

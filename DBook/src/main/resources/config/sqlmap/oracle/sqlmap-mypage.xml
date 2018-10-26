@@ -13,12 +13,13 @@
 	</select>
 	
 	<!-- id로 리뷰 리스트 불러오기-->	
-	<select id="reviews" resultType="reviewVO" parameterType="string">
-		select review_no, r.id, book_id, rating, content, good, bad, to_char(review_reg_date, 'yyyy-mm-dd') as review_reg_date, nickname
-		  from review r inner join db_user u
-		    on r.id = u.id
-		  where r.id = #{id}
-		  order by review_no desc
+	<select id="reviews" resultType="MypageVO" parameterType="string">
+		select b.book_id, b.book_name, b.cover, b.author, b.publisher, r.review_no, r.rating, r.content, r.good, r.bad, r.review_reg_date
+		  from review r inner join book b
+		    on b.book_id = r.book_id inner join db_user d
+		    on r.id = d.id
+		where  d.id = #{id}
+		order by r.review_no desc
 	</select>
 	
 </mapper>

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.project.mypage.vo.MinBookVO;
-import kr.co.project.review.vo.ReviewVO;
+import kr.co.project.mypage.vo.MypageVO;
 
 @Repository
 public class MypageDAO {
@@ -20,8 +20,8 @@ public class MypageDAO {
 		return books;
 	}
 
-	public List<ReviewVO> reviewListById(String id) {
-		List<ReviewVO> reviews = sqlSessionTemplate.selectList("kr.co.project.mypage.dao.MypageDAO.reviews", id);
+	public List<MypageVO> reviewListById(String id) {
+		List<MypageVO> reviews = sqlSessionTemplate.selectList("kr.co.project.mypage.dao.MypageDAO.reviews", id);
 		return reviews;
 	}
 

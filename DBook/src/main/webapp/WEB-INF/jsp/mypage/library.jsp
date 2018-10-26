@@ -93,19 +93,37 @@
 													<span>내가 쓴 리뷰</span>
 													<a class="review-book more cursor">M O R E</a>
 												</div>
-												
-												<div class="articles review-book-list">
-													<c:forEach begin="1" end="4">
+												<div id="reviews"></div>
+												<div id="review-page"></div>
+
+													<!-- <div class="reviewForm-base">
+														<div class="review-cover"><img src="/DBook/resources/images/book01.jpg"></div>
+															<div id="review1" class="review">
+																<div class="reviewForm0">42</div>
+																<div class="reviewForm1">q (q)</div>
+																<div class="reviewForm2">
+																	<div class="rating_point">7</div>
+																	<span class="star_smallR1 on"></span><span
+																		class="star_smallR2 on"></span><span class="star_smallR1 on"></span><span
+																		class="star_smallR2 on"></span><span class="star_smallR1 on"></span><span
+																		class="star_smallR2 on"></span><span class="star_smallR1 on"></span><span
+																		class="star_smallR2"></span><span class="star_smallR1"></span><span
+																		class="star_smallR2"></span>
+																</div>
+																<div class="reviewForm3">asfaeg</div>
+																<div class="reviewForm4">2018-10-26</div>
+																<div class="reviewForm5">
+																	<span class="good"><img
+																		src="/DBook/resources/images/good.png"><a>0</a></span><span
+																		class="bad" style="border: 2px solid rgb(245, 106, 106);"><img
+																		src="/DBook/resources/images/bad.png"><a>1</a></span>
+																</div>
+															</div>
+													</div> -->
 													
-													<article>
-													   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
-													   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
-													   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
-													</article>
 													
-													</c:forEach>
+													
 												</div>
-												<div class="view-more hidden review-view-more"><img src="/DBook/resources/images/arrow-60.png"></div>
 											</div>
 											
 			                             </div>
@@ -127,13 +145,13 @@
 		<!-- Scripts -->
 			<jsp:include page="../include/JS.jsp"></jsp:include>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
-			<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
+			<script src="../resources/assets/js/slide2.js"></script>
 			<script type="text/javascript">
 			
 			$(document).ready(function() {
 				bookmarkViewMore();
-				reviewViewMore();
 				category_toggle();
+				reviews_print(1);
 			});
 
 			$(window).resize(function(){
@@ -197,13 +215,6 @@
 			}
 			
 			function addBook(data) {
-				console.log(data);
-				console.log(data.items[0].cover);
-				console.log(data.items[0].book_id);
-				console.log(data.items[0].book_name);
-				console.log(data.items[0].publisher);
-				console.log(data.items[0].author);
-				
 				var s = "";
 					s += '<div class = "bookmark-div-articles">';
 				for(var i =0; i<data.items.length; i++){
@@ -218,26 +229,6 @@
 				
 			}
 			
-			function addReview(data) {
-				console.log(data);
-			}
-			
-			function reviewViewMore() {
-				$.ajax({
-					url : '../mypage/review.json',
-					type : 'POST',
-					dataType : 'json',
-					data : {id :'${sessionScope.user.id}', nTh:reviewNTh},
-					error : function(request, status, error){
-				       	alert("code:"+request.status+"\n"+"error:"+error);
-				    },
-					success : function(data){
-						addReview(data);
-						reviewNTh++;
-					}
-				});
-			}
-			
 			$('.bookmark-view-more').click(function() {
 				bookmarkViewMore();
 			});
@@ -246,7 +237,206 @@
 				reviewViewMore();
 			});
 			
+			/* 리뷰 db에서 가져와서 출력 */
+			function reviews_print(curPage){
+				$.ajax({
+					url : '../mypage/review.json',
+					type : 'POST',
+					dataType : 'json',
+					data : {},
+					error : function(request, status, error){
+				       	alert("code:"+request.status+"\n"+"error:"+error);
+				    },
+					success : function(reviews){
+						
+						console.log(reviews);
+						
+						$("#reviews").children().remove()
+						
+						var totalPage = 0;
+						var numPerPage = 10;
+						
+						if(reviews.items.length != 0){
+							totalPage = Math.ceil(reviews.items.length / numPerPage);
+						}
+						var a = '';
+						for(var i=0; i<reviews.items.length; i++){
+							if(i>=(curPage-1)*numPerPage && i<curPage*numPerPage){
+								
+								a += '<div class="reviewForm-base">';
+								a += 	'<div class="review-cover"><img src="' + reviews.items[i].cover + '"></div>';
+								a += 		'<div id="review' + (i+1) + '" class="review">';
+								a += 			'<div class="reviewForm0">' + reviews.items[i].review_no + '</div>';
+								a += 			'<div class="reviewForm1">'+ reviews.items[i].book_name +'</div>';
+								a +=			'<div class="reviewForm2">';
+								a +=				'<div class="rating_point">' + reviews.items[i].rating + '</div>';
+								a +=				'<span class="star_smallR1"></span>';
+								a +=				'<span class="star_smallR2"></span>';
+								a +=				'<span class="star_smallR1"></span>';
+								a +=				'<span class="star_smallR2"></span>';
+								a +=				'<span class="star_smallR1"></span>';
+								a +=				'<span class="star_smallR2"></span>';
+								a +=				'<span class="star_smallR1"></span>';
+								a +=				'<span class="star_smallR2"></span>';
+								a +=				'<span class="star_smallR1"></span>';
+								a +=				'<span class="star_smallR2"></span>';
+								a +=			'</div>';
+								a +=			'<div class="reviewForm3">';
+								if(reviews.items[i].content !=null){
+									a +=	reviews.items[i].content
+								}
+								a +=			'</div>';
+								a +=			'<div class="reviewForm4">' + reviews.items[i].review_reg_date + '</div>';
+								a +=			'<div class="reviewForm5">';
+								a +=				'<span class="good"><img src="${pageContext.request.contextPath}/resources/images/good.png"/><a>' + reviews.items[i].good + '</a></span>'
+								a +=				'<span class="bad"><img src="${pageContext.request.contextPath}/resources/images/bad.png"/><a>' + reviews.items[i].bad + '</a></span>'
+								a +=			'</div>';
+								a += 		'</div><br>';
+								a += 	'</div>';
+								a += '</div>';
+							}
+						}
+						$("#reviews").append(a);
+						
+						$("#review-page").empty();
+						var b = '';
+						b += '<a class="page-number" href="javascript:reviews_print(1)"> << </a>';
+						if(curPage<5){
+							for(var i=1; i<=(totalPage<5?totalPage:5); i++){
+								b += '<a class="page-number" href="javascript:reviews_print(' + i + ')">' + i + '</a>';
+							}
+						}else if(curPage+3 > totalPage){
+							for(var i=totalPage-4; i<=totalPage; i++){
+								b += '<a class="page-number" href="javascript:reviews_print(' + i + ')">' + i + '</a>';
+							}
+						}else{
+							for(var i=curPage-2; i<=curPage+2; i++){
+								b += '<a class="page-number" href="javascript:reviews_print(' + i + ')">' + i + '</a>';
+							}
+						}
+						b += '<a class="page-number" href="javascript:reviews_print(' + totalPage + ')"> >> </a>'
+						$("#review-page").append(b);
+						
+						setTimeout(function(){
+							reviews_rating(curPage);
+							$('input[name=rating]').attr("value", getInputRating());
+							
+							reaction_border();
+						}, 500);
+					}
+				});
+			}
 			
+			function getInputRating(){
+				return $("#rating span.on").length;
+			}
+		
+			function reviews_rating(curPage){
+				for(var i=(curPage-1)*10+1; i<=curPage*10; i++){
+					if($("#review"+i).children(".reviewForm2").children(".rating_point").text() != 0){
+						rating_point = $("#review"+i).children(".reviewForm2").children(".rating_point").text()-1;
+						$("#review"+i).children(".reviewForm2").children("span").eq(rating_point).addClass('on').prevAll('span').addClass('on');
+					}
+				}
+			}
+			
+			/* 리뷰 good 누를때 처리 */
+			// 동적 생성 태그는 onclick 대신 이렇게
+			$(document).on("click",".good",function (){
+				var temp_this = $(this).parents().eq("0");
+				
+				if(${empty sessionScope.user}){
+					alert("로그인이 필요한 서비스 입니다");
+					location.href = "../user/login.do";
+				}else{
+					$.ajax({
+						url : '../mypage/review_react.do',
+						type : 'POST',
+						dataType : 'json',
+						data : {
+									review_no : temp_this.parents().eq("0").children().eq("0").text(),
+									id : '${sessionScope.user.id}',
+									good_or_bad : 1
+								},
+						error : function(request, status, error){
+					       	alert("code:"+request.status+"\n"+"error:"+error);
+					    },
+						success : function(r){
+							temp_this.children().eq("0").css("border", "2px solid #f56a6a");
+							temp_this.children().eq("1").css("border", "1px solid #ededed");
+							temp_this.children().eq("0").children().eq("1").empty();
+							temp_this.children().eq("0").children().eq("1").append(r.items[0].good);
+							temp_this.children().eq("1").children().eq("1").empty();
+							temp_this.children().eq("1").children().eq("1").append(r.items[1].bad);
+						}
+					});
+				}
+			});
+		
+		/* 리뷰 bad 누를때 처리 */
+			$(document).on("click",".bad",function (){
+				var temp_this = $(this).parents().eq("0");
+				
+				if(${empty sessionScope.user}){
+					alert("로그인이 필요한 서비스 입니다");
+					location.href = "../user/login.do";
+				}else{
+					$.ajax({
+						url : '../mypage/review_react.do',
+						type : 'POST',
+						dataType : 'json',
+						data : {
+									review_no : temp_this.parents().eq("0").children().eq("0").text(),
+									id : '${sessionScope.user.id}',
+									good_or_bad : 0
+								},
+						error : function(request, status, error){
+					       	alert("code:"+request.status+"\n"+"error:"+error);
+					    },
+						success : function(r){
+							temp_this.children().eq("0").css("border", "1px solid #ededed");
+							temp_this.children().eq("1").css("border", "2px solid #f56a6a");
+							temp_this.children().eq("0").children().eq("1").empty();
+							temp_this.children().eq("0").children().eq("1").append(r.items[0].good);
+							temp_this.children().eq("1").children().eq("1").empty();
+							temp_this.children().eq("1").children().eq("1").append(r.items[1].bad);
+						}
+					});
+				}
+			});
+		
+			/* good, bad 눌렀던 리뷰 border style 바꾸기 */
+			function reaction_border(){
+				
+				if(${!empty sessionScope.user} && $(".review").length != 0){
+					var review_no_list = new Array();
+					for(var i=0; i<$(".review").length; i++){
+						review_no_list[i] = $(".review").eq(i).children().eq("0").text();
+					}
+					
+					$.ajaxSettings.traditional = true;
+					$.ajax({
+						url : '${pageContext.request.contextPath}/review/reaction_border.do',
+						type : 'POST',
+						dataType : 'json',
+						data : {
+									review_no_list : review_no_list
+								},
+						error : function(request, status, error){
+					       	alert("code:"+request.status+"\n"+"error:"+error);
+					    },
+						success : function(r){
+							for(var i=0; i<$(".review").length; i++){
+								if(r.items[i].reaction == 1){
+									$(".review").eq(i).children().eq("5").children().eq("0").css("border", "2px solid #f56a6a");
+								}else if(r.items[i].reaction ==0){
+									$(".review").eq(i).children().eq("5").children().eq("1").css("border", "2px solid #f56a6a");
+								}
+							}
+						}
+					});
+				}
+			}
 			
 			</script>
 			

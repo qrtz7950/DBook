@@ -5,7 +5,9 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.project.login.vo.LoginVO;
 import kr.co.project.mypage.service.MypageService;
+import kr.co.project.review.service.ReviewService;
+import kr.co.project.review_reaction.vo.ReviewReactionVO;
 
 @Controller
 @RestController
@@ -22,6 +26,9 @@ public class MypageController {
 	@Autowired
 	private MypageService mpService;
 	
+	@Autowired
+	private ReviewService rvService;
+	
 	// 마이 페이지
 	@RequestMapping(("/library.do"))
 	public ModelAndView mypage(HttpSession session) {
@@ -30,10 +37,6 @@ public class MypageController {
 		
 		LoginVO user = (LoginVO) session.getAttribute("user");
 		
-		//최초로 보여줄 3개의 카테고리의 4개를 뽑아와야함
-		//북마크
-		//최근에 본 책
-		//리뷰
 		mav.setViewName("mypage/library");
 		
 		return mav;
@@ -53,18 +56,29 @@ public class MypageController {
 		return books;
 	}
 	
+	
 	@ResponseBody
-	@RequestMapping(("/review.json"))
-	public JSONObject ratedReview(@RequestParam(value="id") String id, @RequestParam(value="nTh") int nTh) {
-		System.out.println("ratedReview()진입");
-		int start = 10 * nTh + 1;
-		int end = 10 * nTh + 10;
-		System.out.println("해당 시행은 " + (nTh+1) + "번째 시행입니다");
-		System.out.println(id + "의 리뷰를 가져옴" + start + "번째부터" + end + "번째까지");
+	@RequestMapping(value="/review.json", method = RequestMethod.POST)
+	public JSONObject mypageReview(HttpSession session) {
+		System.out.println("mypageReview()진입");
 		
-		JSONObject reviews = mpService.ratedReview(id,start,end);
+		LoginVO user = (LoginVO) session.getAttribute("user");
+
+		JSONObject reviews = mpService.review(user.getId());
 		
 		return reviews;
+	}
+	
+	// review_no, id, good_or_bad 로 리뷰 good/bad 선택 실행
+	@ResponseBody
+	@RequestMapping(value="/review_react.do", method = RequestMethod.POST)
+	public JSONObject mypageReview_react(@ModelAttribute ReviewReactionVO reviewReaction) {
+		System.out.println("mypageReview_react() 진입");
+		//System.out.println(reviewReaction);
+		
+		JSONObject reaction = rvService.review_react(reviewReaction);
+		
+		return reaction;
 	}
 	
 	@RequestMapping(("/userRating.do"))
@@ -80,6 +94,7 @@ public class MypageController {
 		
 		return mav;
 	}
+
 }
 
 

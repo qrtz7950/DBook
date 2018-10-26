@@ -27,7 +27,7 @@
 
 #category-content{
 	width:83%;
-	display: inline-flex;
+	display: inline-block;
 }
 
 #category-content .posts {
@@ -97,10 +97,6 @@
 	text-decoration: none; 
 }
 
-.bookmark-book-content{
-	width: 100%;
-}
-
 .articles{
 	margin:0;
 	padding:0;
@@ -135,4 +131,197 @@
 .recent-div-articles{
 	display:inline-flex;
 }
+
+.recent-book-content{
+	display:inline-block;
+}
+.bookmark-book-content{
+	display:inline-block;
+}
+
+.review-book-list{
+	display:inline-flex;
+}
+
+/* 병문스 */
+
+/* 별점 */
+.star_smallR1 {
+	background:
+		url('../../images/star_small.png')
+		no-repeat -26px 0;
+	background-size: auto 100%;
+	width: 7.5px;
+	height: 15px;
+	float: left;
+	text-indent: -9999px;
+}
+
+.star_smallR2 {
+	background:
+		url('../../images/star_small.png')
+		no-repeat right 0;
+	background-size: auto 100%;
+	width: 7.5px;
+	height: 15px;
+	float: left;
+	text-indent: -9999px;
+}
+
+#rating>span {
+	cursor: pointer;
+}
+
+#avg_rating {
+	display: inline-block;
+	height: 30px;
+}
+
+#rating {
+	display: inline-block;
+	height: 20px;
+	margin-left: 20px;
+	position: relative;
+	top: -3px;
+}
+
+.reviewForm2>span {
+	width: 8px;
+	height: 16px;
+}
+
+.starR1.on {
+	background-position: 0 0;
+}
+
+.starR2.on {
+	background-position: -15px 0;
+}
+
+.star_smallR1.on {
+	background-position: 0 0;
+}
+
+.star_smallR2.on {
+	background-position: -7.5px 0;
+}
+
+/* 리뷰 */
+#reviews {
+	width:100%;
+	padding: 0 17% 0 0%;
+}
+.review {
+    width: 70%;
+    margin: 5.625% 5% 0 0;
+}
+
+.reviewForm-base{
+	width:100%;
+    height: 200px;
+	display: inline-flex;
+}
+
+.reviewForm-base :after{
+	
+	border-bottom: 1px solid #dadada;
+}
+
+
+
+.review-cover{
+	text-align: center;
+}
+
+.review-cover > img{
+	width: 50%;
+	margin-bottom: 5%;
+}
+
+.reviewForm0 {display: none;}
+
+.reviewForm1 {
+	font-size: 15px;
+	color: #2a2a2a;
+	line-height: 25px;
+	font-weight: 800;
+	display: inline;
+}
+
+.reviewForm2 {
+	display: inline-block;
+	margin-left: 15px;
+	position: relative;
+	top: 2px;
+}
+
+.reviewForm3 {
+	font-size: 13px;
+	color: black;
+	line-height: 18px;
+	word-break: break-all;
+	padding: 5px;
+}
+
+.reviewForm4 {
+	display: inline;
+}
+
+.reviewForm5 {
+	float: right;
+	display: inline-block;
+}
+
+.rating_point {
+	display: none;
+}
+
+.page-number {
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	border: none;
+}
+
+.good, .bad {
+	float: left;
+	position: relative;
+	min-width: 15px;
+	padding: 1px 7px;
+	margin: 0 2px;
+	margin-bottom: 2px;
+	border: 1px solid #ededed;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.good:hover, .bad:hover {
+	background-color: rgba(245, 106, 106, 0.05);
+}
+
+.good>img, .bad>img {
+	width: 15px;
+	margin-right: 2px;
+}
+
+.good>a, .bad>a {
+	color: #7f888f;
+	border: none;
+}
+
+#review-submit {
+	font-family: "Roboto", sans-serif;
+	text-transform: uppercase;
+	outline: 0;
+	border: 0;
+	font-size: 12px;
+	cursor: pointer;
+	border-radius: 5px;
+	margin: -30px 0 10px 15px;
+}
+
+#review-page {
+	text-align: center;
+}
+
 

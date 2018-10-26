@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import kr.co.project.mypage.dao.MypageDAO;
 import kr.co.project.mypage.vo.MinBookVO;
-import kr.co.project.review.dao.ReviewDAO;
-import kr.co.project.review.vo.ReviewVO;
+import kr.co.project.mypage.vo.MypageVO;
+import kr.co.project.review_reaction.vo.ReviewReactionVO;
 
 @Service
 public class MypageService {
@@ -49,38 +49,38 @@ public class MypageService {
 		return books;
 	}
 
-	public JSONObject ratedReview(String id, int start, int end) {
+	public JSONObject review(String id) {
 		
-		List<ReviewVO> review_list = dao.reviewListById(id);
+		List<MypageVO> review_list = dao.reviewListById(id);
 		JSONObject reviews = new JSONObject();
 		
 		try {
 			JSONArray jArray = new JSONArray();
-			
-			if(review_list.size() > start) {
-				if(review_list.size() < end)
-					end = review_list.size();
+			for(int i=0; i<review_list.size(); i++) {
+				JSONObject j = new JSONObject();
+				j.put("review_no", review_list.get(i).getReview_no());
+				j.put("book_id", review_list.get(i).getBook_id());
+				j.put("rating", review_list.get(i).getRating());
+				j.put("content", review_list.get(i).getContent());
+				j.put("good", review_list.get(i).getGood());
+				j.put("bad", review_list.get(i).getBad());
+				j.put("review_reg_date", review_list.get(i).getReview_reg_date());
+				j.put("book_id", review_list.get(i).getBook_id());
+				j.put("book_name", review_list.get(i).getBook_name());
+				j.put("cover", review_list.get(i).getCover());
+				j.put("author", review_list.get(i).getAuthor());
+				j.put("publisher", review_list.get(i).getPublisher());
 				
-				for(int i=start-1; i<=end-1; i++) {
-					JSONObject j = new JSONObject();
-					j.put("review_no", review_list.get(i).getReview_no());
-					j.put("id", review_list.get(i).getId());
-					j.put("nickname", review_list.get(i).getNickname());
-					j.put("book_id", review_list.get(i).getBook_id());
-					j.put("rating", review_list.get(i).getRating());
-					j.put("content", review_list.get(i).getContent());
-					j.put("good", review_list.get(i).getGood());
-					j.put("bad", review_list.get(i).getBad());
-					j.put("review_reg_date", review_list.get(i).getReview_reg_date());
-					jArray.add(j);
-				}
-				reviews.put("items", jArray);
+				jArray.add(j);
 			}
+			
+			reviews.put("items", jArray);
+			
+			System.out.println(reviews.toString());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 		return reviews;
 	}
-
 }
