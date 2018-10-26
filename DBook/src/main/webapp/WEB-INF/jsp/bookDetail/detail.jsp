@@ -65,6 +65,7 @@
 	position: inherit;
 	display: inline-block;
 	cursor: pointer;
+	text-align: center;
 }
 
 #view-cnt {
@@ -440,7 +441,7 @@
 						style="margin-top: 20px; margin-bottom: 20px;">
 						<form name="reviewInputForm"
 							action="${pageContext.request.contextPath}/review/write.do"
-							onsubmit="return check_before_input()" method="post">
+							onsubmit="return check_login()" method="post">
 							<div class="input-group" style="width: 95%; margin: 0 auto;">
 								<input type="hidden" name="id" value="${sessionScope.user.id}">
 								<input type="hidden" name="book_id"
@@ -511,7 +512,7 @@
 					
 					/* 관심버튼 선택출력 */
 					function interest_print(){
-						if(${!empty user}){
+						if(${!empty sessionScope.user}){
 							$.ajax({
 								type : 'post',
 								url : '${pageContext.request.contextPath}/user/check_interest.do',
@@ -522,18 +523,59 @@
 								success : function(r){
 									if(r == 0){
 										$('#interest').css('background-color', '#f56a6a');
-										$('#interest').append("관심+");
+										$('#interest').append("관심 +");
 									}else{
 										$('#interest').css('background-color', '#dadada');
-										$('#interest').append("관심-");
+										$('#interest').append("해제");
 									}
 								}
 							});							
 						}else{
-							$('#interest').css('display', 'none');
-							$('#view-cnt').css('left', '0');
+							$('#interest').css('background-color', '#f56a6a');
+							$('#interest').append("관심 +");
 						}
 					}
+					
+					/* 관심버튼 누를때 */
+					$(document).on("click","#interest",function (){
+						if(check_login()){
+							if($('#interest').text()=='관심 +'){
+								$.ajax({
+									type : 'post',
+									url : '${pageContext.request.contextPath}/user/manage_interest.do',
+									data : {
+												book_id : '${requestScope.book.book_id}',
+												interest : 'yes' 
+											},
+									error : function(request, status, error){
+								       	alert("code:"+request.status+"\n"+"error:"+error);
+								    },
+									success : function(){
+										$('#interest').css('background-color', '#dadada');
+										$('#interest').empty();
+										$('#interest').append("해제");
+									}
+								});
+							}else if($('#interest').text() == '해제'){
+								$.ajax({
+									type : 'post',
+									url : '${pageContext.request.contextPath}/user/manage_interest.do',
+									data : {
+										book_id :'${requestScope.book.book_id}',
+										interest : 'no' 
+									},
+									error : function(request, status, error){
+								       	alert("code:"+request.status+"\n"+"error:"+error);
+								    },
+									success : function(){
+										$('#interest').css('background-color', '#f56a6a');
+										$('#interest').empty();
+										$('#interest').append("관심 +");
+									}
+								});
+							}
+						}
+					});
 					
 				/* 리뷰 */
 					/* 별 누를때 */
@@ -545,7 +587,7 @@
 			
 					/* 리뷰 등록 */
 						$("#review-submit").click(function(){
-							if(check_before_input()){
+							if(check_login()){
 								$.ajax({
 									type : 'post',
 									url : '${pageContext.request.contextPath}/review/write.do',
@@ -575,8 +617,8 @@
 							}
 						}
 					
-					/* 리뷰 보내기전 확인 */
-						function check_before_input(){
+					/* 로그인상태 확인 */
+						function check_login(){
 							if(${empty user}){
 								alert("로그인이 필요한 서비스 입니다");
 								location.href = "${pageContext.request.contextPath}/user/login.do";
@@ -715,10 +757,7 @@
 						$(document).on("click",".good",function (){
 							var temp_this = $(this).parents().eq("0");
 							
-							if(${empty sessionScope.user}){
-								alert("로그인이 필요한 서비스 입니다");
-								location.href = "${pageContext.request.contextPath}/user/login.do";
-							}else{
+							if(check_login()){
 								$.ajax({
 									url : '${pageContext.request.contextPath}/review/review_react.do',
 									type : 'POST',
@@ -747,10 +786,7 @@
 						$(document).on("click",".bad",function (){
 							var temp_this = $(this).parents().eq("0");
 							
-							if(${empty sessionScope.user}){
-								alert("로그인이 필요한 서비스 입니다");
-								location.href = "${pageContext.request.contextPath}/user/login.do";
-							}else{
+							if(check_login()){
 								$.ajax({
 									url : '${pageContext.request.contextPath}/review/review_react.do',
 									type : 'POST',
