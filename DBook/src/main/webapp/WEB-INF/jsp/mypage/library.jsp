@@ -95,9 +95,15 @@
 												</div>
 												<div id="reviews"></div>
 												<div id="review-page"></div>
-
-													<!-- <div class="reviewForm-base">
-														<div class="review-cover"><img src="/DBook/resources/images/book01.jpg"></div>
+												
+												<!-- 예시 -->
+												<!-- 
+													<div class="reviewForm-base">
+														<div class="review-cover">
+															<article>
+															   <a href="#" class="image"><img src="https://bookthumb-phinf.pstatic.net/cover/140/494/14049497.jpg"></a>
+															</article>
+														</div>
 															<div id="review1" class="review">
 																<div class="reviewForm0">42</div>
 																<div class="reviewForm1">q (q)</div>
@@ -119,7 +125,7 @@
 																		src="/DBook/resources/images/bad.png"><a>1</a></span>
 																</div>
 															</div>
-													</div> -->
+													</div>   -->
 													
 													
 													
@@ -263,8 +269,15 @@
 						for(var i=0; i<reviews.items.length; i++){
 							if(i>=(curPage-1)*numPerPage && i<curPage*numPerPage){
 								
+								if(reviews.items[i].cover == null)
+									reviews.items[i].cover = "/DBook/resources/images/image-null.png";
+								
 								a += '<div class="reviewForm-base">';
-								a += 	'<div class="review-cover"><img src="' + reviews.items[i].cover + '"></div>';
+								a += 	'<div class="review-cover">';
+								a += 		'<article>';
+								a += 		'<a href="#" class="image"><img src="' + reviews.items[i].cover + '"></a>';
+								a += 		'</article>';
+								a += 	'</div>';
 								a += 		'<div id="review' + (i+1) + '" class="review">';
 								a += 			'<div class="reviewForm0">' + reviews.items[i].review_no + '</div>';
 								a += 			'<div class="reviewForm1">'+ reviews.items[i].book_name +'</div>';
