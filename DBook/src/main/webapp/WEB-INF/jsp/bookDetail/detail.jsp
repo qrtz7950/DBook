@@ -470,10 +470,16 @@
 
 	<!-- Scripts -->
 	<jsp:include page="../include/JS.jsp"></jsp:include>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
+	<script	src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.cookie-1.4.1.min.js"></script>
+
+	<!-- 쿠키! -->
+	<script type="text/javascript">
+		$.cookie.json = true;
+		$.cookie('${requestScope.book.book_id}', "${requestScope.book.book_id}", { expires: 7 });
+		console.log($.cookie());
+	</script>
 
 	<script>
 					$(document).ready(function() {
