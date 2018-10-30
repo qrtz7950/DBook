@@ -74,15 +74,7 @@
 												<div class="articles recent-book-list">
 												
 													<div class = "recent-div-articles">
-														<c:forEach begin="1" end="4">
-														
-														<article>
-														   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
-														   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
-														   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
-														</article>
-														
-														</c:forEach>
+														<!-- 최근에 본 책 -->
 													</div>
 												</div>
 												<div class="view-more hidden recent-view-more"><img src="/DBook/resources/images/arrow-60.png"></div>
@@ -95,9 +87,15 @@
 												</div>
 												<div id="reviews"></div>
 												<div id="review-page"></div>
-
-													<!-- <div class="reviewForm-base">
-														<div class="review-cover"><img src="/DBook/resources/images/book01.jpg"></div>
+												
+												<!-- 예시 -->
+												<!-- 
+													<div class="reviewForm-base">
+														<div class="review-cover">
+															<article>
+															   <a href="#" class="image"><img src="https://bookthumb-phinf.pstatic.net/cover/140/494/14049497.jpg"></a>
+															</article>
+														</div>
 															<div id="review1" class="review">
 																<div class="reviewForm0">42</div>
 																<div class="reviewForm1">q (q)</div>
@@ -119,7 +117,7 @@
 																		src="/DBook/resources/images/bad.png"><a>1</a></span>
 																</div>
 															</div>
-													</div> -->
+													</div>   -->
 													
 													
 													
@@ -148,15 +146,55 @@
 			<script src="../resources/assets/js/slide2.js"></script>
 			<script type="text/javascript">
 			
+			var bookmarkNTh = 0;
+			var reviewNTh = 0;	
+			var cookieNTh = 0;
+			
 			$(document).ready(function() {
 				bookmarkViewMore();
 				category_toggle();
 				reviews_print(1);
+				recents_print(1);
 			});
 
 			$(window).resize(function(){
 				category_toggle();
 			});
+			
+			function recents_print(num) {
+				var cookies = $.cookie();
+				
+				$.ajax({
+					url : '../mypage/recent.json',
+					type : 'POST',
+					dataType : 'json',
+					data : {
+							
+							},
+					error : function(request, status, error){
+				       	alert("code:"+request.status+"\n"+"error:"+error);
+				    },
+					success : function(data){
+						addBook(data);
+						bookmarkNTh++;
+					}
+				});
+				
+				for(var i=0; i<cookies.length; i++){
+					if(reviews.items[i].cover == null)
+						reviews.items[i].cover = "/DBook/resources/images/image-null.png";
+					
+					a += '<article>';
+					a += 	'<a href="'+  +'" class="image"><img src="'+  +'"></a>';
+					a += 	'<h3><a href="'+  +'">'+  +'</a></h3>';
+					a += 	'<p><a href="'+  +'">'+  +'</a><br><a href="'+  +'">'+  +'</a></p>';
+					a += '</article>';
+				}
+				$("#recent-div-articles").append(a);
+				
+				cookieNTh++;
+				
+			}
 			
 			function category_toggle(){
 			
@@ -194,9 +232,6 @@
 				$('.bookmark-book-content').slideUp(500);
 				$('.recent-book-content').slideUp(500);
 			});
-			
-			var bookmarkNTh = 0;
-			var reviewNTh = 0;			
 			
 			function bookmarkViewMore() {
 				$.ajax({
@@ -263,8 +298,15 @@
 						for(var i=0; i<reviews.items.length; i++){
 							if(i>=(curPage-1)*numPerPage && i<curPage*numPerPage){
 								
+								if(reviews.items[i].cover == null)
+									reviews.items[i].cover = "/DBook/resources/images/image-null.png";
+								
 								a += '<div class="reviewForm-base">';
-								a += 	'<div class="review-cover"><img src="' + reviews.items[i].cover + '"></div>';
+								a += 	'<div class="review-cover">';
+								a += 		'<article>';
+								a += 		'<a href="#" class="image"><img src="' + reviews.items[i].cover + '"></a>';
+								a += 		'</article>';
+								a += 	'</div>';
 								a += 		'<div id="review' + (i+1) + '" class="review">';
 								a += 			'<div class="reviewForm0">' + reviews.items[i].review_no + '</div>';
 								a += 			'<div class="reviewForm1">'+ reviews.items[i].book_name +'</div>';
