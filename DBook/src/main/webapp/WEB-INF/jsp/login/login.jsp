@@ -12,35 +12,38 @@
 
 </head>
 <body>
-	<div class="login-page">
-	  <h1><a style="text-decoration: none;" href="${pageContext.request.contextPath}/main/home.do"><strong>DB</strong>ook</a></h1>
-	  <hr>
-	  <div class="form">
-	    <form class="register-form">
-	      <input id="sign_id" type="text" placeholder="ID"/>
-	      <div id="isDupId">
-	      	<img id="OKicon" class="hidden" alt="OK" src="${pageContext.request.contextPath}/resources/images/OK.png">
-	      	<img id="NOicon" class="hidden" alt="NO" src="${pageContext.request.contextPath}/resources/images/NO.png">
-	      </div>
-	      <input id="sign_nickname" type="text" placeholder="NICKNAME"/>
-	      <input id="sign_password" type="password" placeholder="PASSWORD"/>
-	      <input id="sign_password_check" type="password" placeholder="CONFIRM PASSWORD"/>
-	      <input id="sign_age_range" type="text" placeholder="AGE   ex)29"/>
-	      <select id="sign_gender" size="1">
-	      	<option value="male" selected="selected">Male</option>
-	      	<option value="female">Female</option>
-	      </select>
-	      <button id="signIn">create</button>
-	      <p class="message">Already registered? <a href="#">Sign In</a></p>
-	    </form>
-	    <form class="login-form">
-	      <input id="id" type="text" placeholder="ID"/>
-	      <input id="password" type="password" placeholder="PASSWORD"/>
-	      <button id="logIn" value="LOGIN">LOGIN</button>
-	      <a id="kakao-login-btn"></a>
-	      <p class="message">Not registered? <a href="#">Create an account</a></p>
-	    </form>
-	  </div>
+	<div class="login-page-base">
+		<div class="forSpace"></div>
+		<div class="login-page">
+		  <h1><a style="text-decoration: none;" href="${pageContext.request.contextPath}/main/home.do"><strong>DB</strong>ook</a></h1>
+		  <hr>
+		  <div class="form">
+		    <form class="register-form">
+		      <input id="sign_id" type="text" placeholder="ID"/>
+		      <div id="isDupId">
+		      	<img id="OKicon" class="hidden" alt="OK" src="${pageContext.request.contextPath}/resources/images/OK.png">
+		      	<img id="NOicon" class="hidden" alt="NO" src="${pageContext.request.contextPath}/resources/images/NO.png">
+		      </div>
+		      <input id="sign_nickname" type="text" placeholder="NICKNAME"/>
+		      <input id="sign_password" type="password" placeholder="PASSWORD"/>
+		      <input id="sign_password_check" type="password" placeholder="CONFIRM PASSWORD"/>
+		      <input id="sign_age_range" type="text" placeholder="AGE   ex)29"/>
+		      <select id="sign_gender" size="1">
+		      	<option value="male" selected="selected">Male</option>
+		      	<option value="female">Female</option>
+		      </select>
+		      <button id="signIn">create</button>
+		      <p id="alreadyRegistered" class="message">Already registered? <a href="#">Sign In</a></p>
+		    </form>
+		    <form class="login-form">
+		      <input id="id" type="text" placeholder="ID"/>
+		      <input id="password" type="password" placeholder="PASSWORD"/>
+		      <button id="logIn" value="LOGIN">LOGIN</button>
+		      <a id="kakao-login-btn"></a>
+		      <p id="notregistered" class="message">Not registered? <a href="#">Create an account</a></p>
+		    </form>
+		  </div>
+		</div>
 	</div>
 <%-- <a id="kakao-login-btn"></a>
 <a href="${pageContext.request.contextPath}/user/logout.do">DBook 로그아웃</a>

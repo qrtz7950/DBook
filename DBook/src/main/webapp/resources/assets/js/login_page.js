@@ -1,6 +1,7 @@
 $('.message a').click(function(){
-	   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-	});
+	$('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+	$('.forSpace').animate({height: "toggle", opacity: "toggle"}, "slow");
+});
 
 function post_to_url(path, params, method) {
     

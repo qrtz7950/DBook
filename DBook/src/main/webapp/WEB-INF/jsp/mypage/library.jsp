@@ -154,47 +154,11 @@
 				bookmarkViewMore();
 				category_toggle();
 				reviews_print(1);
-				recents_print(1);
 			});
 
 			$(window).resize(function(){
 				category_toggle();
 			});
-			
-			function recents_print(num) {
-				var cookies = $.cookie();
-				
-				$.ajax({
-					url : '../mypage/recent.json',
-					type : 'POST',
-					dataType : 'json',
-					data : {
-							
-							},
-					error : function(request, status, error){
-				       	alert("code:"+request.status+"\n"+"error:"+error);
-				    },
-					success : function(data){
-						addBook(data);
-						bookmarkNTh++;
-					}
-				});
-				
-				for(var i=0; i<cookies.length; i++){
-					if(reviews.items[i].cover == null)
-						reviews.items[i].cover = "/DBook/resources/images/image-null.png";
-					
-					a += '<article>';
-					a += 	'<a href="'+  +'" class="image"><img src="'+  +'"></a>';
-					a += 	'<h3><a href="'+  +'">'+  +'</a></h3>';
-					a += 	'<p><a href="'+  +'">'+  +'</a><br><a href="'+  +'">'+  +'</a></p>';
-					a += '</article>';
-				}
-				$("#recent-div-articles").append(a);
-				
-				cookieNTh++;
-				
-			}
 			
 			function category_toggle(){
 			

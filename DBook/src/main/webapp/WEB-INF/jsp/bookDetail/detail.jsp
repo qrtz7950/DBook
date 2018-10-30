@@ -480,7 +480,6 @@
 		$.cookie('${requestScope.book.book_id}', "${requestScope.book.book_id}", { expires: 7 });
 		console.log($.cookie());
 	</script>
-
 	<script>
 					$(document).ready(function() {
 						detailForm();

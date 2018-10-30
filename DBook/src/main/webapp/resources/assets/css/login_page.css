@@ -1,6 +1,27 @@
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+html {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	height: inherit;
+	text-overflow: clip;
+}
+
+.login-page-base{
+	width: 500px;
+	height: 100%;
+	background-color: #ffc4c4;
+    margin: auto;
+}
+
+.forSpace{
+	height: 14%;
+}
+
 .login-page {
 	width: 360px;
 	padding: 8% 0 0;
