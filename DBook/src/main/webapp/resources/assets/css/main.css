@@ -3827,7 +3827,7 @@
 		@media screen and (max-width: 736px) {
 
 			#header {
-				padding-top: 6.5em;
+				padding-top: 5em;
 			}
 
 				#header .logo {
@@ -3840,7 +3840,6 @@
 					line-height: 5em;
 					position: absolute;
 					right: -0.5em;
-					top: 0;
 				}
 
 		}
