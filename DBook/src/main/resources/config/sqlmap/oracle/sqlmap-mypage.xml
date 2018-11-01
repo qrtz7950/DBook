@@ -22,4 +22,10 @@
 		order by r.review_no desc
 	</select>
 	
+	<select id="caches" resultType="MypageVO" parameterType="string">
+		select *
+		  from book
+		where  book_id = #{id}
+	</select>
+	
 </mapper>

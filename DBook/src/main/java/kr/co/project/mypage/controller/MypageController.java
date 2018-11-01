@@ -1,5 +1,14 @@
 package kr.co.project.mypage.controller;
 
+import java.sql.Array;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -15,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.project.login.vo.LoginVO;
 import kr.co.project.mypage.service.MypageService;
+import kr.co.project.mypage.vo.MypageVO;
 import kr.co.project.review.service.ReviewService;
 import kr.co.project.review_reaction.vo.ReviewReactionVO;
 
@@ -31,11 +41,9 @@ public class MypageController {
 	
 	// 마이 페이지
 	@RequestMapping(("/library.do"))
-	public ModelAndView mypage(HttpSession session) {
+	public ModelAndView mypage() {
 		System.out.println("mypage()진입");
 		ModelAndView mav = new ModelAndView();
-		
-		LoginVO user = (LoginVO) session.getAttribute("user");
 		
 		mav.setViewName("mypage/library");
 		
@@ -79,6 +87,16 @@ public class MypageController {
 		JSONObject reaction = rvService.review_react(reviewReaction);
 		
 		return reaction;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/cache.do", method = RequestMethod.POST)
+	public JSONObject cache(@RequestParam(value="cacheBookArray") String[] cacheBookArray) {
+		System.out.println("cache() 진입");
+		
+		JSONObject cache = mpService.getCacheBookList(cacheBookArray);
+		
+		return cache;
 	}
 	
 	@RequestMapping(("/userRating.do"))

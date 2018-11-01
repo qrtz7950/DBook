@@ -1,5 +1,6 @@
 package kr.co.project.mypage.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -82,5 +83,29 @@ public class MypageService {
 		}
 		
 		return reviews;
+	}
+
+	public JSONObject getCacheBookList(String[] cacheBookArray) {
+		
+		List<MypageVO> list = new ArrayList<>();
+		JSONObject caches = new JSONObject();
+		JSONArray jArray = new JSONArray();
+		
+		for(int i=0;i<cacheBookArray.length;i++) {
+			JSONObject j = new JSONObject();
+			MypageVO m = dao.getCacheBook(cacheBookArray[i]);
+			
+			j.put("book_id", m.getBook_id());
+			j.put("book_name", m.getBook_name());
+			j.put("cover", m.getCover());
+			j.put("author", m.getAuthor());
+			j.put("publisher", m.getPublisher());
+			
+			jArray.add(j);
+		}
+		
+		caches.put("items", jArray);
+		
+		return caches;
 	}
 }

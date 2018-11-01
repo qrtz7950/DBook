@@ -16,13 +16,15 @@ public class MypageDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	public List<MinBookVO> bookmarkBooks(String id) {
-		List<MinBookVO> books = sqlSessionTemplate.selectList("kr.co.project.mypage.dao.MypageDAO.bookmarks", id);
-		return books;
+		return sqlSessionTemplate.selectList("kr.co.project.mypage.dao.MypageDAO.bookmarks", id);
 	}
 
 	public List<MypageVO> reviewListById(String id) {
-		List<MypageVO> reviews = sqlSessionTemplate.selectList("kr.co.project.mypage.dao.MypageDAO.reviews", id);
-		return reviews;
+		return sqlSessionTemplate.selectList("kr.co.project.mypage.dao.MypageDAO.reviews", id);
+	}
+
+	public MypageVO getCacheBook(String book_id) {
+		return sqlSessionTemplate.selectOne("kr.co.project.mypage.dao.MypageDAO.caches", book_id);
 	}
 
 }

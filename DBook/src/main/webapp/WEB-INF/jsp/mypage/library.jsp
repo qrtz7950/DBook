@@ -74,7 +74,6 @@
 												<div class="articles recent-book-list">
 												
 													<div class = "recent-div-articles">
-														<!-- 최근에 본 책 -->
 													</div>
 												</div>
 												<div class="view-more hidden recent-view-more"><img src="/DBook/resources/images/arrow-60.png"></div>
@@ -144,6 +143,17 @@
 			<jsp:include page="../include/JS.jsp"></jsp:include>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
 			<script src="../resources/assets/js/slide2.js"></script>
+			<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.cookie-1.4.1.min.js"></script>
+			<script type="text/javascript">
+			// 쿠키
+			$.cookie();
+			console.log('!');
+			var cookies = $.cookie();
+			console.log(cookies);
+			var cookiesJson = JSON.parse(cookies);
+			console.log(cookiesJson);
+			
+			</script>
 			<script type="text/javascript">
 			
 			var bookmarkNTh = 0;
