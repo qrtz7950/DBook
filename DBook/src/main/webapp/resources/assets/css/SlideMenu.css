@@ -36,9 +36,9 @@
 
 .cbp-spmenu-vertical {
 	width: 400px;
-	height: 100%;	/* 메뉴길이 */
-	top: 0;
-	z-index: 995;
+	height: calc(100% - 49px);	/* 메뉴길이 */
+	bottom: 0;
+	z-index: 985;
 }
 
 .cbp-spmenu-vertical a {

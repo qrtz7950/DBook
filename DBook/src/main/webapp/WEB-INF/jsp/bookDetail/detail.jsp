@@ -5,19 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/SlideMenu.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/autocomplete.css" />
-<link
-	href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
-	rel="stylesheet" type="text/css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/TopMenu.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/detail.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/SlideMenu.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/autocomplete.css" />
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/TopMenu.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/detail.css" />
 
 <title>DBook</title>
 <style type="text/css">
@@ -322,8 +315,7 @@
 				<section style="padding: 15px 0 0 0; margin: 0; height: auto; border: none;">
 					<div id="category_select">
 
-						<a href="${pageContext.request.contextPath}"
-							style="border: hidden;">홈 ></a> <select style="width: auto;">
+						<a href="${pageContext.request.contextPath}" style="border: hidden;">홈 ></a> <select style="width: auto;">
 
 							<option>${requestScope.categories["0"]}</option>
 							<option>국내도서</option>
@@ -351,8 +343,12 @@
 				<section class="detail-section">
 					<div id="book_info">
 						<div id="cover_image">
-							<img src="${requestScope.book.cover}"
-								style="width: 100%; height: auto;" />
+							<c:if test="${!empty requestScope.book.cover}">
+								<img src="${requestScope.book.cover}" style="width: 100%; height: auto;" />
+							</c:if>
+							<c:if test="${empty requestScope.book.cover}">
+								<img src="${pageContext.request.contextPath}/resources/images/image-null.png" style="width: 100%; height: auto;" />
+							</c:if>
 						</div>
 						<div class="book_info_table">
 							<div class="book_info_row">
@@ -477,7 +473,7 @@
 	<!-- 쿠키! -->
 	<script type="text/javascript">
 		$.cookie.json = true;
-		$.cookie('${requestScope.book.book_id}', "${requestScope.book.book_id}", { expires: 7 });
+		$.cookie('${requestScope.book.book_id}', "${requestScope.book.book_id}", { expires: 7, path: '/' });
 		console.log($.cookie());
 	</script>
 	<script>
