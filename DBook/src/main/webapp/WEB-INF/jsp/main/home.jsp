@@ -12,12 +12,76 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/layerPopUp.css" />
 		
 	<title>DBook</title>
-
+	
+	<style>	
+	#index-background{
+		background: url('${pageContext.request.contextPath}/resources/images/index.jpg') no-repeat center center fixed;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		position: fixed;
+		z-index: 955;
+	  }
+      
+      #index-black{
+      	top: 0;
+      	width: 100%;
+      	height: 100%;
+      	background-color: #000000;
+      	opacity: 0.5;
+      	z-index: 960;
+      	position: fixed;
+      }
+      
+      #index-up{
+		position: fixed;
+		top: 35%;
+		left: calc((100% - 370px)/2);
+		z-index: 965;
+      }
+      
+      #index-up > a{
+      	color: #ffffff;
+      	font-size: 50px;
+      	border: none;
+      	text-align: center;
+      	width: 340px;
+      }
+      
+     #index-btn{
+		display: none;
+		font-size: 20px;
+		color: #ffffff !important;
+		border-radius: 200px;
+		background-color: #fc426a;
+		padding: 0 30px;
+		margin: 0 0 0 220px;
+     }
+      
+    #index-btn:hover {
+		background-color: #f3a0a0;
+	}
+	</style>
 </head>
 <body>
 		<!-- topMenu -->
 			<jsp:include page="../include/TopMenu.jsp"/>
 			
+		<!-- Cover -->
+							
+			<div id="index-background" class="cover"></div>
+			<div id="index-black" class="cover"></div>
+			<div id="index-up" class="cover">
+				<a>오늘은 무슨책?</a>
+				<br>
+				<div style="color: #f3a0a0">나를 위한 맞춤 책 추천사이트</div>
+				<button id="index-btn">DBook</button>
+			</div>
+		
 		<!-- Wrapper -->
 			<div id="wrapper">
 				<!-- Main -->
@@ -31,8 +95,8 @@
 								<section id="banner">
 									<div class="content">
 										<header>
-											<h1>나에게 <br>
-											by HTML5 UP</h1>
+											<h1>오늘은<br>
+											무슨책?</h1>
 											<p>A free and fully responsive site template</p>
 										</header>
 										<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
@@ -41,7 +105,7 @@
 										</ul>
 									</div>
 									<span class="image object">
-										<img src="${pageContext.request.contextPath}/resources/images/pic10.jpg" alt="" />
+										<img src="${pageContext.request.contextPath}/resources/images/home_pic.jpg" alt="" />
 									</span>
 								</section>
 
@@ -55,16 +119,16 @@
 											<div class="swiper-wrapper">
 												<div class="swiper-slide"><div><img src="http://oldmidi.cdn3.cafe24.com/p/578.jpg"><div>1</div></div></div>
 												<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/099.jpg"><div>2</div></div></div>
-												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/334.jpg"><div>3</div></div></div>
+<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/334.jpg"><div>3</div></div></div> -->
 												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/526.jpg"><div>4</div></div></div>
 												<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/563.jpg"><div>5</div></div></div>
 												<div class="swiper-slide"><div><img src="http://oldmidi.cdn3.cafe24.com/p/019.jpg"><div>6</div></div></div>
 												<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/187.jpg"><div>7</div></div></div>
-												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/176.jpg"><div>8</div></div></div>
-												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/461.jpg"><div>9</div></div></div>
+<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/176.jpg"><div>8</div></div></div> -->
+<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/461.jpg"><div>9</div></div></div> -->
 												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/321.jpg"><div>10</div></div></div>
 												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/521.jpg"><div>11</div></div></div>
-												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/400.jpg"><div>12</div></div></div>
+<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/400.jpg"><div>12</div></div></div> -->
 												<div class="swiper-slide"><div><img src="http://biketago.com/img/p/407.jpg"><div>13</div></div></div>
 												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/288.jpg"><div>14</div></div></div>
 												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/557.jpg"><div>15</div></div></div>
@@ -199,6 +263,27 @@
 			
 			
 		<!-- 로그인 유저정보 추가입력 -->
+			<script>
+				$(document).ready(function(){
+	   				setTimeout(function(){
+	   					$('#index-btn').show(1000);
+	   				}, 3000);
+	   			});
+	   			
+	   			// scroll lock
+	   			$('html, body').css({'overflow': 'hidden', 'height': '100%'});
+	   			$('#element').on('scroll touchmove mousewheel', function(event) {
+	   			  event.preventDefault();
+	   			  event.stopPropagation();
+	   			  return false;
+	   			});
+	   			
+	   			$('#index-btn').click(function(){
+	   				$('.cover').fadeOut(1000);
+	   				$('#element').off('scroll touchmove mousewheel');	// scroll lock 해제
+	   			});
+			</script>
+			
 			<c:if test="${not empty user.id and user.gender == 'none' or user.age_range == 'none'}">
             <script>
 	            function wrapWindowByMask(){
@@ -237,8 +322,7 @@
                       });
                    });
             	});
-               
             </script>
-         </c:if>        
+         </c:if>
 </body>
 </html>
