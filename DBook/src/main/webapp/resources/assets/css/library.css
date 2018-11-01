@@ -127,21 +127,26 @@
 
 .bookmark-div-articles{
 	display:inline-flex;
+	width:100%;
 }
+
+.bookmark-book-content{
+	width:100%;
+	display:inline-block;
+}
+
 .recent-div-articles{
+	width:100%;
 	display:inline-flex;
 }
+
+.recent-book-content
 
 .recent-book-content{
-	display:inline-block;
-}
-.bookmark-book-content{
+	width:100%;
 	display:inline-block;
 }
 
-.review-book-list{
-	display:inline-flex;
-}
 
 /* 병문스 */
 

@@ -23,7 +23,7 @@ public class MypageDAO {
 		return sqlSessionTemplate.selectList("kr.co.project.mypage.dao.MypageDAO.reviews", id);
 	}
 
-	public MypageVO getCacheBook(String book_id) {
+	public MypageVO getCookieBook(String book_id) {
 		return sqlSessionTemplate.selectOne("kr.co.project.mypage.dao.MypageDAO.caches", book_id);
 	}
 

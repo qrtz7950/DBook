@@ -90,13 +90,13 @@ public class MypageController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/cache.do", method = RequestMethod.POST)
-	public JSONObject cache(@RequestParam(value="cacheBookArray") String[] cacheBookArray) {
-		System.out.println("cache() 진입");
+	@RequestMapping(value="/cookie.json", method = RequestMethod.POST)
+	public JSONObject cookie(@RequestParam(value="cookieBookArray") String[] cookieBookArray) {
+		System.out.println("cookie() 진입");
 		
-		JSONObject cache = mpService.getCacheBookList(cacheBookArray);
+		JSONObject cookie = mpService.getCookieBookList(cookieBookArray);
 		
-		return cache;
+		return cookie;
 	}
 	
 	@RequestMapping(("/userRating.do"))

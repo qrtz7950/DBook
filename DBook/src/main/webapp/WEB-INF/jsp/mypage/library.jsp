@@ -70,12 +70,27 @@
 													<span>최근에 본 도서</span>
 													<a class="recent-book more cursor">M O R E</a>
 												</div>
-												
 												<div class="articles recent-book-list">
-												
-													<div class = "recent-div-articles">
+													<div class="recent-div-articles">
+														<article> <a href="" class="image"><img src="https://bookthumb-phinf.pstatic.net/cover/112/111/11211133.jpg"></a>
+														    <h3><a href="#">82년생 김지영</a></h3>
+														    <p><a href="#">김제희</a><br><a href="#">비트교육</a></p>
+														</article>
+														<article> <a href="" class="image"><img src="https://bookthumb-phinf.pstatic.net/cover/112/111/11211133.jpg"></a>
+														    <h3><a href="#">82년생 김지영</a></h3>
+														    <p><a href="#">김제희</a><br><a href="#">비트교육</a></p>
+														</article>
+														<article> <a href="" class="image"><img src="https://bookthumb-phinf.pstatic.net/cover/112/111/11211133.jpg"></a>
+														    <h3><a href="#">82년생 김지영</a></h3>
+														    <p><a href="#">김제희</a><br><a href="#">비트교육</a></p>
+														</article>
+														<article> <a href="" class="image"><img src="https://bookthumb-phinf.pstatic.net/cover/112/111/11211133.jpg"></a>
+														    <h3><a href="#">82년생 김지영</a></h3>
+														    <p><a href="#">김제희</a><br><a href="#">비트교육</a></p>
+														</article>
 													</div>
 												</div>
+												
 												<div class="view-more hidden recent-view-more"><img src="/DBook/resources/images/arrow-60.png"></div>
 											</div>
 											
@@ -144,26 +159,74 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
 			<script src="../resources/assets/js/slide2.js"></script>
 			<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.cookie-1.4.1.min.js"></script>
+						
 			<script type="text/javascript">
 			// 쿠키
-			$.cookie();
-			console.log('!');
-			var cookies = $.cookie();
-			console.log(cookies);
-			var cookiesJson = JSON.parse(cookies);
-			console.log(cookiesJson);
+			console.log($.cookie());
 			
+			function parseCookieToArray(cookies) {
+				for(var i = 1; i < 5; i++){
+					order = 'recentBook' + i
+					cookieBookArray.push(cookies.order);
+				}
+			}
+			
+			function getCookieBookInfo() {
+				$.ajaxSettings.traditional = true;
+				console.log("getCookieBookInfo()안에서");
+				console.log(cookieBookArray);
+				$.ajax({
+					url : '../mypage/cookie.json',
+					type : 'POST',
+					dataType : 'text',
+					data : {'cookieBookArray':cookieBookArray},
+					error : function(request, status, error){
+				       	alert("code:"+request.status+"\n"+"error:"+error);
+				    },
+					success : function(data){
+						addCookieBooks(data);
+					}
+				});
+			}
+			
+			function addCookieBooks(data) {
+				
+				var temp = '';
+				
+				temp += '<div id="recent' + (i+1) + '" class="articles recent-book-list">';
+				temp += 	'<div class="recent-div-articles">';
+				
+				for(var i=0; i<reviews.items.length; i++){
+					if(reviews.items[i].cover == null)
+						reviews.items[i].cover = "/DBook/resources/images/image-null.png";
+					
+					temp += 		'<article>';
+					temp += 			'<a href="${pageContext.request.contextPath}/book/bookDetail/' + data.items[i].book_id + '.do" class="image"><img src="' + data.items[i].cover + '"></a>';
+					temp +=	 			'<h3><a href=${pageContext.request.contextPath}/book/bookDetail/' + data.items[i].book_id + '.do">' + data.items[i].book_id + '</a></h3>';
+					temp +=				'<p><a href=${pageContext.request.contextPath}book/bookSearch/searchResult.do?keyword="' + data.items[i].author + '">' + data.items[i].author + '</a><br><a href="${pageContext.request.contextPath}book/bookSearch/searchResult.do?keyword="' + data.items[i].pubisher + '">' + data.items[i].pubisher + '</a></p>';
+					temp += 		'</article>';
+				}
+				
+				temp += 	'</div>';
+				temp += '</div>';
+				
+				$('.recent-book-list').append(temp);
+				
+			}
 			</script>
 			<script type="text/javascript">
-			
+			var cookieBookArray = [];
 			var bookmarkNTh = 0;
 			var reviewNTh = 0;	
 			var cookieNTh = 0;
 			
 			$(document).ready(function() {
+				var c = $.cookie();
+				parseCookieToArray(c);
+				getCookieBookInfo();
+				reviews_print(1);
 				bookmarkViewMore();
 				category_toggle();
-				reviews_print(1);
 			});
 
 			$(window).resize(function(){
@@ -455,7 +518,6 @@
 			}
 			
 			</script>
-			
 			<script>
 			/*
 			$(document).ready(function(){

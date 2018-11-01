@@ -471,10 +471,35 @@
 	<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.cookie-1.4.1.min.js"></script>
 
 	<!-- 쿠키! -->
-	<script type="text/javascript">
+	<script>
 		$.cookie.json = true;
-		$.cookie('${requestScope.book.book_id}', "${requestScope.book.book_id}", { expires: 7, path: '/' });
+		var c = $.cookie();
+		var check = true;
+		
+		for(var i = 1; i <5; i++){
+			var recentBook = 'recentBook'; 
+			if($.cookie(recentBook + i) == '${requestScope.book.book_id}'){
+				check = false;
+			}
+		}
+		
+		if(check){
+		
+			$.removeCookie('recentBook1');
+			
+			var cok21 = $.cookie('recentBook2');
+			var cok32 = $.cookie('recentBook3');
+			var cok43 = $.cookie('recentBook4');
+			
+			$.cookie( 'recentBook1', cok21, { expires: 30, path: '/' });
+			$.cookie( 'recentBook2', cok32, { expires: 30, path: '/' });
+			$.cookie( 'recentBook3', cok43, { expires: 30, path: '/' });
+		
+			$.cookie( 'recentBook4', '${requestScope.book.book_id}', { expires: 30, path: '/' });		
+		}
+		
 		console.log($.cookie());
+		
 	</script>
 	<script>
 					$(document).ready(function() {

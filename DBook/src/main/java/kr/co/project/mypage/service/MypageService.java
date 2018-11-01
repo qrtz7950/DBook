@@ -85,15 +85,15 @@ public class MypageService {
 		return reviews;
 	}
 
-	public JSONObject getCacheBookList(String[] cacheBookArray) {
+	public JSONObject getCookieBookList(String[] cookieBookArray) {
 		
 		List<MypageVO> list = new ArrayList<>();
-		JSONObject caches = new JSONObject();
+		JSONObject cookies = new JSONObject();
 		JSONArray jArray = new JSONArray();
 		
-		for(int i=0;i<cacheBookArray.length;i++) {
+		for(int i=0;i<cookieBookArray.length;i++) {
 			JSONObject j = new JSONObject();
-			MypageVO m = dao.getCacheBook(cacheBookArray[i]);
+			MypageVO m = dao.getCookieBook(cookieBookArray[i]);
 			
 			j.put("book_id", m.getBook_id());
 			j.put("book_name", m.getBook_name());
@@ -104,8 +104,8 @@ public class MypageService {
 			jArray.add(j);
 		}
 		
-		caches.put("items", jArray);
+		cookies.put("items", jArray);
 		
-		return caches;
+		return cookies;
 	}
 }
