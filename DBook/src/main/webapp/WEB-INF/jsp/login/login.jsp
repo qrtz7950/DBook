@@ -49,13 +49,6 @@
 <a href="${pageContext.request.contextPath}/user/logout.do">DBook 로그아웃</a>
 <a href="http://developers.kakao.com/logout">카카오 로그아웃</a> --%>
 
-<!-- Script -->
-<c:if test="${not empty msg}">
-	<script type="text/javascript">
-		alert('${msg}');
-	</script>
-</c:if>
-
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/assets/js/login_page.js"></script>

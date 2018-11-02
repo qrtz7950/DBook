@@ -1,32 +1,4 @@
-$('.message a').click(function(){
-	$('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-	$('.forSpace').animate({height: "toggle", opacity: "toggle"}, "slow");
-});
-
-function post_to_url(path, params, method) {
-    
-	method = method || "post"; 
-
-    var form = document.createElement("form");
-    form.setAttribute("method", method);
-    form.setAttribute("action", path);
- 
-    for(var key in params) {
-        var hiddenField = document.createElement("input");
-        hiddenField.setAttribute("type", "hidden");
-        hiddenField.setAttribute("name", key);
-        hiddenField.setAttribute("value", params[key]);
- 
-        form.appendChild(hiddenField);
-    }
- 
-    document.body.appendChild(form);
-    form.submit();
-}
-
 function signCheckForm() {
-	
-	console.log('checkForm()진입');
 		
 	if(isNull($('#sign_id'), '아이디를 입력해주세요')) {
 		return false;
@@ -99,9 +71,6 @@ function isNull(obj, msg) {
 	}
 	return false;
 }
-
-var idState = '';
-
 function callback(data) {
 	
 	idState = data;
@@ -120,14 +89,87 @@ function callback(data) {
 	}
 }
 
+var idState = '';
+$.ajaxSettings.traditional = true;
 $(document).ready(function() {
+	
+	/////////////////////////
+	////카카오  로그아웃 ////
+	//Kakao.Auth.logout()////
+	/////////////////////////
+	
+	//사용할 앱의 JavaScript 키
+	Kakao.init('70b6dca9bb4272bcec25e71ea7ab0125');
+	//카카오 로그인 버튼을 생성
+	Kakao.Auth.createLoginButton({
+	     container: '#kakao-login-btn',
+	     success: function(authObj) {
+	     console.log(JSON.stringify(authObj));
+	       // 로그인 성공시 사용자 정보 가져오기
+	       Kakao.API.request({
+	           url: '/v2/user/me',
+	           success: function(response) {
+	           	
+					var id = response.id;
+					var profile_image = response.properties['profile_image'];
+					var thumbnail_image = response.properties['thumbnail_image'];
+					var nickname = response.properties['nickname'];
+					var age_range = response.kakao_account['age_range'];
+					var gender = response.kakao_account['gender'];
+	           	var has_gender = response.kakao_account['has_gender'];
+	           	var has_age_range = response.kakao_account['has_age_range'];
+					
+	           	console.log(JSON.stringify(response));
+					console.log(id);
+					console.log(profile_image);
+					console.log(thumbnail_image);
+					console.log(nickname);
+					console.log(age_range);
+					console.log(gender);
+					console.log(has_gender);
+					console.log(has_age_range);
+					
+					if(has_gender == false || has_age_range == false){
+						if(has_gender == false)
+							gender = 'none';
+						
+						if(has_age_range == false)
+							age_range = 'none';
+					} 
+					
+					$.ajax({
+						url : '../user/kakaoLogin.do',
+						type : 'POST',
+						dataType : 'text',
+						data : {"id": id
+							, "profile_image":profile_image
+							, "thumbnail_image":thumbnail_image
+							, "nickname":nickname
+							, "age_range":age_range
+							, "gender":gender
+							},
+						error : function(request, status, error){
+					       	alert("code:"+request.status+"\n"+"error:"+error);
+					    },
+						success : function(data){
+							location.href = "../main/home.do";
+						}
+					});
+					
+	           	}
+	       });
+	     },
+	     fail: function(err) {
+	        alert(JSON.stringify(err));
+	     }
+	});
 	
 	$("#sign_id").keyup(function(){
 
 		var word=$("#sign_id").val();
 
 		$.ajax({
-			delay: 500,
+			delay: 1000,
 			url : "../user/idDupCheck.json",
 			data : {
 				id:word
@@ -135,6 +177,7 @@ $(document).ready(function() {
 			dataType : "json",
 			success : callback
 		});
+		return false;
 	});
 	
 	$('#signIn').click(function() {
@@ -154,19 +197,30 @@ $(document).ready(function() {
 			var nickname = $('#sign_nickname').val();
 			
 			$.ajax({
-				success : function(){
-					post_to_url("../user/signIn.do",
-							{ "id":id
-						, "profile_image":profile_image
-						, "thumbnail_image":thumbnail_image
-						, "password":password
-						, "nickname":nickname
-						, "age_range":age
-						, "gender":gender
-							});
-						  }
-				  });
+				url : '../user/signIn.do',
+				type : 'POST',
+				dataType : 'text',
+				data : {"id":id
+					  , "profile_image":profile_image
+					  , "thumbnail_image":thumbnail_image
+					  , "password":password
+					  , "nickname":nickname
+				      , "age_range":age
+				      , "gender":gender},
+				error : function(request, status, error){
+			       	alert("code:"+request.status+"\n"+"error:"+error);
+			    },
+				success : function(data){
+					if(data == ''){
+						alert('회원 가입 성공!\n 메인페이지로 이동합니다');
+						location.href = "../main/home.do";
+					} else {
+						alert('이미 존재하는 아이디입니다');
+					}
+				}
+			});
 		}
+		return false;
 	});
 	
 	$('#logIn').click(function() {
@@ -175,76 +229,26 @@ $(document).ready(function() {
 		var password = $('#password').val();
 		
 		$.ajax({
-			success : function(){
-				post_to_url("../user/login.do",
-						{ "id":id
-						, "password":password
-						});
+			url : '../user/login.do',
+			type : 'POST',
+			dataType : 'text',
+			data : {"id":id
+				  , "password":password},
+			error : function(request, status, error){
+		       	alert("code:"+request.status+"\n"+"error:"+error);
+		    },
+			success : function(data){
+				if(data == ''){
+					location.href = "../main/home.do";
+				} else {
+					alert('아이디 또는 비밀번호를 확인하세요');
+				}
 			}
 		});
+		return false;
 	});
+	
 });
 
-/////////////////////////
-//    카카오 로그아웃		 ////
-//Kakao.Auth.logout()////
-/////////////////////////
-
-// 사용할 앱의 JavaScript 키
-Kakao.init('70b6dca9bb4272bcec25e71ea7ab0125');
-// 카카오 로그인 버튼을 생성
-Kakao.Auth.createLoginButton({
-      container: '#kakao-login-btn',
-      success: function(authObj) {
-      console.log(JSON.stringify(authObj));
-        // 로그인 성공시 사용자 정보 가져오기
-        Kakao.API.request({
-            url: '/v2/user/me',
-            success: function(response) {
-            	
-				var id = response.id;
-				var profile_image = response.properties['profile_image'];
-				var thumbnail_image = response.properties['thumbnail_image'];
-				var nickname = response.properties['nickname'];
-				var age_range = response.kakao_account['age_range'];
-				var gender = response.kakao_account['gender'];
-            	var has_gender = response.kakao_account['has_gender'];
-            	var has_age_range = response.kakao_account['has_age_range'];
-				
-            	console.log(JSON.stringify(response));
-				console.log(id);
-				console.log(profile_image);
-				console.log(thumbnail_image);
-				console.log(nickname);
-				console.log(age_range);
-				console.log(gender);
-				console.log(has_gender);
-				console.log(has_age_range);
-				
-				if(has_gender == false || has_age_range == false){
-
-					if(has_gender == false){
-						gender = 'none';
-					}
-					
-					if(has_age_range == false){
-						age_range = 'none';
-					}
-				} 
-				post_to_url("../user/kakaoLogin.do",
-						{ "id": id
-						, "profile_image":profile_image
-						, "thumbnail_image":thumbnail_image
-						, "nickname":nickname
-						, "age_range":age_range
-						, "gender":gender
-						});
-            	}
-        });
-      },
-      fail: function(err) {
-         alert(JSON.stringify(err));
-      }
-    });
    	
    	

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitterReturnValueHandler;
 
 import kr.co.project.login.service.LoginService;
 import kr.co.project.login.vo.LoginVO;
@@ -35,33 +36,27 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/user/login.do", method=RequestMethod.POST)
-	public ModelAndView LoginProcess(@ModelAttribute LoginVO user, HttpSession session) {
+	@ResponseBody
+	public String LoginProcess(@ModelAttribute LoginVO user, HttpSession session) {
 		
 		System.out.println("LoginProcess() 메소드호출");
 		System.out.println(user);
 		
 		user = loginService.Login(user);
 
-		ModelAndView mav = new ModelAndView();
 		String msg = "";
 		
 		if(user == null) {
-			System.out.println("틀림");
 			msg = "아이디 또는 비밀번호를 확인하세요";
-			mav.addObject("msg", msg);
-			mav.setViewName("login/login");
-			
-			return mav;
+			return msg;
 		} else {
-			System.out.println("맞음");
 			session.setAttribute("user", user);
-			mav.setViewName("redirect:/main/home.do");
-			return mav;
+			return msg;
 		}
 	}
 	
 	@RequestMapping(value="/user/kakaoLogin.do", method=RequestMethod.POST)
-	public ModelAndView kakaoLoginProcess(@ModelAttribute LoginVO user, HttpSession session) {
+	public void kakaoLoginProcess(@ModelAttribute LoginVO user, HttpSession session) {
 		
 		System.out.println("kakaoLoginProcess() 메소드호출");
 		System.out.println("현재 로그인 정보" + user);
@@ -72,11 +67,6 @@ public class LoginController {
 		
 		System.out.print("세션에 올라간 정보");
 		System.out.println((LoginVO)session.getAttribute("user"));
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/main/home.do");
-		
-		return mav;
 	}
 	
 	@RequestMapping(value="/user/update.do", method=RequestMethod.POST)
@@ -108,13 +98,13 @@ public class LoginController {
 		System.out.println((LoginVO)session.getAttribute("user"));
 		
 		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("redirect:/main/home.do");
 		
 		return mav;
 	}
 
+	@ResponseBody
 	@RequestMapping(value="/user/signIn.do", method=RequestMethod.POST)
-	public ModelAndView signIn(@ModelAttribute LoginVO user, HttpSession session) {
+	public String signIn(@ModelAttribute LoginVO user, HttpSession session) {
 		
 		System.out.println("signIn()진입...");
 		System.out.println(user);
@@ -122,19 +112,13 @@ public class LoginController {
 		user = loginService.signIn(user);
 		
 		String msg = "";
-		ModelAndView mav = new ModelAndView();
 		
 		if(user == null) {
 			msg = "이미 존재하는 ID입니다";
-			mav.addObject("msg", msg);
-			mav.setViewName("login/login");
 		} else {
-			System.out.println("회원가입후 바로 그 정보로 로그인");
-			System.out.println(user);
 			session.setAttribute("user", user);
-			mav.setViewName("redirect:/main/home.do");
 		}
-		return mav;
+		return msg;
 	}
 	
 	@RequestMapping(value="/user/idDupCheck.json")

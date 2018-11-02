@@ -46,7 +46,7 @@ public class LoginService{
 	public LoginVO addUserInfo(LoginVO user) {
 		
 		dao.addUserInfo(user);
-		user = dao.login(user);
+		user = dao.kakaoLogin(user);
 		return user;
 	}
 	
