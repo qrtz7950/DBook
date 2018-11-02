@@ -7,7 +7,7 @@ import pandas as pd
 def crawling_naverbook():
     results = []
 
-    for book_id in range(10, 20):
+    for book_id in range(14007665, 14007999):
 
         url = 'https://book.naver.com/bookdb/book_detail.nhn?bid=%d' % book_id
 
@@ -17,10 +17,7 @@ def crawling_naverbook():
             response = urlopen(request)
             receive = response.read()
             html = receive.decode('utf-8', 'replace')
-            html = html.replace('&#x0D;','')
-            #html = html.rstrip('&#x0D;')
-            #html = html.rstrip();
-            #print(html)
+            html = html.replace('&#x0D;', '')
             print('%s: success for request[%s]' % (datetime.now(), url))
         except Exception as e:
             print('%s: %s' % (e, datetime.now()))
@@ -48,14 +45,12 @@ def crawling_naverbook():
                 else : # 제목
                     book_name = book_name_split[0]
 
-
             # -------------------책표지 cover
             tag_thumb_type_end = tag_book_info.find('div', attrs={'class':'thumb type_end'})
             tag_thumb_type = tag_thumb_type_end.find('div')
             tag_a2 = tag_thumb_type.find('a')
             for tag_img in tag_a2('img'):
                 cover = tag_img.get('src')
-
             # ---------------작가, 역자, 춣판사, 출간일
             tag_book_info_inner = tag_book_info.find('div', attrs={'class': 'book_info_inner'})
             tag_book_info_div1 = tag_book_info_inner.findAll('div')
@@ -125,10 +120,7 @@ def crawling_naverbook():
             tag_content = bs.find('div', attrs={'id': 'content'})
             tags_div_section_detail = tag_content.findAll('div')
             tags_span = tag_content.findAll('span', attrs={'class': None})
-            tags_p = tag_content.findAll('p')
-            #print(tags_p.text)
-            contents="";
-
+            print(tags_span)
             # 책소개에 정보가 있는 경우
             if tags_div_section_detail[0] != tag_content.find('div', attrs={'class':'section section info_not'}):
 
@@ -147,12 +139,12 @@ def crawling_naverbook():
                     book_introduction = "  "
 
                 if "저자소개" in tags_span[1].text:
-                    author_introduction_before = tag_content.find('div', attrs={'id': 'authorIntroContent'}).text
+                    author_introduction_before = tag_content.find('div', attrs={'id': 'authorIntroContent'})
                     author_introduction = author_introduction_before.find('p')
                     author_introduction = str(author_introduction)
                     author_introduction = author_introduction.replace("</br>", "")
                 elif "저자소개" in tags_span[2].text:
-                    author_introduction_before = tag_content.find('div', attrs={'id': 'authorIntroContent'}).text
+                    author_introduction_before = tag_content.find('div', attrs={'id': 'authorIntroContent'})
                     author_introduction = author_introduction_before.find('p')
                     author_introduction = str(author_introduction)
                     author_introduction = author_introduction.replace("</br>", "")
@@ -192,16 +184,11 @@ def crawling_naverbook():
                 else :
                     contents = "  "
 
-            # 책소개에 정보가 없지만 목차가 있는 경우
-            else :
+            # 책소개에 정보가 없는 경우
+            elif tags_div_section_detail[0] == tag_content.find('div', attrs={'class':'section section info_not'}):
                 book_introduction = "  "
                 author_introduction = "  "
-                if "목차" in tags_span[1].text:
-                    contents += tag_content.find('div', attrs={'id':'contentContent'}).text
-                elif "목차" in tags_span[2].text:
-                    contents += tag_content.find('div', attrs={'id':'contentContent'}).text
-                else :
-                    contents = "  "
+                contents = "  "
 
 
             tag_navi = bs.find('ul', attrs={'class': 'navi'})
@@ -210,38 +197,171 @@ def crawling_naverbook():
             if li == 3:
                 tag_select1 = tag_navi.find('li', attrs={'class': 'select'})
                 category1 = tag_select1.find('a').text
+                category_text = str(category1)
                 category2 = "  "
                 category3 = "  "
-                category4 = "  "
-            if li == 5:
+            elif li == 5:
                 tag_select1 = tag_navi.find('li', attrs={'class': 'select'})
                 category1 = tag_select1.find('a').text
                 tag_select2 = tag_navi.find('li', attrs={'class': 'select2'})
                 category2 = tag_select2.find('a').text
+                category_text = str(category2)
                 category3 = "  "
-                category4 = "  "
-            if li == 7:
+            elif li == 7:
                 tag_select1 = tag_navi.find('li', attrs={'class': 'select'})
                 category1 = tag_select1.find('a').text
                 tag_select2 = tag_navi.find('li', attrs={'class': 'select2'})
                 category2 = tag_select2.find('a').text
                 tag_select3 = tag_navi.find('li', attrs={'class': 'select3'})
                 category3 = tag_select3.find('a').text
-                category4 = "  "
-            if li == 9:
+                category_text = str(category3)
+            elif li == 9:
                 tag_select1 = tag_navi.find('li', attrs={'class': 'select'})
                 category1 = tag_select1.find('a').text
                 tag_select2 = tag_navi.find('li', attrs={'class': 'select2'})
                 category2 = tag_select2.find('a').text
                 tag_select3 = tag_navi.find('li', attrs={'class': 'select3'})
                 category3 = tag_select3.find('a').text
-                tag_select4 = tag_navi.find('li', attrs={'class': 'select4'})
-                category4 = tag_select4.find('a').text
+                category_text = str(category3)
+            print(category_text)
+            tag_ul = bs.find('ul', attrs={'class': 'history'})
+            tags_a = tag_ul.findAll('a')
 
 
+            if category_text in tags_a[0].text:
+                category_href = str(tags_a[0].get('href'))
+                category_split = category_href.split('code=')[1]
+                parent_no1 = ""
+                parent_no2 = ""
+                category_no = category_split
+                print(category_no)
+            elif category_text in tags_a[1].text:
+                category_href = str(tags_a[1].get('href'))
+                category_split = category_href.split('code=')[1]
+                if len(category_split) == 6:
+                    parent_no1 = category_split[0:3]
+                    parent_no2 = ""
+                    category_no = category_split
+                    print(parent_no1 + " > " + category_no)
+                elif len(category_split) == 3:
+                    parent_no1 = ""
+                    parent_no2 = ""
+                    category_no = category_split
+                    print(category_no)
+            elif category_text in tags_a[2].text:
+                category_href = str(tags_a[2].get('href'))
+                category_split = category_href.split('code=')[1]
+                if len(category_split) == 9:
+                    parent_no1 = category_split[0:3]
+                    parent_no2 = category_split[0:6]
+                    category_no = category_split
+                    print(parent_no1 + " > " + parent_no2 + " > " + category_no)
+                elif len(category_split) == 6:
+                    parent_no1 = category_split[0:3]
+                    parent_no2 = ""
+                    category_no = category_split
+                    print(parent_no1 + " > " + category_no)
+                elif len(category_split) == 3:
+                    parent_no1 = ""
+                    parent_no2 = ""
+                    category_no = category_split
+                    print(category_no)
+            elif category_text in tags_a[3].text:
+                category_href = str(tags_a[3].get('href'))
+                category_split = category_href.split('code=')[1]
+                if len(category_split) == 9:
+                    parent_no1 = category_split[0:3]
+                    parent_no2 = category_split[0:6]
+                    category_no = category_split
+                    print(parent_no1 + " > " + parent_no2 + " > " + category_no)
+                elif len(category_split) == 6:
+                    parent_no1 = category_split[0:3]
+                    parent_no2 = ""
+                    category_no = category_split
+                    print(parent_no1 + " > " + category_no)
+                elif len(category_split) == 3:
+                    parent_no1 = ""
+                    parent_no2 = ""
+                    category_no = category_split
+                    print(category_no)
+            elif category_text in tags_a[4].text:
+                category_href = str(tags_a[4].get('href'))
+                category_split = category_href.split('code=')[1]
+                if len(category_split) == 9:
+                    parent_no1 = category_split[0:3]
+                    parent_no2 = category_split[0:6]
+                    category_no = category_split
+                    print(parent_no1 + " > " + parent_no2 + " > " + category_no)
+                elif len(category_split) == 6:
+                    parent_no1 = category_split[0:3]
+                    parent_no2 = ""
+                    category_no = category_split
+                    print(parent_no1 + " > " + category_no)
+                elif len(category_split) == 3:
+                    parent_no1 = ""
+                    parent_no2 = ""
+                    category_no = category_split
+                    print(category_no)
+            elif category_text in tags_a[5].text:
+                category_href = str(tags_a[5].get('href'))
+                category_split = category_href.split('code=')[1]
+                if len(category_split) == 9:
+                    parent_no1 = category_split[0:3]
+                    parent_no2 = category_split[0:6]
+                    category_no = category_split
+                    print(parent_no1 + " > " + parent_no2 + " > " + category_no)
+                elif len(category_split) == 6:
+                    parent_no1 = category_split[0:3]
+                    parent_no2 = ""
+                    category_no = category_split
+                    print(parent_no1 + " > " + category_no)
+                elif len(category_split) == 3:
+                    parent_no1 = ""
+                    parent_no2 = ""
+                    category_no = category_split
+                    print(category_no)
+            elif category_text in tags_a[6].text:
+                category_href = str(tags_a[6].get('href'))
+                category_split = category_href.split('code=')[1]
+                if len(category_split) == 9:
+                    parent_no1 = category_split[0:3]
+                    parent_no2 = category_split[0:6]
+                    category_no = category_split
+                    print(parent_no1 + " > " + parent_no2 + " > " + category_no)
+                elif len(category_split) == 6:
+                    parent_no1 = category_split[0:3]
+                    parent_no2 = ""
+                    category_no = category_split
+                    print(parent_no1 + " > " + category_no)
+                elif len(category_split) == 3:
+                    parent_no1 = ""
+                    parent_no2 = ""
+                    category_no = category_split
+                    print(category_no)
+            elif category_text in tags_a[7].text:
+                category_href = str(tags_a[7].get('href'))
+                category_split = category_href.split('code=')[1]
+                if len(category_split) == 9:
+                    parent_no1 = category_split[0:3]
+                    parent_no2 = category_split[0:6]
+                    category_no = category_split
+                    print(parent_no1 + " > " + parent_no2 + " > " + category_no)
+                elif len(category_split) == 6:
+                    parent_no1 = category_split[0:3]
+                    parent_no2 = ""
+                    category_no = category_split
+                    print(parent_no1 + " > " + category_no)
+                elif len(category_split) == 3:
+                    parent_no1 = ""
+                    parent_no2 = ""
+                    category_no = category_split
+                    print(category_no)
+            else:
+                parent_no1 = "!!!"
+                parent_no2 = "@@@"
+                category_no = "###"
 
-
-        except: #삭제된 도서의 경우 및 책소개,저자소개,목차 중 하나라도 없는 경우
+        except :
             book_id = "No data"
             book_name = "No data"
             cover = "No data"
@@ -256,15 +376,15 @@ def crawling_naverbook():
             author_introduction = "No data"
             contents = "No data"
             category1 = "No data"
+            parent_no1 = "No data"
             category2 = "No data"
+            parent_no2 = "No data"
             category3 = "No data"
-            category4 = "No data"
-
-
+            category_no = "No data"
 
         result = ((book_id, book_name, author, publisher, published_date, translator, cover))
         result2 = ((form_detail, isbn, is_ebook))
-        result3 = ((category1, category2, category3, category4))
+        result3 = ((category1, category2, category3))
         result4 = ((book_introduction))
         result5 = ((author_introduction))
         result6 = ((contents))
@@ -284,16 +404,18 @@ def crawling_naverbook():
 
         print("")
         results.append((book_id, book_name, author, publisher, published_date, translator, cover, form_detail, isbn,
-                        is_ebook, category1, category2, category3, category4, book_introduction, author_introduction,
-                        contents))
+                        is_ebook, category1, category2, category3, parent_no1, parent_no2, category_no, book_introduction, author_introduction,
+                       contents))
+
 
     # Store
     #print(result)
     #store
     table = pd.DataFrame(results, columns = ['book_id', 'book_name', 'author', 'publisher', 'published_date',
-                                             'translator', 'cover', 'form_detail',
-                                             'isbn', 'is_ebook', 'category1', 'category2', 'category3', 'category4',
-                                             'book_introduction', 'author_introduction', 'contents'])
+                                             'translator', 'cover', 'form_detail', 'isbn', 'is_ebook',
+                                             'category1',  'category2', 'category3',
+                                             'parent_no1', 'parent_no2', 'category_no', 'book_introduction',
+                                             'author_introduction', 'contents'])
     table.to_csv('__result__/DBook_db.csv', encoding='utf-8', mode='w', index=True)
 
 
