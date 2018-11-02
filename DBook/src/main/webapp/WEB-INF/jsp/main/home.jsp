@@ -10,10 +10,26 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/slide2.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/css/swiper.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/layerPopUp.css" />
-		
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
+	
 	<title>DBook</title>
 	
 	<style>	
+	
+	.swiper-slide > div > img{
+		width: auto;
+		height: 230px;
+	}
+	
+	#banner{
+	    left: -10%;
+	    position: relative;
+	    width: 120%;
+	    height: -webkit-fill-available;
+	    background: url(/DBook/resources/images/index.jpg) center center / cover no-repeat;
+	}
+	
 	#index-background{
 		background: url('${pageContext.request.contextPath}/resources/images/index.jpg') no-repeat center center fixed;
 		-webkit-background-size: cover;
@@ -34,14 +50,16 @@
       	background-color: #000000;
       	opacity: 0.5;
       	z-index: 960;
-      	position: fixed;
+      	position: absolute;
       }
       
       #index-up{
-		position: fixed;
+		position: absolute;
 		top: 35%;
-		left: calc((100% - 370px)/2);
+		width: 700px;
+		left: calc((100% - 700px)/2);
 		z-index: 965;
+		text-align: center;
       }
       
       #index-up > a{
@@ -59,7 +77,7 @@
 		border-radius: 200px;
 		background-color: #fc426a;
 		padding: 0 30px;
-		margin: 0 0 0 220px;
+		margin: 50px 0 0 0;
      }
       
     #index-btn:hover {
@@ -71,58 +89,38 @@
 		<!-- topMenu -->
 			<jsp:include page="../include/TopMenu.jsp"/>
 			
-		<!-- Cover -->
-							
-			<div id="index-background" class="cover"></div>
-			<div id="index-black" class="cover"></div>
-			<div id="index-up" class="cover">
-				<a>오늘은 무슨책?</a>
-				<br>
-				<div style="color: #f3a0a0">나를 위한 맞춤 책 추천사이트</div>
-				<button id="index-btn">DBook</button>
-			</div>
-		
 		<!-- Wrapper -->
 			<div id="wrapper">
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
 
-							<!-- Header -->
-							<jsp:include page="../include/HeaderMenu.jsp"/>
-
 							<!-- Banner -->
 								<section id="banner">
-									<div class="content">
-										<header>
-											<h1>오늘은<br>
-											무슨책?</h1>
-											<p>A free and fully responsive site template</p>
-										</header>
-										<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
-										<ul class="actions">
-											<li><a href="#" class="button big">Learn More</a></li>
-										</ul>
+									<div id="index-black" class="cover"></div>
+									<div id="index-up" class="cover">
+										<a>오늘은 무슨책?</a>
+										<br>
+										<div style="color: #f3a0a0">나를 위한 맞춤 책 추천사이트</div>
+										<button id="index-btn">DBook</button>
 									</div>
-									<span class="image object">
-										<img src="${pageContext.request.contextPath}/resources/images/home_pic.jpg" alt="" />
-									</span>
 								</section>
+
+							<!-- Header -->
+								<jsp:include page="../include/HeaderMenu.jsp"/>
 
 							<!-- Section -->
 								<section>
 									<header class="major">
-										<h2>slide</h2>
+										<h2>추천도서</h2>
 									</header>
 									<div class="swiper-container">
-										<div class="swiper-container">
 											<div class="swiper-wrapper">
-												<div class="swiper-slide"><div><img src="http://oldmidi.cdn3.cafe24.com/p/578.jpg"><div>1</div></div></div>
-												<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/099.jpg"><div>2</div></div></div>
-<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/334.jpg"><div>3</div></div></div> -->
-												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/526.jpg"><div>4</div></div></div>
-												<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/563.jpg"><div>5</div></div></div>
-												<div class="swiper-slide"><div><img src="http://oldmidi.cdn3.cafe24.com/p/019.jpg"><div>6</div></div></div>
+												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/280/14028062.jpg"><div>존 러스킨의 생명의 경제학</div></div></div>
+												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/308/14030874.jpg"><div>기억 파단자</div></div></div>
+												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/671/14067118.jpg"><div>5년 전에 잊어린 것</div></div></div>
+												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/526/14052659.jpg"><div>펭귄 하이웨이</div></div></div>
+												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/670/14067045.jpg"><div>악마의 미학</div></div></div>
 												<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/187.jpg"><div>7</div></div></div>
 <!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/176.jpg"><div>8</div></div></div> -->
 <!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/461.jpg"><div>9</div></div></div> -->
@@ -141,65 +139,66 @@
 										
 											<!-- 페이징 -->
 											<div class="swiper-pagination"></div>
-										</div>
-										<div style="text-align:center; margin-top:5px;">랜덤사진 갤러리</div>
 									</div>
-								</section>
-
-							<!-- Section -->
-								<section>
+									
 									<header class="major">
-										<h2>Ipsum sed dolor</h2>
+										<h2>추천도서2</h2>
 									</header>
-									<div class="posts">
-										<article>
-											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic01.jpg" alt="" /></a>
-											<h3>Interdum aenean</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic02.jpg" alt="" /></a>
-											<h3>Nulla amet dolore</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic03.jpg" alt="" /></a>
-											<h3>Tempus ullamcorper</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic04.jpg" alt="" /></a>
-											<h3>Sed etiam facilis</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic05.jpg" alt="" /></a>
-											<h3>Feugiat lorem aenean</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="${pageContext.request.contextPath}/resources/images/pic06.jpg" alt="" /></a>
-											<h3>Amet varius aliquam</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
+									<div class="swiper-container">
+											<div class="swiper-wrapper">
+												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/280/14028062.jpg"><div>존 러스킨의 생명의 경제학</div></div></div>
+												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/308/14030874.jpg"><div>기억 파단자</div></div></div>
+												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/671/14067118.jpg"><div>5년 전에 잊어린 것</div></div></div>
+												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/526/14052659.jpg"><div>펭귄 하이웨이</div></div></div>
+												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/670/14067045.jpg"><div>악마의 미학</div></div></div>
+												<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/187.jpg"><div>7</div></div></div>
+<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/176.jpg"><div>8</div></div></div> -->
+<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/461.jpg"><div>9</div></div></div> -->
+												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/321.jpg"><div>10</div></div></div>
+												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/521.jpg"><div>11</div></div></div>
+<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/400.jpg"><div>12</div></div></div> -->
+												<div class="swiper-slide"><div><img src="http://biketago.com/img/p/407.jpg"><div>13</div></div></div>
+												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/288.jpg"><div>14</div></div></div>
+												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/557.jpg"><div>15</div></div></div>
+												<div class="swiper-slide" style="font-size:50pt;">- 끝 -</div>
+											</div>
+										
+											<!-- 네비게이션 -->
+											<div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+											<div class="swiper-button-prev"></div><!-- 이전 버튼 -->
+										
+											<!-- 페이징 -->
+											<div class="swiper-pagination"></div>
+									</div>
+
+									<header class="major">
+										<h2>추천도서3</h2>
+									</header>
+									<div class="swiper-container">
+											<div class="swiper-wrapper">
+												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/280/14028062.jpg"><div>존 러스킨의 생명의 경제학</div></div></div>
+												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/308/14030874.jpg"><div>기억 파단자</div></div></div>
+												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/671/14067118.jpg"><div>5년 전에 잊어린 것</div></div></div>
+												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/526/14052659.jpg"><div>펭귄 하이웨이</div></div></div>
+												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/670/14067045.jpg"><div>악마의 미학</div></div></div>
+												<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/187.jpg"><div>7</div></div></div>
+<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/176.jpg"><div>8</div></div></div> -->
+<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/461.jpg"><div>9</div></div></div> -->
+												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/321.jpg"><div>10</div></div></div>
+												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/521.jpg"><div>11</div></div></div>
+<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/400.jpg"><div>12</div></div></div> -->
+												<div class="swiper-slide"><div><img src="http://biketago.com/img/p/407.jpg"><div>13</div></div></div>
+												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/288.jpg"><div>14</div></div></div>
+												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/557.jpg"><div>15</div></div></div>
+												<div class="swiper-slide" style="font-size:50pt;">- 끝 -</div>
+											</div>
+										
+											<!-- 네비게이션 -->
+											<div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+											<div class="swiper-button-prev"></div><!-- 이전 버튼 -->
+										
+											<!-- 페이징 -->
+											<div class="swiper-pagination"></div>
 									</div>
 								</section>
 
@@ -258,16 +257,15 @@
 
 		<!-- Scripts -->
 			<jsp:include page="../include/JS.jsp"></jsp:include>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
 			<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
 			
 			
-		<!-- 로그인 유저정보 추가입력 -->
+		
 			<script>
 				$(document).ready(function(){
 	   				setTimeout(function(){
-	   					$('#index-btn').show(1000);
-	   				}, 3000);
+	   					$('#index-btn').fadeIn(1000);
+	   				}, 2000);
 	   			});
 	   			
 	   			// scroll lock
@@ -279,11 +277,13 @@
 	   			});
 	   			
 	   			$('#index-btn').click(function(){
-	   				$('.cover').fadeOut(1000);
-	   				$('#element').off('scroll touchmove mousewheel');	// scroll lock 해제
+	   				$('html, body').css({'overflow': '', 'height': ''});	// scroll lock 해제
+	   				$('#element').off('scroll touchmove mousewheel');
+	   				$('#banner').slideUp(1000);
 	   			});
 			</script>
-			
+		
+		<!-- 로그인 유저정보 추가입력 -->
 			<c:if test="${not empty user.id and user.gender == 'none' or user.age_range == 'none'}">
             <script>
 	            function wrapWindowByMask(){
