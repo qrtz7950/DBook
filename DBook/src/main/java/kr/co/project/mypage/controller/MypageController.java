@@ -1,14 +1,7 @@
 package kr.co.project.mypage.controller;
 
-import java.sql.Array;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.Arrays;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -24,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.project.login.vo.LoginVO;
 import kr.co.project.mypage.service.MypageService;
-import kr.co.project.mypage.vo.MypageVO;
 import kr.co.project.review.service.ReviewService;
 import kr.co.project.review_reaction.vo.ReviewReactionVO;
 
@@ -82,9 +74,8 @@ public class MypageController {
 	@RequestMapping(value="/review_react.do", method = RequestMethod.POST)
 	public JSONObject mypageReview_react(@ModelAttribute ReviewReactionVO reviewReaction) {
 		System.out.println("mypageReview_react() 진입");
-		//System.out.println(reviewReaction);
-		
-		JSONObject reaction = rvService.review_react(reviewReaction);
+
+		 JSONObject reaction = rvService.review_react(reviewReaction);
 		
 		return reaction;
 	}
@@ -93,8 +84,8 @@ public class MypageController {
 	@RequestMapping(value="/cookie.json", method = RequestMethod.POST)
 	public JSONObject cookie(@RequestParam(value="cookieBookArray") String[] cookieBookArray) {
 		System.out.println("cookie() 진입");
-		
-		JSONObject cookie = mpService.getCookieBookList(cookieBookArray);
+
+		JSONObject  cookie = mpService.getCookieBookList(cookieBookArray);
 		
 		return cookie;
 	}
