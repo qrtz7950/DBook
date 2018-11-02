@@ -68,30 +68,9 @@
 											<div class="recent-book-content">
 												<div class="mypage-subtitle">
 													<span>최근에 본 도서</span>
-													<a class="recent-book more cursor">M O R E</a>
+													<a class="recent-book more cursor"></a>
 												</div>
-												<div class="articles recent-book-list">
-													<div class="recent-div-articles">
-														<article> <a href="" class="image"><img src="https://bookthumb-phinf.pstatic.net/cover/112/111/11211133.jpg"></a>
-														    <h3><a href="#">82년생 김지영</a></h3>
-														    <p><a href="#">김제희</a><br><a href="#">비트교육</a></p>
-														</article>
-														<article> <a href="" class="image"><img src="https://bookthumb-phinf.pstatic.net/cover/112/111/11211133.jpg"></a>
-														    <h3><a href="#">82년생 김지영</a></h3>
-														    <p><a href="#">김제희</a><br><a href="#">비트교육</a></p>
-														</article>
-														<article> <a href="" class="image"><img src="https://bookthumb-phinf.pstatic.net/cover/112/111/11211133.jpg"></a>
-														    <h3><a href="#">82년생 김지영</a></h3>
-														    <p><a href="#">김제희</a><br><a href="#">비트교육</a></p>
-														</article>
-														<article> <a href="" class="image"><img src="https://bookthumb-phinf.pstatic.net/cover/112/111/11211133.jpg"></a>
-														    <h3><a href="#">82년생 김지영</a></h3>
-														    <p><a href="#">김제희</a><br><a href="#">비트교육</a></p>
-														</article>
-													</div>
-												</div>
-												
-												<div class="view-more hidden recent-view-more"><img src="/DBook/resources/images/arrow-60.png"></div>
+												<div class="articles recent-book-list"></div>
 											</div>
 											
 											<div class="review-book-content">
@@ -102,49 +81,12 @@
 												<div id="reviews"></div>
 												<div id="review-page"></div>
 												
-												<!-- 예시 -->
-												<!-- 
-													<div class="reviewForm-base">
-														<div class="review-cover">
-															<article>
-															   <a href="#" class="image"><img src="https://bookthumb-phinf.pstatic.net/cover/140/494/14049497.jpg"></a>
-															</article>
-														</div>
-															<div id="review1" class="review">
-																<div class="reviewForm0">42</div>
-																<div class="reviewForm1">q (q)</div>
-																<div class="reviewForm2">
-																	<div class="rating_point">7</div>
-																	<span class="star_smallR1 on"></span><span
-																		class="star_smallR2 on"></span><span class="star_smallR1 on"></span><span
-																		class="star_smallR2 on"></span><span class="star_smallR1 on"></span><span
-																		class="star_smallR2 on"></span><span class="star_smallR1 on"></span><span
-																		class="star_smallR2"></span><span class="star_smallR1"></span><span
-																		class="star_smallR2"></span>
-																</div>
-																<div class="reviewForm3">asfaeg</div>
-																<div class="reviewForm4">2018-10-26</div>
-																<div class="reviewForm5">
-																	<span class="good"><img
-																		src="/DBook/resources/images/good.png"><a>0</a></span><span
-																		class="bad" style="border: 2px solid rgb(245, 106, 106);"><img
-																		src="/DBook/resources/images/bad.png"><a>1</a></span>
-																</div>
-															</div>
-													</div>   -->
-													
-													
-													
-												</div>
 											</div>
-											
-			                             </div>
+										</div>
+		                             </div>
 		                           
 		                           </div>
 							</section>
-								
-
-							<%-- <a href="${pageContext.request.contextPath}/login/login.do">카톡로그인</a> --%>
 						</div>
 					</div>
 			</div>
@@ -162,23 +104,20 @@
 						
 			<script type="text/javascript">
 			// 쿠키
-			console.log($.cookie());
-			
-			function parseCookieToArray(cookies) {
+			function parseCookieToArray() {
 				for(var i = 1; i < 5; i++){
 					order = 'recentBook' + i
-					cookieBookArray.push(cookies.order);
+					var a = $.cookie(order);
+					cookieBookArray.push(a);
 				}
 			}
 			
 			function getCookieBookInfo() {
 				$.ajaxSettings.traditional = true;
-				console.log("getCookieBookInfo()안에서");
-				console.log(cookieBookArray);
 				$.ajax({
 					url : '../mypage/cookie.json',
 					type : 'POST',
-					dataType : 'text',
+					dataType : 'json',
 					data : {'cookieBookArray':cookieBookArray},
 					error : function(request, status, error){
 				       	alert("code:"+request.status+"\n"+"error:"+error);
@@ -196,14 +135,14 @@
 				temp += '<div id="recent' + (i+1) + '" class="articles recent-book-list">';
 				temp += 	'<div class="recent-div-articles">';
 				
-				for(var i=0; i<reviews.items.length; i++){
-					if(reviews.items[i].cover == null)
-						reviews.items[i].cover = "/DBook/resources/images/image-null.png";
+				for(var i=0; i<data.items.length; i++){
+					if(data.items[i].cover == null)
+						data.items[i].cover = "/DBook/resources/images/image-null.png";
 					
 					temp += 		'<article>';
 					temp += 			'<a href="${pageContext.request.contextPath}/book/bookDetail/' + data.items[i].book_id + '.do" class="image"><img src="' + data.items[i].cover + '"></a>';
-					temp +=	 			'<h3><a href=${pageContext.request.contextPath}/book/bookDetail/' + data.items[i].book_id + '.do">' + data.items[i].book_id + '</a></h3>';
-					temp +=				'<p><a href=${pageContext.request.contextPath}book/bookSearch/searchResult.do?keyword="' + data.items[i].author + '">' + data.items[i].author + '</a><br><a href="${pageContext.request.contextPath}book/bookSearch/searchResult.do?keyword="' + data.items[i].pubisher + '">' + data.items[i].pubisher + '</a></p>';
+					temp +=	 			'<h3><a href=${pageContext.request.contextPath}/book/bookDetail/' + data.items[i].book_id + '.do">' + data.items[i].book_name + '</a></h3>';
+					temp +=				'<p><a href=${pageContext.request.contextPath}/book/bookSearch/searchResult.do?keyword="' + data.items[i].author + '">' + data.items[i].author + '</a><br><a href="${pageContext.request.contextPath}/book/bookSearch/searchResult.do?keyword="' + data.items[i].publisher + '">' + data.items[i].publisher + '</a></p>';
 					temp += 		'</article>';
 				}
 				
@@ -280,13 +219,13 @@
 				       	alert("code:"+request.status+"\n"+"error:"+error);
 				    },
 					success : function(data){
-						addBook(data);
+						addBookmark(data);
 						bookmarkNTh++;
 					}
 				});
 			}
 			
-			function addBook(data) {
+			function addBookmark(data) {
 				var s = "";
 					s += '<div class = "bookmark-div-articles">';
 				for(var i =0; i<data.items.length; i++){
@@ -516,7 +455,6 @@
 					});
 				}
 			}
-			
 			</script>
 			<script>
 			/*
@@ -532,7 +470,5 @@
 			});
 			*/
 			</script>
-			
-			
 </body>
 </html>

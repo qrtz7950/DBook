@@ -1,6 +1,7 @@
 package kr.co.project.mypage.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -91,17 +92,25 @@ public class MypageService {
 		JSONObject cookies = new JSONObject();
 		JSONArray jArray = new JSONArray();
 		
+		System.out.println("이거 널이냐 공백이냐" + cookieBookArray[0]);
+		
+		System.out.println("for문 스타트");
 		for(int i=0;i<cookieBookArray.length;i++) {
-			JSONObject j = new JSONObject();
-			MypageVO m = dao.getCookieBook(cookieBookArray[i]);
-			
-			j.put("book_id", m.getBook_id());
-			j.put("book_name", m.getBook_name());
-			j.put("cover", m.getCover());
-			j.put("author", m.getAuthor());
-			j.put("publisher", m.getPublisher());
-			
-			jArray.add(j);
+			if(cookieBookArray[i] != "" && cookieBookArray[i] != " ") {
+				System.out.println("가공 전 : " + cookieBookArray[i]);
+				cookieBookArray[i] = cookieBookArray[i].replaceAll("\"", "");
+				System.out.println("가공 후 : " + cookieBookArray[i]);
+				MypageVO m = dao.getCookieBook(cookieBookArray[i]);
+				JSONObject j = new JSONObject();
+				
+				j.put("book_id", m.getBook_id());
+				j.put("book_name", m.getBook_name());
+				j.put("cover", m.getCover());
+				j.put("author", m.getAuthor());
+				j.put("publisher", m.getPublisher());
+				
+				jArray.add(j);
+			}
 		}
 		
 		cookies.put("items", jArray);

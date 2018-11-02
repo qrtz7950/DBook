@@ -485,17 +485,17 @@
 		
 		if(check){
 		
-			$.removeCookie('recentBook1');
+			$.removeCookie('recentBook4');
 			
-			var cok21 = $.cookie('recentBook2');
-			var cok32 = $.cookie('recentBook3');
-			var cok43 = $.cookie('recentBook4');
+			var cok21 = $.cookie('recentBook1');
+			var cok32 = $.cookie('recentBook2');
+			var cok43 = $.cookie('recentBook3');
 			
-			$.cookie( 'recentBook1', cok21, { expires: 30, path: '/' });
-			$.cookie( 'recentBook2', cok32, { expires: 30, path: '/' });
-			$.cookie( 'recentBook3', cok43, { expires: 30, path: '/' });
+			$.cookie( 'recentBook2', cok21, { expires: 30, path: '/' });
+			$.cookie( 'recentBook3', cok32, { expires: 30, path: '/' });
+			$.cookie( 'recentBook4', cok43, { expires: 30, path: '/' });
 		
-			$.cookie( 'recentBook4', '${requestScope.book.book_id}', { expires: 30, path: '/' });		
+			$.cookie( 'recentBook1', '${requestScope.book.book_id}', { expires: 30, path: '/' });		
 		}
 		
 		console.log($.cookie());
