@@ -1,4 +1,4 @@
-/* MenuButton */
+/* MenuButton *//*
 $(document).ready(function() {
 	menuButton();
 });
@@ -35,4 +35,20 @@ function menuButton(){
 		$("#showTop").show();
 		$("#cbp-spmenu-s3").show();							
     }
+}*/
+
+$(document).ready(function() {
+	depend_on_login();
+});
+
+function depend_on_login(){
+	if(b_check_login){
+		$('#btn-login').css('display', 'none');
+		$('#btn-logout').css('display', 'block');
+		$('#user-nickname').css('display', 'block');
+	}else{
+		$('#btn-login').css('display', 'block');
+		$('#btn-logout').css('display', 'none');
+		$('#user-nickname').css('display', 'none');
+	}
 }

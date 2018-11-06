@@ -2284,7 +2284,7 @@
 	header.major > :last-child {
 		border-bottom: solid 3px #f56a6a;
 		display: inline-block;
-		margin: 1em 0 0 0;
+		margin: 1em 0 0.5em 0;
 		padding: 0 0.75em 0.5em 0;
 	}
 

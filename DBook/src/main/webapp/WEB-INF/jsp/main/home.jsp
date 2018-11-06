@@ -262,6 +262,8 @@
 			
 		
 			<script>
+				var login_check = ${!empty user}; 
+			
 				$(document).ready(function(){
 	   				setTimeout(function(){
 	   					$('#index-btn').fadeIn(1000);

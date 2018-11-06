@@ -1,5 +1,36 @@
 @charset "UTF-8";
 
+@media screen and (max-width: 1920px){
+	#showTop {display : none;}	
+	#cbp-spmenu-s3 {display : none;}								
+	.topMenu-left {display : block;}
+	#showLeft {display : block;}
+	#cbp-spmenu-s1 {display : block;}
+	#topMenu-search {display : block;}
+}
+
+@media screen and (max-width: 660px){
+	#showTop {display : none;}	
+	#cbp-spmenu-s3 {display : none;}								
+	.topMenu-left {display : none;}
+	#showLeft {display : block;}
+	#cbp-spmenu-s1 {display : block;}
+	#topMenu-search {display : block;}
+}
+
+@media screen and (max-width: 450px){
+	#showTop {display : block;}	
+	#cbp-spmenu-s3 {display : block;}								
+	.topMenu-left {display : none;}
+	#showLeft {display : none;}
+	#cbp-spmenu-s1 {display : none;}
+	#topMenu-search {display : none;}
+}
+
+.topMenu-left-1 {display : block;}
+
+#btn-logout, #user-nickname, #btn-login {display: none;}
+
 #topMenu {
 	position: fixed;
 	width: 100%;
@@ -16,7 +47,6 @@
 }
 
 #topMenu > li a {
-    display: block;
     color: white;
     text-align: center;
     padding: 14px 16px;
