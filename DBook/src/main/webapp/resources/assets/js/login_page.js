@@ -1,3 +1,8 @@
+$('.message a').click(function(){
+   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+   $('.forSpace').animate({height: "toggle", opacity: "toggle"}, "slow");
+});
+
 function signCheckForm() {
 		
 	if(isNull($('#sign_id'), '아이디를 입력해주세요')) {
