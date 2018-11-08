@@ -2,6 +2,7 @@ package kr.co.project.review.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,4 +113,22 @@ public class ReviewDAO {
 	}
 	
 	//--------------------------------------------------------------------------------------------------------
+	
+	//----------------------------------------------초기 추천을 위한 유저 상관도 테이블 관련----------------------------------------
+	
+	// 자신이 평가한 책 조회
+	public List<ReviewVO> myRatingBooks(String id) {
+		List<ReviewVO> myRatingBookList = sqlSessionTemplate.selectList("kr.co.project.review.dao.ReviewDAO.myRatingBooks", id);
+		return myRatingBookList;
+	}
+	
+	// 해당책 평가했던 id들 조회
+	public List<String> compareIds(String id, String book_id) {
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("book_id", book_id);
+		
+		List<String> compareIdList = sqlSessionTemplate.selectList("kr.co.project.review.dao.ReviewDAO.compareIds", map);
+		return compareIdList;
+	}
 }

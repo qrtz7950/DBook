@@ -73,6 +73,8 @@ public class ReviewController {
 		}
 		
 		reviewService.addUserRating(list);
+		// 가입후 평가페이지에서 처음으로 평가시 초기 유저 상관도 테이블 계산 후 입력
+		reviewService.calcRecommend(user.getId());
 		
 		return;
 	}

@@ -112,7 +112,7 @@
 							<!-- Section -->
 								<section>
 									<header class="major">
-										<h2>추천도서</h2>
+										<h2>높은 평점을 받은 도서</h2>
 									</header>
 									<div class="swiper-container">
 											<div class="swiper-wrapper">
@@ -142,7 +142,7 @@
 									</div>
 									
 									<header class="major">
-										<h2>추천도서2</h2>
+										<h2>조회수가 높은 도서</h2>
 									</header>
 									<div class="swiper-container">
 											<div class="swiper-wrapper">
@@ -172,7 +172,7 @@
 									</div>
 
 									<header class="major">
-										<h2>추천도서3</h2>
+										<h2>사람들의 관심이 많은 도서</h2>
 									</header>
 									<div class="swiper-container">
 											<div class="swiper-wrapper">

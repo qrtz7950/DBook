@@ -78,4 +78,18 @@
 		  where review_no = #{review_no}
 	</select>
 	
+	
+	<!-- 자신이 평가했던 책 조회-->
+	<select id="myRatingBooks" resultType="reviewVO" parameterType="string">
+		select book_id, rating
+		  from review
+		  where id = #{id}
+	</select>
+	
+	<!-- 해당책 평가했던 id들 조회 -->
+	<select id="compareIds" resultType="string" parameterType="hashmap">
+		select id
+		  from review
+		  where book_id = #{book_id} and id != #{id}
+	</select>
 </mapper>

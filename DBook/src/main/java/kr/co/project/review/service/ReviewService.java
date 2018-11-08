@@ -1,6 +1,8 @@
 package kr.co.project.review.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -133,6 +135,32 @@ public class ReviewService {
 		reactions.put("items", jArray);
 		
 		return reactions;
+	}
+	
+	// 가입후 평가페이지에서 처음으로 평가시 초기 유저 상관도 테이블 계산 후 입력
+	public void calcRecommend(String id) {
+		// 자신이 평가한 책 목록 뽑기
+		List<ReviewVO> myRatingBookList = dao.myRatingBooks(id);
+		System.out.println(myRatingBookList.toString());
+		
+		// 자신이 평가한 책을 평가한 다른 유저 id list 뽑기
+		List<String> compareIdList = new ArrayList<>();
+		for(ReviewVO myRatingBook : myRatingBookList) {
+			List<String> temp1 = dao.compareIds(id, myRatingBook.getBook_id());
+			if(temp1 != null) {
+				compareIdList.addAll(temp1);				
+			}
+		}
+		// id list 중복 id 제거
+		HashSet<String> removeSame = new HashSet<>(compareIdList);
+		compareIdList.clear();
+		compareIdList = new ArrayList<>(removeSame);
+		System.out.println(compareIdList.toString());
+		
+		// 자신과 id list에서 하나씩 뽑아낸 id와 공통 평가한 책의 평점의 차의 합의 평균을 구함
+		for(String compareId : compareIdList) {
+			
+		}
 	}
 	
 }
