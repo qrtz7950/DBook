@@ -1,52 +1,49 @@
 package kr.co.project.book.vo;
 
+/**
+ * @author bit
+ *
+ */
 public class BookVO {
 	
 	private String book_id;
 	private String book_name;
-	private String cover;
+	private String category_no;
 	private String author;
 	private String translator;
 	private String publisher;
 	private String published_date;
 	private int is_ebook;
 	private String form_detail;
-	private String isbn_10;
-	private String isbn_13;
+	private String isbn;
+	private int view_cnt;
 	private String book_introduction;
 	private String author_introduction;
 	private String contents;
-	private int view_cnt;
-	private String category1;
-	private String category2;
-	private String category3;
+	private String cover;
 	
 	public BookVO() {
 	}
 
-	public BookVO(String book_id, String book_name, String cover, String author, String translator, String publisher,
-			String published_date, int is_ebook, String form_detail, String isbn_10, String isbn_13,
-			String book_introduction, String author_introduction, String contents, int view_cnt, String category1,
-			String category2, String category3) {
+	public BookVO(String book_id, String book_name, String category_no, String author, String translator,
+			String publisher, String published_date, int is_ebook, String form_detail, String isbn, int view_cnt,
+			String book_introduction, String author_introduction, String contents, String cover) {
 		super();
 		this.book_id = book_id;
 		this.book_name = book_name;
-		this.cover = cover;
+		this.category_no = category_no;
 		this.author = author;
 		this.translator = translator;
 		this.publisher = publisher;
 		this.published_date = published_date;
 		this.is_ebook = is_ebook;
 		this.form_detail = form_detail;
-		this.isbn_10 = isbn_10;
-		this.isbn_13 = isbn_13;
+		this.isbn = isbn;
+		this.view_cnt = view_cnt;
 		this.book_introduction = book_introduction;
 		this.author_introduction = author_introduction;
 		this.contents = contents;
-		this.view_cnt = view_cnt;
-		this.category1 = category1;
-		this.category2 = category2;
-		this.category3 = category3;
+		this.cover = cover;
 	}
 
 	public String getBook_id() {
@@ -65,12 +62,12 @@ public class BookVO {
 		this.book_name = book_name;
 	}
 
-	public String getCover() {
-		return cover;
+	public String getCategory_no() {
+		return category_no;
 	}
 
-	public void setCover(String cover) {
-		this.cover = cover;
+	public void setCategory_no(String category_no) {
+		this.category_no = category_no;
 	}
 
 	public String getAuthor() {
@@ -121,20 +118,20 @@ public class BookVO {
 		this.form_detail = form_detail;
 	}
 
-	public String getIsbn_10() {
-		return isbn_10;
+	public String getIsbn() {
+		return isbn;
 	}
 
-	public void setIsbn_10(String isbn_10) {
-		this.isbn_10 = isbn_10;
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
 	}
 
-	public String getIsbn_13() {
-		return isbn_13;
+	public int getView_cnt() {
+		return view_cnt;
 	}
 
-	public void setIsbn_13(String isbn_13) {
-		this.isbn_13 = isbn_13;
+	public void setView_cnt(int view_cnt) {
+		this.view_cnt = view_cnt;
 	}
 
 	public String getBook_introduction() {
@@ -161,48 +158,21 @@ public class BookVO {
 		this.contents = contents;
 	}
 
-	public int getView_cnt() {
-		return view_cnt;
+	public String getCover() {
+		return cover;
 	}
 
-	public void setView_cnt(int view_cnt) {
-		this.view_cnt = view_cnt;
-	}
-
-	public String getCategory1() {
-		return category1;
-	}
-
-	public void setCategory1(String category1) {
-		this.category1 = category1;
-	}
-
-	public String getCategory2() {
-		return category2;
-	}
-
-	public void setCategory2(String category2) {
-		this.category2 = category2;
-	}
-
-	public String getCategory3() {
-		return category3;
-	}
-
-	public void setCategory3(String category3) {
-		this.category3 = category3;
+	public void setCover(String cover) {
+		this.cover = cover;
 	}
 
 	@Override
 	public String toString() {
-		return "BookVO [book_id=" + book_id + ", book_name=" + book_name + ", cover=" + cover + ", author=" + author
-				+ ", translator=" + translator + ", publisher=" + publisher + ", published_date=" + published_date
-				+ ", is_ebook=" + is_ebook + ", form_detail=" + form_detail + ", isbn_10=" + isbn_10 + ", isbn_13="
-				+ isbn_13 + ", book_introduction=" + book_introduction + ", author_introduction=" + author_introduction
-				+ ", contents=" + contents + ", view_cnt=" + view_cnt + ", category1=" + category1 + ", category2="
-				+ category2 + ", category3=" + category3 + "]";
+		return "BookVO [book_id=" + book_id + ", book_name=" + book_name + ", category_no=" + category_no + ", author="
+				+ author + ", translator=" + translator + ", publisher=" + publisher + ", published_date="
+				+ published_date + ", is_ebook=" + is_ebook + ", form_detail=" + form_detail + ", isbn=" + isbn
+				+ ", view_cnt=" + view_cnt + ", book_introduction=" + book_introduction + ", author_introduction="
+				+ author_introduction + ", contents=" + contents + ", cover=" + cover + "]";
 	}
-	
-	
 	
 }

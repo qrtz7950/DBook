@@ -1,5 +1,8 @@
 package kr.co.project.book.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,15 +22,21 @@ public class BookController {
 	private BookService bookService; 
 	
 	// 카테고리 검색 페이지
-	@RequestMapping("/booklist/category/{category}.do")
+	@RequestMapping("/booklist/category.do/{category}")
 	public ModelAndView booklistByCategory(@PathVariable("category") String category) {
 
 		System.out.println("booklistByCategory()진입");
 		
-		String[] categories = category.split(">");
+		String[] categories = category.split(";");
+		String categoryNumber = null;
 		
-		for(int i=0; i<categories.length; i++) {
-			System.out.println(categories[i]);
+		List<BookVO> list = new ArrayList<>();
+		
+		if(categories.length >= 3) {
+			for(int i=0; i<categories.length; i++) {
+				categoryNumber += categories[i];
+			}
+			list = bookService.booklistByCategory("1", "20", categoryNumber);
 		}
 		
 		ModelAndView mav = new ModelAndView();

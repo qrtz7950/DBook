@@ -19,4 +19,18 @@
 			where 	book_id = #{book_id}
 	</update>
 	
+	<!-- 카테고리 별로 책 n권씩 가져오기  -->
+	<select id="booklistByCategory" resultType="bookVO" parameterType="string">
+	select  book_id
+     , book_name
+     , publisher
+  	from (
+        select b.*
+             , row_number() over(order by b.book_id asc) as rnum
+          from book b
+          where category_no = #{start} #{} 
+        )
+	where rnum between 1 and 10;
+	</select>
+	
 </mapper>
