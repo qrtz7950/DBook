@@ -28,9 +28,8 @@
         select b.*
              , row_number() over(order by b.book_id asc) as rnum
           from book b
-          where category_no = #{start} #{} 
         )
-	where rnum between 1 and 10;
+	where rnum between 1 and 10
 	</select>
 	
 </mapper>
