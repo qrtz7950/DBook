@@ -66,38 +66,31 @@
 											</div>
 											<div id="side-category-menu_title_category">
 												<ul>
-													<li><a href="${pageContext.request.contextPath}/booklist/category/국내도서>소설.do">소설</a></li>
-													<li><a href="#">시/에세이</a></li>
-													<li><a href="#">인문</a></li>
-													<li><a href="#">가정/생활</a></li>
-													<li><a href="#">요리</a></li>
-													<li><a href="#">건강</a></li>
-													<li><a href="#">취미/스포츠</a></li>
-													<li><a href="#">경제/경영</a></li>
-													<li><a href="#">자기계발</a></li>
-													<li><a href="#">정치/사회</a></li>
-													<li><a href="#">정부간행물</a></li>
-													<li><a href="#">역사/문화</a></li>
-													<li><a href="#">종교</a></li>
-													<li><a href="#">예술/대중문화</a></li>
-													<li><a href="#">중/고학습</a></li>
-													<li><a href="#">기술/공학</a></li>
-													<li><a href="#">외국어</a></li>
-													<li><a href="#">과학</a></li>
-													<li><a href="#">취업/수험서</a></li>
-													<li><a href="#">여행</a></li>
-													<li><a href="#">컴퓨터/IT</a></li>
-													<li><a href="#">잡지</a></li>
-													<li><a href="#">사전</a></li>
-													<li><a href="#">청소년</a></li>
-													<li><a href="#">초등학습</a></li>
-													<li><a href="#">유아</a></li>
-													<li><a href="#">아동</a></li>
-													<li><a href="#">어린이영어</a></li>
-													<li><a href="#">만화</a></li>
-													<li><a href="#">아동/유아전집</a></li>
-													<li><a href="#">한국소개도서</a></li>
-													<li><a href="#">PB상품</a></li>
+												<li href="../book/booklist/category.do/"><a><span>소설</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>시/에세이</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>경제/경영</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>자기계발</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>인문</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>역사/문화</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>사회</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>과학/공학</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>예술/대중문화</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>종교</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>유아</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>어린이</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>가정/생활/요리</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>건강</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>취미/레저</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>여행/지도</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>국어/외국어</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>사전</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>컴퓨터/IT</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>청소년</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>학습/참고서</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>취업/수험서</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>만화</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>잡지</span></a></li>
+												<li href="../book/booklist/category.do/"><a><span>해외도서</span></a></li>
 												</ul>
 											</div>
 										</div>

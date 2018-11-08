@@ -1,5 +1,10 @@
 package kr.co.project.book.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +32,14 @@ public class BookService {
 	public void upView_cnt(String book_id) {
 		
 		dao.upView_cnt(book_id);
+	}
+
+	public List<BookVO> booklistByCategory(String start, String end, String categoryNumber) {
+
+	
+		List<BookVO> list = new ArrayList<>();
+		
+		//return dao.booklistByCategory(start,end,categoryNumber);
+		return null;
 	}
 }

@@ -1,5 +1,8 @@
 package kr.co.project.book.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,5 +23,5 @@ public class BookDAO {
 	public void upView_cnt(String book_id) {
 		sqlSessionTemplate.update("kr.co.project.book.dao.BookDAO.upView_cnt", book_id);		
 	}
-	
+
 }
