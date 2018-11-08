@@ -34,12 +34,15 @@ public class BookService {
 		dao.upView_cnt(book_id);
 	}
 
-	public List<BookVO> booklistByCategory(String start, String end, String categoryNumber) {
+	public List<BookVO> booklistByCategory(int start, int end, String categoryNumber) {
 
-	
-		List<BookVO> list = new ArrayList<>();
-		
-		//return dao.booklistByCategory(start,end,categoryNumber);
-		return null;
+		Map map = new HashMap();
+		String conStart = start + "";
+		String conEnd = end + "";
+		map.put("startNum", conStart);
+		map.put("endNum", conEnd);
+		map.put("categoryNumber", categoryNumber);
+
+		return dao.booklistByCategory(map);
 	}
 }

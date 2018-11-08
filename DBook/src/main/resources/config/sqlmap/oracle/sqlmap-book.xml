@@ -7,7 +7,7 @@
 	<!-- book_id로 책 정보 조회 -->	
 	<select id="bookDetail" resultType="bookVO" parameterType="bookVO">
 		select book_id, book_name, cover, author, translator, publisher, to_char(published_date, 'yyyy-mm-dd') as published_date,
-			   is_ebook, form_detail, isbn_10, isbn_13, book_introduction, author_introduction, contents, view_cnt 
+			   is_ebook, form_detail, isbn, book_introduction, author_introduction, contents, view_cnt 
 		  from book
 		  where book_id = #{book_id}
 	</select>
@@ -20,17 +20,19 @@
 	</update>
 	
 	<!-- 카테고리 별로 책 n권씩 가져오기  -->
-	<select id="booklistByCategory" resultType="bookVO" parameterType="string">
-	select  book_id
-     , book_name
-     , publisher
-  	from (
-        select b.*
-             , row_number() over(order by b.book_id asc) as rnum
-          from book b
-          where category_no = #{start} #{} 
-        )
-	where rnum between 1 and 10;
+	<select id="booklistByCategory" resultType="bookVO" parameterType="hashmap">
+		select  book_id
+		     , book_name
+		     , publisher
+	         , published_date
+	         , category_no
+		  	from (
+		        select b.*
+		             , row_number() over(order by b.published_date desc) as rnum
+		          from book b
+	              where b.category_no like #categoryNumber# || '%' 
+		        )
+			where rnum between 1 and 20;
 	</select>
 	
 </mapper>

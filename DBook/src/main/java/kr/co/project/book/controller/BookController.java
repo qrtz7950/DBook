@@ -3,18 +3,24 @@ package kr.co.project.book.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.json.simple.JSONObject;
 
 import kr.co.project.book.service.BookService;
 import kr.co.project.book.vo.BookVO;
 import kr.co.project.review.service.ReviewService;
 
 @Controller
+@RestController
 @RequestMapping("/book")
 public class BookController {
 	
@@ -22,25 +28,37 @@ public class BookController {
 	private BookService bookService; 
 	
 	// 카테고리 검색 페이지
-	@RequestMapping("/booklist/category.do/{category}")
-	public ModelAndView booklistByCategory(@PathVariable("category") String category) {
+	@RequestMapping("/booklist/category.do")
+	public ModelAndView booklistByCategory(HttpServletRequest request) {
 
 		System.out.println("booklistByCategory()진입");
 		
-		String[] categories = category.split(";");
-		String categoryNumber = null;
+		int page = 1;
 		
-		List<BookVO> list = new ArrayList<>();
+		if(request.getParameter("page") != null)
+			page = Integer.parseInt(request.getParameter("page"));
+		String category = request.getParameter("category");
 		
-		if(categories.length >= 3) {
-			for(int i=0; i<categories.length; i++) {
-				categoryNumber += categories[i];
-			}
-			list = bookService.booklistByCategory("1", "20", categoryNumber);
+		int start = 20 * page -19;
+		int end = 20 * page;
+		
+		System.out.println("파라미터 페이지 : " + page);
+		System.out.println("실제 페이지 : " + page);
+		System.out.println("시작 : " + start);
+		System.out.println("끝 : " + end);
+		
+		List<BookVO> bookListByCategory = new ArrayList<>();
+		
+		if(category != null) {
+			bookListByCategory = bookService.booklistByCategory(start, end, category);
+		} else {
+			bookListByCategory = bookService.booklistByCategory(start, end, "100");
 		}
 		
+		System.out.println(bookListByCategory);
+		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("categories", categories);
+		mav.addObject("bookListByCategory", bookListByCategory);
 		mav.setViewName("booklist/category");
 		
 		return mav;
