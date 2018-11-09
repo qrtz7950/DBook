@@ -177,10 +177,10 @@ public class ReviewService {
 				if(count != 0) {
 					// float형 소수점 자릿수로 오류 날수도 있음 오류나면 여기 보세요 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
 					distance /= count;
-					UserCorrelationVO ucvo = new UserCorrelationVO(id, compareId, distance);
-					resultList.add(ucvo);
 				}
 			}
+			UserCorrelationVO ucvo = new UserCorrelationVO(id, compareId, distance);
+			resultList.add(ucvo);
 		}
 		
 		AscendingObj ascending = new AscendingObj();
@@ -188,8 +188,19 @@ public class ReviewService {
 		
 		System.out.print("오름차순 - ");
         for (UserCorrelationVO a : resultList) {
-            System.out.print(a.getCompareId() + ":" + a.getDistance() + " ");
+            System.out.print(a.getCompare_id() + ":" + a.getDistance() + " ");
         }
+        
+        System.out.println();
+        System.out.print("5개 - ");
+        if(resultList.size() > 5) {
+        	resultList.subList(5,resultList.size()).clear();
+        }
+        for (UserCorrelationVO a : resultList) {
+            System.out.print(a.getCompare_id() + ":" + a.getDistance() + " ");
+        }
+        
+        dao.addUserCorrelation(resultList);
 	}
 	class AscendingObj implements Comparator<UserCorrelationVO>{
 		@Override
@@ -202,7 +213,6 @@ public class ReviewService {
 			}else {
 				r = -1;
 			}
-			
 			return r;
 		}
 	}
