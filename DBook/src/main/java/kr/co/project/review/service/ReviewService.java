@@ -1,6 +1,8 @@
 package kr.co.project.review.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import kr.co.project.review.dao.ReviewDAO;
 import kr.co.project.review.vo.ReviewVO;
 import kr.co.project.review_reaction.vo.ReviewReactionVO;
+import kr.co.project.usercorrelation.vo.UserCorrelationVO;
 
 @Service
 public class ReviewService {
@@ -158,8 +161,49 @@ public class ReviewService {
 		System.out.println(compareIdList.toString());
 		
 		// 자신과 id list에서 하나씩 뽑아낸 id와 공통 평가한 책의 평점의 차의 합의 평균을 구함
+		List<UserCorrelationVO> resultList = new ArrayList<>();
+		float distance;
 		for(String compareId : compareIdList) {
+			distance = 0;
+			List<ReviewVO> compareRatingBookList = dao.myRatingBooks(compareId);
+			for(ReviewVO myRatingBook : myRatingBookList) {
+				int count = 0;
+				for(ReviewVO compareRatingBook : compareRatingBookList) {
+					if(myRatingBook.getBook_id().equals(compareRatingBook.getBook_id())) {
+						distance += Math.pow(myRatingBook.getRating() - compareRatingBook.getRating(), 2);
+						count++;
+					}
+				}
+				if(count != 0) {
+					// float형 소수점 자릿수로 오류 날수도 있음 오류나면 여기 보세요 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+					distance /= count;
+					UserCorrelationVO ucvo = new UserCorrelationVO(id, compareId, distance);
+					resultList.add(ucvo);
+				}
+			}
+		}
+		
+		AscendingObj ascending = new AscendingObj();
+		Collections.sort(resultList, ascending);
+		
+		System.out.print("오름차순 - ");
+        for (UserCorrelationVO a : resultList) {
+            System.out.print(a.getCompareId() + ":" + a.getDistance() + " ");
+        }
+	}
+	class AscendingObj implements Comparator<UserCorrelationVO>{
+		@Override
+		public int compare(UserCorrelationVO o1, UserCorrelationVO o2) {
+			int r;
+			if(o1.getDistance() == o2.getDistance()) {
+				r = 0;
+			}else if(o1.getDistance() > o2.getDistance()) {
+				r = 1;
+			}else {
+				r = -1;
+			}
 			
+			return r;
 		}
 	}
 	
