@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.project.book.dao.BookDAO;
 import kr.co.project.book.vo.BookVO;
+import kr.co.project.book.vo.CategoryVO;
 
 @Service
 public class BookService {
@@ -34,15 +35,8 @@ public class BookService {
 		dao.upView_cnt(book_id);
 	}
 
-	public List<BookVO> booklistByCategory(int start, int end, String categoryNumber) {
-
-		Map map = new HashMap();
-		String conStart = start + "";
-		String conEnd = end + "";
-		map.put("startNum", conStart);
-		map.put("endNum", conEnd);
-		map.put("categoryNumber", categoryNumber);
-
-		return dao.booklistByCategory(map);
+	public List<BookVO> booklistByCategory(CategoryVO categoryVO) {
+	
+		return dao.booklistByCategory(categoryVO);
 	}
 }

@@ -97,12 +97,12 @@
 									
 										<div id="category-content" class="posts">
 											
-											<c:forEach begin="1" end="21">
+											<c:forEach var="book" items="#{bookListByCategory}">
 											
 											<article>
-											   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
-											   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
-											   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
+											   <a href="#" class="image"><img src="${book.cover}"></a>
+											   <h3><a href="#">${book.book_name}</a></h3>
+											   <p><a href="#">${book.author} 지음</a><br><a href="#">${book.publisher}</a></p>
 											</article>
 											
 											</c:forEach>

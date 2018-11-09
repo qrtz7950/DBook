@@ -17,6 +17,7 @@ import org.json.simple.JSONObject;
 
 import kr.co.project.book.service.BookService;
 import kr.co.project.book.vo.BookVO;
+import kr.co.project.book.vo.CategoryVO;
 import kr.co.project.review.service.ReviewService;
 
 @Controller
@@ -42,18 +43,12 @@ public class BookController {
 		int start = 20 * page -19;
 		int end = 20 * page;
 		
-		System.out.println("파라미터 페이지 : " + page);
-		System.out.println("실제 페이지 : " + page);
-		System.out.println("시작 : " + start);
-		System.out.println("끝 : " + end);
-		
 		List<BookVO> bookListByCategory = new ArrayList<>();
+		CategoryVO categoryVO = new CategoryVO(start,end,category);
 		
-		if(category != null) {
-			bookListByCategory = bookService.booklistByCategory(start, end, category);
-		} else {
-			bookListByCategory = bookService.booklistByCategory(start, end, "100");
-		}
+		if(category == null)
+			categoryVO.setCategoryNumber("100");
+		bookListByCategory = bookService.booklistByCategory(categoryVO);
 		
 		System.out.println(bookListByCategory);
 		

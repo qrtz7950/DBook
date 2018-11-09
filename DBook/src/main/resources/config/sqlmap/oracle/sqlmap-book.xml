@@ -13,26 +13,24 @@
 	</select>
 	
 	<!-- 책 조회수 올리기 -->
-	<update id="upView_cnt" parameterType="string">
+	<update id="upView_cnt" parameterType="String">
 		update book 
 			set		view_cnt = view_cnt + 1
 			where 	book_id = #{book_id}
 	</update>
 	
 	<!-- 카테고리 별로 책 n권씩 가져오기  -->
-	<select id="booklistByCategory" resultType="bookVO" parameterType="hashmap">
-		select  book_id
-		     , book_name
-		     , publisher
-	         , published_date
-	         , category_no
-		  	from (
-		        select b.*
-		             , row_number() over(order by b.published_date desc) as rnum
-		          from book b
-	              where b.category_no like #categoryNumber# || '%' 
-		        )
-			where rnum between 1 and 20;
+	<select id="booklistByCategory" resultType="bookVO" parameterType="categoryVO">
+		select br.book_id , br.book_name , br.category_no , br.publisher , br.published_date , br.cover
+		from ( 
+		    select rownum as rnum, b.book_id , b.book_name , b.category_no , b.publisher , b.published_date , b.cover
+		    from (
+			        select book_id, book_name, category_no, publisher , published_date , cover
+			        from book
+			        where category_no like #{categoryNumber} || '%'
+			        order by published_date desc ) b
+		    where #{end} >= rownum ) br
+		where br.rnum >= #{start}
 	</select>
 	
 </mapper>

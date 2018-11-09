@@ -7,6 +7,7 @@ drop table review CASCADE CONSTRAINTS;
 drop table review_reaction CASCADE CONSTRAINTS;
 drop table db_category CASCADE CONSTRAINTS;
 drop table db_category_management CASCADE CONSTRAINTS;
+drop table user_correlation CASCADE CONSTRAINTS;
 
 drop sequence seq_db_user_no;
 drop sequence review_no;
@@ -26,12 +27,12 @@ create table db_user (
 
 CREATE TABLE book ( 
         book_id                VARCHAR2(10)     primary key
-    ,   book_name              VARCHAR2(128)
+    ,   book_name              VARCHAR2(300)
     ,   category_no            VARCHAR2(9)
-    ,   author                 VARCHAR2(26)
-    ,   translator             VARCHAR2(26)
-    ,   publisher              VARCHAR2(26)
-    ,   published_date         VARCHAR2(10)
+    ,   author                 VARCHAR2(200)
+    ,   translator             VARCHAR2(200)
+    ,   publisher              VARCHAR2(200)
+    ,   published_date         VARCHAR2(15)
     ,   is_ebook               VARCHAR2(7)
     ,   form_detail            VARCHAR2(7)
     ,   isbn                   VARCHAR2(13)
@@ -106,6 +107,16 @@ create table db_category (
         references book(book_id) on delete cascade
     ,   constraint db_category_category_no_fk foreign key(category_no)
         references db_category_management(category_no)
+);
+
+create table user_correlation(
+        id      varchar2(20)
+    ,   compare_id  varchar2(20)
+    ,   distance    Number(10, 1)
+    ,   constraint user_correlation_id_fk foreign key(id)
+        references db_user(id) on delete cascade
+    ,   constraint user_correlation_compare_id_fk foreign key(compare_id)
+        references db_user(id) on delete cascade
 );
 
 Insert into HR.DB_USER (NO,ID,PASSWORD,PROFILE_IMAGE,THUMBNAIL_IMAGE,NICKNAME,AGE_RANGE,GENDER) values (seq_db_user_no.nextval,'q','q',null,null,'q','20~29','male');

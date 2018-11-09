@@ -21,6 +21,7 @@
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
+<!-- 		<property name="typeAliasesPackege" value="kr.co.project.login.vo"/> -->
 		<property name="configLocation" value="classpath:config/mybatis/sqlMapConfig.xml" />
 		<property name="mapperLocations" value="classpath:config/sqlmap/oracle/*.xml" />
 	</bean>
