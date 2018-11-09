@@ -1,33 +1,33 @@
 package kr.co.project.usercorrelation.vo;
 
 public class UserCorrelationVO {
-	private String standardId;
-	private String compareId;
+	private String id;
+	private String compare_id;
 	private float distance;
 	
 	public UserCorrelationVO() {
 	}
-	
-	public UserCorrelationVO(String standardId, String compareId, float distance) {
-		this.standardId = standardId;
-		this.compareId = compareId;
+
+	public UserCorrelationVO(String id, String compare_id, float distance) {
+		this.id = id;
+		this.compare_id = compare_id;
 		this.distance = distance;
 	}
 
-	public String getstandardId() {
-		return standardId;
+	public String getid() {
+		return id;
 	}
 
-	public void setstandardId(String standardId) {
-		this.standardId = standardId;
+	public void setid(String id) {
+		this.id = id;
 	}
 
-	public String getCompareId() {
-		return compareId;
+	public String getCompare_id() {
+		return compare_id;
 	}
 
-	public void setCompareId(String compareId) {
-		this.compareId = compareId;
+	public void setCompare_id(String compare_id) {
+		this.compare_id = compare_id;
 	}
 
 	public float getDistance() {
@@ -40,7 +40,7 @@ public class UserCorrelationVO {
 
 	@Override
 	public String toString() {
-		return "UserCorrelationVO [standardId=" + standardId + ", compareId=" + compareId + ", distance=" + distance
+		return "UserCorrelationVO [id=" + id + ", compare_id=" + compare_id + ", distance=" + distance
 				+ "]";
 	}
 	

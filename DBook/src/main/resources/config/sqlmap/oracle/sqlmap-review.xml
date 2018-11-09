@@ -92,4 +92,11 @@
 		  from review
 		  where book_id = #{book_id} and id != #{id}
 	</select>
+	
+	<!-- user correlation 테이블 입력 -->
+	<insert id="addUserCorrelation" parameterType="userCorrelationVO">
+		insert into user_correlation(id, compare_id, distance)
+			   values(#{id}, #{compare_id}, #{distance})
+	</insert>
+			
 </mapper>

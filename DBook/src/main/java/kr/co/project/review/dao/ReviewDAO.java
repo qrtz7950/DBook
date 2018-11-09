@@ -1,5 +1,6 @@
 package kr.co.project.review.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.project.review.vo.ReviewVO;
 import kr.co.project.review_reaction.vo.ReviewReactionVO;
+import kr.co.project.usercorrelation.vo.UserCorrelationVO;
 
 @Repository
 public class ReviewDAO {
@@ -130,5 +132,11 @@ public class ReviewDAO {
 		
 		List<String> compareIdList = sqlSessionTemplate.selectList("kr.co.project.review.dao.ReviewDAO.compareIds", map);
 		return compareIdList;
+	}
+
+	public void addUserCorrelation(List<UserCorrelationVO> resultList) {
+		for(UserCorrelationVO result : resultList) {
+			sqlSessionTemplate.insert("kr.co.project.review.dao.ReviewDAO.addUserCorrelation", result);
+		}
 	}
 }
