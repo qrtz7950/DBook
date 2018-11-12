@@ -91,12 +91,12 @@
 									
 										<div id="category-content" class="posts">
 											
-											<c:forEach begin="1" end="21">
+											<c:forEach var="book" items="#{bookListByKeyword}">
 											
 											<article>
-											   <a href="#" class="image"><img src="/DBook/resources/images/book01.jpg"></a>
-											   <h3><a href="#">죽고 싶지만 떡볶이는 먹고 싶어</a></h3>
-											   <p><a href="#">백세희 지음</a><br><a href="#">흔</a></p>
+											   <a href="#" class="image"><img src="${book.cover}"></a>
+											   <h3><a href="#">${book.book_name}</a></h3>
+											   <p><a href="#">${book.author} 지음</a><br><a href="#">${book.publisher}</a></p>
 											</article>
 											
 											</c:forEach>
@@ -114,7 +114,7 @@
 			
 		<!-- Sidebar -->
 			<jsp:include page="../include/SlideSideMenu.jsp"></jsp:include>
-					
+			<jsp:include page="../include/SlideTopMenu.jsp"></jsp:include>
 
 		<!-- Scripts -->
 			<jsp:include page="../include/JS.jsp"></jsp:include>
@@ -163,7 +163,8 @@
 		
 		
 		<!-- 검색결과  -->
-			<script>
+			<!-- <script>
+			 
 			$(document).ready(function() {
 				search();
 			});
@@ -173,7 +174,7 @@
 						type : "post",
 						dataType: "json",
 						data: request,
-						success: function( data) {
+						success: function(data) {
 		                    response(data);
 		                },
 		                error: function(status, error){
@@ -182,7 +183,7 @@
 						
 					});
 				}
-			</script>
+			</script> -->
 			
 			
 </body>

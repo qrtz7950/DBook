@@ -19,6 +19,7 @@ import kr.co.project.book.service.BookService;
 import kr.co.project.book.vo.BookVO;
 import kr.co.project.book.vo.CategoryVO;
 import kr.co.project.review.service.ReviewService;
+import kr.co.project.book.vo.SearchVO;
 
 @Controller
 @RestController
@@ -61,13 +62,31 @@ public class BookController {
 	
 	// 키워드 검색 페이지
 	@RequestMapping("/bookSearch/searchResult.do")
-	public ModelAndView booksearchByKeyword(@RequestParam("keyword") String keyword) {
+	public ModelAndView booksearchByKeyword(HttpServletRequest request) {
 		
 		System.out.println("booksearchByKeyword()진입");
 		
+		int page = 1;
+		
+		if(request.getParameter("page") != null)
+			page = Integer.parseInt(request.getParameter("page"));
+		String keyword = request.getParameter("keyword");
+		System.out.println(keyword);
+		int start = 20 * page -19;
+		int end = 20 * page;
+		
+		List<BookVO> bookListByKeyword = new ArrayList<>();
+		SearchVO searchVO = new SearchVO(start,end,keyword);
+		
+		if(keyword == null)
+			searchVO.setKeyword("");
+		bookListByKeyword = bookService.booklistByKeyword(searchVO);
+		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("keyword", keyword);
+		mav.addObject("bookListByKeyword", bookListByKeyword);
 		mav.setViewName("bookSearch/searchResult");
+		
+		
 		
 		return mav;
 	}
