@@ -13,7 +13,7 @@ public class BookVO {
 	private String translator;
 	private String publisher;
 	private String published_date;
-	private int is_ebook;
+	private String is_ebook;
 	private String form_detail;
 	private String isbn;
 	private int view_cnt;
@@ -26,7 +26,7 @@ public class BookVO {
 	}
 
 	public BookVO(String book_id, String book_name, String category_no, String author, String translator,
-			String publisher, String published_date, int is_ebook, String form_detail, String isbn, int view_cnt,
+			String publisher, String published_date, String is_ebook, String form_detail, String isbn, int view_cnt,
 			String book_introduction, String author_introduction, String contents, String cover) {
 		super();
 		this.book_id = book_id;
@@ -102,11 +102,11 @@ public class BookVO {
 		this.published_date = published_date;
 	}
 
-	public int getIs_ebook() {
+	public String getIs_ebook() {
 		return is_ebook;
 	}
 
-	public void setIs_ebook(int is_ebook) {
+	public void setIs_ebook(String is_ebook) {
 		this.is_ebook = is_ebook;
 	}
 

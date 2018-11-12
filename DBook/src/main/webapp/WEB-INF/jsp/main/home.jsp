@@ -22,6 +22,9 @@
 		height: 230px;
 	}
 	
+	.hidden-book-id{display: none;}
+	.book-package:hover{cursor: pointer;}
+	
 	#banner{
 	    left: -10%;
 	    position: relative;
@@ -114,23 +117,8 @@
 									<header class="major">
 										<h2>높은 평점을 받은 도서</h2>
 									</header>
-									<div class="swiper-container">
+									<div class="swiper-container" id="top-rating-books">
 											<div class="swiper-wrapper">
-												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/280/14028062.jpg"><div>존 러스킨의 생명의 경제학</div></div></div>
-												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/308/14030874.jpg"><div>기억 파단자</div></div></div>
-												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/671/14067118.jpg"><div>5년 전에 잊어린 것</div></div></div>
-												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/526/14052659.jpg"><div>펭귄 하이웨이</div></div></div>
-												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/670/14067045.jpg"><div>악마의 미학</div></div></div>
-												<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/187.jpg"><div>7</div></div></div>
-<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/176.jpg"><div>8</div></div></div> -->
-<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/461.jpg"><div>9</div></div></div> -->
-												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/321.jpg"><div>10</div></div></div>
-												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/521.jpg"><div>11</div></div></div>
-<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/400.jpg"><div>12</div></div></div> -->
-												<div class="swiper-slide"><div><img src="http://biketago.com/img/p/407.jpg"><div>13</div></div></div>
-												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/288.jpg"><div>14</div></div></div>
-												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/557.jpg"><div>15</div></div></div>
-												<div class="swiper-slide" style="font-size:50pt;">- 끝 -</div>
 											</div>
 										
 											<!-- 네비게이션 -->
@@ -144,23 +132,8 @@
 									<header class="major">
 										<h2>조회수가 높은 도서</h2>
 									</header>
-									<div class="swiper-container">
+									<div class="swiper-container" id="top-view_cnt-books">
 											<div class="swiper-wrapper">
-												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/280/14028062.jpg"><div>존 러스킨의 생명의 경제학</div></div></div>
-												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/308/14030874.jpg"><div>기억 파단자</div></div></div>
-												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/671/14067118.jpg"><div>5년 전에 잊어린 것</div></div></div>
-												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/526/14052659.jpg"><div>펭귄 하이웨이</div></div></div>
-												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/670/14067045.jpg"><div>악마의 미학</div></div></div>
-												<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/187.jpg"><div>7</div></div></div>
-<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/176.jpg"><div>8</div></div></div> -->
-<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/461.jpg"><div>9</div></div></div> -->
-												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/321.jpg"><div>10</div></div></div>
-												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/521.jpg"><div>11</div></div></div>
-<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/400.jpg"><div>12</div></div></div> -->
-												<div class="swiper-slide"><div><img src="http://biketago.com/img/p/407.jpg"><div>13</div></div></div>
-												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/288.jpg"><div>14</div></div></div>
-												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/557.jpg"><div>15</div></div></div>
-												<div class="swiper-slide" style="font-size:50pt;">- 끝 -</div>
 											</div>
 										
 											<!-- 네비게이션 -->
@@ -174,7 +147,22 @@
 									<header class="major">
 										<h2>사람들의 관심이 많은 도서</h2>
 									</header>
-									<div class="swiper-container">
+									<div class="swiper-container" id="top-interest-books">
+											<div class="swiper-wrapper">
+											</div>
+										
+											<!-- 네비게이션 -->
+											<div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+											<div class="swiper-button-prev"></div><!-- 이전 버튼 -->
+										
+											<!-- 페이징 -->
+											<div class="swiper-pagination"></div>
+									</div>
+									
+									<header class="major">
+										<h2>샘플</h2>
+									</header>
+									<div class="swiper-container swiper-sample">
 											<div class="swiper-wrapper">
 												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/280/14028062.jpg"><div>존 러스킨의 생명의 경제학</div></div></div>
 												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/308/14030874.jpg"><div>기억 파단자</div></div></div>
@@ -257,10 +245,10 @@
 
 		<!-- Scripts -->
 			<jsp:include page="../include/JS.jsp"></jsp:include>
-			<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
+			<!-- <script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script> -->
 			
 			
-		
+		<!-- 초기 화면 설정 -->
 			<script>
 				var login_check = ${!empty user}; 
 			
@@ -269,6 +257,7 @@
 	   					$('#index-btn').fadeIn(1000);
 	   				}, 2000);
 	   			});
+				
 	   			
 	   			// scroll lock
 	   			$('html, body').css({'overflow': 'hidden', 'height': '100%'});
@@ -326,5 +315,124 @@
             	});
             </script>
          </c:if>
+         
+         <!-- 슬라이드 관련 -->
+	         <script>
+	         	// 각 조건에 따라 추천책 띄우기
+	         	$(document).ready(function(){
+	         		slideSetting('.swiper-sample', 5);
+	         		
+	         		// 평점이 높은 책
+	         		$.ajax({
+						url : '${pageContext.request.contextPath}/book/select_books.do',
+						type : 'POST',
+						dataType : 'json',
+						data : {mode : '1'},
+						error : function(request, status, error){
+					       	console.log("code:"+request.status+"\n"+"error:"+error);
+					    },
+						success : function(books){
+							$('#top-rating-books').children().eq('0').empty();
+							var a = '';
+							for(var i=0; i<books.items.length; i++){
+								a += '<div class="swiper-slide">';
+								a += 	'<div class="book-package">';
+								a +=		'<div class="hidden-book-id">' + books.items[i].book_id + '</div>';
+								a +=		'<img src="' + books.items[i].cover + '">';
+								a += 		'<div>' + books.items[i].book_name + '</div>';
+								a +=	'</div>';
+								a += '</div>';
+							}
+							$("#top-rating-books").children().eq('0').append(a);
+							
+							slideSetting('#top-rating-books', 5); 
+						}
+					});
+	         		
+	         		// 조회수가 높은 책
+	         		$.ajax({
+						url : '${pageContext.request.contextPath}/book/select_books.do',
+						type : 'POST',
+						dataType : 'json',
+						data : {mode : '2'},
+						error : function(request, status, error){
+					       	console.log("code:"+request.status+"\n"+"error:"+error);
+					    },
+						success : function(books){
+							$('#top-view_cnt-books').children().eq('0').empty();
+							var a = '';
+							for(var i=0; i<books.items.length; i++){
+								a += '<div class="swiper-slide">';
+								a += 	'<div class="book-package">';
+								a +=		'<div class="hidden-book-id">' + books.items[i].book_id + '</div>';
+								a +=		'<img src="' + books.items[i].cover + '">';
+								a += 		'<div>' + books.items[i].book_name + '</div>';
+								a +=	'</div>';
+								a += '</div>';
+							}
+							$("#top-view_cnt-books").children().eq('0').append(a);
+							
+							slideSetting('#top-view_cnt-books', 5); 
+						}
+					});
+	         		
+	         		// 관심이 높은 책
+	         		$.ajax({
+						url : '${pageContext.request.contextPath}/book/select_books.do',
+						type : 'POST',
+						dataType : 'json',
+						data : {mode : '3'},
+						error : function(request, status, error){
+					       	console.log("code:"+request.status+"\n"+"error:"+error);
+					    },
+						success : function(books){
+							$('#top-interest-books').children().eq('0').empty();
+							var a = '';
+							for(var i=0; i<books.items.length; i++){
+								a += '<div class="swiper-slide">';
+								a += 	'<div class="book-package">';
+								a +=		'<div class="hidden-book-id">' + books.items[i].book_id + '</div>';
+								a +=		'<img src="' + books.items[i].cover + '">';
+								a += 		'<div>' + books.items[i].book_name + '</div>';
+								a +=	'</div>';
+								a += '</div>';
+							}
+							$("#top-interest-books").children().eq('0').append(a);
+							
+							slideSetting('#top-interest-books', 5); 
+						}
+					});
+	         	});
+	         	
+	         	$(document).on("click",".book-package",function (){
+	         		var temp_bookId = $(this).children().eq('0').text();
+	         		location.href = "${pageContext.request.contextPath}/book/bookDetail/" + temp_bookId + ".do";
+	         	});
+	         	
+	         	// 슬라이드 설정 함수
+	         	function slideSetting(where, number){
+	         		new Swiper(where, {
+	         			
+						slidesPerView : number, // 동시에 보여줄 슬라이드 갯수
+						spaceBetween : 20, // 슬라이드간 간격
+						slidesPerGroup : number, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+
+						// 그룹수가 맞지 않을 경우 빈칸으로 메우기
+						// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+						loopFillGroupWithBlank : true,
+
+						loop : true, // 무한 반복
+
+						pagination : { // 페이징
+							el : '.swiper-pagination',
+							clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+						},
+						navigation : { // 네비게이션
+							nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+							prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+						}
+					});
+	         	}
+	         </script>
 </body>
 </html>

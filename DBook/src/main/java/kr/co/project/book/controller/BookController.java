@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -89,19 +90,6 @@ public class BookController {
 			String author_intro = book.getAuthor_introduction();
 			String cont = book.getContents();
 			
-			if(book_intro != null) {
-				String[] book_introduction = book.getBook_introduction().split(";");
-				mav.addObject("book_introduction", book_introduction);
-			}
-			if(author_intro != null) {
-				String[] author_introduction = book.getAuthor_introduction().split(";");
-				mav.addObject("author_introduction", author_introduction);
-			}
-			if(cont != null) {
-				String[] contents = book.getContents().split(";");
-				mav.addObject("contents", contents);
-			}
-			
 			mav.addObject("book", book);
 			
 			//mav.setViewName("forward:/review/bookDetail_review.do");
@@ -112,6 +100,17 @@ public class BookController {
 		}
 		
 		return mav;
+	}
+	
+	// 조건에 따른 책 리스트 조회
+	@ResponseBody
+	@RequestMapping(value="/select_books.do", method = RequestMethod.POST)
+	public JSONObject selectBooks(@RequestParam(value="mode") int mode) {
+		System.out.println("top_rating_books() 진입");
+		
+		JSONObject books = bookService.selectBooks(mode);
+		
+		return books;
 	}
 	
 }

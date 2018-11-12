@@ -29,4 +29,16 @@ public class BookDAO {
 		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.booklistByCategory", categoryVO);
 	}
 
+	public List<BookVO> top_rating_bookList() {
+		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.topRatingBookList");
+	}
+
+	public List<BookVO> top_view_cnt_bookList() {
+		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.topViewCntBookList");
+	}
+
+	public List<BookVO> top_interest_bookList() {
+		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.topInterestBookList");
+	}
+
 }

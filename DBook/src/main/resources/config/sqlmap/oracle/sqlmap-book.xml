@@ -6,7 +6,7 @@
 	
 	<!-- book_id로 책 정보 조회 -->	
 	<select id="bookDetail" resultType="bookVO" parameterType="bookVO">
-		select book_id, book_name, cover, author, translator, publisher, to_char(published_date, 'yyyy-mm-dd') as published_date,
+		select book_id, book_name, cover, author, translator, publisher, published_date,
 			   is_ebook, form_detail, isbn, book_introduction, author_introduction, contents, view_cnt 
 		  from book
 		  where book_id = #{book_id}
@@ -31,6 +31,53 @@
 			        order by published_date desc ) b
 		    where #{end} >= rownum ) br
 		where br.rnum >= #{start}
+	</select>
+	
+	<!-- 평점이 높은 책 리스트 가져오기  -->
+	<select id="topRatingBookList" resultType="bookVO">
+		select br.book_id , br.book_name , br.category_no , br.publisher , br.published_date , br.cover
+		from ( 
+		    select rownum as rnum, b.book_id , b.book_name , b.category_no , b.publisher , b.published_date , b.cover
+		    from (
+			        select bp.book_id, bp.book_name, bp.category_no, bp.publisher , bp.published_date , bp.cover, r.rating
+			        from book bp inner join (
+			        					select book_id, avg(rating) rating
+			        					from review
+			        					group by book_id
+			        						) r on bp.book_id = r.book_id
+			        order by r.rating desc ) b
+		    where 15 >= rownum ) br
+		where br.rnum >= 1
+	</select>
+	
+	<!-- 조회수가 높은 책 리스트 가져오기  -->
+	<select id="topViewCntBookList" resultType="bookVO">
+		select br.book_id , br.book_name , br.category_no , br.publisher , br.published_date , br.cover
+		from ( 
+		    select rownum as rnum, b.book_id , b.book_name , b.category_no , b.publisher , b.published_date , b.cover
+		    from (
+			        select book_id, book_name, category_no, publisher , published_date , cover, view_cnt
+			        from book
+			        order by view_cnt desc ) b
+		    where 15 >= rownum ) br
+		where br.rnum >= 1
+	</select>
+	
+	<!-- 관심이 높은 책 리스트 가져오기  -->
+	<select id="topInterestBookList" resultType="bookVO">
+		select br.book_id , br.book_name , br.category_no , br.publisher , br.published_date , br.cover
+		from ( 
+		    select rownum as rnum, b.book_id , b.book_name , b.category_no , b.publisher , b.published_date , b.cover
+		    from (
+			        select bp.book_id, bp.book_name, bp.category_no, bp.publisher , bp.published_date , bp.cover, i.interest
+			        from book bp inner join (
+			        					select book_id, count(*) interest
+			        					from interest
+			        					group by book_id
+			        						) i on bp.book_id = i.book_id
+			        order by i.interest desc ) b
+		    where 15 >= rownum ) br
+		where br.rnum >= 1
 	</select>
 	
 </mapper>

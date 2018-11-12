@@ -364,16 +364,16 @@
 								<div class="book_info_cell book_info_col2">${requestScope.book.published_date}</div>
 							</div>
 							<div class="book_info_row">
-								<div class="book_info_cell book_info_col1">형태</div>
+								<div class="book_info_cell book_info_col1">페이지</div>
 								<div class="book_info_cell book_info_col2">${requestScope.book.form_detail}</div>
 								<div class="book_info_cell book_info_col1">eBOOK</div>
 								<div class="book_info_cell book_info_col2">
-									<c:if test="${requestScope.book.is_ebook==0}">없음</c:if>
-									<c:if test="${requestScope.book.is_ebook==1}">있음</c:if>
+									<c:if test="${requestScope.book.is_ebook=='Yes'}">없음</c:if>
+									<c:if test="${requestScope.book.is_ebook=='No'}">있음</c:if>
 								</div>
 							</div>
 							<div class="book_info_row">
-								<div class="book_info_cell book_info_col1">ISBN 10</div>
+								<div class="book_info_cell book_info_col1">ISBN</div>
 								<div class="book_info_cell book_info_col2">${requestScope.book.isbn}</div>
 								<div class="book_info_cell book_info_col1">ISBN 13</div>
 								<div class="book_info_cell book_info_col2"></div>
@@ -401,7 +401,7 @@
 
 				<section class="detail-section">
 					<h3>책 소개</h3>
-					<c:forEach var="item" items="${requestScope.book_introduction}">
+					<c:forEach var="item" items="${requestScope.book.book_introduction}">
 										${item}
 										<br>
 					</c:forEach>
@@ -409,7 +409,7 @@
 
 				<section class="detail-section">
 					<h3>저자 소개</h3>
-					<c:forEach var="item" items="${requestScope.author_introduction}">
+					<c:forEach var="item" items="${requestScope.book.author_introduction}">
 										${item}
 										<br>
 					</c:forEach>
@@ -417,7 +417,7 @@
 
 				<section class="detail-section">
 					<h3>목차</h3>
-					<c:forEach var="item" items="${requestScope.contents}">
+					<c:forEach var="item" items="${requestScope.book.contents}">
 										${item}
 										<br>
 					</c:forEach>
