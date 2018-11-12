@@ -13,15 +13,17 @@
         java.util.ArrayList<String> list = new java.util.ArrayList<String>();
  
         try { 
-           String first_name = (request.getParameter("term") == null?"":request.getParameter("term"));   
+           String book_name = (request.getParameter("term") == null?"":request.getParameter("term"));   
            Class.forName("oracle.jdbc.driver.OracleDriver"); 
            conn = java.sql.DriverManager
            .getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr"); 
-           String sql = "select first_name from employees where first_name like ? "; 
+           String sql = "select book_name, author from book where book_name like ? or author like ? ";
     
            pstmt = conn.prepareStatement(sql); 
     
-           pstmt.setString(1, "%"+first_name+"%"); 
+           pstmt.setString(1, "%"+book_name+"%");
+           pstmt.setString(2, "%"+book_name+"%");
+           
     
            rs = pstmt.executeQuery(); 
     

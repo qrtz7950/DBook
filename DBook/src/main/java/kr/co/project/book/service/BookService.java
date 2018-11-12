@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import kr.co.project.book.dao.BookDAO;
 import kr.co.project.book.vo.BookVO;
 import kr.co.project.book.vo.CategoryVO;
+import kr.co.project.book.vo.SearchVO;
 
 @Service
 public class BookService {
@@ -78,5 +79,10 @@ public class BookService {
 		}
 		
 		return books;
+	}
+	
+	public List<BookVO> booklistByKeyword(SearchVO searchVO) {
+		
+		return dao.booklistByKeyword(searchVO);
 	}
 }

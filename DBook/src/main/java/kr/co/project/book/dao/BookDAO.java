@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.project.book.vo.BookVO;
 import kr.co.project.book.vo.CategoryVO;
+import kr.co.project.book.vo.SearchVO;
 import kr.co.project.review.vo.ReviewVO;
 
 @Repository
@@ -27,6 +28,10 @@ public class BookDAO {
 
 	public List<BookVO> booklistByCategory(CategoryVO categoryVO) {
 		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.booklistByCategory", categoryVO);
+	}
+	
+	public List<BookVO> booklistByKeyword(SearchVO searchVO) {
+		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.booklistByKeyword", searchVO);
 	}
 
 	public List<BookVO> top_rating_bookList() {

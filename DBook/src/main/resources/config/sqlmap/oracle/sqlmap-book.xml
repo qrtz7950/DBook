@@ -80,4 +80,17 @@
 		where br.rnum >= 1
 	</select>
 	
+	<!-- 책 검색 결과로 책 n권씩 가져오기 -->
+	<select id="booklistByKeyword" resultType="bookVO" parameterType="searchVO">
+		select br.book_id , br.book_name , br.author, br.category_no , br.publisher , br.published_date , br.cover
+		from ( 
+		    select rownum as rnum, b.book_id , b.author, b.book_name , b.category_no , b.publisher , b.published_date , b.cover
+		    from (
+			        select book_id, book_name, author, category_no, publisher , published_date , cover
+			        from book
+			        where book_name like '%'||#{keyword}||'%' or author like '%'||#{keyword}||'%'
+			        order by published_date desc ) b
+		    where #{end} >= rownum ) br
+		where br.rnum >= #{start} 
+	</select>
 </mapper>
