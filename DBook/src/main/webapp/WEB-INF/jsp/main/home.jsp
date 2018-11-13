@@ -113,7 +113,7 @@
 								<jsp:include page="../include/HeaderMenu.jsp"/>
 
 							<!-- Section -->
-								<section>
+								<section id="recommend-book">
 									<header class="major">
 										<h2>높은 평점을 받은 도서</h2>
 									</header>
@@ -170,11 +170,8 @@
 												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/526/14052659.jpg"><div>펭귄 하이웨이</div></div></div>
 												<div class="swiper-slide"><div><img src="https://bookthumb-phinf.pstatic.net/cover/140/670/14067045.jpg"><div>악마의 미학</div></div></div>
 												<div class="swiper-slide"><div><img src="http://superkts.dothome.co.kr/img/p/187.jpg"><div>7</div></div></div>
-<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/176.jpg"><div>8</div></div></div> -->
-<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/461.jpg"><div>9</div></div></div> -->
 												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/321.jpg"><div>10</div></div></div>
 												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/521.jpg"><div>11</div></div></div>
-<!-- 												<div class="swiper-slide"><div><img src="http://superkts.bl.ee/img/p/400.jpg"><div>12</div></div></div> -->
 												<div class="swiper-slide"><div><img src="http://biketago.com/img/p/407.jpg"><div>13</div></div></div>
 												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/288.jpg"><div>14</div></div></div>
 												<div class="swiper-slide"><div><img src="http://mabinogi.filamt.com/img/p/557.jpg"><div>15</div></div></div>
@@ -188,6 +185,11 @@
 											<!-- 페이징 -->
 											<div class="swiper-pagination"></div>
 									</div>
+									
+									<c:if test="${empty user}">
+										<div style=""><h1>로그인하시면 나에게 맞는 추천을 받을수 있어요</h1></div>
+									</c:if>
+									
 								</section>
 
 						</div>
@@ -322,92 +324,48 @@
 	         	$(document).ready(function(){
 	         		slideSetting('.swiper-sample', 5);
 	         		
-	         		// 평점이 높은 책
-	         		$.ajax({
-						url : '${pageContext.request.contextPath}/book/select_books.do',
-						type : 'POST',
-						dataType : 'json',
-						data : {mode : '1'},
-						error : function(request, status, error){
-					       	console.log("code:"+request.status+"\n"+"error:"+error);
-					    },
-						success : function(books){
-							$('#top-rating-books').children().eq('0').empty();
-							var a = '';
-							for(var i=0; i<books.items.length; i++){
-								a += '<div class="swiper-slide">';
-								a += 	'<div class="book-package">';
-								a +=		'<div class="hidden-book-id">' + books.items[i].book_id + '</div>';
-								a +=		'<img src="' + books.items[i].cover + '" onError="this.onerror=null;this.src=\'${pageContext.request.contextPath}/resources/images/image-null.png\';" />';
-								a += 		'<div>' + books.items[i].book_name + '</div>';
-								a +=	'</div>';
-								a += '</div>';
-							}
-							$("#top-rating-books").children().eq('0').append(a);
-							
-							slideSetting('#top-rating-books', 5); 
-						}
-					});
-	         		
-	         		// 조회수가 높은 책
-	         		$.ajax({
-						url : '${pageContext.request.contextPath}/book/select_books.do',
-						type : 'POST',
-						dataType : 'json',
-						data : {mode : '2'},
-						error : function(request, status, error){
-					       	console.log("code:"+request.status+"\n"+"error:"+error);
-					    },
-						success : function(books){
-							$('#top-view_cnt-books').children().eq('0').empty();
-							var a = '';
-							for(var i=0; i<books.items.length; i++){
-								a += '<div class="swiper-slide">';
-								a += 	'<div class="book-package">';
-								a +=		'<div class="hidden-book-id">' + books.items[i].book_id + '</div>';
-								a +=		'<img src="' + books.items[i].cover + '" onError="this.onerror=null;this.src=\'${pageContext.request.contextPath}/resources/images/image-null.png\';" />';
-								a += 		'<div>' + books.items[i].book_name + '</div>';
-								a +=	'</div>';
-								a += '</div>';
-							}
-							$("#top-view_cnt-books").children().eq('0').append(a);
-							
-							slideSetting('#top-view_cnt-books', 5); 
-						}
-					});
-	         		
-	         		// 관심이 높은 책
-	         		$.ajax({
-						url : '${pageContext.request.contextPath}/book/select_books.do',
-						type : 'POST',
-						dataType : 'json',
-						data : {mode : '3'},
-						error : function(request, status, error){
-					       	console.log("code:"+request.status+"\n"+"error:"+error);
-					    },
-						success : function(books){
-							$('#top-interest-books').children().eq('0').empty();
-							var a = '';
-							for(var i=0; i<books.items.length; i++){
-								a += '<div class="swiper-slide">';
-								a += 	'<div class="book-package">';
-								a +=		'<div class="hidden-book-id">' + books.items[i].book_id + '</div>';
-								a +=		'<img src="' + books.items[i].cover + '" onError="this.onerror=null;this.src=\'${pageContext.request.contextPath}/resources/images/image-null.png\';" />';
-								a += 		'<div>' + books.items[i].book_name + '</div>';
-								a +=	'</div>';
-								a += '</div>';
-							}
-							$("#top-interest-books").children().eq('0').append(a);
-							
-							slideSetting('#top-interest-books', 5); 
-						}
-					});
+	         		// 평점이 높은 책 추천
+	         		select_books('#top-rating-books', 1);
+	         		// 조회수가 높은 책 추천
+	         		select_books('#top-view_cnt-books', 2);
+	         		// 관심이 높은 책 추천
+	         		select_books('#top-interest-books', 3);
 	         	});
 	         	
+	         	// 책 누를 시 이동
 	         	$(document).on("click",".book-package",function (){
 	         		var temp_bookId = $(this).children().eq('0').text();
 	         		location.href = "${pageContext.request.contextPath}/book/bookDetail/" + temp_bookId + ".do";
 	         	});
+	         	
+	         	// id, mode를 받아 알맞은 책들을 해당 위치에 넣음
+	         	function select_books(id, mode){
+	         		$.ajax({
+						url : '${pageContext.request.contextPath}/book/select_books.do',
+						type : 'POST',
+						dataType : 'json',
+						data : {'mode' : mode},
+						error : function(request, status, error){
+					       	console.log("code:"+request.status+"\n"+"error:"+error);
+					    },
+						success : function(books){
+							$(id).children().eq('0').empty();
+							var a = '';
+							for(var i=0; i<books.items.length; i++){
+								a += '<div class="swiper-slide">';
+								a += 	'<div class="book-package">';
+								a +=		'<div class="hidden-book-id">' + books.items[i].book_id + '</div>';
+								a +=		'<img src="' + books.items[i].cover + '" onError="this.onerror=null;this.src=\'${pageContext.request.contextPath}/resources/images/image-null.png\';" />';
+								a += 		'<div>' + books.items[i].book_name + '</div>';
+								a +=	'</div>';
+								a += '</div>';
+							}
+							$(id).children().eq('0').append(a);
+							
+							slideSetting(id, 5); 
+						}
+					});
+	         	}
 	         	
 	         	// 슬라이드 설정 함수
 	         	function slideSetting(where, number){
@@ -433,6 +391,48 @@
 						}
 					});
 	         	}
-	         </script>
+			</script>
+			
+		<!-- 로그인 시 추가 슬라이드 -->
+			<script>
+				var mode = 4;
+				var recommendArray = new Array();
+				
+				var recommendObj = new Object();
+				recommendObj.recommendWhat = "회원님의 연령대가 좋아하는 도서";
+				recommendObj.id = "top-user_age-books";
+				recommendArray.push(recommendObj);
+				
+				var recommendObj = new Object();
+				recommendObj.recommendWhat = "회원님의 평가와 유사한 사람들의 도서";
+				recommendObj.id = "similar-rating-books";
+				recommendArray.push(recommendObj);
+				
+				var recommendObj = new Object();
+				recommendObj.recommendWhat = "관심도서가 같은 사람들의 또다른 관심도서";
+				recommendObj.id = "same-interest-books";
+				recommendArray.push(recommendObj);
+	
+				$(window).scroll(function() {
+				    if ($(window).scrollTop() == $(document).height() - $(window).height() && login_check && mode<=6) {
+				      var a = '';
+				      a +=	'<header class ="major">';
+				      a += 		'<h2>' + recommendArray[mode-4].recommendWhat + '</h2>';
+				      a +=	'</header>';
+				      a +=	'<div class="swiper-container" id="' + recommendArray[mode-4].id + '">';
+				      a +=		'<div class="swiper-wrapper">';
+				      a +=		'</div>';
+				      a +=		'<div class="swiper-button-next"></div>';
+				      a +=		'<div class="swiper-button-prev"></div>';
+				      a +=		'<div class="swiper-pagination"></div>';
+				      a +=	'</div>';
+				      
+				      $("#recommend-book").append(a);
+				      select_books('#'+recommendArray[mode-4].id, mode-3);
+				      
+				      mode++;
+				    }
+				});
+			</script>
 </body>
 </html>
