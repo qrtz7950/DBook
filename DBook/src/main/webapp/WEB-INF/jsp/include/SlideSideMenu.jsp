@@ -26,12 +26,13 @@
 						<li>
 							<span class="opener">하던거</span>
 							<ul>
-								<li><a href="${pageContext.request.contextPath}/book/booklist/category/국내도서>소설.do">카테고리별 검색</a></li>
+								<li><a href="${pageContext.request.contextPath}/book/booklist/category.do">카테고리별 검색</a></li>
+								<li><a href="${pageContext.request.contextPath}/book/bookDetail/13733438.do">상세</a></li>
+								<li><a href="${pageContext.request.contextPath}/mypage/library.do">마이 페이지</a></li>
+								<li><a href="${pageContext.request.contextPath}/mypage/userRating.do">도서 평가</a></li>
 								<li><a href="${pageContext.request.contextPath}/user/login.do">로그인</a></li>
-								<li><a href="${pageContext.request.contextPath}/book/bookDetail/KOR9791196394509.do">상세</a></li>
 								<li><a href="${pageContext.request.contextPath}/user/logout.do">로그아웃</a></li>
 								<li><a href="http://developers.kakao.com/logout">카톡 로그아웃</a></li>
-								<li><a href="${pageContext.request.contextPath}/mypage/library.do">마이 페이지</a></li>
 							</ul>
 						</li>
 						<li>
