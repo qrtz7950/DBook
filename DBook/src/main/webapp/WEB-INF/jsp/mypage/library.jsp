@@ -259,7 +259,7 @@
 					s += '<div class = "bookmark-div-articles">';
 				for(var i =0; i<data.items.length; i++){
 					s += '<article>';
-					s += '	<a href="${pageContext.request.contextPath}/book/bookDetail/' + data.items[i].book_id + '.do" class="image"><img src=' + data.items[i].cover + '></a>';
+					s += '	<a href="${pageContext.request.contextPath}/book/bookDetail/' + data.items[i].book_id + '.do" class="image"><img src="' + books.items[i].cover + '" onError="this.onerror=null;this.src=\'${pageContext.request.contextPath}/resources/images/image-null.png\';"/></a>';
 					s += '	<h3><a href="${pageContext.request.contextPath}/book/bookDetail/' + data.items[i].book_id + '.do">' + data.items[i].book_name + '</a></h3>';
 					s += '	<p><a href="${pageContext.request.contextPath}/book/bookSearch/searchResult.do?keyword=' + data.items[i].author + '">' + data.items[i].author + '</a><br><a href="${pageContext.request.contextPath}/book/bookSearch/searchResult.do?keyword=' + data.items[i].publisher + '">' + data.items[i].publisher + '</a></p>';
 					s += '</article>';
@@ -453,7 +453,7 @@
 						data.items[i].cover = "/DBook/resources/images/image-null.png";
 					
 					temp += 		'<article>';
-					temp += 			'<a href="${pageContext.request.contextPath}/book/bookDetail/' + data.items[i].book_id + '.do" class="image"><img src="' + data.items[i].cover + '"></a>';
+					temp += 			'<a href="${pageContext.request.contextPath}/book/bookDetail/' + data.items[i].book_id + '.do" class="image"><img src="' + books.items[i].cover + '" onError="this.onerror=null;this.src=\'${pageContext.request.contextPath}/resources/images/image-null.png\';"/></a>';
 					temp +=	 			'<h3><a href="${pageContext.request.contextPath}/book/bookDetail/' + data.items[i].book_id + '.do">' + data.items[i].book_name + '</a></h3>';
 					temp +=				'<p><a href="${pageContext.request.contextPath}/book/bookSearch/searchResult.do?keyword=' + data.items[i].author + '">' + data.items[i].author + '</a><br><a href="${pageContext.request.contextPath}/book/bookSearch/searchResult.do?keyword=' + data.items[i].publisher + '">' + data.items[i].publisher + '</a></p>';
 					temp += 		'</article>';

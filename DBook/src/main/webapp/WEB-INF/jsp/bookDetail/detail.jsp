@@ -343,12 +343,7 @@
 				<section class="detail-section">
 					<div id="book_info">
 						<div id="cover_image">
-							<c:if test="${!empty requestScope.book.cover}">
-								<img src="${requestScope.book.cover}" style="width: 100%; height: auto;" />
-							</c:if>
-							<c:if test="${empty requestScope.book.cover}">
-								<img src="${pageContext.request.contextPath}/resources/images/image-null.png" style="width: 100%; height: auto;" />
-							</c:if>
+							<img src="${requestScope.book.cover}" style="width: 100%; height: auto;" onError="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/image-null.png';" />
 						</div>
 						<div class="book_info_table">
 							<div class="book_info_row">

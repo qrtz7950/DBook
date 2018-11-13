@@ -313,7 +313,7 @@
 					
 						<div class="book" id=book${bookOrder}>
 							<div class="book_cover">
-								<img src="/DBook/resources/images/book01.jpg">
+								<img src="/DBook/resources/images/book01.jpg" onError="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/image-null.png';">
 							</div>
 							<div class="book_overlay hidden">
 								<div class="book_overlay_title">죽고 싶지만 떡볶이는 먹고싶어</div>

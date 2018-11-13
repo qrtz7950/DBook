@@ -100,7 +100,7 @@
 											<c:forEach var="book" items="#{bookListByCategory}">
 											
 											<article>
-											   <a href="#" class="image"><img src="${book.cover}"></a>
+											   <a href="#" class="image"><img src="${book.cover}" alt="Image not found" onError="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/image-null.png';" /></a>
 											   <h3><a href="#">${book.book_name}</a></h3>
 											   <p><a href="#">${book.author} 지음</a><br><a href="#">${book.publisher}</a></p>
 											</article>

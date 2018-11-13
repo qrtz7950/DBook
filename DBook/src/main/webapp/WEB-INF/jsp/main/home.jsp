@@ -338,7 +338,7 @@
 								a += '<div class="swiper-slide">';
 								a += 	'<div class="book-package">';
 								a +=		'<div class="hidden-book-id">' + books.items[i].book_id + '</div>';
-								a +=		'<img src="' + books.items[i].cover + '">';
+								a +=		'<img src="' + books.items[i].cover + '" onError="this.onerror=null;this.src=\'${pageContext.request.contextPath}/resources/images/image-null.png\';" />';
 								a += 		'<div>' + books.items[i].book_name + '</div>';
 								a +=	'</div>';
 								a += '</div>';
@@ -365,7 +365,7 @@
 								a += '<div class="swiper-slide">';
 								a += 	'<div class="book-package">';
 								a +=		'<div class="hidden-book-id">' + books.items[i].book_id + '</div>';
-								a +=		'<img src="' + books.items[i].cover + '">';
+								a +=		'<img src="' + books.items[i].cover + '" onError="this.onerror=null;this.src=\'${pageContext.request.contextPath}/resources/images/image-null.png\';" />';
 								a += 		'<div>' + books.items[i].book_name + '</div>';
 								a +=	'</div>';
 								a += '</div>';
@@ -392,7 +392,7 @@
 								a += '<div class="swiper-slide">';
 								a += 	'<div class="book-package">';
 								a +=		'<div class="hidden-book-id">' + books.items[i].book_id + '</div>';
-								a +=		'<img src="' + books.items[i].cover + '">';
+								a +=		'<img src="' + books.items[i].cover + '" onError="this.onerror=null;this.src=\'${pageContext.request.contextPath}/resources/images/image-null.png\';" />';
 								a += 		'<div>' + books.items[i].book_name + '</div>';
 								a +=	'</div>';
 								a += '</div>';
