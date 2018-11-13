@@ -88,7 +88,7 @@
 		    from (
 			        select book_id, book_name, author, category_no, publisher , published_date , cover
 			        from book
-			        where book_name like '%'||#{keyword}||'%' or author like '%'||#{keyword}||'%'
+			        where book_name like '%'||#{keyword}||'%' or author like '%'||#{keyword}||'%' or publisher like '%'||#{keyword}||'%'
 			        order by published_date desc ) b
 		    where #{end} >= rownum ) br
 		where br.rnum >= #{start} 

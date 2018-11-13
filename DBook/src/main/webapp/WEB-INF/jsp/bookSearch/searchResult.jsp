@@ -42,7 +42,7 @@
 								<section style="padding-top: 15px; height: auto;">
 								
 									<div id="category_select">
-										<h2><strong>'${param.keyword}'</strong> 로 검색한 결과</h2>
+										<h2><strong>'${param.keyword}'</strong> 의 검색 결과</h2>
 									</div>
 									
 									<div id="category_main_base">
@@ -93,10 +93,12 @@
 											
 											<c:forEach var="book" items="#{bookListByKeyword}">
 											
-											<article>
+											<article class="book-search">
+												<div style="display: none;">${book.book_id}</div>
 											   <a href="#" class="image"><img src="${book.cover}" onError="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/image-null.png';" /></a>
 											   <h3><a href="#">${book.book_name}</a></h3>
-											   <p><a href="#">${book.author} 지음</a><br><a href="#">${book.publisher}</a></p>
+											   <p><a href="${pageContext.request.contextPath}/book/bookSearch/searchResult.do?keyword=${book.author}">${book.author} 지음</a><br>
+											   <a href="${pageContext.request.contextPath}/book/bookSearch/searchResult.do?keyword=${book.publisher}">${book.publisher}</a></p>
 											</article>
 											
 											</c:forEach>
@@ -132,7 +134,10 @@
 						menuButton();
 					});
 				
-				 
+					$(document).on("click",".book-search",function (){
+						var temp_bookId = $(this).children().eq('0').text();
+		         		location.href = "${pageContext.request.contextPath}/book/bookDetail/" + temp_bookId + ".do";
+					});
 			</script>
 			
 		<!-- script function -->
