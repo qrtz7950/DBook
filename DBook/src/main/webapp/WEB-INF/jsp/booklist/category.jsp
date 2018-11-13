@@ -101,18 +101,17 @@
 											
 											<article>
 											   <a href="../bookDetail/${book.book_id}.do" class="image">
-											   		<img src="${book.cover}" alt="Image not found" onError="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/image-null.png';" />
+											   		<img src="${book.cover}" onError="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/image-null.png';" />
 											   </a>
 											   <h3><a href="../bookDetail/${book.book_id}.do">${book.book_name}</a></h3>
-											   <p><a href="#">${book.author} 지음</a><br><a href="#">${book.publisher}</a></p>
+											   <p><a href="../bookSearch/searchResult.do?keyword=${book.author}">${book.author} 지음</a><br><a href="../bookSearch/searchResult.do?keyword=${book.publisher}">${book.publisher}</a></p>
 											</article>
 											
 											</c:forEach>
-											
-                                            <div class="page-number-base">
-	                                            &lt;&lt;
-	                                            &gt;&gt;
-                                            </div>
+                                        </div>
+                                        
+                                        <div id="page-number">
+	                                       	
                                         </div>
                                         
                                     </div>
@@ -121,19 +120,20 @@
 					</div>
 			</div>
 			
-		<!-- Sidebar -->
-			<jsp:include page="../include/SlideSideMenu.jsp"></jsp:include>
-			<jsp:include page="../include/SlideTopMenu.jsp"></jsp:include>
+	<!-- Sidebar -->
+	<jsp:include page="../include/SlideSideMenu.jsp"></jsp:include>
+	<jsp:include page="../include/SlideTopMenu.jsp"></jsp:include>
 					
 
-		<!-- Scripts -->
-			<jsp:include page="../include/JS.jsp"></jsp:include>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
-			<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
-			<script type="text/javascript">
+	<!-- Scripts -->
+	<jsp:include page="../include/JS.jsp"></jsp:include>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
+	<script type="text/javascript">
 			
 			$(document).ready(function() {
 				category_toggle();
+				printPageNumber();
 				return false;
 			});
 
@@ -141,6 +141,44 @@
 				category_toggle();
 				return false;
 			});
+			
+			function printPageNumber(){
+				var no = ${param.page};
+				var deca = Math.floor(no/10);
+				var forwPages = (deca * 10) + 11 ;
+				var prePages = (deca * 10) - 9 ;
+				if (prePages <= 0){
+					prePages = 1;
+				}
+				
+				var temp = '<a href="javascript:goToPage(' + prePages + ')">&lt;&lt;&nbsp;&nbsp;</a>';
+				for(var i=0;i<10;i++){
+					var page = deca * 10 + i + 1;
+					temp += '<a class="page-number" href="javascript:goToPage(' + page + ')">' + page + '</a>'
+				}
+				temp += '<a href="javascript:goToPage(' + forwPages + ')">&nbsp;&nbsp;&gt;&gt;</a>'
+
+				$('#page-number').append(temp);
+			}
+			
+			function goToPage(num){
+				
+				switch (num) {
+				case 0:
+					num = ${param.page} + 1; 
+					break;
+				case -1:
+					num = ${param.page} - 1;
+					if(num == 0){
+						num = 1;
+					}
+					break;
+				default:
+					break;
+				}
+				location.href='../booklist/category.do?category=${param.category}&page=' + num;
+				
+			}
 			
 			function category_toggle(){
 			
@@ -155,22 +193,6 @@
 				}
 			}
 			
-			</script>
-			
-			<script>
-	
-			$(document).ready(function(){
-				
-				$("#category1").each(function(){
-					
-					if($(this).val()=="${requestScope.categories[0]}"){
-						$(this).attr()
-					}
-					
-				});	
-			}); 
-			</script>
-			
-			
+	</script>
 </body>
 </html>

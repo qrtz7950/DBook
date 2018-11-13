@@ -49,7 +49,7 @@ public class BookController {
 		CategoryVO categoryVO = new CategoryVO(start,end,category);
 		
 		if(category == null)
-			categoryVO.setCategoryNumber("100");
+			categoryVO.setCategoryNumber("110");
 		bookListByCategory = bookService.booklistByCategory(categoryVO);
 		
 		System.out.println(bookListByCategory);

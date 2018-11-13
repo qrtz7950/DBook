@@ -310,7 +310,7 @@
 					<div class="bookList">
 					
 					<c:forEach var="bookOrder" items="${asd}">
-					
+
 						<div class="book" id=book${bookOrder}>
 							<div class="book_cover">
 								<img src="/DBook/resources/images/book01.jpg" onError="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/image-null.png';">
@@ -336,9 +336,9 @@
 								</div>
 							</div>
 						</div>
-					
+						
 					</c:forEach>
-					
+
 					</div>
 				</div>
 			</div>

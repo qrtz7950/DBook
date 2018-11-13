@@ -32,18 +32,15 @@ public class BookService {
 	
 	// 책 조회수 올리기
 	public void upView_cnt(String book_id) {
-		
 		dao.upView_cnt(book_id);
 	}
 
 	public List<BookVO> booklistByCategory(CategoryVO categoryVO) {
-	
 		return dao.booklistByCategory(categoryVO);
 	}
 	
 	// 조건에 맞는 책 리스트 조회
 	public JSONObject selectBooks(int mode) {
-		
 		List<BookVO> book_list = new ArrayList<>();
 		
 		switch(mode) {

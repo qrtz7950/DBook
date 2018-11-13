@@ -21,11 +21,11 @@
 	
 	<!-- 카테고리 별로 책 n권씩 가져오기  -->
 	<select id="booklistByCategory" resultType="bookVO" parameterType="categoryVO">
-		select br.book_id , br.book_name , br.category_no , br.publisher , br.published_date , br.cover
+		select br.book_id , br.book_name, br.author, br.category_no , br.publisher , br.published_date , br.cover
 		from ( 
-		    select rownum as rnum, b.book_id , b.book_name , b.category_no , b.publisher , b.published_date , b.cover
+		    select rownum as rnum, b.book_id , b.book_name, b.author, b.category_no , b.publisher , b.published_date , b.cover
 		    from (
-			        select book_id, book_name, category_no, publisher , published_date , cover
+			        select book_id, book_name, author, category_no, publisher , published_date , cover
 			        from book
 			        where category_no like #{categoryNumber} || '%'
 			        order by published_date desc ) b

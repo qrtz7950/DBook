@@ -300,7 +300,7 @@
 								a += '<div class="reviewForm-base">';
 								a += 	'<div class="review-cover">';
 								a += 		'<article>';
-								a += 		'<a href="#" class="image"><img src="' + reviews.items[i].cover + '"></a>';
+								a += 		'<a href="#" class="image"><img style="height:auto;" src="' + reviews.items[i].cover + '"></a>';
 								a += 		'</article>';
 								a += 	'</div>';
 								a += 		'<div id="review' + (i+1) + '" class="review">';
@@ -445,7 +445,7 @@
 				
 				var temp = '';
 				
-				temp += '<div id="recent' + (i+1) + '" class="articles recent-book-list">';
+				temp += '<div id="recent' + (i+1) + 'style="display:inline-flex;" class="articles recent-book-list">';
 				temp += 	'<div class="recent-div-articles">';
 				
 				for(var i=0; i<data.items.length; i++){
