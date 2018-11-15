@@ -25,7 +25,9 @@ public class ReviewService {
 	
 	// 리뷰 입력
 	public void writeReview(ReviewVO review) {
+		dao.deleteReview(review);
 		dao.writeReview(review);
+		calcUserCorrelation(review.getId());
 	}
 	
 	// book_id로 해당 책 리뷰 조회
@@ -140,8 +142,11 @@ public class ReviewService {
 		return reactions;
 	}
 	
-	// 가입후 평가페이지에서 처음으로 평가시 초기 유저 상관도 테이블 계산 후 입력
-	public void calcRecommend(String id) {
+	// 가입후 평가페이지에서 처음으로 평가시 초기 유저 상관도 테이블 계산 후 입력 -> 시간나면 피어슨 상관 계수로 변경
+	public void calcUserCorrelation(String id) {
+		// 이전 correlation table 기준 유저 삭제
+		dao.deleteUserCorrelation(id);
+		
 		// 자신이 평가한 책 목록 뽑기
 		List<ReviewVO> myRatingBookList = dao.myRatingBooks(id);
 		System.out.println(myRatingBookList.toString());
@@ -165,9 +170,9 @@ public class ReviewService {
 		float distance;
 		for(String compareId : compareIdList) {
 			distance = 0;
+			int count = 0;
 			List<ReviewVO> compareRatingBookList = dao.myRatingBooks(compareId);
 			for(ReviewVO myRatingBook : myRatingBookList) {
-				int count = 0;
 				for(ReviewVO compareRatingBook : compareRatingBookList) {
 					if(myRatingBook.getBook_id().equals(compareRatingBook.getBook_id())) {
 						distance += Math.pow(myRatingBook.getRating() - compareRatingBook.getRating(), 2);
@@ -179,8 +184,10 @@ public class ReviewService {
 					distance /= count;
 				}
 			}
-			UserCorrelationVO ucvo = new UserCorrelationVO(id, compareId, distance);
-			resultList.add(ucvo);
+			if(count > 2) {		// 겹치는 데이터의 양 지정 (높을 수록 신뢰도 오르지만, 데이터가 적으면 다 걸러짐)
+				UserCorrelationVO ucvo = new UserCorrelationVO(id, compareId, distance);
+				resultList.add(ucvo);
+			}
 		}
 		
 		AscendingObj ascending = new AscendingObj();
@@ -216,5 +223,4 @@ public class ReviewService {
 			return r;
 		}
 	}
-	
 }

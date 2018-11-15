@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+
 import org.json.simple.JSONObject;
 
 import kr.co.project.book.service.BookService;
@@ -21,6 +25,7 @@ import kr.co.project.book.vo.BookVO;
 import kr.co.project.book.vo.CategoryVO;
 import kr.co.project.review.service.ReviewService;
 import kr.co.project.book.vo.SearchVO;
+import kr.co.project.login.vo.LoginVO;
 
 @Controller
 @RestController
@@ -124,10 +129,12 @@ public class BookController {
 	// 조건에 따른 책 리스트 조회
 	@ResponseBody
 	@RequestMapping(value="/select_books.do", method = RequestMethod.POST)
-	public JSONObject selectBooks(@RequestParam(value="mode") int mode) {
+	public JSONObject selectBooks(@RequestParam(value="mode") int mode, HttpSession session) {
 		System.out.println("top_rating_books() 진입");
 		
-		JSONObject books = bookService.selectBooks(mode);
+		LoginVO user = (LoginVO) session.getAttribute("user");
+		
+		JSONObject books = bookService.selectBooks(mode, user);
 		
 		return books;
 	}

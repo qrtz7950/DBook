@@ -46,7 +46,7 @@
 			        					group by book_id
 			        						) r on bp.book_id = r.book_id
 			        order by r.rating desc ) b
-		    where 15 >= rownum ) br
+		    where 21 >= rownum ) br
 		where br.rnum >= 1
 	</select>
 	
@@ -59,7 +59,7 @@
 			        select book_id, book_name, category_no, publisher , published_date , cover, view_cnt
 			        from book
 			        order by view_cnt desc ) b
-		    where 15 >= rownum ) br
+		    where 21 >= rownum ) br
 		where br.rnum >= 1
 	</select>
 	
@@ -76,7 +76,7 @@
 			        					group by book_id
 			        						) i on bp.book_id = i.book_id
 			        order by i.interest desc ) b
-		    where 15 >= rownum ) br
+		    where 21 >= rownum ) br
 		where br.rnum >= 1
 	</select>
 	
@@ -93,4 +93,80 @@
 		    where #{end} >= rownum ) br
 		where br.rnum >= #{start} 
 	</select>
+	
+	<!-- 로그인한 유저의 나이대의 선호도서 가져오기  -->
+	<select id="topUserAgeBookList" resultType="bookVO" parameterType="loginVO">
+		select br.book_id , br.book_name , br.category_no , br.publisher , br.published_date , br.cover
+		from ( 
+		    select rownum as rnum, b.book_id , b.book_name , b.category_no , b.publisher , b.published_date , b.cover
+		    from (
+			        select bp.book_id, bp.book_name, bp.category_no, bp.publisher , bp.published_date , bp.cover, ru.rating
+			        from book bp inner join (
+											select book_id, avg(rating) rating
+											from review r inner join db_user u on r.id = u.id and u.age_range = #{age_range}
+											group by book_id
+			        						) ru on bp.book_id = ru.book_id
+			        order by ru.rating desc ) b
+		    where 21 >= rownum ) br
+		where br.rnum >= 1
+	</select>
+	
+	<!-- 성향이 비슷한 회원이 좋아한 도서  -->
+	<select id="similarRatingBookList" resultType="bookVO" parameterType="loginVO">
+		select br.book_id , br.book_name , br.category_no , br.publisher , br.published_date , br.cover
+		  from ( 
+		    select rownum as rnum, b.book_id , b.book_name , b.category_no , b.publisher , b.published_date , b.cover
+		      from (
+			        select bp.book_id, bp.book_name, bp.category_no, bp.publisher , bp.published_date , bp.cover, ruc.rating
+			          from book bp inner join (
+											select book_id, avg(rating) rating
+											  from review
+											  where book_id not in (
+											                        select book_id
+											                          from review
+											                          where id = #{id}
+											                       )
+											  		and id in (
+														select compare_id
+														  from user_correlation 
+														  where id = #{id}
+													 	)
+											group by book_id
+			        						) ruc on bp.book_id = ruc.book_id
+			        order by ruc.rating desc ) b
+		      where 21 >= rownum ) br
+		  where br.rnum >= 1
+	</select>
+	
+	<!-- 로그인한 유저의 관심도서가 같은 사람들의 또다른 관심도서 가져오기  -->
+	<select id="sameInterestBookList" resultType="bookVO" parameterType="loginVO">
+		select br.book_id , br.book_name , br.category_no , br.publisher , br.published_date , br.cover
+		from ( 
+		    select rownum as rnum, b.book_id , b.book_name , b.category_no , b.publisher , b.published_date , b.cover
+		    from (
+			        select bp.book_id, bp.book_name, bp.category_no, bp.publisher , bp.published_date , bp.cover, iii.interest_count
+			        from book bp inner join (
+											select book_id, count(*) interest_count
+											  from interest
+											  where book_id not in (
+											                        select book_id
+											                          from interest
+											                          where id = #{id}
+											                       )
+											        and id in (
+											                    select distinct id
+											                      from interest
+											                      where book_id in(
+											                      					select book_id
+											                      					  from interest
+											                      					  where id = #{id}
+											                      				  )
+											                  )
+											  group by book_id
+			        						) iii on bp.book_id = iii.book_id
+			        order by interest_count desc ) b
+		    where 21 >= rownum ) br
+		where br.rnum >= 1
+	</select>
+	
 </mapper>

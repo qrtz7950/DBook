@@ -1,7 +1,6 @@
 package kr.co.project.book.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.project.book.vo.BookVO;
 import kr.co.project.book.vo.CategoryVO;
 import kr.co.project.book.vo.SearchVO;
-import kr.co.project.review.vo.ReviewVO;
+import kr.co.project.login.vo.LoginVO;
 
 @Repository
 public class BookDAO {
@@ -44,6 +43,18 @@ public class BookDAO {
 
 	public List<BookVO> top_interest_bookList() {
 		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.topInterestBookList");
+	}
+
+	public List<BookVO> top_user_age_bookList(LoginVO user) {
+		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.topUserAgeBookList", user);
+	}
+
+	public List<BookVO> similar_rating_bookList(LoginVO user) {
+		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.similarRatingBookList", user);
+	}
+	
+	public List<BookVO> same_interest_bookList(LoginVO user) {
+		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.sameInterestBookList", user);
 	}
 
 }
