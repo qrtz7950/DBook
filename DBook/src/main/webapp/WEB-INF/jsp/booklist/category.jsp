@@ -143,8 +143,13 @@
 			});
 			
 			function printPageNumber(){
-				var no = ${param.page};
-				var deca = Math.floor(no/10);
+				var no = 1;
+	            
+	            <c:if test="${not empty param.page}">
+	            no = ${param.page};
+	            </c:if>
+	            
+	            var deca = Math.floor(no/10);
 				var forwPages = (deca * 10) + 11 ;
 				var prePages = (deca * 10) - 9 ;
 				if (prePages <= 0){
