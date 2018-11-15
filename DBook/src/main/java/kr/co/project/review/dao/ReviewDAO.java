@@ -24,14 +24,14 @@ public class ReviewDAO {
 		sqlSessionTemplate.insert("kr.co.project.review.dao.ReviewDAO.writeReview", review);
 	}
 	
+	// 리뷰 삭제
+	public void deleteReview(ReviewVO review) {
+		sqlSessionTemplate.delete("kr.co.project.review.dao.ReviewDAO.deleteReview", review);
+	}
+	
 	// book_id로 해당 책 리뷰 조회
 	public List<ReviewVO> reviewListByBook_id(String book_id) {
 		List<ReviewVO> reviews = sqlSessionTemplate.selectList("kr.co.project.review.dao.ReviewDAO.reviewListByBook_id", book_id);
-		/*
-		for(ReviewVO review : reviews) {
-			System.out.println(review);
-		}
-		*/
 		return reviews;
 	}
 
@@ -42,11 +42,6 @@ public class ReviewDAO {
 	// book_id로 해당 책 평점 조회
 	public List<Integer> book_avg_rating(String book_id) {
 		List<Integer> rating_points = sqlSessionTemplate.selectList("kr.co.project.review.dao.ReviewDAO.book_avg_rating", book_id);
-		/*
-		for(int rating : rating_points) {
-			System.out.println(rating);
-		}
-		*/
 		return rating_points;
 	}
 	
@@ -65,7 +60,6 @@ public class ReviewDAO {
 	public int check_review_reaction(ReviewReactionVO reviewReaction) {
 		int check = -1;
 		ReviewReactionVO val = sqlSessionTemplate.selectOne("kr.co.project.review.dao.ReviewDAO.check_review_reaction", reviewReaction);
-		//System.out.println("!!!" + val);
 		
 		if(val != null) {
 			if(val.getGood_or_bad() == 1) {
@@ -139,4 +133,9 @@ public class ReviewDAO {
 			sqlSessionTemplate.insert("kr.co.project.review.dao.ReviewDAO.addUserCorrelation", result);
 		}
 	}
+
+	public void deleteUserCorrelation(String id) {
+		sqlSessionTemplate.delete("kr.co.project.review.dao.ReviewDAO.deleteUserCorrelation", id);
+	}
+	
 }

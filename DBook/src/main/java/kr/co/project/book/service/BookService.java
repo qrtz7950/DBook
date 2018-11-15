@@ -17,6 +17,7 @@ import kr.co.project.book.vo.BookVO;
 import kr.co.project.book.vo.CategorySerchVO;
 import kr.co.project.book.vo.CategoryVO;
 import kr.co.project.book.vo.SearchVO;
+import kr.co.project.login.vo.LoginVO;
 
 @Service
 public class BookService {
@@ -45,18 +46,27 @@ public class BookService {
 	}
 	
 	// 조건에 맞는 책 리스트 조회
-	public JSONObject selectBooks(int mode) {
+	public JSONObject selectBooks(int mode, LoginVO user) {
 		List<BookVO> book_list = new ArrayList<>();
 		
 		switch(mode) {
-			case 1 :
+			case 0 :	// 평점 높은 도서
 				book_list = dao.top_rating_bookList();
 				break;
-			case 2 :
+			case 1 :	// 조회수 높은 도서
 				book_list = dao.top_view_cnt_bookList();
 				break;
-			case 3 :
+			case 2 :	// 관심설정 많은 도서
 				book_list = dao.top_interest_bookList();
+				break;
+			case 3 :	// 해당 연령 인기도서
+				book_list = dao.top_user_age_bookList(user);
+				break;
+			case 4 :	// 성향이 비슷한 회원이 좋아한 도서
+				book_list = dao.similar_rating_bookList(user);
+				break;
+			case 5 :	// 관심도서가 같은 사람의 다른 관심도서
+				book_list = dao.same_interest_bookList(user);
 				break;
 		}
 		
@@ -66,8 +76,14 @@ public class BookService {
 			JSONArray jArray = new JSONArray();
 			for(int i=0; i<book_list.size(); i++) {
 				JSONObject j = new JSONObject();
+				
+				String book_name = book_list.get(i).getBook_name();
+				if(book_name.length() > 22) {
+					book_name = book_name.substring(0, 21) + "...";
+				}
+				
 				j.put("book_id", book_list.get(i).getBook_id());
-				j.put("book_name", book_list.get(i).getBook_name());
+				j.put("book_name", book_name);
 				j.put("cover", book_list.get(i).getCover());
 				jArray.add(j);
 			}

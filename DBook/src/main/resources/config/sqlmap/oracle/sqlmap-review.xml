@@ -10,6 +10,12 @@
 			   values(review_no.nextval, #{id}, #{book_id}, #{rating}, #{content}, #{good}, #{bad})
 	</insert>
 	
+	<!-- 리뷰 삭제 -->	
+	<delete id="deleteReview" parameterType="reviewVO">
+		delete from review
+		  where id = #{id} and book_id = #{book_id}
+	</delete>
+	
 	<!-- 회원가입 리뷰 등록 -->	
 	<insert id="addUserRating" parameterType="reviewVO">
 		insert into review(review_no, id, book_id, rating)
@@ -98,5 +104,11 @@
 		insert into user_correlation(id, compare_id, distance)
 			   values(#{id}, #{compare_id}, #{distance})
 	</insert>
+	
+	<!-- user correlation 삭제 -->
+	<delete id="deleteUserCorrelation" parameterType="string">
+		delete from user_correlation
+		  where id = #{id}
+	</delete>
 			
 </mapper>
