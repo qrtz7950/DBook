@@ -44,14 +44,14 @@ CREATE TABLE book (
                     );
 
 create table user_rating_booklist (
-        book_id             varchar2(20)
+        book_id             varchar2(10)
     ,   constraint best_seller_no_fk foreign key(book_id)
         references book(book_id) on delete cascade
 );
 
 create table interest (
         id              varchar2(30)
-    ,   book_id         varchar2(20)
+    ,   book_id         varchar2(10)
     ,   constraint interest_id_fk foreign key(id)
         references db_user(id) on delete cascade
     ,   constraint interest_book_id_fk foreign key(book_id)
@@ -85,7 +85,7 @@ create table review_reaction (
 );
 
 create table db_category (
-        category_name   varchar2(50)
+        category_name   varchar2(100)
     ,   category_no     varchar(9)
     ,   constraint db_category_book_id_fk foreign key(book_id)
         references book(book_id) on delete cascade
@@ -94,8 +94,8 @@ create table db_category (
 );
 
 create table user_correlation(
-        id      varchar2(20)
-    ,   compare_id  varchar2(20)
+        id      varchar2(30)
+    ,   compare_id  varchar2(30)
     ,   distance    Number(10, 1)
     ,   constraint user_correlation_id_fk foreign key(id)
         references db_user(id) on delete cascade
@@ -104,5 +104,13 @@ create table user_correlation(
 );
 
 Insert into HR.DB_USER (NO,ID,PASSWORD,PROFILE_IMAGE,THUMBNAIL_IMAGE,NICKNAME,AGE_RANGE,GENDER) values (seq_db_user_no.nextval,'q','q',null,null,'q','20~29','male');
+
+--카테고리 번호가 맞지 않아 들어가지 않는 책들 조회 및 삭제
+-- 카테고리 간첩들 조회
+select b.category_no, b.* from book b
+    where category_no not in (select db_category.category_no from db_category);
+-- 간첩 척살
+delete from book b
+    where category_no not in (select db_category.category_no from db_category);
 
 commit;
