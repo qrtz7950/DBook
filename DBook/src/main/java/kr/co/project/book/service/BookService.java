@@ -2,14 +2,19 @@ package kr.co.project.book.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+
 import kr.co.project.book.dao.BookDAO;
 import kr.co.project.book.vo.BookVO;
+import kr.co.project.book.vo.CategorySerchVO;
 import kr.co.project.book.vo.CategoryVO;
 import kr.co.project.book.vo.SearchVO;
 
@@ -82,4 +87,69 @@ public class BookService {
 		
 		return dao.booklistByKeyword(searchVO);
 	}
+
+	public JSONObject categorylistByCategoryNo(String categoryNo) {
+		List<String> name = new ArrayList<>();
+		List<String> no = new ArrayList<>();
+		
+		List<CategorySerchVO> list = dao.categorylistByCategoryNo(categoryNo);
+		
+		int i = categoryNo.length() / 3;
+
+		for(CategorySerchVO cat : list) {
+			if(cat.getCategory_no().length() > i * 3) {
+				if(!name.contains(cat.getCategory_name().split(";")[i])) {
+					name.add(cat.getCategory_name().split(";")[i]);
+					no.add(cat.getCategory_no().substring(0, (i+1)*3));
+				}
+			}
+		}
+		
+		JSONObject categorys = new JSONObject();
+		
+		categorys.put("name", name);
+		categorys.put("no", no);
+		
+		System.out.println(categorys.toJSONString());
+		
+		return categorys;
+	}
+
+	public List<CategorySerchVO> categorylistByCategoryNoInit(String category) {
+		System.out.println("categorylistByCategoryNoInit()진입");
+		
+		List<String> name = new ArrayList<>();
+		List<String> no = new ArrayList<>();
+		
+		List<CategorySerchVO> catList = new ArrayList<>();
+		List<CategorySerchVO> list = dao.categorylistByCategoryNoInit();
+
+		System.out.println(list);
+		
+		for(CategorySerchVO cat : list) {
+			if(category.equals(cat.getCategory_no().substring(0, 3))) {
+				name.add(cat.getCategory_name().split(";")[0]);
+				no.add(cat.getCategory_no().substring(0, 3));
+				break;
+			}
+			
+		}
+		for(CategorySerchVO cat : list) {
+			if(!name.contains(cat.getCategory_name().split(";")[0])) {
+				name.add(cat.getCategory_name().split(";")[0]);
+				no.add(cat.getCategory_no().substring(0, 3));
+			}
+		}
+		
+		for(int i=0; i<name.size(); i++) {
+			CategorySerchVO c = new CategorySerchVO();
+			c.setCategory_name(name.get(i));
+			c.setCategory_no(no.get(i));
+			catList.add(c);
+		}
+		
+		return catList;
+	}
+	
 }
+

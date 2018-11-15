@@ -18,6 +18,7 @@ import org.json.simple.JSONObject;
 
 import kr.co.project.book.service.BookService;
 import kr.co.project.book.vo.BookVO;
+import kr.co.project.book.vo.CategorySerchVO;
 import kr.co.project.book.vo.CategoryVO;
 import kr.co.project.review.service.ReviewService;
 import kr.co.project.book.vo.SearchVO;
@@ -48,18 +49,41 @@ public class BookController {
 		List<BookVO> bookListByCategory = new ArrayList<>();
 		CategoryVO categoryVO = new CategoryVO(start,end,category);
 		
-		if(category == null)
+		if(category == null) {
+			category = "110";
 			categoryVO.setCategoryNumber("110");
+		}
 		bookListByCategory = bookService.booklistByCategory(categoryVO);
 		
+		List<CategorySerchVO> categorys = bookService.categorylistByCategoryNoInit(category);
+		
 		System.out.println(bookListByCategory);
+		System.out.println(categorys);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("bookListByCategory", bookListByCategory);
+		mav.addObject("categorys", categorys);
 		mav.setViewName("booklist/category");
 		
 		return mav;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/booklist/categoryList.json", method = RequestMethod.POST)
+	public JSONObject categoryList(HttpServletRequest request) {
+		System.out.println("categoryList() 진입");
+		
+		String category = request.getParameter("category");
+		
+		if(category == null) {
+			category = "110";
+		}
+		
+		JSONObject categorys = bookService.categorylistByCategoryNo(category);
+		
+		return categorys;
+	}
+	
 	
 	// 키워드 검색 페이지
 	@RequestMapping("/bookSearch/searchResult.do")

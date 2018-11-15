@@ -93,4 +93,15 @@
 		    where #{end} >= rownum ) br
 		where br.rnum >= #{start} 
 	</select>
+	
+	<!-- 책 검색 결과로 책 n권씩 가져오기 -->
+	<select id="categorylistBycategoryNo" resultType="CategorySerchVO" parameterType="string">
+		select * from db_category
+        		where category_no like #{categoryNo} || '%'
+	</select>
+	
+	<!-- 책 검색 결과로 책 n권씩 가져오기 -->
+	<select id="categorylistBycategoryNoInit" resultType="CategorySerchVO" parameterType="string">
+		select * from db_category
+	</select>
 </mapper>

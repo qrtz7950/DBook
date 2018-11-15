@@ -7,6 +7,7 @@
 	<typeAliases>
 		<typeAlias type="kr.co.project.login.vo.LoginVO" alias="loginVO"/>
 		<typeAlias type="kr.co.project.book.vo.BookVO" alias="bookVO"/>
+		<typeAlias type="kr.co.project.book.vo.CategorySerchVO" alias="categorySerchVO"/>
 		<typeAlias type="kr.co.project.book.vo.CategoryVO" alias="categoryVO"/>
 		<typeAlias type="kr.co.project.book.vo.SearchVO" alias="searchVO"/>
 		<typeAlias type="kr.co.project.review.vo.ReviewVO" alias="reviewVO"/>
@@ -14,7 +15,6 @@
 		<typeAlias type="kr.co.project.mypage.vo.MypageVO" alias="mypageVO"/>
 		<typeAlias type="kr.co.project.review_reaction.vo.ReviewReactionVO" alias="reviewReactionVO"/>
 		<typeAlias type="kr.co.project.usercorrelation.vo.UserCorrelationVO" alias="userCorrelationVO"/>
-		
 	</typeAliases>
 	
 </configuration>

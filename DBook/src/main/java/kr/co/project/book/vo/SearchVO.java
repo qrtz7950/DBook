@@ -8,7 +8,6 @@ public class SearchVO {
 	
 	
 	public SearchVO() {
-		// TODO Auto-generated constructor stub
 	}
 	public SearchVO(int start, int end, String keyword) {
 		this.start = start;

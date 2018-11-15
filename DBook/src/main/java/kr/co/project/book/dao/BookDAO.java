@@ -1,16 +1,15 @@
 package kr.co.project.book.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.project.book.vo.BookVO;
+import kr.co.project.book.vo.CategorySerchVO;
 import kr.co.project.book.vo.CategoryVO;
 import kr.co.project.book.vo.SearchVO;
-import kr.co.project.review.vo.ReviewVO;
 
 @Repository
 public class BookDAO {
@@ -44,6 +43,14 @@ public class BookDAO {
 
 	public List<BookVO> top_interest_bookList() {
 		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.topInterestBookList");
+	}
+
+	public List<CategorySerchVO> categorylistByCategoryNo(String categoryNo) {
+		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.categorylistBycategoryNo", categoryNo);
+	}
+	
+	public List<CategorySerchVO> categorylistByCategoryNoInit() {
+		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.categorylistBycategoryNoInit");
 	}
 
 }

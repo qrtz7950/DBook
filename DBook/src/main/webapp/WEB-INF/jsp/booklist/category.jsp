@@ -35,26 +35,20 @@
 										
 										<a href="${pageContext.request.contextPath}">홈 ></a>
 									
-										<select style="width:auto;" >
-											<option>${requestScope.categories["0"]}</option>
-											<option>국내도서</option>
-											<option>국외도서</option>
+										<select class="firCat" style="width:auto;">
+											<c:forEach var="cat" items="${categorys}">
+												<option class="firOpt" value="${cat.category_no}">${cat.category_name}</option>
+											</c:forEach>
 										</select>
 										
 										<div>></div>
 										
-										<select style="width:auto;" >
-											<option>${requestScope.categories["0"]}</option>
-											<option>국내도서</option>
-											<option>국외도서</option>
+										<select class="secCat" style="width:auto;" >
 										</select>
 										
 										<div>></div>
 										
-										<select style="width:auto;" >
-											<option>${requestScope.categories["0"]}</option>
-											<option>국내도서</option>
-											<option>국외도서</option>
+										<select class="thriCat" style="width:auto;" >
 										</select>
 									</div>
 									
@@ -131,9 +125,32 @@
 	<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
 	<script type="text/javascript">
 			
+			var category = 110;
+			var categoryInit = $('.secCat');
+			var firDepth = null;
+			var secDepth = null;
+			var thirDepth = null;
+			
+			<c:if test="${not empty param.category}">
+				category = ${param.category};
+            </c:if>
+	
 			$(document).ready(function() {
 				category_toggle();
 				printPageNumber();
+				getCategoryList(category, categoryInit);
+				
+				$('.firCat').change(function() {
+					firDepth = $(this).val();
+					getCategoryList($(this).val(), categoryInit);
+					return false;
+				});
+				
+				$('.secCat').change(function() {
+					getCategoryList($(this).val(), $('.thriCat'));
+					return false;
+				});
+
 				return false;
 			});
 
@@ -141,6 +158,32 @@
 				category_toggle();
 				return false;
 			});
+			
+			function getCategoryList(category, obj) {
+				
+				$.ajax({
+					url : '../booklist/categoryList.json',
+					type : 'POST',
+					dataType : 'json',
+					data : {'category' : category},
+					error : function(request, status, error){
+				       	alert("code:"+request.status+"\n"+"error:"+error);
+				    },
+					success : function(data){
+						addCategory(data, obj);
+					}
+				});
+			}
+			
+			function addCategory(data, obj) {
+				temp = '';
+				
+				for(var i=0; i<data.name.length; i++){
+					temp += '<option class="optClick" value="' + data.no[i] + '">' + data.name[i] + '</option>';
+				}
+				obj.empty();
+				obj.append(temp);
+			}
 			
 			function printPageNumber(){
 				var no = 1;
