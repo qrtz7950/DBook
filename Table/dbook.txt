@@ -6,6 +6,8 @@ drop table review CASCADE CONSTRAINTS;
 drop table review_reaction CASCADE CONSTRAINTS;
 drop table db_category CASCADE CONSTRAINTS;
 drop table user_correlation CASCADE CONSTRAINTS;
+drop table book_price CASCADE CONSTRAINTS;
+drop table naver_book_rate CASCADE CONSTRAINTS;
 
 drop sequence seq_db_user_no;
 drop sequence review_no;
@@ -21,6 +23,11 @@ create table db_user (
     ,   age_range       varchar2(8)
     ,   gender          varchar2(12)
     ,   reg_date        date            default sysdate
+);
+
+create table db_category (
+        category_name   varchar2(100)
+    ,   category_no     varchar(9)      primary key
 );
 
 CREATE TABLE book ( 
@@ -84,15 +91,6 @@ create table review_reaction (
         references db_user(id) on delete cascade
 );
 
-create table db_category (
-        category_name   varchar2(100)
-    ,   category_no     varchar(9)
-    ,   constraint db_category_book_id_fk foreign key(book_id)
-        references book(book_id) on delete cascade
-    ,   constraint db_category_category_no_fk foreign key(category_no)
-        references db_category_management(category_no)
-);
-
 create table user_correlation(
         id      varchar2(30)
     ,   compare_id  varchar2(30)
@@ -101,6 +99,20 @@ create table user_correlation(
         references db_user(id) on delete cascade
     ,   constraint user_correlation_compare_id_fk foreign key(compare_id)
         references db_user(id) on delete cascade
+);
+
+create table book_price(
+        book_id varchar2(10)
+    ,   price   varchar2(20)
+    ,   constraint book_price_book_id_fk foreign key(book_id)
+        references book(book_id) on delete cascade
+);
+
+create table naver_book_rate(
+        book_id varchar2(10)
+    ,   rating   varchar2(7)
+    ,   constraint naver_book_rate_book_id_fk foreign key(book_id)
+        references book(book_id) on delete cascade
 );
 
 Insert into HR.DB_USER (NO,ID,PASSWORD,PROFILE_IMAGE,THUMBNAIL_IMAGE,NICKNAME,AGE_RANGE,GENDER) values (seq_db_user_no.nextval,'q','q',null,null,'q','20~29','male');
