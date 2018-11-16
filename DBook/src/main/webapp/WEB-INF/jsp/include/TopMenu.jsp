@@ -3,9 +3,8 @@
     
 <ul id="topMenu">
 			<li><a class="topMenu-left-1" href="${pageContext.request.contextPath}/main/home.do">DBook</a></li>
-			<li><a class="topMenu-left" href="http://kpa21.or.kr/main-news/publish-news">NEWS</a></li>
-			<li><a class="topMenu-left" href="http://bookcontest.or.kr/index.php">Contest</a></li>
-			<li><a class="topMenu-left" href="https://github.com/qrtz7950/dbook">About</a></li>
+
+			<li><a class="topMenu-left" href="${pageContext.request.contextPath}/ranking/rankingHome.do">Ranking</a></li>
 			<li class="topMenu-right" style="cursor: pointer;"><a id="showLeft">Menu</a></li>
 			<li class="topMenu-right" style="cursor: pointer;"><a id="showTop">Menu</a></li>
 			<li class="topMenu-right" style="cursor: pointer;"><a id="btn-login" href="${pageContext.request.contextPath}/user/login.do">Login</a></li>

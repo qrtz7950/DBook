@@ -30,6 +30,11 @@ public class ReviewService {
 		calcUserCorrelation(review.getId());
 	}
 	
+	// 리뷰 삭제
+	public void deleteReview(ReviewVO review) {
+		dao.deleteReview(review);
+	}
+	
 	// book_id로 해당 책 리뷰 조회
 	public JSONObject reviewListByBook_id(String book_id) {
 		
