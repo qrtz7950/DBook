@@ -35,7 +35,7 @@
 										
 										<a href="${pageContext.request.contextPath}">홈 ></a>
 									
-										<select class="firCat" style="width:auto;">
+										<select class="firCat Cat">
 											<c:forEach var="cat" items="${categorys}">
 												<option class="firOpt" value="${cat.category_no}">${cat.category_name}</option>
 											</c:forEach>
@@ -43,13 +43,15 @@
 										
 										<div>></div>
 										
-										<select class="secCat" style="width:auto;" >
+										<select class="secCat Cat" >
 										</select>
 										
 										<div>></div>
 										
-										<select class="thriCat" style="width:auto;" >
+										<select class="thirCat Cat" >
 										</select>
+										
+										<button class="goToCategory">이동</button>
 									</div>
 									
                                     <div id="category_main_base">
@@ -125,33 +127,89 @@
 	<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
 	<script type="text/javascript">
 			
-			var category = 110;
 			var categoryInit = $('.secCat');
 			var firDepth = null;
 			var secDepth = null;
 			var thirDepth = null;
+			var secFirstNo;
 			
 			<c:if test="${not empty param.category}">
-				category = ${param.category};
+				var category = '${param.category}';
+				console.log("카테고리 init : " + category);
+            </c:if>
+			<c:if test="${empty param.category}">
+				var category = '110';
+				console.log("카테고리 init : " + category);
             </c:if>
 	
 			$(document).ready(function() {
 				category_toggle();
 				printPageNumber();
-				getCategoryList(category, categoryInit);
+				
+				var len = category.length;
+
+				var ajaxResult = getCategoryList(category.substring(0,3), categoryInit);
+ 				ajaxResult.done(function(){
+ 					getCategoryList(secFirstNo, $('.thirCat'));
+ 				});
+ 				
+				if(len >= 6){
+					getCategoryList(category.substring(0,6), $('.thirCat'));
+				} else {
+					getCategoryList("000", $('.thirCat'));	
+				}
+				
 				
 				$('.firCat').change(function() {
+					
+					var temp = '<option class="optClick">없음</option>';
+					
 					firDepth = $(this).val();
-					getCategoryList($(this).val(), categoryInit);
-					return false;
+					
+					if(firDepth == 340) {
+						$('thirCat').empty();
+						$('secCat').empty();
+						$('thirCat').append(temp);
+						getCategoryList($(this).val(), categoryInit);
+						return false;
+					} else if(firDepth == 340170) {
+						$('thirCat').empty();
+						$('secCat').empty();
+						$('secCat').append(temp);
+						$('thirCat').append(temp);
+						return false;
+					}
+					
+					var ajaxResult = getCategoryList(firDepth, $('.secCat'));
+					ajaxResult.done(function(){
+						getCategoryList(secFirstNo, $('.thirCat'));
+					});
 				});
 				
 				$('.secCat').change(function() {
-					getCategoryList($(this).val(), $('.thriCat'));
+					
+					if(firDepth == 340) {
+						return false;
+					}
+
+					getCategoryList($(this).val(), $('.thirCat'));
+					return false;
+				});
+				
+				$('.goToCategory').click(function() {
+					
+					var where = $('.thirCat').val();
+					
+					if($('.thirCat').val() == null || $('.thirCat').val() == "없음") {
+						where = $('.secCat').val(); 
+					} else if($('.secCat').val() == null || $('.secCat').val() == "없음") {
+						where = $('.firCat').val();
+					}
+					
+					location.href="../booklist/category.do?category=" + where + "&page=1";
 					return false;
 				});
 
-				return false;
 			});
 
 			$(window).resize(function(){
@@ -161,7 +219,7 @@
 			
 			function getCategoryList(category, obj) {
 				
-				$.ajax({
+				var result = $.ajax({
 					url : '../booklist/categoryList.json',
 					type : 'POST',
 					dataType : 'json',
@@ -173,13 +231,19 @@
 						addCategory(data, obj);
 					}
 				});
+				return result;
 			}
 			
 			function addCategory(data, obj) {
 				temp = '';
-				
-				for(var i=0; i<data.name.length; i++){
-					temp += '<option class="optClick" value="' + data.no[i] + '">' + data.name[i] + '</option>';
+				if(data.name[0] == null){
+					temp += '<option class="optClick">없음</option>';
+					secFirstNo = "000";
+				} else{
+					for(var i=0; i<data.name.length; i++){
+						temp += '<option class="optClick" value="' + data.no[i] + '">' + data.name[i] + '</option>';
+					}
+					secFirstNo = data.no[0];
 				}
 				obj.empty();
 				obj.append(temp);
@@ -224,7 +288,7 @@
 				default:
 					break;
 				}
-				location.href='../booklist/category.do?category=${param.category}&page=' + num;
+				window.location.href='../booklist/category.do?category=${param.category}&page=' + num;
 				
 			}
 			

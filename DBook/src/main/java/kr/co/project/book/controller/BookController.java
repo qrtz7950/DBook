@@ -62,9 +62,6 @@ public class BookController {
 		
 		List<CategorySerchVO> categorys = bookService.categorylistByCategoryNoInit(category);
 		
-		System.out.println(bookListByCategory);
-		System.out.println(categorys);
-		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("bookListByCategory", bookListByCategory);
 		mav.addObject("categorys", categorys);
@@ -85,6 +82,17 @@ public class BookController {
 		}
 		
 		JSONObject categorys = bookService.categorylistByCategoryNo(category);
+		
+		return categorys;
+	}
+	@ResponseBody
+	@RequestMapping(value="/booklist/categoryNames.json", method = RequestMethod.POST)
+	public JSONObject categoryNames(HttpServletRequest request) {
+		System.out.println("categoryNames() 진입");
+		
+		String categoryNo = request.getParameter("category");
+		
+		JSONObject categorys = bookService.categoryNameByCategoryNo(categoryNo);
 		
 		return categorys;
 	}

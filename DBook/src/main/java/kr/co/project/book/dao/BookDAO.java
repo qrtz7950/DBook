@@ -67,4 +67,8 @@ public class BookDAO {
 		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.sameInterestBookList", user);
 	}
 
+	public CategorySerchVO categoryNamesByCategoryNo(String categoryNo) {
+		return sqlSessionTemplate.selectOne("kr.co.project.book.dao.BookDAO.categoryNamesBycategoryNo", categoryNo);
+	}
+
 }

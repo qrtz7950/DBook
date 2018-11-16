@@ -11,11 +11,23 @@ body {
 	text-overflow: clip;
 }
 
+.pink{
+    height: 100%;
+    width: 500px;
+    background-color: #ffc4c4;
+    margin: auto;
+    position: fixed;
+    left: calc(50% - 250px);
+    z-index: 0;
+    top: 0;
+}
+
 .login-page-base{
 	width: 500px;
 	height: 100%;
-	background-color: #ffc4c4;
     margin: auto;
+    z-index: 1;
+    display: flex;
 }
 
 .forSpace{
@@ -26,6 +38,7 @@ body {
 	width: 360px;
 	padding: 8% 0 0;
 	margin: auto;
+	z-index: 1;
 }
 
 .login-page a{

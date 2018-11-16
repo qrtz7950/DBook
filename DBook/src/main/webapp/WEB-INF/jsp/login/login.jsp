@@ -12,10 +12,11 @@
 
 </head>
 <body>
+	<div class="pink"></div>
 	<div class="login-page-base">
 		<div class="forSpace"></div>
 		<div class="login-page">
-		  <h1><a style="text-decoration: none;" href="${pageContext.request.contextPath}/main/home.do"><strong>DB</strong>ook</a></h1>
+		  <div><h1><a style="text-decoration: none;" href="${pageContext.request.contextPath}/main/home.do"><strong>DB</strong>ook</a></h1></div>
 		  <hr>
 		  <div class="form">
 		    <form class="register-form">

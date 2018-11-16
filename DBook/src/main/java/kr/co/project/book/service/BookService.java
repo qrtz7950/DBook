@@ -1,6 +1,7 @@
 package kr.co.project.book.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -8,9 +9,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import kr.co.project.book.dao.BookDAO;
 import kr.co.project.book.vo.BookVO;
@@ -109,18 +107,34 @@ public class BookService {
 		List<String> no = new ArrayList<>();
 		
 		List<CategorySerchVO> list = dao.categorylistByCategoryNo(categoryNo);
-		
 		int i = categoryNo.length() / 3;
-
-		for(CategorySerchVO cat : list) {
-			if(cat.getCategory_no().length() > i * 3) {
-				if(!name.contains(cat.getCategory_name().split(";")[i])) {
-					name.add(cat.getCategory_name().split(";")[i]);
-					no.add(cat.getCategory_no().substring(0, (i+1)*3));
+		
+		if(categoryNo.equals("340170")) {
+			return null;
+		} else if(categoryNo.equals("340")) {
+			for(CategorySerchVO cat : list) {
+				if(cat.getCategory_no().length() > i * 3) {
+					System.out.println(Arrays.toString(cat.getCategory_name().split(";")));
+					if(!cat.getCategory_name().split(";")[i-1].equals("일본도서") && !name.contains(cat.getCategory_name().split(";")[i])) {
+						name.add(cat.getCategory_name().split(";")[i]);
+						no.add(cat.getCategory_no().substring(0, (i+1)*3));
+					}
+				}
+			}
+		} else if(categoryNo.substring(0,3).equals("340")) {
+			return null;
+		} else {
+			for(CategorySerchVO cat : list) {
+				if(cat.getCategory_no().length() > i * 3) {
+					System.out.println(Arrays.toString(cat.getCategory_name().split(";")));
+					if(!name.contains(cat.getCategory_name().split(";")[i])) {
+						name.add(cat.getCategory_name().split(";")[i]);
+						no.add(cat.getCategory_no().substring(0, (i+1)*3));
+					}
 				}
 			}
 		}
-		
+
 		JSONObject categorys = new JSONObject();
 		
 		categorys.put("name", name);
@@ -140,7 +154,7 @@ public class BookService {
 		List<CategorySerchVO> catList = new ArrayList<>();
 		List<CategorySerchVO> list = dao.categorylistByCategoryNoInit();
 
-		System.out.println(list);
+		category = category.substring(0,3);
 		
 		for(CategorySerchVO cat : list) {
 			if(category.equals(cat.getCategory_no().substring(0, 3))) {
@@ -148,7 +162,6 @@ public class BookService {
 				no.add(cat.getCategory_no().substring(0, 3));
 				break;
 			}
-			
 		}
 		for(CategorySerchVO cat : list) {
 			if(!name.contains(cat.getCategory_name().split(";")[0])) {
@@ -165,6 +178,18 @@ public class BookService {
 		}
 		
 		return catList;
+	}
+
+	public JSONObject categoryNameByCategoryNo(String categoryNo) {
+
+		CategorySerchVO cat = dao.categoryNamesByCategoryNo(categoryNo);
+		
+		JSONObject category = new JSONObject();
+
+		category.put("category_name", cat.getCategory_name());
+		category.put("category_no", cat.getCategory_no());
+		
+		return category;
 	}
 	
 }

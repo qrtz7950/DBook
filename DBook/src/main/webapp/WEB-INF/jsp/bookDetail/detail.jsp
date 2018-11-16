@@ -293,6 +293,17 @@
 #review-page {
 	text-align: center;
 }
+
+.cat{
+	text-decoration: none;
+	border-bottom: none;
+	color: black;
+}
+
+.cat:hover{
+	border-bottom : 1px solid #000000;
+	color: black;
+}
 </style>
 </head>
 <body>
@@ -313,23 +324,7 @@
 
 				<!-- Section -->
 				<section style="padding: 15px 0 0 0; margin: 0; height: auto; border: none;">
-					<div id="category_select">
-
-						<a href="${pageContext.request.contextPath}" style="border: hidden;">홈 ></a> <select style="width: auto;">
-
-							<option>${requestScope.categories["0"]}</option>
-							<option>국내도서</option>
-							<option>국외도서</option>
-						</select> <span>></span> <select style="width: auto;">
-							<option>${requestScope.categories["0"]}</option>
-							<option>국내도서</option>
-							<option>국외도서</option>
-						</select> <span>></span> <select style="width: auto;">
-							<option>${requestScope.categories["0"]}</option>
-							<option>국내도서</option>
-							<option>국외도서</option>
-						</select>
-					</div>
+					<div id="category_select"></div>
 				</section>
 
 				<section class="detail-section info-head">
@@ -502,11 +497,53 @@
 						avg_rating();
 						interest_print();						
 						reviews_print(1);
+						getCategoryNames();
 					});
 		
 					$(window).resize(function(){
 						detailForm();
 					});
+					
+
+					
+					function getCategoryNames() {
+							
+						var categoryNo = ${requestScope.book.category_no};
+						
+						$.ajax({
+								url : '../booklist/categoryNames.json',
+								type : 'POST',
+								dataType : 'json',
+								data : {'category' : categoryNo},
+								error : function(request, status, error){
+							       	alert("code:"+request.status+"\n"+"error:"+error);
+							    },
+								success : function(data){
+									putCategoryNames(data);
+								}
+							});
+					}
+					
+					function putCategoryNames(data) {
+						
+						console.log(data);
+						
+						var nameArr = data.category_name.split(";");
+						var classes = ['firCat','secCat','thirCat'];
+						
+						console.log(nameArr);
+						console.log(nameArr.length);
+
+						temp = '<a href="../home.do" style="border: hidden;">홈 ></a>';
+						for(var i=0;i<nameArr.length;i++){
+							console.log('i : ' + i);
+							temp += '	<a class="'+ classes[i] +' cat"  href="../booklist/category.do?category=' + data.category_no.substring(0,3*(i+1)) + '&page=1">' + nameArr[i] + '</a>'
+							if(i < (nameArr.length - 1)){
+								temp += '>'
+							}
+						}
+						$('#category_select').append(temp);
+					}
 				
 				
 				/* 책 정보 */

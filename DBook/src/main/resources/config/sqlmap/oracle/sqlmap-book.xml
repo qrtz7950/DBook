@@ -7,7 +7,7 @@
 	<!-- book_id로 책 정보 조회 -->	
 	<select id="bookDetail" resultType="bookVO" parameterType="bookVO">
 		select book_id, book_name, cover, author, translator, publisher, published_date,
-			   is_ebook, form_detail, isbn, book_introduction, author_introduction, contents, view_cnt 
+			   is_ebook, form_detail, isbn, book_introduction, author_introduction, contents, view_cnt, category_no
 		  from book
 		  where book_id = #{book_id}
 	</select>
@@ -94,10 +94,14 @@
 		where br.rnum >= #{start} 
 	</select>
 	
-	<!-- 책 검색 결과로 책 n권씩 가져오기 -->
 	<select id="categorylistBycategoryNo" resultType="CategorySerchVO" parameterType="string">
 		select * from db_category
         		where category_no like #{categoryNo} || '%'
+	</select>
+	
+	<select id="categoryNamesBycategoryNo" resultType="CategorySerchVO" parameterType="string">
+		select * from db_category
+        		where category_no = #{categoryNo}
 	</select>
 	
 	<!-- 책 검색 결과로 책 n권씩 가져오기 -->
