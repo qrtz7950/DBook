@@ -13,7 +13,7 @@
         java.util.ArrayList<String> list = new java.util.ArrayList<String>();
  
         try { 
-           String book_name = (request.getParameter("term") == null?"":request.getParameter("term"));   
+           String search_word = (request.getParameter("term") == null?"":request.getParameter("term"));   
            Class.forName("oracle.jdbc.driver.OracleDriver"); 
            conn = java.sql.DriverManager
            .getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr"); 
@@ -21,8 +21,8 @@
     
            pstmt = conn.prepareStatement(sql); 
     
-           pstmt.setString(1, "%"+book_name+"%");
-           pstmt.setString(2, "%"+book_name+"%");
+           pstmt.setString(1, "%"+search_word+"%");
+           pstmt.setString(2, "%"+search_word+"%");
            
     
            rs = pstmt.executeQuery(); 

@@ -255,7 +255,7 @@
 		.starR2.on {background-position:-11.25px 0;}
 	
 	</style>
-<title>Insert title here</title>
+<title>도서 평가 :: DBook</title>
 </head>
 <body>
 
@@ -388,7 +388,7 @@
 					} else if (progressCnt == 50) {
 						$('.progrecess_title').text("너 그런거 보니...?");
 					} else if (progressCnt == 80) {
-						$('.progrecess_title').text("거의 다 됬어요!");
+						$('.progrecess_title').text("거의 다 됐어요!");
 					}
 					progressCnt += 10;
 					progressBarPlus(progressCnt);

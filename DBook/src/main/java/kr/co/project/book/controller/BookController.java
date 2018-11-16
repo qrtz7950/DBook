@@ -109,7 +109,6 @@ public class BookController {
 		if(request.getParameter("page") != null)
 			page = Integer.parseInt(request.getParameter("page"));
 		String keyword = request.getParameter("keyword");
-		System.out.println(keyword);
 		int start = 20 * page -19;
 		int end = 20 * page;
 		

@@ -53,38 +53,31 @@
 											</div>
 											<div id="side-category-menu_title_category">
 												<ul>
-													<li><a href="${pageContext.request.contextPath}/booklist/category/국내도서>소설.do">소설</a></li>
-													<li><a href="#">시/에세이</a></li>
-													<li><a href="#">인문</a></li>
-													<li><a href="#">가정/생활</a></li>
-													<li><a href="#">요리</a></li>
-													<li><a href="#">건강</a></li>
-													<li><a href="#">취미/스포츠</a></li>
-													<li><a href="#">경제/경영</a></li>
-													<li><a href="#">자기계발</a></li>
-													<li><a href="#">정치/사회</a></li>
-													<li><a href="#">정부간행물</a></li>
-													<li><a href="#">역사/문화</a></li>
-													<li><a href="#">종교</a></li>
-													<li><a href="#">예술/대중문화</a></li>
-													<li><a href="#">중/고학습</a></li>
-													<li><a href="#">기술/공학</a></li>
-													<li><a href="#">외국어</a></li>
-													<li><a href="#">과학</a></li>
-													<li><a href="#">취업/수험서</a></li>
-													<li><a href="#">여행</a></li>
-													<li><a href="#">컴퓨터/IT</a></li>
-													<li><a href="#">잡지</a></li>
-													<li><a href="#">사전</a></li>
-													<li><a href="#">청소년</a></li>
-													<li><a href="#">초등학습</a></li>
-													<li><a href="#">유아</a></li>
-													<li><a href="#">아동</a></li>
-													<li><a href="#">어린이영어</a></li>
-													<li><a href="#">만화</a></li>
-													<li><a href="#">아동/유아전집</a></li>
-													<li><a href="#">한국소개도서</a></li>
-													<li><a href="#">PB상품</a></li>
+												    <li><a href="../booklist/category.do?category=100&page=1"><span>소설</span></a></li>
+													<li><a href="../booklist/category.do?category=110&page=1"><span>시/에세이</span></a></li>
+													<li><a href="../booklist/category.do?category=120&page=1"><span>인문</span></a></li>
+													<li><a href="../booklist/category.do?category=130&page=1"><span>가정/생활/요리</span></a></li>
+													<li><a href="../booklist/category.do?category=140&page=1"><span>건강</span></a></li>
+													<li><a href="../booklist/category.do?category=150&page=1"><span>취미/레저</span></a></li>
+													<li><a href="../booklist/category.do?category=160&page=1"><span>경제/경영</span></a></li>
+													<li><a href="../booklist/category.do?category=170&page=1"><span>자기계발</span></a></li>
+													<li><a href="../booklist/category.do?category=180&page=1"><span>사회</span></a></li>
+													<li><a href="../booklist/category.do?category=190&page=1"><span>역사/문화</span></a></li>
+													<li><a href="../booklist/category.do?category=200&page=1"><span>종교</span></a></li>
+													<li><a href="../booklist/category.do?category=210&page=1"><span>예술/대중문화</span></a></li>
+													<li><a href="../booklist/category.do?category=220&page=1"><span>학습/참고서</span></a></li>
+													<li><a href="../booklist/category.do?category=230&page=1"><span>국어/외국어</span></a></li>
+													<li><a href="../booklist/category.do?category=240&page=1"><span>사전</span></a></li>
+													<li><a href="../booklist/category.do?category=250&page=1"><span>과학/공학</span></a></li>
+													<li><a href="../booklist/category.do?category=260&page=1"><span>취업/수험서</span></a></li>
+													<li><a href="../booklist/category.do?category=270&page=1"><span>여행/지도</span></a></li>
+													<li><a href="../booklist/category.do?category=280&page=1"><span>컴퓨터/IT</span></a></li>
+													<li><a href="../booklist/category.do?category=290&page=1"><span>잡지</span></a></li>
+													<li><a href="../booklist/category.do?category=300&page=1"><span>청소년</span></a></li>
+													<li><a href="../booklist/category.do?category=310&page=1"><span>유아</span></a></li>
+													<li><a href="../booklist/category.do?category=320&page=1"><span>어린이</span></a></li>
+													<li><a href="../booklist/category.do?category=330&page=1"><span>만화</span></a></li>
+													<li><a href="../booklist/category.do?category=340&page=1"><span>해외도서</span></a></li>
 												</ul>
 											</div>
 										</div>
@@ -104,6 +97,10 @@
 											</c:forEach>
 											
 			                             </div>
+			                             
+			                             <div id="page-number">
+	                                       	
+                                        </div>
 		                           
 		                           </div>
 							</section>
@@ -122,6 +119,77 @@
 			<jsp:include page="../include/JS.jsp"></jsp:include>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
 			<script src="${pageContext.request.contextPath}/resources/assets/js/slide2.js"></script>
+			<script type="text/javascript">
+				
+				$(document).ready(function() {
+					category_toggle();
+					printPageNumber();
+					return false;
+				});
+	
+				$(window).resize(function(){
+					category_toggle();
+					return false;
+				});
+				
+				function printPageNumber(){
+					var no = 1;
+					
+					<c:if test="${not empty param.page}">
+					no = ${param.page};
+					</c:if>
+					
+					console.log(no);
+					 
+					var deca = Math.floor(no/10);
+					var forwPages = (deca * 10) + 11 ;
+					var prePages = (deca * 10) - 9 ;
+					if (prePages <= 0){
+						prePages = 1;
+					}
+					
+					var temp = '<a href="javascript:goToPage(' + prePages + ')">&lt;&lt;&nbsp;&nbsp;</a>';
+					for(var i=0;i<10;i++){
+						var page = deca * 10 + i + 1;
+						temp += '<a class="page-number" href="javascript:goToPage(' + page + ')">' + page + '</a>'
+					}
+					temp += '<a href="javascript:goToPage(' + forwPages + ')">&nbsp;&nbsp;&gt;&gt;</a>'
+	
+					$('#page-number').append(temp);
+				}
+				
+				function goToPage(num){
+					
+					switch (num) {
+					case 0:
+						num = ${param.page} + 1; 
+						break;
+					case -1:
+						num = ${param.page} - 1;
+						if(num == 0){
+							num = 1;
+						}
+						break;
+					default:
+						break;
+					}
+					location.href='../bookSearch/searchResult.do?keyword=${param.keyword}&page=' + num;
+					
+				}
+				
+				function category_toggle(){
+					
+					if($(window).width()<480){
+						$("#side-category-menu").hide();
+						$("#category-content").css("width","100%");
+					}
+					
+					if($(window).width()>480){
+						$("#side-category-menu").show();
+						$("#category-content").css("width","83%");
+					}
+				}
+			</script>
 			
 		<!-- 달지마 -->
 			<script>
@@ -165,6 +233,7 @@
 					/* setTimeout("menuButton()", 100); */
 				}
 			</script>
+			
 		
 		
 		<!-- 검색결과  -->

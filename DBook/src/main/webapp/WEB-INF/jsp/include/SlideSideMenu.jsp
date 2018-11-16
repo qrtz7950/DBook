@@ -38,59 +38,50 @@
 						<li>
 							<span class="opener">국내도서</span>
 							<ul>
-								<li><a href="${pageContext.request.contextPath}/book/booklist/category/국내도서>소설.do">소설</a></li>
-								<li><a href="#">시/에세이</a></li>
-								<li><a href="#">인문</a></li>
-								<li><a href="#">가정/생활</a></li>
-								<li><a href="#">요리</a></li>
-								<li><a href="#">건강</a></li>
-								<li><a href="#">취미/스포츠</a></li>
-								<li><a href="#">경제/경영</a></li>
-								<li><a href="#">자기계발</a></li>
-								<li><a href="#">정치/사회</a></li>
-								<li><a href="#">정부간행물</a></li>
-								<li><a href="#">역사/문화</a></li>
-								<li><a href="#">종교</a></li>
-								<li><a href="#">예술/대중문화</a></li>
-								<li><a href="#">중/고학습</a></li>
-								<li><a href="#">기술/공학</a></li>
-								<li><a href="#">외국어</a></li>
-								<li><a href="#">과학</a></li>
-								<li><a href="#">취업/수험서</a></li>
-								<li><a href="#">여행</a></li>
-								<li><a href="#">컴퓨터/IT</a></li>
-								<li><a href="#">잡지</a></li>
-								<li><a href="#">사전</a></li>
-								<li><a href="#">청소년</a></li>
-								<li><a href="#">초등학습</a></li>
-								<li><a href="#">유아</a></li>
-								<li><a href="#">아동</a></li>
-								<li><a href="#">어린이영어</a></li>
-								<li><a href="#">만화</a></li>
-								<li><a href="#">아동/유아전집</a></li>
-								<li><a href="#">한국소개도서</a></li>
-								<li><a href="#">PB상품</a></li>
+												    <li><a href="../booklist/category.do?category=100&page=1"><span>소설</span></a></li>
+													<li><a href="../booklist/category.do?category=110&page=1"><span>시/에세이</span></a></li>
+													<li><a href="../booklist/category.do?category=120&page=1"><span>인문</span></a></li>
+													<li><a href="../booklist/category.do?category=130&page=1"><span>가정/생활/요리</span></a></li>
+													<li><a href="../booklist/category.do?category=140&page=1"><span>건강</span></a></li>
+													<li><a href="../booklist/category.do?category=150&page=1"><span>취미/레저</span></a></li>
+													<li><a href="../booklist/category.do?category=160&page=1"><span>경제/경영</span></a></li>
+													<li><a href="../booklist/category.do?category=170&page=1"><span>자기계발</span></a></li>
+													<li><a href="../booklist/category.do?category=180&page=1"><span>사회</span></a></li>
+													<li><a href="../booklist/category.do?category=190&page=1"><span>역사/문화</span></a></li>
+													<li><a href="../booklist/category.do?category=200&page=1"><span>종교</span></a></li>
+													<li><a href="../booklist/category.do?category=210&page=1"><span>예술/대중문화</span></a></li>
+													<li><a href="../booklist/category.do?category=220&pag출판도시 문화재단e=1"><span>학습/참고서</span></a></li>
+													<li><a href="../booklist/category.do?category=230&page=1"><span>국어/외국어</span></a></li>
+													<li><a href="../booklist/category.do?category=240&page=1"><span>사전</span></a></li>
+													<li><a href="../booklist/category.do?category=250&page=1"><span>과학/공학</span></a></li>
+													<li><a href="../booklist/category.do?category=260&page=1"><span>취업/수험서</span></a></li>
+													<li><a href="../booklist/category.do?category=270&page=1"><span>여행/지도</span></a></li>
+													<li><a href="../booklist/category.do?category=280&page=1"><span>컴퓨터/IT</span></a></li>
+													<li><a href="../booklist/category.do?category=290&page=1"><span>잡지</span></a></li>
+													<li><a href="../booklist/category.do?category=300&page=1"><span>청소년</span></a></li>
+													<li><a href="../booklist/category.do?category=310&page=1"><span>유아</span></a></li>
+													<li><a href="../booklist/category.do?category=320&page=1"><span>어린이</span></a></li>
+													<li><a href="../booklist/category.do?category=330&page=1"><span>만화</span></a></li>
 							</ul>
 						</li>
 						<li>
-							<span class="opener">국외도서</span>
+							<span class="opener">해외도서</span>
 							<ul>
-								<li><a href="#">영어 도서</a></li>
-								<li><a href="#">일어 도서</a></li>
-								<li><a href="#">프랑스 도서</a></li>
-								<li><a href="#">독어 도서</a></li>
-								<li><a href="#">스페인 도서</a></li>
+								<li><a href="../booklist/category.do?category=340&page=1"><span>해외도서</span></a></li>
 							</ul>
 						</li>
 						<li><a href="#">스포츠/경제</a></li>
 						<li><a href="#">사회</a></li>
 						<li>
-							<span class="opener">Another Submenu</span>
+							<span class="opener">온라인 서점 바로가기</span>
 							<ul>
-								<li><a href="#">Lorem Dolor</a></li>
-								<li><a href="#">Ipsum Adipiscing</a></li>
-								<li><a href="#">Tempus Magna</a></li>
-								<li><a href="#">Feugiat Veroeros</a></li>
+								<li><a href="http://www.yes24.com">Yes24</a></li>
+								<li><a href="http://www.kyobobook.co.kr">교보문고</a></li>
+								<li><a href="https://www.aladin.co.kr">알라딘</a></li>
+								<li><a href="http://book.interpark.com/">인터파크 도서</a></li>
+								<li><a href="http://www.bandinlunis.com">반디앤루니스</a></li>
+								<li><a href="http://www.ypbooks.co.kr">영풍문고</a></li>
+								<li><a href="http://books.11st.co.kr">11번가</a></li>
 							</ul>
 						</li>
 						<li><a href="#">Maximus Erat</a></li>

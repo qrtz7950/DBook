@@ -250,6 +250,7 @@
 			}
 			
 			function printPageNumber(){
+				
 				var no = 1;
 	            
 	            <c:if test="${not empty param.page}">
@@ -257,6 +258,7 @@
 	            </c:if>
 	            
 	            var deca = Math.floor(no/10);
+
 				var forwPages = (deca * 10) + 11 ;
 				var prePages = (deca * 10) - 9 ;
 				if (prePages <= 0){
