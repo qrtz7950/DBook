@@ -3,9 +3,7 @@
     
 <ul id="topMenu">
 			<li><a class="topMenu-left-1" href="${pageContext.request.contextPath}/main/home.do">DBook</a></li>
-			<li><a class="topMenu-left" href="#news">News</a></li>
-			<li><a class="topMenu-left" href="#contact">Contact</a></li>
-			<li><a class="topMenu-left" href="#about">About</a></li>
+			<li><a class="topMenu-left" href="${pageContext.request.contextPath}/ranking/rankingHome.do">Ranking</a></li>
 			<li class="topMenu-right" style="cursor: pointer;"><a id="showLeft">Menu</a></li>
 			<li class="topMenu-right" style="cursor: pointer;"><a id="showTop">Menu</a></li>
 			<li class="topMenu-right" style="cursor: pointer;"><a id="btn-login" href="${pageContext.request.contextPath}/user/login.do">Login</a></li>

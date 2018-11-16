@@ -39,6 +39,16 @@ public class ReviewController {
 		return;
 	}
 	
+	// 리뷰 삭제
+	@RequestMapping(value="/review_delete.do", method=RequestMethod.POST)
+	@ResponseBody
+	public void reviewDelete(@ModelAttribute ReviewVO review) {
+		System.out.println("reviewDelete()진입");
+		
+		reviewService.deleteReview(review);
+		return;
+	}
+	
 	// book_id로 해당 책 리뷰 조회
 	@ResponseBody
 	@RequestMapping(value="/bookDetail_review.do", method = RequestMethod.POST)

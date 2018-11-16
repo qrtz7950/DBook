@@ -1,5 +1,5 @@
 <header id="header">
-	<a href="${pageContext.request.contextPath}/main/home.do" class="logo""><img src="${pageContext.request.contextPath}/resources/images/Main_Logo.png" style="width: 100px; height: auto;" /></a>
+	<a href="${pageContext.request.contextPath}/main/home.do" class="logo"><img src="${pageContext.request.contextPath}/resources/images/Main_Logo.png" style="width: 100px; height: auto;" /></a>
 	<ul class="icons">
 		<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 		<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>

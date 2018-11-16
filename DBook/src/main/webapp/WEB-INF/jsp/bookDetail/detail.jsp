@@ -233,6 +233,18 @@
 	padding: 5px;
 }
 
+.review-delete {
+	display: inline-block;
+    float: right;
+    border: 1px solid #ededed;
+    padding: 0 10px;
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
 .reviewForm4 {
 	display: inline;
 }
@@ -263,6 +275,7 @@
 	border: 1px solid #ededed;
 	background-color: #fff;
 	cursor: pointer;
+	margin-top: 5px;
 }
 
 .good:hover, .bad:hover {
@@ -696,6 +709,9 @@
 											a +=		'<span class="star_smallR1"></span>';
 											a +=		'<span class="star_smallR2"></span>';
 											a +=	'</div>';
+											if(reviews.items[i].id == '${user.id}'){
+												a +='<div class="review-delete">x</div>';
+											}
 											a +=	'<div class="reviewForm3">';
 											if(reviews.items[i].content !=null){
 												a +=	reviews.items[i].content
@@ -830,6 +846,32 @@
 									}
 								});
 							}
+						});
+					
+					/* 리뷰 삭제 누를때 */
+						$(document).on("click",".review-delete",function (){
+							var temp_this = $(this).parents().eq("0");
+							
+							$.ajax({
+								url : '${pageContext.request.contextPath}/review/review_delete.do',
+								type : 'POST',
+								data : {
+											id : '${sessionScope.user.id}',
+											book_id : '${requestScope.book.book_id}'
+								},
+								error : function(request, status, error){
+							       	alert("code:"+request.status+"\n"+"error:"+error);
+							    },
+								success : function(){
+									alert("정상적으로 삭제 되었습니다");
+									
+									$("#rating").children('span').removeClass('on');
+									$("#reviewInput").children().eq("0").children().eq("0").children().eq("3").val('');
+									
+									reviews_print(1);
+									avg_rating();
+								}
+							});
 						});
 					
 				/* 창크기 반응 */
