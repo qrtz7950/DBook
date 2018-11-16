@@ -54,7 +54,9 @@ public class BookController {
 		List<BookVO> bookListByCategory = new ArrayList<>();
 		CategoryVO categoryVO = new CategoryVO(start,end,category);
 		
-		if(category == null) {
+		System.out.println(category);
+	
+		if(category == null || category.equals("")) {
 			category = "110";
 			categoryVO.setCategoryNumber("110");
 		}
