@@ -567,7 +567,7 @@
 							url : '${pageContext.request.contextPath}/review/avg_rating.do',
 							data : {book_id :'${requestScope.book.book_id}'},
 							error : function(request, status, error){
-						       	alert("code:"+request.status+"\n"+"error:"+error);
+						       	console.log("code:"+request.status+"\n"+"error:"+error);
 						    },
 							success : function(avg_rating){
 								$("#avg_rating").children("span").removeClass('on');

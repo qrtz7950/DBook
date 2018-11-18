@@ -378,7 +378,11 @@
 						url : '${pageContext.request.contextPath}/book/select_books.do',
 						type : 'POST',
 						dataType : 'json',
-						data : {'mode' : mode},
+						data : {
+							'mode' : mode,
+							'start': 1,
+							'end': 21
+						},
 						error : function(request, status, error){
 					       	console.log("code:"+request.status+"\n"+"error:"+error);
 					    },
@@ -386,11 +390,15 @@
 							$(id).children().eq('0').empty();
 							var a = '';
 							for(var i=0; i<books.items.length; i++){
+								var book_name = books.items[i].book_name;
+								if(book_name.length > 22) {
+									book_name = book_name.substring(0, 21) + "...";
+								}
 								a += '<div class="swiper-slide">';
 								a += 	'<div class="book-package">';
 								a +=		'<div class="hidden-book-id">' + books.items[i].book_id + '</div>';
 								a +=		'<img src="' + books.items[i].cover + '" onError="this.onerror=null;this.src=\'${pageContext.request.contextPath}/resources/images/image-null.png\';" />';
-								a += 		'<div>' + books.items[i].book_name + '</div>';
+								a += 		'<div>' + book_name + '</div>';
 								a +=	'</div>';
 								a += '</div>';
 							}
@@ -438,7 +446,7 @@
 	         	}
 			</script>
 			
-		<!-- 로그인 시 추가 슬라이드 -->
+		<!-- 로그인 시 추가 추천 -->
 			<script>
 				$(window).scroll(function() {
 				    if ($(window).scrollTop() == $(document).height() - $(window).height() && login_check && mode-recommendArray.length!=0) {

@@ -6,27 +6,25 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
-
-import org.json.simple.JSONObject;
 
 import kr.co.project.book.service.BookService;
 import kr.co.project.book.vo.BookVO;
 import kr.co.project.book.vo.CategorySerchVO;
 import kr.co.project.book.vo.CategoryVO;
-import kr.co.project.review.service.ReviewService;
 import kr.co.project.book.vo.SearchVO;
+import kr.co.project.book.vo.SelectBooksVO;
 import kr.co.project.login.vo.LoginVO;
+import kr.co.project.review.service.ReviewService;
 
 @Controller
 @RestController
@@ -162,12 +160,15 @@ public class BookController {
 	// 조건에 따른 책 리스트 조회
 	@ResponseBody
 	@RequestMapping(value="/select_books.do", method = RequestMethod.POST)
-	public JSONObject selectBooks(@RequestParam(value="mode") int mode, HttpSession session) {
-		System.out.println("top_rating_books() 진입");
+	public JSONObject selectBooks(@ModelAttribute SelectBooksVO vo, HttpSession session) {
+		System.out.println("selectBooks() 진입");
 		
 		LoginVO user = (LoginVO) session.getAttribute("user");
-		
-		JSONObject books = bookService.selectBooks(mode, user);
+		if(user != null) {
+			vo.setId(user.getId());
+			vo.setAge_range(user.getAge_range());
+		}
+		JSONObject books = bookService.selectBooks(vo);
 		
 		return books;
 	}

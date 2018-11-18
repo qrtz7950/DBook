@@ -10,7 +10,7 @@ import kr.co.project.book.vo.BookVO;
 import kr.co.project.book.vo.CategorySerchVO;
 import kr.co.project.book.vo.CategoryVO;
 import kr.co.project.book.vo.SearchVO;
-
+import kr.co.project.book.vo.SelectBooksVO;
 import kr.co.project.login.vo.LoginVO;
 
 @Repository
@@ -35,16 +35,16 @@ public class BookDAO {
 		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.booklistByKeyword", searchVO);
 	}
 
-	public List<BookVO> top_rating_bookList() {
-		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.topRatingBookList");
+	public List<BookVO> top_rating_bookList(SelectBooksVO vo) {
+		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.topRatingBookList", vo);
 	}
 
-	public List<BookVO> top_view_cnt_bookList() {
-		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.topViewCntBookList");
+	public List<BookVO> top_view_cnt_bookList(SelectBooksVO vo) {
+		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.topViewCntBookList", vo);
 	}
 
-	public List<BookVO> top_interest_bookList() {
-		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.topInterestBookList");
+	public List<BookVO> top_interest_bookList(SelectBooksVO vo) {
+		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.topInterestBookList", vo);
 	}
 
 
@@ -55,20 +55,24 @@ public class BookDAO {
 	public List<CategorySerchVO> categorylistByCategoryNoInit() {
 		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.categorylistBycategoryNoInit");
 	}
-	public List<BookVO> top_user_age_bookList(LoginVO user) {
-		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.topUserAgeBookList", user);
+	public List<BookVO> top_user_age_bookList(SelectBooksVO vo) {
+		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.topUserAgeBookList", vo);
 	}
 
-	public List<BookVO> similar_rating_bookList(LoginVO user) {
-		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.similarRatingBookList", user);
+	public List<BookVO> similar_rating_bookList(SelectBooksVO vo) {
+		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.similarRatingBookList", vo);
 	}
 	
-	public List<BookVO> same_interest_bookList(LoginVO user) {
-		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.sameInterestBookList", user);
+	public List<BookVO> same_interest_bookList(SelectBooksVO vo) {
+		return sqlSessionTemplate.selectList("kr.co.project.book.dao.BookDAO.sameInterestBookList", vo);
 	}
 
 	public CategorySerchVO categoryNamesByCategoryNo(String categoryNo) {
 		return sqlSessionTemplate.selectOne("kr.co.project.book.dao.BookDAO.categoryNamesBycategoryNo", categoryNo);
+	}
+
+	public String avg_ratingByBookId(String book_id) {
+		return sqlSessionTemplate.selectOne("kr.co.project.book.dao.BookDAO.avg_ratingByBookId", book_id);
 	}
 
 }
