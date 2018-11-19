@@ -1,7 +1,6 @@
 package kr.co.project.mypage.service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -9,10 +8,10 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.project.book.vo.BookVO;
 import kr.co.project.mypage.dao.MypageDAO;
 import kr.co.project.mypage.vo.MinBookVO;
 import kr.co.project.mypage.vo.MypageVO;
-import kr.co.project.review_reaction.vo.ReviewReactionVO;
 
 @Service
 public class MypageService {
@@ -116,5 +115,31 @@ public class MypageService {
 		cookies.put("items", jArray);
 		
 		return cookies;
+	}
+	//11.19
+	public List<MypageVO> getRatingBookArray(String[] RatingBookArray) {
+		List<MypageVO> list = new ArrayList<>();
+		JSONObject rating = new JSONObject();
+		JSONArray jArray = new JSONArray();
+		System.out.println(list);
+		for(int i=0; i<RatingBookArray.length; i++) {
+			MypageVO m = (MypageVO) dao.getRatingBooks(RatingBookArray[i]);
+			JSONObject j = new JSONObject();
+			
+			j.put("book_id", m.getBook_id());
+			j.put("book_name", m.getBook_name());
+			j.put("cover", m.getCover());
+			j.put("published_date", m.getPublished_date());
+			
+			jArray.add(j);
+		}
+		
+		
+		return list;
+		
+	}
+
+	public List<BookVO> selectUserBookRating() {
+		return dao.selectUserBookRating();
 	}
 }

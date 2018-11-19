@@ -8,12 +8,16 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import kr.co.project.login.vo.LoginVO;
 import kr.co.project.mypage.service.MypageService;
@@ -90,16 +94,25 @@ public class MypageController {
 		return cookie;
 	}
 	
+	/*@ResponseBody
+	@RequestMapping(value="/userRating.do", method = RequestMethod.POST)
+	public JSONObject userRating(@RequestParam(value="RatingBookArray") String[] RatingBookArray) {
+		System.out.println("userRating() 진입");
+		JSONObject userRating = (JSONObject) mpService.getRatingBookArray(RatingBookArray);
+		
+		return userRating;
+	}
+	*/
 	@RequestMapping(("/userRating.do"))
 	public ModelAndView userRating() {
 		System.out.println("userRating()진입");
 		
-		String[] asd = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
+		String[] asd = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"};
 		// 적재된 책을 꺼내와서 페이지로 쏴주는 코드 작성필요
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mypage/userRating");
-		mav.addObject("asd",asd);
+		mav.addObject("book", mpService.selectUserBookRating());
 		
 		return mav;
 	}

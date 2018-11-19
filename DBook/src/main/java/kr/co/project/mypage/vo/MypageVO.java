@@ -7,6 +7,7 @@ public class MypageVO {
 	private String cover;
 	private String author;
 	private String publisher;
+	private String published_date;
 	private int review_no;
 	private int rating;
 	private String content;
@@ -14,23 +15,34 @@ public class MypageVO {
 	private int bad;
 	private String review_reg_date;
 
+	
 	public MypageVO() {
 	}
 
-	public MypageVO(String book_id, String book_name, String cover, String author, String publisher, int review_no,
-			int rating, String content, int good, int bad, String review_reg_date) {
+	public MypageVO(String book_id, String book_name, String cover, String author, String publisher,
+			String published_date, int review_no, int rating, String content, int good, int bad,
+			String review_reg_date) {
 		super();
 		this.book_id = book_id;
 		this.book_name = book_name;
 		this.cover = cover;
 		this.author = author;
 		this.publisher = publisher;
+		this.published_date = published_date;
 		this.review_no = review_no;
 		this.rating = rating;
 		this.content = content;
 		this.good = good;
 		this.bad = bad;
 		this.review_reg_date = review_reg_date;
+	}
+
+	public String getPublished_date() {
+		return published_date;
+	}
+
+	public void setPublished_date(String published_date) {
+		this.published_date = published_date;
 	}
 
 	public String getBook_id() {
@@ -124,7 +136,9 @@ public class MypageVO {
 	@Override
 	public String toString() {
 		return "MypageVO [book_id=" + book_id + ", book_name=" + book_name + ", cover=" + cover + ", author=" + author
-				+ ", publisher=" + publisher + ", review_no=" + review_no + ", rating=" + rating + ", content="
-				+ content + ", good=" + good + ", bad=" + bad + ", review_reg_date=" + review_reg_date + "]";
+				+ ", publisher=" + publisher + ", published_date=" + published_date + ", review_no=" + review_no
+				+ ", rating=" + rating + ", content=" + content + ", good=" + good + ", bad=" + bad
+				+ ", review_reg_date=" + review_reg_date + "]";
 	}
+
 }

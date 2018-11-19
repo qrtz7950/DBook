@@ -218,7 +218,7 @@ $(document).ready(function() {
 				success : function(data){
 					if(data == ''){
 						alert('회원 가입 성공!\n 메인페이지로 이동합니다');
-						location.href = "../main/home.do";
+						location.href = "../mypage/userRating.do";
 					} else {
 						alert('이미 존재하는 아이디입니다');
 					}

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.project.book.vo.BookVO;
 import kr.co.project.mypage.vo.MinBookVO;
 import kr.co.project.mypage.vo.MypageVO;
 
@@ -25,6 +26,14 @@ public class MypageDAO {
 
 	public MypageVO getCookieBook(String book_id) {
 		return sqlSessionTemplate.selectOne("kr.co.project.mypage.dao.MypageDAO.caches", book_id);
+	}
+	//11.19
+	public List<MypageVO> getRatingBooks(String book_id) {
+		return sqlSessionTemplate.selectList("kr.co.project.mypage.dao.MypageDAO.rating", book_id);
+	}
+
+	public List<BookVO> selectUserBookRating() {
+		return sqlSessionTemplate.selectList("kr.co.project.mypage.dao.MypageDAO.selectUserBookRating");
 	}
 
 }

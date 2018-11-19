@@ -109,7 +109,7 @@
 				
 		.book img{
 			width: 100%;
-			height: 100%;
+			height: 300px;
 		}
 		
 		.book_overlay{
@@ -309,15 +309,15 @@
 				<div class="bookList_base">
 					<div class="bookList">
 					
-					<c:forEach var="bookOrder" items="${asd}">
+					<c:forEach var="bookOrder" items="${book}">
 
-						<div class="book" id=book${bookOrder}>
+						<div class="book" id="${bookOrder.book_id}">
 							<div class="book_cover">
-								<img src="/DBook/resources/images/book01.jpg" onError="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/image-null.png';">
+								<img src="${bookOrder.cover}" onError="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/image-null.png';">
 							</div>
 							<div class="book_overlay hidden">
-								<div class="book_overlay_title">죽고 싶지만 떡볶이는 먹고싶어</div>
-								<div class="book_overlay_date">2018</div>
+								<div class="book_overlay_title">${bookOrder.book_name }</div>
+								<div class="book_overlay_date">${bookOrder.published_date }</div>
 								<div class="hidden isRatingCheck"></div>
 								<input type="hidden" name="rating" value="0">
 								<div class="book_overlay_rating">
