@@ -16,6 +16,7 @@
 		<typeAlias type="kr.co.project.mypage.vo.MypageVO" alias="mypageVO"/>
 		<typeAlias type="kr.co.project.review_reaction.vo.ReviewReactionVO" alias="reviewReactionVO"/>
 		<typeAlias type="kr.co.project.usercorrelation.vo.UserCorrelationVO" alias="userCorrelationVO"/>
+		<typeAlias type="kr.co.project.ranking.vo.InfoReviewVO" alias="infoReviewVO"/>
 	</typeAliases>
 	
 </configuration>
