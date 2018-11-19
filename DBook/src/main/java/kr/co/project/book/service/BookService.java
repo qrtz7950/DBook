@@ -15,6 +15,7 @@ import kr.co.project.book.vo.BookVO;
 import kr.co.project.book.vo.CategorySerchVO;
 import kr.co.project.book.vo.CategoryVO;
 import kr.co.project.book.vo.SearchVO;
+import kr.co.project.book.vo.SelectBooksVO;
 import kr.co.project.login.vo.LoginVO;
 
 @Service
@@ -44,27 +45,27 @@ public class BookService {
 	}
 	
 	// 조건에 맞는 책 리스트 조회
-	public JSONObject selectBooks(int mode, LoginVO user) {
+	public JSONObject selectBooks(SelectBooksVO vo) {
 		List<BookVO> book_list = new ArrayList<>();
 		
-		switch(mode) {
+		switch(vo.getMode()) {
 			case 0 :	// 평점 높은 도서
-				book_list = dao.top_rating_bookList();
+				book_list = dao.top_rating_bookList(vo);
 				break;
 			case 1 :	// 조회수 높은 도서
-				book_list = dao.top_view_cnt_bookList();
+				book_list = dao.top_view_cnt_bookList(vo);
 				break;
 			case 2 :	// 관심설정 많은 도서
-				book_list = dao.top_interest_bookList();
+				book_list = dao.top_interest_bookList(vo);
 				break;
 			case 3 :	// 해당 연령 인기도서
-				book_list = dao.top_user_age_bookList(user);
+				book_list = dao.top_user_age_bookList(vo);
 				break;
 			case 4 :	// 성향이 비슷한 회원이 좋아한 도서
-				book_list = dao.similar_rating_bookList(user);
+				book_list = dao.similar_rating_bookList(vo);
 				break;
 			case 5 :	// 관심도서가 같은 사람의 다른 관심도서
-				book_list = dao.same_interest_bookList(user);
+				book_list = dao.same_interest_bookList(vo);
 				break;
 		}
 		
@@ -74,15 +75,20 @@ public class BookService {
 			JSONArray jArray = new JSONArray();
 			for(int i=0; i<book_list.size(); i++) {
 				JSONObject j = new JSONObject();
-				
-				String book_name = book_list.get(i).getBook_name();
-				if(book_name.length() > 22) {
-					book_name = book_name.substring(0, 21) + "...";
+				String book_id = book_list.get(i).getBook_id();
+				float avg_rating = 0;
+				String avg_rating_raw = dao.avg_ratingByBookId(book_id);
+				if(avg_rating_raw != null) {
+					avg_rating = Float.parseFloat(avg_rating_raw);
 				}
 				
-				j.put("book_id", book_list.get(i).getBook_id());
-				j.put("book_name", book_name);
+				j.put("book_id", book_id);
+				j.put("book_name", book_list.get(i).getBook_name());
+				j.put("author", book_list.get(i).getAuthor());
+				j.put("publisher", book_list.get(i).getPublisher());
+				j.put("published_date", book_list.get(i).getPublished_date());
 				j.put("cover", book_list.get(i).getCover());
+				j.put("avg_rating", String.format("%.2f", avg_rating));
 				jArray.add(j);
 			}
 			

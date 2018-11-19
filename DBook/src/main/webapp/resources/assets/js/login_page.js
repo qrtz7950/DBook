@@ -191,8 +191,12 @@ $(document).ready(function() {
 			
 			var age = $('#sign_age_range').val();
 			
-			age = age - (age % 10);
-			age = age + "~" + (age + 9);
+			if(age < 70){
+				age = age - (age % 10);
+				age = age + "~" + (age + 9);
+			}else{
+				age = "70~";
+			}
 			
 			var id = $('#sign_id').val();
 			var password = $('#sign_password').val();
