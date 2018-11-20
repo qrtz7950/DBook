@@ -101,6 +101,8 @@
 		background-color: #f3a0a0;
 	}
 	
+	#recommend-book{padding: 30px 0 !important;}
+	.major > h2 {margin: 30px 10px 10px !important;}
 	</style>
 </head>
 <body>

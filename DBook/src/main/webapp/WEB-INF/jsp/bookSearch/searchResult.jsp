@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/layerPopUp.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/category.css" />
 	
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/dbook_icon.png" />
 	<title>${param.keyword}:: 검색결과 - DBooK</title>
 
 </head>

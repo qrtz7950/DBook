@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/TopMenu.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/detail.css" />
 
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/dbook_icon.png" />
 <title>DBook</title>
 <style type="text/css">
 .detail-section {
@@ -385,7 +386,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="book_info_table" style="float: right;">
+						<div class="book_info_table" style="float: right; margin-top: 30px;">
 							<div class="book_info_row">
 								<div class="book_info_cell book_info_col1"
 									style="vertical-align: middle;">평점</div>
@@ -509,18 +510,11 @@
 	</script>
 	<script>
 					$(document).ready(function() {
-						detailForm();
 						avg_rating();
 						interest_print();						
 						reviews_print(1);
 						getCategoryNames();
 					});
-		
-					$(window).resize(function(){
-						detailForm();
-					});
-					
-
 					
 					function getCategoryNames() {
 							
@@ -913,26 +907,6 @@
 								}
 							});
 						});
-					
-				/* 창크기 반응 */
-					function detailForm(){
-						
-						if($(window).width()>900){
-							$("#book_info").css("width","700px");
-							$("#cover_image").css("width","25%");
-							$(".book_info_table").css("width","75%");
-						}
-						else if($(window).width()>660){
-							$("#book_info").css("width","100%");
-							$("#cover_image").css("width","25%");
-							$(".book_info_table").css("width","75%");
-					    }
-						else{
-							$("#book_info").css("width","100%");
-							$("#cover_image").css("width","100%");
-							$(".book_info_table").css("width","100%");							
-					    }
-					}
 			</script>
 
 

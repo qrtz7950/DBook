@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>없다 이말이야</h1>
+	<h1>해당하는 책이 없습니다</h1>
 </body>
 </html>

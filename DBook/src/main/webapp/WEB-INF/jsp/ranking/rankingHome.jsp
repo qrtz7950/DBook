@@ -11,6 +11,8 @@
 	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/TopMenu.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/category.css" />
+	
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/dbook_icon.png" />
 	<title>DBook</title>
 	
 	<style>

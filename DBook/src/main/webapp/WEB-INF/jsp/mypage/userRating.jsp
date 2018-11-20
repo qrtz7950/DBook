@@ -255,7 +255,9 @@
 		.starR2.on {background-position:-11.25px 0;}
 	
 	</style>
-<title>도서 평가 :: DBook</title>
+	
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/dbook_icon.png" />
+	<title>도서 평가 :: DBook</title>
 </head>
 <body>
 

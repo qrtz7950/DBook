@@ -20,7 +20,7 @@
 			<!-- Menu -->
 				<nav id="menu">
 					<header class="major">
-						<h2>M E N U</h2>
+						<h2 class="slide-menu-h2">M E N U</h2>
 					</header>
 					<ul>
 						<li>
