@@ -3,7 +3,6 @@ package kr.co.project.book.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,7 +15,6 @@ import kr.co.project.book.vo.CategorySerchVO;
 import kr.co.project.book.vo.CategoryVO;
 import kr.co.project.book.vo.SearchVO;
 import kr.co.project.book.vo.SelectBooksVO;
-import kr.co.project.login.vo.LoginVO;
 
 @Service
 public class BookService {

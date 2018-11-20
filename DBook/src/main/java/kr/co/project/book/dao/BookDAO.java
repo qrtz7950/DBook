@@ -11,7 +11,6 @@ import kr.co.project.book.vo.CategorySerchVO;
 import kr.co.project.book.vo.CategoryVO;
 import kr.co.project.book.vo.SearchVO;
 import kr.co.project.book.vo.SelectBooksVO;
-import kr.co.project.login.vo.LoginVO;
 
 @Repository
 public class BookDAO {

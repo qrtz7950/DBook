@@ -313,7 +313,7 @@
 
 						<div class="book" id="${bookOrder.book_id}">
 							<div class="book_cover">
-								<img src="${bookOrder.cover}" onError="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/image-null.png';">
+								<img src="${bookOrder.cover}" onError="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/image-null.png';" />
 							</div>
 							<div class="book_overlay hidden">
 								<div class="book_overlay_title">${bookOrder.book_name }</div>

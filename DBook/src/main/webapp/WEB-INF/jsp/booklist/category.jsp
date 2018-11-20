@@ -342,10 +342,10 @@
 														<a href="../booklist/category.do?category=300&page=1"><span>청소년</span></a>
 														<div class="absol hidden sec-dep-cat-div">
 												    		<ul>
-												                <li><a href="../booklist/category.do?category=300020&page=1">공부방법/진학가이드</a></
+												                <li><a href="../booklist/category.do?category=300020&page=1">공부방법/진학가이드</a>
 												                <li><a href="../booklist/category.do?category=300010&page=1">논술대비</a></li>
                                                                 <li><a href="../booklist/category.do?category=300030&page=1">진로/진학가이드</a></li>
-                                                                <li><a href="../booklist/category.do?category=300040&page=1">청소년 경제/자기계발</a><
+                                                                <li><a href="../booklist/category.do?category=300040&page=1">청소년 경제/자기계발</a>
                                                                 <li><a href="../booklist/category.do?category=300080&page=1">청소년 과학</a></li>
                                                                 <li><a href="../booklist/category.do?category=300050&page=1">청소년 문학</a></li>
                                                                 <li><a href="../booklist/category.do?category=300070&page=1">청소년 예술</a></li>
