@@ -6,8 +6,8 @@
 	
 	<!-- 리뷰 등록 -->	
 	<insert id="writeReview" parameterType="reviewVO">
-		insert into review(review_no, id, book_id, rating, content, good, bad)
-			   values(review_no.nextval, #{id}, #{book_id}, #{rating}, #{content}, #{good}, #{bad})
+		insert into review(review_no, id, book_id, rating, content)
+			   values(review_no.nextval, #{id}, #{book_id}, #{rating}, #{content})
 	</insert>
 	
 	<!-- 리뷰 삭제 -->	

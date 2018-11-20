@@ -1,23 +1,17 @@
 package kr.co.project.mypage.controller;
 
-import java.util.Arrays;
-
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import kr.co.project.login.vo.LoginVO;
 import kr.co.project.mypage.service.MypageService;
@@ -48,14 +42,19 @@ public class MypageController {
 	
 	@ResponseBody
 	@RequestMapping(("/bookmark.json"))
-	public JSONObject bookmark(@RequestParam(value="id") String id, @RequestParam(value="nTh") int nTh) {
+	public JSONObject bookmark(HttpSession session, @RequestParam(value="nTh") int nTh) {
 		System.out.println("bookmark()진입");
 		int start = 4 * nTh + 1;
 		int end = 4 * nTh + 4;
-		System.out.println("해당 시행은 " + (nTh+1) + "번째 시행입니다");
-		System.out.println(id + "의 즐겨찾기를 가져옴" + start + "번째부터" + end + "번째까지");
+		LoginVO user = (LoginVO) session.getAttribute("user");
 		
-		JSONObject books = mpService.bookmarkBooks(id,start,end);
+		System.out.println("해당 시행은 " + (nTh+1) + "번째 시행입니다");
+
+		JSONObject books = null;
+		
+		if(user != null) {
+			books = mpService.bookmarkBooks(user.getId(),start,end);
+		}
 		
 		return books;
 	}
@@ -67,8 +66,12 @@ public class MypageController {
 		System.out.println("mypageReview()진입");
 		
 		LoginVO user = (LoginVO) session.getAttribute("user");
-
-		JSONObject reviews = mpService.review(user.getId());
+		
+		JSONObject reviews = null;
+		
+		if(user != null) {
+			reviews = mpService.review(user.getId());
+		}
 		
 		return reviews;
 	}
@@ -106,9 +109,6 @@ public class MypageController {
 	@RequestMapping(("/userRating.do"))
 	public ModelAndView userRating() {
 		System.out.println("userRating()진입");
-		
-		String[] asd = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49"};
-		// 적재된 책을 꺼내와서 페이지로 쏴주는 코드 작성필요
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mypage/userRating");

@@ -70,7 +70,9 @@ public class ReviewService {
 	
 	public void addUserRating(List<ReviewVO> list) {
 		for(ReviewVO review : list) {
-			dao.addUserRating(review);
+			review.setContent("");
+			dao.deleteReview(review);
+			dao.writeReview(review);
 		}
 	}
 

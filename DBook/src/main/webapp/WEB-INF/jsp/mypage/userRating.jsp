@@ -386,7 +386,7 @@
 					if (progressCnt == 20) {
 						$('.progrecess_title').text("성향을 파악하는 중...");
 					} else if (progressCnt == 50) {
-						$('.progrecess_title').text("너 그런거 보니...?");
+						$('.progrecess_title').text("");
 					} else if (progressCnt == 80) {
 						$('.progrecess_title').text("거의 다 됐어요!");
 					}
@@ -397,6 +397,10 @@
 					progressCnt += 10;
 					progressBarPlus(progressCnt);
 					$('#progrecess_num').text(progressCnt/10);
+					sendUserRating();
+					bookId = [];
+					bookRating = [];
+				} else {
 					sendUserRating();
 					bookId = [];
 					bookRating = [];

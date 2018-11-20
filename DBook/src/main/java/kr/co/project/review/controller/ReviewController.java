@@ -69,13 +69,8 @@ public class ReviewController {
 		
 		LoginVO user = (LoginVO) session.getAttribute("user");
 		
-		System.out.println(bookId.length);
-		System.out.println(bookRating.length);
-		
 		for(int i = 0; i<10; i++) {
 			ReviewVO mp = new ReviewVO();
-			System.out.println("bookId[" + i + "] : " + bookId[i]);
-			System.out.println("bookRating[" + i + "] : " + bookRating[i]);
 			mp.setBook_id(bookId[i]);
 			mp.setRating(bookRating[i]);
 			mp.setId(user.getId());

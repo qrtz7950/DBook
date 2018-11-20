@@ -22,12 +22,15 @@ public class MypageService {
 	public JSONObject bookmarkBooks(String id, int start, int end) {
 		
 		List<MinBookVO> book_list = dao.bookmarkBooks(id);
+		
+		System.out.println("book_list.size() :  " + book_list.size());
+		
 		JSONObject books = new JSONObject();
 		
 		try {
 			JSONArray jArray = new JSONArray();
 			
-			if(book_list.size() > start) {
+			if(book_list.size() >= start) {
 				if(book_list.size() < end)
 					end = book_list.size();
 				
@@ -91,9 +94,6 @@ public class MypageService {
 		JSONObject cookies = new JSONObject();
 		JSONArray jArray = new JSONArray();
 		
-		System.out.println("이거 널이냐 공백이냐" + cookieBookArray[0]);
-		
-		System.out.println("for문 스타트");
 		for(int i=0;i<cookieBookArray.length;i++) {
 			if(cookieBookArray[i] != "" && cookieBookArray[i] != " ") {
 				System.out.println("가공 전 : " + cookieBookArray[i]);

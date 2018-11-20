@@ -41,7 +41,7 @@
 							<!-- Section -->
 								<section style="padding-top: 15px; height: auto;">
 								
-									<div id="category_select">
+									<div id="category_select" style="height: 55px;">
 										<h2><strong>'${param.keyword}'</strong> 의 검색 결과</h2>
 									</div>
 									
@@ -186,7 +186,7 @@
 					
 					if($(window).width()>480){
 						$("#side-category-menu").show();
-						$("#category-content").css("width","83%");
+						$("#category-content").css("width","87%");
 					}
 				}
 			</script>

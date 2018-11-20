@@ -362,3 +362,7 @@
 #review-page {
 	text-align: center;
 }
+
+.recent-book-list{
+	display: inline-flex;
+}

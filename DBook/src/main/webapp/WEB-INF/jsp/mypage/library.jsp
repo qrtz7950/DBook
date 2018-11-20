@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/TopMenu.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/category.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/library.css" />
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 	<title>DBook</title>
 </head>
 <body>
@@ -104,10 +105,8 @@
 			$(document).ready(function() {
 				parseCookieToArray();
 				if(cookieBookArray.length > 0){
-					console.log('cookieBookArray > 0 조건만족');
 					getCookieBookInfo();
 				} else {
-					console.log('cookieBookArray > 0 조건불만족');
 					addEmptyBooks(4,$('.recent-book-list'));
 				}
 				reviews_print(1);
@@ -243,7 +242,7 @@
 					url : '../mypage/bookmark.json',
 					type : 'POST',
 					dataType : 'json',
-					data : {id :'${sessionScope.user.id}', nTh:bookmarkNTh},
+					data : {nTh:bookmarkNTh},
 					error : function(request, status, error){
 				       	alert("code:"+request.status+"\n"+"error:"+error);
 				    },
@@ -255,17 +254,34 @@
 			}
 			
 			function addBookmark(data) {
+				
 				var s = "";
-					s += '<div class = "bookmark-div-articles">';
-				for(var i =0; i<data.items.length; i++){
-					s += '<article>';
-					s += '	<a href="${pageContext.request.contextPath}/book/bookDetail/' + data.items[i].book_id + '.do" class="image"><img src="' + data.items[i].cover + '" onError="this.onerror=null;this.src=\'${pageContext.request.contextPath}/resources/images/image-null.png\';"/></a>';
-					s += '	<h3><a href="${pageContext.request.contextPath}/book/bookDetail/' + data.items[i].book_id + '.do">' + data.items[i].book_name + '</a></h3>';
-					s += '	<p><a href="${pageContext.request.contextPath}/book/bookSearch/searchResult.do?keyword=' + data.items[i].author + '">' + data.items[i].author + '</a><br><a href="${pageContext.request.contextPath}/book/bookSearch/searchResult.do?keyword=' + data.items[i].publisher + '">' + data.items[i].publisher + '</a></p>';
-					s += '</article>';
+				var a = '#bookmark-order' + bookmarkNTh
+				
+				if(data.items === undefined) {
+					s += '<div id="bookmark-order' + bookmarkNTh + '" class = "bookmark-div-articles">';
+					s += '</div>';
+					$('.bookmark-view-more').empty();
+					$('.bookmark-book-list').append(s);
+					addEmptyBooks(4, $('.bookmark-div-articles'));
+				} else {
+					s += '<div id="bookmark-order' + bookmarkNTh + '" class = "hidden bookmark-div-articles">';
+					for(var i=0; i<data.items.length; i++){
+						s += '<article>';
+						s += '	<a href="${pageContext.request.contextPath}/book/bookDetail/' + data.items[i].book_id + '.do" class="image"><img src="' + data.items[i].cover + '" onError="this.onerror=null;this.src=\'${pageContext.request.contextPath}/resources/images/image-null.png\';"/></a>';
+						s += '	<h3><a href="${pageContext.request.contextPath}/book/bookDetail/' + data.items[i].book_id + '.do">' + data.items[i].book_name + '</a></h3>';
+						s += '	<p><a href="${pageContext.request.contextPath}/book/bookSearch/searchResult.do?keyword=' + data.items[i].author + '">' + data.items[i].author + '</a><br><a href="${pageContext.request.contextPath}/book/bookSearch/searchResult.do?keyword=' + data.items[i].publisher + '">' + data.items[i].publisher + '</a></p>';
+						s += '</article>';
+					}
+					s += '</div>';
+					
+					$('.bookmark-book-list').append(s);
+					if((4 - data.items.length) > 0) {
+						$('.bookmark-view-more').empty();
+						addEmptyBooks((4 - data.items.length), $(a));
+					}
+					$('.bookmark-book-list').slideDown();
 				}
-				s += '</div>';
-				$('.bookmark-book-list').append(s);
 			}
 
 			/* 리뷰 db에서 가져와서 출력 */
@@ -279,8 +295,6 @@
 				       	alert("code:"+request.status+"\n"+"error:"+error);
 				    },
 					success : function(reviews){
-						
-						console.log(reviews);
 						
 						$("#reviews").children().remove()
 						
@@ -300,7 +314,7 @@
 								a += '<div class="reviewForm-base">';
 								a += 	'<div class="review-cover">';
 								a += 		'<article>';
-								a += 		'<a href="#" class="image"><img style="height:auto;" src="' + reviews.items[i].cover + '"></a>';
+								a += 		'<a href="../book/bookDetail/' + reviews.items[i].book_id + '.do" class="image"><img style="height:auto;" src="' + reviews.items[i].cover + '"></a>';
 								a += 		'</article>';
 								a += 	'</div>';
 								a += 		'<div id="review' + (i+1) + '" class="review">';
@@ -324,7 +338,7 @@
 									a +=	reviews.items[i].content
 								}
 								a +=			'</div>';
-								a +=			'<div class="reviewForm4">' + reviews.items[i].review_reg_date + '</div>';
+								a +=			'<div class="reviewForm4">' + reviews.items[i].review_reg_date.substring(0,10) + '</div>';
 								a +=			'<div class="reviewForm5">';
 								a +=				'<span class="good"><img src="${pageContext.request.contextPath}/resources/images/good.png"/><a>' + reviews.items[i].good + '</a></span>'
 								a +=				'<span class="bad"><img src="${pageContext.request.contextPath}/resources/images/bad.png"/><a>' + reviews.items[i].bad + '</a></span>'
@@ -361,6 +375,11 @@
 							
 							reaction_border();
 						}, 500);
+						
+						if($('#review-page').children().length == 2){
+							$("#review-page").empty();
+							$("#review-page").append('<h1 style="margin: 150px 0 150px 0;">아직 작성한 리뷰가 없어요</h1>')
+						}
 					}
 				});
 			}
@@ -421,7 +440,6 @@
 						cookieBookArray.push(a);						
 					}
 				}
-				console.log(cookieBookArray);
 			}
 			
 			function getCookieBookInfo() {
@@ -445,7 +463,7 @@
 				
 				var temp = '';
 				
-				temp += '<div id="recent' + (i+1) + 'style="display:inline-flex;" class="articles recent-book-list">';
+				temp += '<div id="recent' + (i+1) + 'style="display:inline-flex;" class="recent-book-list">';
 				temp += 	'<div class="recent-div-articles">';
 				
 				for(var i=0; i<data.items.length; i++){
@@ -472,28 +490,14 @@
 				
 				for(var i=0; i<num; i++){
 					temp += 		'<article>';
-					temp += 			'<a href="" class="image"><img src="/DBook/resources/images/image-null.png"></a>';
-					temp +=	 			'<h3><a href="">책 정보가 없습니다.</a></h3>';
-					temp +=				'<p><a href=""></a><br><a href=""></a></p>';
+					temp += 			'<a class="image"><img src="/DBook/resources/images/image-null.png"></a>';
+					temp +=	 			'<h3><a>책 정보가 없습니다.</a></h3>';
+					temp +=				'<p><a></a><br><a href=""></a></p>';
 					temp += 		'</article>';
 				}
 				
 				obj.append(temp);
 			}
-			</script>
-			<script>
-			/*
-			$(document).ready(function(){
-				
-				$("#category1").each(function(){
-					
-					if($(this).val()=="${requestScope.categories[0]}"){
-						$(this).attr()
-					}
-					
-				});	
-			});
-			*/
 			</script>
 </body>
 </html>

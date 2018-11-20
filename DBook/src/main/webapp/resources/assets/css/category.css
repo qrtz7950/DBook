@@ -2135,7 +2135,7 @@
 
 	h1, h2, h3, h4, h5, h6 {
 		color: #3d4449;
-		font-family: "Roboto Slab", serif;
+		font-family: 'Nanum Gothic', serif;
 		font-weight: 700;
 		line-height: 1.5;
 		margin: 0 0 1em 0;
@@ -2273,7 +2273,7 @@
 	}
 
 	header p {
-		font-family: "Roboto Slab", serif;
+		font-family: 'Nanum Gothic', serif;
 		font-size: 1em;
 		font-weight: 400;
 		letter-spacing: 0.075em;
@@ -2957,7 +2957,7 @@
 		color: #f56a6a !important;
 		cursor: pointer;
 		display: inline-block;
-		font-family: "Roboto Slab", serif;
+		font-family: 'Nanum Gothic', serif;
 		font-size: 0.8em;
 		font-weight: 700;
 		height: 3.5em;
@@ -3797,7 +3797,7 @@
 		#header .logo {
 			border-bottom: 0;
 			color: inherit;
-			font-family: "Roboto Slab", serif;
+			font-family: 'Nanum Gothic', serif;
 			font-size: 1.125em;
 		}
 
@@ -3956,7 +3956,7 @@
 		-ms-user-select: none;
 		user-select: none;
 		color: #3d4449;
-		font-family: "Roboto Slab", serif;
+		font-family: 'Nanum Gothic', serif;
 		font-family: 400;
 		letter-spacing: 0.075em;
 		list-style: none;
@@ -4053,7 +4053,7 @@
 		
 	
 	#side-category-menu{
-		width : 15%;
+		width : 11%;
 		display: block;
 		margin-left:1.5%;
 		float: left;
@@ -4084,7 +4084,7 @@
 	
 	#category_select{
 		display: -webkit-box;
-		height: 50px;
+		height: 40px;
 		vertical-align:middle;
 		border-bottom: 1px solid #7f888f;
 		margin-bottom: 20px;
@@ -4092,11 +4092,10 @@
 	
 	#category_select select{
 		height: 1.75em;
-		margin-left: 1%;
+		margin: 0 1% 0 1%;
 	}
 	#category_select div{
 		height: 1.75em;
-		margin-left: 1%;
 	}
 	
 	#category-content .posts {
@@ -4146,3 +4145,34 @@
 		text-align: center;
 		width: 11%;
 	}
+	
+	.goToCategory{
+	    width: 50px;
+	    height: 25.328px;
+	    text-align: center;
+	    line-height: 0;
+		margin: 0 0 0 1%;
+		padding: 0 0 0 0;
+	}
+	
+	.absol {
+		position: absolute;
+	    background-color: white;
+	    border: solid 1px #f56a6a;
+	    width: 150px;
+	    top: 300px;
+	    left: calc(5em + 17%);
+	    z-index: 900;
+	}
+	
+	.absol ul {
+		list-style: none;
+		padding-left:0px;
+		margin:0 0 0 0;
+	}
+	
+	.hidden {
+		display: none;
+	}
+	
+	
