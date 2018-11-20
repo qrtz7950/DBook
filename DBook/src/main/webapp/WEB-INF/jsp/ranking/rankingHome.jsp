@@ -84,11 +84,17 @@
 		    border-bottom: dotted 1px;
 		    color: #f56a6a;
 		    text-decoration: none;
+		    height: 24px;
 		}
 		.info-detail:hover {
 			cursor: pointer;
 		    font-weight: bold;
 		    border-bottom: dotted 3px;
+		}
+		.info-detail-no {
+			text-align: center;
+	    	height: 50px;
+	    	font-size: 18px;
 		}
 		
 		.info-author, .info-publisher{width: fit-content;}
@@ -251,24 +257,32 @@
 				var temp = $(this).parent();
 				var book_id = temp.children().eq('0').text();
 				
-				$(target_dashboard_id).empty();
-				
-				$.ajax({
-					url : '${pageContext.request.contextPath}/ranking/infoReview.do',
-					type : 'POST',
-					dataType : 'json',
-					data : {
-						'book_id': book_id
-					},
-					error : function(request, status, error){
-				       	console.log("code:"+request.status+"\n"+"error:"+error);
-				    },
-					success : function(data){
-						//data = {"freqData":[{"State":"10대","freq":{"woman":0,"man":0}},{"State":"20대","freq":{"man":1,"woman":2}},{"State":"30대","freq":{"woman":0,"man":1}},{"State":"40대","freq":{"woman":0,"man":0}},{"State":"50대","freq":{"woman":0,"man":0}},{"State":"60대","freq":{"woman":0,"man":0}},{"State":"70대 이상","freq":{"woman":0,"man":0}}],"name":"평점 상세정보"};
-						dashboard(target_dashboard_id, data.freqData);
-						temp.next().slideToggle();
-					}
-				});
+				if($(target_dashboard_id).children().length == 0){
+					$.ajax({
+						url : '${pageContext.request.contextPath}/ranking/infoReview.do',
+						type : 'POST',
+						dataType : 'json',
+						data : {
+							'book_id': book_id
+						},
+						error : function(request, status, error){
+					       	console.log("code:"+request.status+"\n"+"error:"+error);
+					    },
+						success : function(data){
+							if(data.freqData != 0){
+								dashboard(target_dashboard_id, data.freqData);
+							}else{
+								var a = '';
+								a += '<div class="info-detail-no">아직 평가한 사람이 없어요</div>';
+								$(target_dashboard_id).append(a);
+							}
+							
+							temp.next().slideToggle();
+						}
+					});
+				}else{
+					temp.next().slideToggle();
+				}
 			});
 			
 			/* 링크 */
