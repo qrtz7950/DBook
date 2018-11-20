@@ -13,6 +13,8 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/category.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/library.css" />
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+	
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/dbook_icon.png" />
 	<title>DBook</title>
 </head>
 <body>

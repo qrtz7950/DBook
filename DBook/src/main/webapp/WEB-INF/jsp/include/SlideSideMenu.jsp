@@ -20,14 +20,14 @@
 			<!-- Menu -->
 				<nav id="menu">
 					<header class="major">
-						<h2>M E N U</h2>
+						<h2 class="slide-menu-h2">M E N U</h2>
                     </header>
                     <ul>
                         <li><a href="../book/booklist/category.do"></a>책 카테고리</li>
                         <li><a href="../ranking/rankingHome.do">랭킹</a></li>
                     </ul>
 					<header class="major">
-						<h2>C A T E G O R Y</h2>
+						<h2 class="slide-menu-h2">C A T E G O R Y</h2>
 					</header>
 					<ul>
 						<li>
@@ -342,7 +342,7 @@
                      </ul>
 				<section>
 	               <header class="major">
-						<h2>바로가기</h2>
+						<h2 class="slide-menu-h2">바로가기</h2>
 			   	   </header>
 					<ul>
 						<li><a href="http://www.yes24.com">Yes24</a></li>
@@ -359,7 +359,7 @@
 			<!-- Section -->
 				<section>
 					<header class="major">
-						<h2>Get in touch</h2>
+						<h2 class="slide-menu-h2">Get in touch</h2>
 					</header>
 					<ul class="contact">
 						<li class="fa-envelope-o">rlawpgml7950@gmail.com</li>
