@@ -378,8 +378,11 @@
 							<div class="book_info_row">
 								<div class="book_info_cell book_info_col1">ISBN</div>
 								<div class="book_info_cell book_info_col2">${requestScope.book.isbn}</div>
-								<!-- <div class="book_info_cell book_info_col1">ISBN 13</div> -->
-								<div class="book_info_cell book_info_col2"></div>
+								<div class="book_info_cell book_info_col1">정가</div>
+								<div class="book_info_cell book_info_col2">
+									<c:if test="${requestScope.book.price==null}">가격 정보 없음</c:if>
+									${requestScope.book.price}
+								</div>
 							</div>
 						</div>
 						<div class="book_info_table" style="float: right;">

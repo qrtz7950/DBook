@@ -20,7 +20,7 @@
 			<!-- Menu -->
 				<nav id="menu">
 					<header class="major">
-						<h2>책 카테고리</h2>
+						<h2>M E N U</h2>
 					</header>
 					<ul>
 						<li>
@@ -50,7 +50,7 @@
 													<li><a href="../booklist/category.do?category=190&page=1"><span>역사/문화</span></a></li>
 													<li><a href="../booklist/category.do?category=200&page=1"><span>종교</span></a></li>
 													<li><a href="../booklist/category.do?category=210&page=1"><span>예술/대중문화</span></a></li>
-													<li><a href="../booklist/category.do?category=220&pag출판도시 문화재단e=1"><span>학습/참고서</span></a></li>
+													<li><a href="../booklist/category.do?category=220&page=1"><span>학습/참고서</span></a></li>
 													<li><a href="../booklist/category.do?category=230&page=1"><span>국어/외국어</span></a></li>
 													<li><a href="../booklist/category.do?category=240&page=1"><span>사전</span></a></li>
 													<li><a href="../booklist/category.do?category=250&page=1"><span>과학/공학</span></a></li>

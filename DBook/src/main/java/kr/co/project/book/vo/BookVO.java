@@ -21,13 +21,14 @@ public class BookVO {
 	private String author_introduction;
 	private String contents;
 	private String cover;
+	private String price;
 	
 	public BookVO() {
 	}
-
+	
 	public BookVO(String book_id, String book_name, String category_no, String author, String translator,
 			String publisher, String published_date, String is_ebook, String form_detail, String isbn, int view_cnt,
-			String book_introduction, String author_introduction, String contents, String cover) {
+			String book_introduction, String author_introduction, String contents, String cover, String price) {
 		super();
 		this.book_id = book_id;
 		this.book_name = book_name;
@@ -44,7 +45,10 @@ public class BookVO {
 		this.author_introduction = author_introduction;
 		this.contents = contents;
 		this.cover = cover;
+		this.price = price;
 	}
+
+
 
 	public String getBook_id() {
 		return book_id;
@@ -165,6 +169,14 @@ public class BookVO {
 	public void setCover(String cover) {
 		this.cover = cover;
 	}
+	
+	public String getPrice() {
+		return price;
+	}
+	
+	public void setPrice(String price) {
+		this.price = price;
+	}
 
 	@Override
 	public String toString() {
@@ -172,7 +184,7 @@ public class BookVO {
 				+ author + ", translator=" + translator + ", publisher=" + publisher + ", published_date="
 				+ published_date + ", is_ebook=" + is_ebook + ", form_detail=" + form_detail + ", isbn=" + isbn
 				+ ", view_cnt=" + view_cnt + ", book_introduction=" + book_introduction + ", author_introduction="
-				+ author_introduction + ", contents=" + contents + ", cover=" + cover + "]";
+				+ author_introduction + ", contents=" + contents + ", cover=" + cover + ", price=" + price + "]";
 	}
 	
 }
