@@ -29,7 +29,7 @@
 
 .topMenu-left-1 {display : block;}
 
-#btn-logout, #user-nickname, #btn-login {display: none;}
+#new-rating, #btn-logout, #user-nickname, #btn-login {display: none;}
 
 #topMenu {
 	position: fixed;

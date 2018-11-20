@@ -36,38 +36,27 @@
 							</ul>
 						</li>
 						<li>
-							<span class="opener">국내도서</span>
+							<span class="opener">소설</span>
 							<ul>
-												    <li><a href="../booklist/category.do?category=100&page=1"><span>소설</span></a></li>
-													<li><a href="../booklist/category.do?category=110&page=1"><span>시/에세이</span></a></li>
-													<li><a href="../booklist/category.do?category=120&page=1"><span>인문</span></a></li>
-													<li><a href="../booklist/category.do?category=130&page=1"><span>가정/생활/요리</span></a></li>
-													<li><a href="../booklist/category.do?category=140&page=1"><span>건강</span></a></li>
-													<li><a href="../booklist/category.do?category=150&page=1"><span>취미/레저</span></a></li>
-													<li><a href="../booklist/category.do?category=160&page=1"><span>경제/경영</span></a></li>
-													<li><a href="../booklist/category.do?category=170&page=1"><span>자기계발</span></a></li>
-													<li><a href="../booklist/category.do?category=180&page=1"><span>사회</span></a></li>
-													<li><a href="../booklist/category.do?category=190&page=1"><span>역사/문화</span></a></li>
-													<li><a href="../booklist/category.do?category=200&page=1"><span>종교</span></a></li>
-													<li><a href="../booklist/category.do?category=210&page=1"><span>예술/대중문화</span></a></li>
-													<li><a href="../booklist/category.do?category=220&pag출판도시 문화재단e=1"><span>학습/참고서</span></a></li>
-													<li><a href="../booklist/category.do?category=230&page=1"><span>국어/외국어</span></a></li>
-													<li><a href="../booklist/category.do?category=240&page=1"><span>사전</span></a></li>
-													<li><a href="../booklist/category.do?category=250&page=1"><span>과학/공학</span></a></li>
-													<li><a href="../booklist/category.do?category=260&page=1"><span>취업/수험서</span></a></li>
-													<li><a href="../booklist/category.do?category=270&page=1"><span>여행/지도</span></a></li>
-													<li><a href="../booklist/category.do?category=280&page=1"><span>컴퓨터/IT</span></a></li>
-													<li><a href="../booklist/category.do?category=290&page=1"><span>잡지</span></a></li>
-													<li><a href="../booklist/category.do?category=300&page=1"><span>청소년</span></a></li>
-													<li><a href="../booklist/category.do?category=310&page=1"><span>유아</span></a></li>
-													<li><a href="../booklist/category.do?category=320&page=1"><span>어린이</span></a></li>
-													<li><a href="../booklist/category.do?category=330&page=1"><span>만화</span></a></li>
+							    <li><a href="../booklist/category.do?category=100010&page=1"><span class="opener">나라별소설</span></a></li>
+							    <li><a href="../booklist/category.do?category=100020&page=1"><span class="opener">고전/문학</span></a></li>
+							    <li><a href="../booklist/category.do?category=100030&page=1"><span class="opener">장르소설</span></a></li>
+							    <li><a href="../booklist/category.do?category=100040&page=1"><span class="opener">테마소설</span></a></li>
 							</ul>
 						</li>
 						<li>
-							<span class="opener">해외도서</span>
+							<span class="opener">시 /에세이</span>
 							<ul>
-								<li><a href="../booklist/category.do?category=340&page=1"><span>해외도서</span></a></li>
+							    <li><a href="../booklist/category.do?category=110010&page=1"><span class="opener">한국시</span></a></li>
+							    <li><a href="../booklist/category.do?category=110020&page=1"><span class="opener">외국시</span></a></li>
+							    <li><a href="../booklist/category.do?category=110030&page=1"><span class="opener">인물 에세이</span></a></li>
+							    <li><a href="../booklist/category.do?category=110040&page=1"><span class="opener">여행 에세이</span></a></li>
+							    <li><a href="../booklist/category.do?category=110050&page=1"><span class="opener">성공 에세이</span></a></li>
+							    <li><a href="../booklist/category.do?category=110060&page=1"><span class="opener">독서 에세이</span></a></li>
+							    <li><a href="../booklist/category.do?category=110070&page=1"><span class="opener">명상 에세이</span></a></li>
+							    <li><a href="../booklist/category.do?category=110080&page=1"><span class="opener">그림/포토 에세이</span></a></li>
+							    <li><a href="../booklist/category.do?category=110090&page=1"><span class="opener">연애/사랑 에세이</span></a></li>
+							    <li><a href="../booklist/category.do?category=110100&page=1"><span class="opener">삶의 지혜/명언</span></a></li>
 							</ul>
 						</li>
 						<li><a href="#">스포츠/경제</a></li>

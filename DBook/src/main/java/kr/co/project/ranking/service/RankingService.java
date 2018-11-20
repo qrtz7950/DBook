@@ -20,6 +20,7 @@ public class RankingService {
 		try {
 			InfoReviewVO info = new InfoReviewVO();
 			info.setBook_id(book_id);
+			int zero_check = 0;
 			
 			JSONArray jArray = new JSONArray();
 			for(int i=1; i<=7; i++) {
@@ -30,10 +31,15 @@ public class RankingService {
 				JSONObject k = new JSONObject();
 				
 				info.setGender("male");
-				k.put("man", dao.countReviewByGender_Age_range(info));
+				int man = dao.countReviewByGender_Age_range(info);
 				
 				info.setGender("female");
-				k.put("woman", dao.countReviewByGender_Age_range(info));
+				int woman = dao.countReviewByGender_Age_range(info);
+				
+				k.put("man", man);
+				k.put("woman", woman);
+				
+				zero_check += man + woman;
 				
 				if(i!=7) {
 					j.put("State", i+"0대");
@@ -46,7 +52,11 @@ public class RankingService {
 			}
 			
 			data.put("name", "평점 상세정보");
-			data.put("freqData", jArray);
+			if(zero_check != 0) {
+				data.put("freqData", jArray);
+			}else {
+				data.put("freqData", 0);
+			}
 			
 		}catch(Exception e) {
 			e.printStackTrace();
