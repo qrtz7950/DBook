@@ -27,9 +27,9 @@
 	.book-package > div {min-height: 48px;}
 	
 	#banner{
-	    left: -10%;
+	    left: -20%;
 	    position: relative;
-	    width: 120%;
+	    width: 140%;
 	    height: -webkit-fill-available;
 	    background: url(/DBook/resources/images/index.jpg) center center / cover no-repeat;
 	}

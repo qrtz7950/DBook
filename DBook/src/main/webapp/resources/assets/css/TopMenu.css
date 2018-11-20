@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+#new-rating, #btn-logout, #user-nickname, #btn-login {display: none;}
+
 @media screen and (max-width: 1920px){
 	#showTop {display : none;}	
 	#cbp-spmenu-s3 {display : none;}								
@@ -29,7 +31,6 @@
 
 .topMenu-left-1 {display : block;}
 
-#new-rating, #btn-logout, #user-nickname, #btn-login {display: none;}
 
 #topMenu {
 	position: fixed;
