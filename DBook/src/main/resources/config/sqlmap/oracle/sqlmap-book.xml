@@ -6,10 +6,11 @@
 	
 	<!-- book_id로 책 정보 조회 -->	
 	<select id="bookDetail" resultType="bookVO" parameterType="bookVO">
-		select book_id, book_name, cover, author, translator, publisher, published_date,
-			   is_ebook, form_detail, isbn, book_introduction, author_introduction, contents, view_cnt, category_no
-		  from book
-		  where book_id = #{book_id}
+		select b.book_id, b.book_name, b.cover, b.author, b.translator, b.publisher, b.published_date, p.price,
+			   b.is_ebook, b.form_detail, b.isbn, b.book_introduction, b.author_introduction, b.contents, b.view_cnt, b.category_no
+		  from book b left outer join book_price p
+		    on b.book_id = p.book_id
+		 where b.book_id = #{book_id}
 	</select>
 	
 	<!-- 책 조회수 올리기 -->

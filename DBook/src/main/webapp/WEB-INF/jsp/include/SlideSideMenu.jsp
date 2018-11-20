@@ -20,7 +20,7 @@
 			<!-- Menu -->
 				<nav id="menu">
 					<header class="major">
-						<h2>책 카테고리</h2>
+						<h2>M E N U</h2>
 					</header>
 					<ul>
 						<li>
