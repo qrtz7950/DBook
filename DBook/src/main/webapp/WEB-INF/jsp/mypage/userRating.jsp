@@ -386,7 +386,7 @@
 					if (progressCnt == 20) {
 						$('.progrecess_title').text("성향을 파악하는 중...");
 					} else if (progressCnt == 50) {
-						$('.progrecess_title').text("");
+						$('.progrecess_title').text("앗, 저도 그 책 좋아하는데");
 					} else if (progressCnt == 80) {
 						$('.progrecess_title').text("거의 다 됐어요!");
 					}
