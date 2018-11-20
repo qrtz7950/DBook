@@ -115,32 +115,12 @@ $(document).ready(function() {
 	           url: '/v2/user/me',
 	           success: function(response) {
 	           	
-					var id = response.id;
-					var profile_image = response.properties['profile_image'];
-					var thumbnail_image = response.properties['thumbnail_image'];
-					var nickname = response.properties['nickname'];
-					var age_range = response.kakao_account['age_range'];
-					var gender = response.kakao_account['gender'];
-	           	var has_gender = response.kakao_account['has_gender'];
-	           	var has_age_range = response.kakao_account['has_age_range'];
+				var id = response.id;
+				var profile_image = response.properties['profile_image'];
+				var thumbnail_image = response.properties['thumbnail_image'];
+				var nickname = response.properties['nickname'];
 					
 	           	console.log(JSON.stringify(response));
-					console.log(id);
-					console.log(profile_image);
-					console.log(thumbnail_image);
-					console.log(nickname);
-					console.log(age_range);
-					console.log(gender);
-					console.log(has_gender);
-					console.log(has_age_range);
-					
-					if(has_gender == false || has_age_range == false){
-						if(has_gender == false)
-							gender = 'none';
-						
-						if(has_age_range == false)
-							age_range = 'none';
-					} 
 					
 					$.ajax({
 						url : '../user/kakaoLogin.do',
@@ -150,8 +130,6 @@ $(document).ready(function() {
 							, "profile_image":profile_image
 							, "thumbnail_image":thumbnail_image
 							, "nickname":nickname
-							, "age_range":age_range
-							, "gender":gender
 							},
 						error : function(request, status, error){
 					       	alert("code:"+request.status+"\n"+"error:"+error);

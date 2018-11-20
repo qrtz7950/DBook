@@ -4185,5 +4185,25 @@
 		display: none;
 	}
 	
+	@media screen and (max-width: 1920px) {
+		#category-content {
+			width : 87%;
+		}
+		
+		#side-category-menu {
+			display: block;
+		}
+	}
+	
+	@media screen and (max-width: 480px) {
+		#category-content {
+			width : 100%;
+		}
+		
+		#side-category-menu {
+			display: none;
+		}
+	}
+	
 	
 	

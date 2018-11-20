@@ -12,8 +12,8 @@
 	
 	<!-- 카카오 회원가입 -->
 	<insert id="kakaoSignIn" parameterType="loginVO">
-		insert into db_user(no, id, profile_image, thumbnail_image, nickname, age_range, gender)
-		 			values(seq_db_user_no.nextval, #{id}, #{profile_image}, #{thumbnail_image}, #{nickname}, #{age_range}, #{gender})
+		insert into db_user(no, id, profile_image, thumbnail_image, nickname)
+		 			values(seq_db_user_no.nextval, #{id}, #{profile_image}, #{thumbnail_image}, #{nickname})
 	</insert>
 	
 	<!-- 회원가입체크 -->

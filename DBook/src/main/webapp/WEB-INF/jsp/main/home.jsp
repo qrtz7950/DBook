@@ -246,6 +246,8 @@
 		<!-- 변수 설정 -->
 			<script>
 				var login_check = ${!empty user};
+				var gender_check = ${user.gender == null};
+				var age_range_check = ${user.age_range == null};
 				
 				var mode = 0;
 				var recommendArray = new Array();
@@ -285,13 +287,43 @@
 		<!-- 초기 화면 설정 -->
 			<script>
 				$(document).ready(function(){
+					
+					console.log(gender_check);
+					console.log(age_range_check);
+					
 					if(!login_check){
 		   				setTimeout(function(){
 		   					$('#index-btn').fadeIn(1000);
 		   				}, 2000);
+					} else {
+						if(gender_check || age_range_check) {
+							$('.layerPopUp').removeClass('hidden');
+			                  wrapWindowByMask();
+			                  $('#layerPopUp_mask').removeClass('hidden');
+			                  $('#userInfo').click(function() {
+			                      $.ajax({
+			                          type: "POST",
+			                          url: "${pageContext.request.contextPath}/user/update.do",
+			                          data: {
+			                        	  "id" : '${user.id}',
+			                              "nickname" : '${user.nickname}',
+			                              "profile_image" : '${user.profile_image}',
+			                              "thumbnail_image" : '${user.thumbnail_image}',
+			                              "age_range" : $('#age_range').val(),
+			                              "gender" : $('#gender').val()
+			                          },
+			                          success: function() {
+			                             $('.layerPopUp').addClass('hidden');
+			                             $('#mask').hide();
+			                          }, error: function() {
+			                             $('.layerPopUp').addClass('hidden');
+			                             $('#mask').hide();
+			                          }
+			                      });
+			                   });
+						}
 					}
 	   			});
-				
 	   			
 	   			// scroll lock
 	   			if(!login_check){	   				
@@ -308,12 +340,8 @@
 	   				$('#element').off('scroll touchmove mousewheel');
 	   				$('#banner').slideUp(1000);
 	   			});
-			</script>
-		
-		<!-- 로그인 유저정보 추가입력 -->
-			<c:if test="${not empty user.id and user.gender == 'none' or user.age_range == 'none'}">
-            <script>
-	            function wrapWindowByMask(){
+	   			
+	   			function wrapWindowByMask(){
 	                var maskHeight = $(document).height();  
 	                var maskWidth = $(window).width();  
 	
@@ -322,35 +350,8 @@
 	                $('#mask').fadeIn(1000);      
 	                $('#mask').fadeTo("slow",0.8);    
 	        	}
-            
-               $( document ).ready(function() {
-                  $('.layerPopUp').removeClass('hidden');
-                  wrapWindowByMask();
-                  $('#layerPopUp_mask').removeClass('hidden');
-                  $('#userInfo').click(function() {
-                      $.ajax({
-                          type: "POST",
-                          url: "${pageContext.request.contextPath}/user/update.do",
-                          data: {
-                        	  "id" : '${user.id}',
-                              "nickname" : '${user.nickname}',
-                              "profile_image" : '${user.profile_image}',
-                              "thumbnail_image" : '${user.thumbnail_image}',
-                              "age_range" : $('#age_range').val(),
-                              "gender" : $('#gender').val()
-                          },
-                          success: function() {
-                             $('.layerPopUp').addClass('hidden');
-                             $('#mask').hide();
-                          }, error: function() {
-                             $('.layerPopUp').addClass('hidden');
-                             $('#mask').hide();
-                          }
-                      });
-                   });
-            	});
-            </script>
-         	</c:if>
+	   			
+			</script>
          
          <!-- 슬라이드 관련 -->
 	         <script>

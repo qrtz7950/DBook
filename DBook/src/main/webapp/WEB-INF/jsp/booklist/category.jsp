@@ -639,12 +639,10 @@
 			
 				if($(window).width()<480){
 					$("#side-category-menu").hide();
-					$("#category-content").css("width","100%");
 				}
 				
 				if($(window).width()>480){
 					$("#side-category-menu").show();
-					$("#category-content").css("width","87%");
 				}
 			}
 			
