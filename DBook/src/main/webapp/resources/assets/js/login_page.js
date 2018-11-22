@@ -199,7 +199,7 @@ $(document).ready(function() {
 			    },
 				success : function(data){
 					if(data == ''){
-						alert('회원 가입 성공!\n 메인페이지로 이동합니다');
+						alert('회원 가입 성공!\n 회원님의 성향 파악을 위해 평가 페이지로 이동합니다');
 						location.href = "../mypage/userRating.do";
 					} else {
 						alert('이미 존재하는 아이디입니다');

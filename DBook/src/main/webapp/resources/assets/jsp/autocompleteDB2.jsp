@@ -16,7 +16,7 @@
            String search_word = (request.getParameter("term") == null?"":request.getParameter("term"));   
            Class.forName("oracle.jdbc.driver.OracleDriver"); 
            //conn = java.sql.DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
-           conn = java.sql.DriverManager.getConnection("jdbc:oracle:thin:@192.168.1.20:1521:xe", "hr", "hr");
+           conn = java.sql.DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
            
            String sql = "select book_name, author from book where book_name like ? or author like ? ";
     

@@ -4,6 +4,7 @@ public class MypageVO {
 	
 	private String book_id;
 	private String book_name;
+	private String id;
 	private String cover;
 	private String author;
 	private String publisher;
@@ -15,16 +16,16 @@ public class MypageVO {
 	private int bad;
 	private String review_reg_date;
 
-	
 	public MypageVO() {
 	}
-
-	public MypageVO(String book_id, String book_name, String cover, String author, String publisher,
+	
+	public MypageVO(String book_id, String book_name, String id, String cover, String author, String publisher,
 			String published_date, int review_no, int rating, String content, int good, int bad,
 			String review_reg_date) {
 		super();
 		this.book_id = book_id;
 		this.book_name = book_name;
+		this.id = id;
 		this.cover = cover;
 		this.author = author;
 		this.publisher = publisher;
@@ -35,14 +36,6 @@ public class MypageVO {
 		this.good = good;
 		this.bad = bad;
 		this.review_reg_date = review_reg_date;
-	}
-
-	public String getPublished_date() {
-		return published_date;
-	}
-
-	public void setPublished_date(String published_date) {
-		this.published_date = published_date;
 	}
 
 	public String getBook_id() {
@@ -59,6 +52,14 @@ public class MypageVO {
 
 	public void setBook_name(String book_name) {
 		this.book_name = book_name;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getCover() {
@@ -83,6 +84,14 @@ public class MypageVO {
 
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
+	}
+
+	public String getPublished_date() {
+		return published_date;
+	}
+
+	public void setPublished_date(String published_date) {
+		this.published_date = published_date;
 	}
 
 	public int getReview_no() {
@@ -135,10 +144,10 @@ public class MypageVO {
 
 	@Override
 	public String toString() {
-		return "MypageVO [book_id=" + book_id + ", book_name=" + book_name + ", cover=" + cover + ", author=" + author
-				+ ", publisher=" + publisher + ", published_date=" + published_date + ", review_no=" + review_no
-				+ ", rating=" + rating + ", content=" + content + ", good=" + good + ", bad=" + bad
-				+ ", review_reg_date=" + review_reg_date + "]";
+		return "MypageVO [book_id=" + book_id + ", book_name=" + book_name + ", id=" + id + ", cover=" + cover
+				+ ", author=" + author + ", publisher=" + publisher + ", published_date=" + published_date
+				+ ", review_no=" + review_no + ", rating=" + rating + ", content=" + content + ", good=" + good
+				+ ", bad=" + bad + ", review_reg_date=" + review_reg_date + "]";
 	}
-
+	
 }

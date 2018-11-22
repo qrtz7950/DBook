@@ -45,6 +45,8 @@ public class ReviewController {
 	public void reviewDelete(@ModelAttribute ReviewVO review) {
 		System.out.println("reviewDelete()진입");
 		
+		System.out.println(review);
+		
 		reviewService.deleteReview(review);
 		return;
 	}
