@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
+	.slide-side-icon{
+		width: 20px;
+		height: 20px;
+		margin-right: 5px;
+	}
+</style>
 
 <head>
 <!-- Autocomplete Scripts -->
@@ -23,7 +30,7 @@
 						<h2 class="slide-menu-h2">M E N U</h2>
                     </header>
                     <ul>
-                        <li><a href="../book/booklist/category.do"></a>책 카테고리</li>
+                        <li><a href="../book/booklist/category.do">책 카테고리</a></li>
                         <li><a href="../ranking/rankingHome.do">랭킹</a></li>
                     </ul>
 					<header class="major">
@@ -345,13 +352,13 @@
 						<h2 class="slide-menu-h2">바로가기</h2>
 			   	   </header>
 					<ul>
-						<li><a href="http://www.yes24.com">Yes24</a></li>
-						<li><a href="http://www.kyobobook.co.kr">교보문고</a></li>
-						<li><a href="https://www.aladin.co.kr">알라딘</a></li>
-						<li><a href="http://book.interpark.com/">인터파크 도서</a></li>
-						<li><a href="http://www.bandinlunis.com">반디앤루니스</a></li>
-						<li><a href="http://www.ypbooks.co.kr">영풍문고</a></li>
-						<li><a href="http://books.11st.co.kr">11번가</a></li>
+						<li><a href="http://www.yes24.com"><img class="slide-side-icon" src="http://image.yes24.com/sysimage/renew/gnb/yes24.ico">Yes24</a></li>
+						<li><a href="http://www.kyobobook.co.kr"><img class="slide-side-icon"  src="http://image.kyobobook.co.kr/newimages/apps/b2c/kyobo.ICO">교보문고</a></li>
+						<li><a href="https://www.aladin.co.kr"><img class="slide-side-icon" src="https://image.aladin.co.kr/img/home/aladin.ico">알라딘</a></li>
+						<li><a href="http://book.interpark.com/"><img class="slide-side-icon" src="http://bimage.interpark.com/interpark.ico">인터파크 도서</a></li>
+						<li><a href="http://www.bandinlunis.com"><img class="slide-side-icon" src="http://image.bandinlunis.com/favicon.ico">반디앤루니스</a></li>
+						<li><a href="http://www.ypbooks.co.kr"><img class="slide-side-icon" src="http://pub.ypbooks.co.kr/ypbooks/images/ylogo.ico">영풍문고</a></li>
+						<li><a href="http://books.11st.co.kr"><img class="slide-side-icon" src="http://s.011st.com/img/common/icon/favicon.ico" title="11번가">11번가</a></li>
 					</ul>
 				</section>
                 </nav>

@@ -99,7 +99,10 @@
 }
 
 
-.slide-menu-h2 {margin: 0 0 1em 0.5em !important;}
+.slide-menu-h2 {
+    margin: 1.5em 0 0.5em 0 !important;
+    padding: 0 !important;
+}
 
 /*---------------------------------------------------------------------*/
 /* Slide Top Menu */
